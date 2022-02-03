@@ -120,7 +120,7 @@ iconType = IconType.Custom(Icons.Rounded.AccountCircle)
 ```
 <hr>
 
-### 🙏 Got inspired from 🙏
+#### 🙏 Got inspired by:
 [Timeline-View by Vipul Asri](https://github.com/vipulasri/Timeline-View)
 
 

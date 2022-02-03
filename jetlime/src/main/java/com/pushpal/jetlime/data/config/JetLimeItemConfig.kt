@@ -10,7 +10,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class JetLimeItemConfig(
-  val isExpandable: Boolean = false,
   var position: Int = 0,
   var titleColor: Color = Color(0xFFFFFFFF),
   var descriptionColor: Color = Color(0xFFCFCFCF),
