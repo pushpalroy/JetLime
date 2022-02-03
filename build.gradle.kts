@@ -3,13 +3,28 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    maven("https://plugins.gradle.org/m2/")
   }
   dependencies {
-    classpath("com.android.tools.build:gradle:7.0.4")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
+    classpath(DependingOn.Gradle.androidGradlePlugin)
+    classpath(DependingOn.Gradle.kotlinGradlePlugin)
+    classpath(DependingOn.Gradle.ktlintGradlePlugin)
+    classpath(DependingOn.Gradle.vanniktechGradlePlugin)
   }
 }
 
 tasks.register("clean", Delete::class) {
   delete(rootProject.buildDir)
+}
+
+allprojects {
+  pluginManager.withPlugin(Plugins.vanniktechPublish) {
+    extensions.getByType(com.vanniktech.maven.publish.MavenPublishPluginExtension::class.java)
+      .apply {
+        sonatypeHost = com.vanniktech.maven.publish.SonatypeHost.S01
+      }
+  }
+}
+subprojects {
+  apply(plugin = Plugins.ktlint)
 }

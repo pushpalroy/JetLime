@@ -1,6 +1,6 @@
 plugins {
-  id("com.android.application")
-  kotlin("android")
+  id(Plugins.application)
+  id(Plugins.kotlinAndroid)
 }
 
 android {
@@ -13,7 +13,7 @@ android {
     versionCode = 1
     versionName = "1.0"
 
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner = DependingOn.AndroidTest.androidJUnitRunner
   }
 
   buildTypes {
@@ -44,20 +44,24 @@ android {
 dependencies {
 
   implementation(project(":jetlime"))
-  implementation("androidx.core:core-ktx:1.7.0")
-  implementation("androidx.appcompat:appcompat:1.4.1")
-  implementation("com.google.android.material:material:1.5.0")
+  //implementation("io.github.pushpalroy:jetlime:1.0.0")
 
-  implementation("androidx.compose.ui:ui:1.0.5")
-  implementation("androidx.compose.material:material:1.0.5")
-  implementation("androidx.compose.ui:ui-tooling-preview:1.0.5")
-  implementation("androidx.activity:activity-compose:1.4.0")
-  implementation("io.coil-kt:coil-compose:1.4.0")
-  implementation("academy.compose.companion:multi-fab:1.2")
-  // implementation("com.google.accompanist:accompanist-pager:0.24.1-alpha")
-  implementation("com.google.accompanist:accompanist-insets:0.20.3")
+  implementation(DependingOn.Android.material)
 
-  testImplementation("junit:junit:4.13.2")
-  androidTestImplementation("androidx.test.ext:junit:1.1.3")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+  implementation(DependingOn.AndroidX.coreKtx)
+  implementation(DependingOn.AndroidX.appCompat)
+
+  implementation(DependingOn.AndroidX.Compose.ui)
+  implementation(DependingOn.AndroidX.Compose.material)
+  implementation(DependingOn.AndroidX.Compose.uiTooling)
+  implementation(DependingOn.AndroidX.Compose.uiToolingPreview)
+  implementation(DependingOn.AndroidX.Compose.activity)
+  implementation(DependingOn.AndroidX.Compose.coil)
+
+  implementation(DependingOn.Accompanist.insets)
+  implementation(DependingOn.ThirdParty.multiFab)
+
+  testImplementation(DependingOn.Test.jUnit)
+  androidTestImplementation(DependingOn.AndroidTest.jUnitExtensions)
+  androidTestImplementation(DependingOn.AndroidTest.espressoCore)
 }
