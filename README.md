@@ -14,14 +14,13 @@
 :-------------------------:|:-------------------------: | :-------------------------: 
 <img src="art/simple.png" width=240 />  |  <img src="art/animated.gif" width=240 /> | <img src="art/fancy.png" width=240 />
 
-
 ## Implementation
 
 In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.0")
+  implementation("io.github.pushpalroy:jetlime:1.0.1")
 }
 ```
 
@@ -30,24 +29,42 @@ dependencies {
 #### ✌🏻 To start using JetLime, use the composable `JetLimeView` like this:
 
 ```kotlin
-val jetLimeList = remember {
-  mutableStateListOf(
-    JetLimeItem(
-      title = "Item title",
-      description = "Item description",
-      jetLimeItemConfig = JetLimeItemConfig(
-        itemHeight = 80.dp,
-        iconType = IconType.Filled
+val jetLimeItemsModel = remember {
+  JetLimeItemsModel(
+    list = mutableStateListOf(
+      JetLimeItem(
+        title = "Item title",
+        description = "Item description",
+        jetLimeItemConfig = JetLimeItemConfig(
+          itemHeight = 80.dp,
+          iconType = IconType.Filled
+        )
       )
     )
   )
 }
 
 JetLimeView(
-  jetLimeItems = jetLimeList,
+  jetLimeItemsModel = jetLimeItemsModel,
   jetLimeViewConfig = JetLimeViewConfig(lineType = LineType.Solid),
   modifier = Modifier.padding(16.dp)
 )
+```
+
+#### 🤲🏻 Add or remove items to the list:
+
+```kotlin
+jetLimeItemsModel.addItem(
+  JetLimeItem(
+    title = "New Item",
+    description = "New item description",
+    jetLimeItemConfig = JetLimeItemConfig(iconAnimation = IconAnimation())
+  )
+)
+```
+
+```kotlin
+jetLimeItemsModel.removeItem(jetLimeItemsModel.items.lastOrNull())
 ```
 
 #### 🤘🏻 To customize `JetLimeView` more play around with `JetLimeViewConfig`:
@@ -87,18 +104,18 @@ val jetLimeItemConfig = JetLimeItemConfig(
 
 ```kotlin
   val jetLimeItemConfig = JetLimeItemConfig(
-    iconAnimation = IconAnimation(
-      initialValue = 0.5f,
-      targetValue = 1.5f,
-      keySpecs = keyframes {
-        durationMillis = 500
-        0.6f at 0
-        0.7f at 100
-        0.8f at 200
-        0.9f at 300
-        1f at 500
-      }
-    )
+  iconAnimation = IconAnimation(
+    initialValue = 0.5f,
+    targetValue = 1.5f,
+    keySpecs = keyframes {
+      durationMillis = 500
+      0.6f at 0
+      0.7f at 100
+      0.8f at 200
+      0.9f at 300
+      1f at 500
+    }
+  )
 )
 ```
 
@@ -118,13 +135,15 @@ JetLimeItem(
 ```kotlin
 iconType = IconType.Custom(Icons.Rounded.AccountCircle)
 ```
+
 <hr>
 
 #### 🙏 Got inspired by:
+
 [Timeline-View by Vipul Asri](https://github.com/vipulasri/Timeline-View)
 
-
 ### License
+
 ```
 MIT License
 

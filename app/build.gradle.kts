@@ -44,7 +44,7 @@ android {
 dependencies {
 
   implementation(project(":jetlime"))
-  //implementation("io.github.pushpalroy:jetlime:1.0.0")
+  //implementation("io.github.pushpalroy:jetlime:1.0.1")
 
   implementation(DependingOn.Android.material)
 
