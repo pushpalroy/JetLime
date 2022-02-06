@@ -1,6 +1,7 @@
 package com.pushpal.jetlime.ui.timelines
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
@@ -11,19 +12,18 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.data.JetLimeItem
+import com.pushpal.jetlime.data.FakeData
+import com.pushpal.jetlime.data.JetLimeItemsModel
+import com.pushpal.jetlime.data.JetLimeItemsModel.JetLimeItem
 import com.pushpal.jetlime.data.config.IconAnimation
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import com.pushpal.jetlime.data.config.JetLimeViewConfig
 import com.pushpal.jetlime.data.config.LineType
-import com.pushpal.jetlime.data.initAnimated
 import com.pushpal.jetlime.ui.JetLimeView
 import com.pushpal.jetlime.ui.theme.JetLimeSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
@@ -33,10 +33,14 @@ import com.pushpal.jetlime.ui.util.multifab.MultiFabItem
 import com.pushpal.jetlime.ui.util.multifab.MultiFloatingActionButton
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalAnimationApi::class, ExperimentalTransitionApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun AnimatedTimeLine() {
-  val jetLimeList = remember { mutableStateListOf<JetLimeItem>() }.apply { initAnimated() }
+  val jetLimeItemsModel = remember {
+    JetLimeItemsModel(list = FakeData.animatedJetLimeItems)
+  }
+
   val scaffoldState = rememberScaffoldState()
   val listState = rememberLazyListState()
   val jetTimeLineViewConfig = JetLimeViewConfig(
@@ -49,7 +53,12 @@ fun AnimatedTimeLine() {
 
   Scaffold(
     scaffoldState = scaffoldState,
-    floatingActionButton = { FAB(jetLimeList, listState) }
+    floatingActionButton = {
+      FAB(
+        jetLimeItemsModel = jetLimeItemsModel,
+        listState = listState
+      )
+    }
   ) {
     JetLimeSurface(
       color = JetLimeTheme.colors.uiBackground,
@@ -57,7 +66,7 @@ fun AnimatedTimeLine() {
         .fillMaxSize()
     ) {
       JetLimeView(
-        jetLimeItems = jetLimeList,
+        jetLimeItemsModel = jetLimeItemsModel,
         jetLimeViewConfig = jetTimeLineViewConfig,
         listState = listState,
         modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
@@ -69,7 +78,7 @@ fun AnimatedTimeLine() {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FAB(
-  jetLimeList: SnapshotStateList<JetLimeItem>,
+  jetLimeItemsModel: JetLimeItemsModel,
   listState: LazyListState
 ) {
   val coroutineScope = rememberCoroutineScope()
@@ -77,15 +86,18 @@ fun FAB(
     items = getFabItemsList(),
     fabIcon = FabIcon(iconRes = Icons.Filled.Add, iconRotate = 45f),
     onFabItemClicked = { item ->
-      when (item.id) {
-        1 -> coroutineScope.launch {
-          jetLimeList.addItem()
-          listState.scrollToItem(jetLimeList.size)
+      coroutineScope.launch {
+        when (item.id) {
+          1 -> jetLimeItemsModel.addItem(
+            JetLimeItem(
+              title = "New Item",
+              description = "New item description",
+              jetLimeItemConfig = JetLimeItemConfig(iconAnimation = IconAnimation())
+            )
+          )
+          2 -> jetLimeItemsModel.removeItem(jetLimeItemsModel.items.lastOrNull())
         }
-        2 -> coroutineScope.launch {
-          jetLimeList.removeItem()
-          listState.scrollToItem(jetLimeList.size)
-        }
+        listState.scrollToItem(jetLimeItemsModel.items.size)
       }
     },
     fabOption = FabOption(
@@ -110,20 +122,6 @@ private fun getFabItemsList(): List<MultiFabItem> {
       label = "Remove"
     )
   )
-}
-
-private fun SnapshotStateList<JetLimeItem>.addItem() {
-  add(
-    JetLimeItem(
-      title = "New Item",
-      description = "New item description",
-      jetLimeItemConfig = JetLimeItemConfig(iconAnimation = IconAnimation())
-    )
-  )
-}
-
-private fun SnapshotStateList<JetLimeItem>.removeItem() {
-  removeLastOrNull()
 }
 
 @ExperimentalAnimationApi

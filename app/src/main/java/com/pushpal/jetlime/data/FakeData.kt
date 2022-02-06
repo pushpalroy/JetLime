@@ -21,8 +21,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.pushpal.jetlime.data.JetLimeItemsModel.JetLimeItem
 import com.pushpal.jetlime.data.config.IconAnimation
 import com.pushpal.jetlime.data.config.IconType
+import com.pushpal.jetlime.data.config.IconType.Filled
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import com.pushpal.jetlime.ui.theme.JetLimeTypography
 
@@ -33,7 +35,7 @@ object FakeData {
       description = "12/A Green Avenue",
       jetLimeItemConfig = JetLimeItemConfig(
         itemHeight = 80.dp,
-        iconType = IconType.Filled
+        iconType = Filled
       )
     ),
     JetLimeItem(
