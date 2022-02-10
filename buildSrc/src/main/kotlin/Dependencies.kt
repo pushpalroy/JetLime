@@ -27,7 +27,7 @@ object DependingOn {
       val material by lazy { "androidx.compose.material:material:${Versions.compose}" }
       val activity by lazy { "androidx.activity:activity-compose:${Versions.activity}" }
       val coil by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
-      val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.compose}" }
+      val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}" }
     }
   }
 
