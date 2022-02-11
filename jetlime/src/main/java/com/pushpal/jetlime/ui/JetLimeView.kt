@@ -8,6 +8,7 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -30,7 +31,11 @@ import kotlinx.coroutines.flow.collect
  * @param jetLimeViewConfig is the config for the view. See [jetLimeViewConfig]
  * @param listState is the state of the LazyColumn which will hold the JetLimeItems.
  */
-@OptIn(ExperimentalAnimationApi::class, ExperimentalTransitionApi::class)
+@OptIn(
+  ExperimentalAnimationApi::class,
+  ExperimentalTransitionApi::class,
+  ExperimentalFoundationApi::class
+)
 @ExperimentalAnimationApi
 @Composable
 fun JetLimeView(
@@ -41,9 +46,11 @@ fun JetLimeView(
 ) {
   LaunchedEffect(jetLimeItemsModel) {
     snapshotFlow {
-      jetLimeItemsModel.items.firstOrNull { it.visible.isIdle && it.visible.targetState.not() }
-    }.collect {
-      if (it != null) {
+      jetLimeItemsModel.items.firstOrNull { jetLimeItem ->
+        jetLimeItem.visible.isIdle && jetLimeItem.visible.targetState.not()
+      }
+    }.collect { jetLimeItem ->
+      if (jetLimeItem != null) {
         jetLimeItemsModel.pruneItems()
       }
     }
@@ -58,7 +65,7 @@ fun JetLimeView(
         val jetLimeItem = remember { mutableStateOf(item) }
         val slideInVertically = remember {
           slideInVertically(
-            initialOffsetY = { a -> -a / 3 },
+            initialOffsetY = { a -> -a / 4 },
             animationSpec = tween(
               durationMillis = 600,
               delayMillis = 100,
@@ -85,8 +92,8 @@ fun JetLimeView(
             title = jetLimeItem.value.title,
             description = jetLimeItem.value.description,
             content = jetLimeItem.value.content,
-            jetLimeItemConfig = jetLimeItem.value.jetLimeItemConfig.apply { position = pos },
-            jetLimeViewConfig = jetLimeViewConfig,
+            itemConfig = jetLimeItem.value.jetLimeItemConfig.apply { position = pos },
+            viewConfig = jetLimeViewConfig,
             totalItems = jetLimeItemsModel.items.size
           )
         }

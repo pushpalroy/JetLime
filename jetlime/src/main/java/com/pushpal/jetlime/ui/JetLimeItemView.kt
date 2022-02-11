@@ -16,10 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
@@ -46,53 +45,59 @@ import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import com.pushpal.jetlime.data.config.JetLimeViewConfig
 import com.pushpal.jetlime.data.config.LineType
 
+const val heightFactor = 3
+
 /**
  * [JetLimeItemView] is exposed to be used as composable
  * @param title is the optional title of the item
  * @param description is the optional description of the item
  * @param content is any optional composable that can be populated in the item
- * @param jetLimeItemConfig is the config for the item. See [JetLimeItemConfig]
- * @param jetLimeViewConfig is the config for the entire view. See [JetLimeViewConfig]
+ * @param itemConfig is the config for the item. See [JetLimeItemConfig]
+ * @param viewConfig is the config for the entire view. See [JetLimeViewConfig]
  * @param totalItems is the total number of items
  */
 @Composable
 fun JetLimeItemView(
   title: String? = null,
   description: String? = null,
-  content: @Composable () -> Unit = {},
-  jetLimeItemConfig: JetLimeItemConfig,
-  jetLimeViewConfig: JetLimeViewConfig,
-  totalItems: Int
+  itemConfig: JetLimeItemConfig,
+  viewConfig: JetLimeViewConfig,
+  totalItems: Int,
+  content: @Composable () -> Unit = {}
 ) {
   BoxWithConstraints(
     modifier = Modifier
       .fillMaxWidth()
-      .background(color = jetLimeViewConfig.backgroundColor)
-      .height(jetLimeItemConfig.itemHeight)
+      .background(color = viewConfig.backgroundColor)
+      .height(itemConfig.itemHeight)
   ) {
 
     ConstraintLayout(
-      decoupledConstraints(
-        lineStartMargin = jetLimeViewConfig.lineStartMargin,
-        lineEndMargin = jetLimeViewConfig.lineEndMargin
+      constraintSet = decoupledConstraints(
+        lineStartMargin = viewConfig.lineStartMargin,
+        lineEndMargin = viewConfig.lineEndMargin
       )
     ) {
-
       Canvas(
         modifier = Modifier
           .fillMaxHeight()
           .layoutId("line")
       ) {
-        val startX = 0f
-        val endX = 0f
-        val startY = if (jetLimeItemConfig.position == 0) size.height / 3 else 0f
-        val endY =
-          if (jetLimeItemConfig.position == totalItems - 1) size.height / 3 else size.height
 
-        val pathEffect = when (jetLimeViewConfig.lineType) {
+        val startX = 0f
+        val startY = if (itemConfig.isFirstItem()) {
+          size.height / heightFactor
+        } else 0f
+
+        val endX = 0f
+        val endY = if (itemConfig.isLastItem(totalItems)) {
+          size.height / heightFactor
+        } else size.height
+
+        val pathEffect = when (viewConfig.lineType) {
           is LineType.Dashed -> PathEffect.dashPathEffect(
-            jetLimeViewConfig.lineType.intervals,
-            jetLimeViewConfig.lineType.phase
+            viewConfig.lineType.intervals,
+            viewConfig.lineType.phase
           )
           else -> null
         }
@@ -100,22 +105,22 @@ fun JetLimeItemView(
           cap = StrokeCap.Round,
           start = Offset(x = startX, y = startY),
           end = Offset(x = endX, y = endY),
-          color = jetLimeViewConfig.lineColor,
+          color = viewConfig.lineColor,
           pathEffect = pathEffect,
-          strokeWidth = jetLimeViewConfig.lineThickness
+          strokeWidth = viewConfig.lineThickness
         )
       }
 
-      if (jetLimeViewConfig.showIcons) {
-        val iconImage = when (jetLimeItemConfig.iconType) {
+      if (viewConfig.showIcons) {
+        val iconImage = when (itemConfig.iconType) {
           IconType.Empty -> ImageVector.vectorResource(id = R.drawable.icon_empty)
-          IconType.Checked -> Icons.Filled.CheckCircle
+          IconType.Checked -> ImageVector.vectorResource(id = R.drawable.icon_check)
           IconType.Filled -> ImageVector.vectorResource(id = R.drawable.icon_filled)
-          is IconType.Custom -> (jetLimeItemConfig.iconType as IconType.Custom).iconImage
+          is IconType.Custom -> (itemConfig.iconType as IconType.Custom).iconImage
         }
 
-        var finalAlpha = 1f
-        jetLimeItemConfig.iconAnimation?.let { safeIconAnimation ->
+        var finalAlpha = remember { 1f }
+        itemConfig.iconAnimation?.let { safeIconAnimation ->
           val infiniteTransition = rememberInfiniteTransition()
           val alpha by infiniteTransition.animateFloat(
             initialValue = safeIconAnimation.initialValue,
@@ -133,20 +138,20 @@ fun JetLimeItemView(
           contentDescription = "Indicator",
           contentScale = ContentScale.Crop,
           colorFilter = ColorFilter.tint(
-            color = jetLimeItemConfig.iconColor
+            color = itemConfig.iconColor
           ),
           modifier = Modifier
-            .size(jetLimeViewConfig.iconSize)
+            .size(viewConfig.iconSize)
             .scale(finalAlpha)
-            .clip(jetLimeViewConfig.iconShape)
+            .clip(viewConfig.iconShape)
             .border(
-              width = jetLimeViewConfig.iconBorderThickness,
-              color = jetLimeItemConfig.iconBorderColor,
-              shape = jetLimeViewConfig.iconShape
+              width = viewConfig.iconBorderThickness,
+              color = itemConfig.iconBorderColor,
+              shape = viewConfig.iconShape
             )
             .background(
-              color = jetLimeItemConfig.iconBackgroundColor,
-              shape = jetLimeViewConfig.iconShape
+              color = itemConfig.iconBackgroundColor,
+              shape = viewConfig.iconShape
             )
             .layoutId("indicator")
         )
@@ -155,7 +160,7 @@ fun JetLimeItemView(
       title?.let { safeTitle ->
         Text(
           text = safeTitle,
-          color = jetLimeItemConfig.titleColor,
+          color = itemConfig.titleColor,
           style = TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
@@ -170,7 +175,7 @@ fun JetLimeItemView(
       description?.let { safeDescription ->
         Text(
           text = safeDescription,
-          color = jetLimeItemConfig.descriptionColor,
+          color = itemConfig.descriptionColor,
           style = TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
@@ -240,18 +245,17 @@ fun PreviewJetLimeItemView() {
   JetLimeItemView(
     title = "Cafe Coffee Day",
     description = "2/A South Green Lane",
-    content = {
-      Text(
-        text = "Canada 287",
-        style = TextStyle(
-          fontFamily = FontFamily.Default,
-          fontWeight = FontWeight.Thin,
-          fontSize = 12.sp
-        )
-      )
-    },
-    jetLimeItemConfig = JetLimeItemConfig(position = 0, itemHeight = 150.dp),
-    jetLimeViewConfig = JetLimeViewConfig(lineStartMargin = 48.dp),
+    itemConfig = JetLimeItemConfig(position = 0, itemHeight = 150.dp),
+    viewConfig = JetLimeViewConfig(lineStartMargin = 48.dp),
     totalItems = 3
-  )
+  ) {
+    Text(
+      text = "Canada 287",
+      style = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Thin,
+        fontSize = 12.sp
+      )
+    )
+  }
 }
