@@ -2,7 +2,7 @@
 
 > A simple yet highly customizable library for showing a TimeLine view
 
-[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.0.0-blue?style=flat-square&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
+[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.1.0-blue?style=flat-square&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
 [![Compose](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=flat-square&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=flat-square&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Follow&style=social)](https://github.com/pushpalroy)
@@ -20,7 +20,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.1")
+  implementation("io.github.pushpalroy:jetlime:1.0.2")
 }
 ```
 
@@ -81,7 +81,6 @@ val jetTimeLineViewConfig = JetLimeViewConfig(
   iconShape = CircleShape,
   iconBorderThickness = 2.dp,
   itemSpacing = 0.dp,
-  enableItemAnimation = false,
   showIcons = true
 )
 ```
