@@ -17,7 +17,6 @@ data class JetLimeViewConfig(
   val iconShape: Shape = CircleShape,
   val iconBorderThickness: Dp = 2.dp,
   val itemSpacing: Dp = 0.dp,
-  val enableItemAnimation: Boolean = false,
   val showIcons: Boolean = true
 )
 

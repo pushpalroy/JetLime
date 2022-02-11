@@ -32,7 +32,6 @@ fun ModifiedTimeLine() {
     lineThickness = 16F,
     iconShape = JetLimeShapes.small,
     iconBorderThickness = 0.dp,
-    enableItemAnimation = false,
     showIcons = true
   )
 

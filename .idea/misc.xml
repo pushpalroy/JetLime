@@ -65,6 +65,7 @@
         <entry key="jetlime/src/main/res/drawable/baseline_adjust_24.xml" value="0.3723076923076923" />
         <entry key="jetlime/src/main/res/drawable/baseline_radio_button_checked_24.xml" value="0.3723076923076923" />
         <entry key="jetlime/src/main/res/drawable/baseline_radio_button_unchecked_24.xml" value="0.3723076923076923" />
+        <entry key="jetlime/src/main/res/drawable/ic_check_circle.xml" value="0.209" />
         <entry key="jetlime/src/main/res/drawable/icon_empty.xml" value="0.209" />
         <entry key="jetlime/src/main/res/drawable/icon_filled.xml" value="0.209" />
       </map>

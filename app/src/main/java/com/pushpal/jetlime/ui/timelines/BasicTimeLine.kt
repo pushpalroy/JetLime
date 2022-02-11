@@ -20,13 +20,12 @@ import com.pushpal.jetlime.ui.theme.JetLimeTheme
 @ExperimentalAnimationApi
 @Composable
 fun BasicTimeLine() {
-  val jetLimeItemsModel = remember { JetLimeItemsModel(list = FakeData.simpleJetLimeItems) }
   val listState = rememberLazyListState()
+  val jetLimeItemsModel = remember { JetLimeItemsModel(list = FakeData.simpleJetLimeItems) }
   val jetTimeLineViewConfig = JetLimeViewConfig(
     backgroundColor = JetLimeTheme.colors.uiBackground,
     itemSpacing = 0.dp,
     lineType = LineType.Solid,
-    enableItemAnimation = false,
     showIcons = true
   )
 

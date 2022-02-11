@@ -19,7 +19,15 @@ data class JetLimeItemConfig(
   var iconBorderColor: Color = Color(0xffffffff),
   var iconBackgroundColor: Color = Color(0xffffffff),
   var itemHeight: Dp = 80.dp
-)
+) {
+  fun isFirstItem(): Boolean {
+    return position == 0
+  }
+
+  fun isLastItem(totalItems: Int): Boolean {
+    return position == totalItems - 1
+  }
+}
 
 sealed class IconType {
   object Empty : IconType()
