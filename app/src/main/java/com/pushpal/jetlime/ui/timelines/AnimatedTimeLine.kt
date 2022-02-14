@@ -47,6 +47,7 @@ fun AnimatedTimeLine() {
     backgroundColor = JetLimeTheme.colors.uiBackground,
     itemSpacing = 0.dp,
     lineType = LineType.Solid,
+    enableItemAnimation = true,
     showIcons = true
   )
 

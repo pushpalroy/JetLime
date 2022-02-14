@@ -15,8 +15,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import com.pushpal.jetlime.data.JetLimeItemsModel
@@ -61,38 +59,44 @@ fun JetLimeView(
     verticalArrangement = Arrangement.spacedBy(jetLimeViewConfig.itemSpacing)
   ) {
     items(count = jetLimeItemsModel.items.size) { pos ->
-      jetLimeItemsModel.items[pos].let { item ->
-        val jetLimeItem = remember { mutableStateOf(item) }
-        val slideInVertically = remember {
-          slideInVertically(
-            initialOffsetY = { a -> -a / 4 },
-            animationSpec = tween(
-              durationMillis = 600,
-              delayMillis = 100,
-              easing = FastOutSlowInEasing
-            )
+      jetLimeItemsModel.items[pos].let { jetLimeItem ->
+        val slideInVertically = slideInVertically(
+          initialOffsetY = { a -> -a / 4 },
+          animationSpec = tween(
+            durationMillis = 600,
+            delayMillis = 100,
+            easing = FastOutSlowInEasing
           )
-        }
-        val shrinkVertically = remember {
-          shrinkVertically(
-            animationSpec = tween(
-              durationMillis = 400,
-              delayMillis = 100,
-              easing = LinearOutSlowInEasing
-            )
+        )
+        val shrinkVertically = shrinkVertically(
+          animationSpec = tween(
+            durationMillis = 400,
+            delayMillis = 100,
+            easing = LinearOutSlowInEasing
           )
-        }
-        AnimatedVisibility(
-          visibleState = item.visible,
-          enter = slideInVertically,
-          exit = shrinkVertically
-        ) {
+        )
 
+        if (jetLimeViewConfig.enableItemAnimation) {
+          AnimatedVisibility(
+            visibleState = jetLimeItem.visible,
+            enter = slideInVertically,
+            exit = shrinkVertically
+          ) {
+            JetLimeItemView(
+              title = jetLimeItem.title,
+              description = jetLimeItem.description,
+              content = jetLimeItem.content,
+              itemConfig = jetLimeItem.jetLimeItemConfig.apply { position = pos },
+              viewConfig = jetLimeViewConfig,
+              totalItems = jetLimeItemsModel.items.size
+            )
+          }
+        } else {
           JetLimeItemView(
-            title = jetLimeItem.value.title,
-            description = jetLimeItem.value.description,
-            content = jetLimeItem.value.content,
-            itemConfig = jetLimeItem.value.jetLimeItemConfig.apply { position = pos },
+            title = jetLimeItem.title,
+            description = jetLimeItem.description,
+            content = jetLimeItem.content,
+            itemConfig = jetLimeItem.jetLimeItemConfig.apply { position = pos },
             viewConfig = jetLimeViewConfig,
             totalItems = jetLimeItemsModel.items.size
           )

@@ -1,6 +1,7 @@
 plugins {
   id(Plugins.application)
   id(Plugins.kotlinAndroid)
+  id(Plugins.kotlinKapt)
 }
 
 android {
@@ -40,6 +41,11 @@ android {
     kotlinCompilerExtensionVersion = Versions.compose
   }
 }
+// Required for annotation processing plugins like Dagger
+kapt {
+  generateStubs = true
+  correctErrorTypes = true
+}
 
 dependencies {
 
@@ -60,6 +66,10 @@ dependencies {
 
   implementation(DependingOn.Accompanist.insets)
   implementation(DependingOn.ThirdParty.multiFab)
+
+  implementation(DependingOn.Lifecycle.runtime)
+  implementation(DependingOn.Lifecycle.viewmodel)
+  implementation(DependingOn.Lifecycle.viewModelCompose)
 
   testImplementation(DependingOn.Test.jUnit)
   androidTestImplementation(DependingOn.AndroidTest.jUnitExtensions)

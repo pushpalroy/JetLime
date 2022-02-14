@@ -5,6 +5,7 @@ object Plugins {
   val library by lazy { "com.android.library" }
   val android by lazy { "android" }
   val kotlinAndroid by lazy { "kotlin-android" }
+  val kotlinKapt by lazy { "kotlin-kapt" }
   val vanniktechPublish by lazy { "com.vanniktech.maven.publish" }
   val ktlint by lazy { "org.jlleitschuh.gradle.ktlint" }
 }
@@ -37,6 +38,12 @@ object DependingOn {
 
   object ThirdParty {
     val multiFab by lazy { "academy.compose.companion:multi-fab:${Versions.multiFab}" }
+  }
+
+  object Lifecycle {
+    val runtime by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycle}" }
+    val viewModelCompose by lazy { "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifeCycle}" }
+    val viewmodel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycle}" }
   }
 
   object Test {

@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
@@ -119,7 +118,7 @@ fun JetLimeItemView(
           is IconType.Custom -> (itemConfig.iconType as IconType.Custom).iconImage
         }
 
-        var finalAlpha = remember { 1f }
+        var finalAlpha = 1f
         itemConfig.iconAnimation?.let { safeIconAnimation ->
           val infiniteTransition = rememberInfiniteTransition()
           val alpha by infiniteTransition.animateFloat(
