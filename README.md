@@ -10,9 +10,9 @@
 
 #### Made with ❤ using Compose
 
-| Simple | Animated | Fancy |
-:-------------------------:|:-------------------------: | :-------------------------: 
-<img src="art/simple.png" width=240 />  |  <img src="art/animated.gif" width=240 /> | <img src="art/fancy.png" width=240 />
+| Simple | Animated | Fancy | Item Update |
+:-------------------------:|:-------------------------: | :-------------------------: | :-------------------------: 
+<img src="art/simple.png" width=200 />  |  <img src="art/animated.gif" width=200 /> | <img src="art/fancy.png" width=200 /> | <img src="art/item_update.gif" width=200 />
 
 ## Implementation
 
@@ -20,7 +20,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.2")
+  implementation("io.github.pushpalroy:jetlime:1.0.3")
 }
 ```
 
