@@ -13,6 +13,7 @@ object Versions {
   const val jUnitExtensions = "1.1.3"
   const val accompanistInsets = "0.23.0"
   const val multiFab = "1.2"
+  const val lifeCycle = "2.4.0"
   const val espresso = "3.4.0"
   const val ktlint = "10.2.0"
 }

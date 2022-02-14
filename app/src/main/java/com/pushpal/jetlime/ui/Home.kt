@@ -23,6 +23,7 @@ import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.AnimatedTimeLine
 import com.pushpal.jetlime.ui.timelines.BasicTimeLine
 import com.pushpal.jetlime.ui.timelines.ModifiedTimeLine
+import com.pushpal.jetlime.ui.timelines.updatestate.ItemUpdateTimeLine
 
 @Composable
 fun HomeScreen() {
@@ -44,7 +45,7 @@ fun HomeScreen() {
 fun HomeContent(
   modifier: Modifier = Modifier
 ) {
-  val tabs = remember { listOf("Simple", "Animated", "Fancy") }
+  val tabs = remember { listOf("Simple", "Animated", "Fancy", "Item Update") }
   var selectedIndex by remember { mutableStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
@@ -72,6 +73,7 @@ fun HomeContent(
       0 -> BasicTimeLine()
       1 -> AnimatedTimeLine()
       2 -> ModifiedTimeLine()
+      3 -> ItemUpdateTimeLine()
     }
   }
 }

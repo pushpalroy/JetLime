@@ -13,6 +13,7 @@ data class JetLimeViewConfig(
   val lineType: LineType = LineType.Solid,
   val lineStartMargin: Dp = 48.dp,
   val lineEndMargin: Dp = 36.dp,
+  val enableItemAnimation: Boolean = false,
   val iconSize: Dp = 26.dp,
   val iconShape: Shape = CircleShape,
   val iconBorderThickness: Dp = 2.dp,
