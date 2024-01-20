@@ -1,6 +1,7 @@
 plugins {
   id(Plugins.library)
   id(Plugins.kotlinAndroid)
+  id(Plugins.vanniktechPublish)
 }
 
 android {
@@ -57,4 +58,28 @@ dependencies {
   androidTestApi(DependingOn.AndroidTest.uiTestJunit)
 }
 
-plugins.apply(Plugins.vanniktechPublish)
+mavenPublishing {
+  val artifactId = "jetlime"
+  coordinates("io.github.pushpalroy", artifactId, "1.0.4")
+
+  pom {
+    name.set(artifactId)
+    description.set("A simple yet highly customizable library for showing a TimeLine view in Android.")
+    inceptionYear.set("2022")
+    url.set("https://github.com/pushpalroy/jetlime/")
+    licenses {
+      license {
+        name.set("MIT License")
+        url.set("https://github.com/pushpalroy/jetlime/blob/main/LICENSE")
+        distribution.set("https://opensource.org/license/mit/")
+      }
+    }
+    developers {
+      developer {
+        id.set("pushpalroy")
+        name.set("Pushpal Roy")
+        url.set("https://github.com/pushpalroy/")
+      }
+    }
+  }
+}

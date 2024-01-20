@@ -2,7 +2,7 @@
 
 > A simple yet highly customizable library for showing a TimeLine view
 
-[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.1.0-blue?style=flat-square&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
+[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5.1-blue?style=flat-square&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
 [![Compose](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=flat-square&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=flat-square&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Follow&style=social)](https://github.com/pushpalroy)
@@ -10,9 +10,9 @@
 
 #### Made with ❤ using Compose
 
-| Simple | Animated | Fancy | Item Update |
-:-------------------------:|:-------------------------: | :-------------------------: | :-------------------------: 
-<img src="art/simple.png" width=200 />  |  <img src="art/animated.gif" width=200 /> | <img src="art/fancy.png" width=200 /> | <img src="art/item_update.gif" width=200 />
+|                 Simple                 |                 Animated                 |                 Fancy                 |                 Item Update                 |
+|:--------------------------------------:|:----------------------------------------:|:-------------------------------------:|:-------------------------------------------:|
+| <img src="art/simple.png" width=200 /> | <img src="art/animated.gif" width=200 /> | <img src="art/fancy.png" width=200 /> | <img src="art/item_update.gif" width=200 /> |
 
 ## Implementation
 

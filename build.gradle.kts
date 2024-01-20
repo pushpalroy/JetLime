@@ -17,14 +17,6 @@ tasks.register("clean", Delete::class) {
   delete(rootProject.buildDir)
 }
 
-allprojects {
-  pluginManager.withPlugin(Plugins.vanniktechPublish) {
-    extensions.getByType(com.vanniktech.maven.publish.MavenPublishPluginExtension::class.java)
-      .apply {
-        sonatypeHost = com.vanniktech.maven.publish.SonatypeHost.S01
-      }
-  }
-}
 subprojects {
   apply(plugin = Plugins.ktlint)
 }

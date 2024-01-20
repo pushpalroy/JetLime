@@ -72,7 +72,6 @@ dependencies {
   implementation(DependingOn.AndroidX.Compose.activity)
   implementation(DependingOn.AndroidX.Compose.coil)
 
-  implementation(DependingOn.Accompanist.insets)
   implementation(DependingOn.ThirdParty.multiFab)
 
   implementation(DependingOn.Lifecycle.runtime)

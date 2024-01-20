@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.pushpal.jetlime.data.JetLimeItemsModel.JetLimeItem
 import com.pushpal.jetlime.data.config.IconAnimation
 import com.pushpal.jetlime.data.config.IconType
@@ -158,7 +158,7 @@ object FakeData {
     ) {
       items(imageUrlsList) { imageUrl ->
         Image(
-          painter = rememberImagePainter(data = imageUrl),
+          painter = rememberAsyncImagePainter(model = imageUrl),
           contentDescription = "Image",
           modifier = Modifier
             .size(80.dp)
