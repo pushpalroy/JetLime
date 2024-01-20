@@ -2,8 +2,6 @@ name: Android Sample Build CI
 on:
   pull_request:
     branches: [ main ]
-  push:
-    branches: [ main ]
 
 jobs:
   debug-build:

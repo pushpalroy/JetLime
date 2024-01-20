@@ -32,10 +32,6 @@ object DependingOn {
     }
   }
 
-  object Accompanist {
-    val insets by lazy { "com.google.accompanist:accompanist-insets:${Versions.accompanistInsets}" }
-  }
-
   object ThirdParty {
     val multiFab by lazy { "academy.compose.companion:multi-fab:${Versions.multiFab}" }
   }
