@@ -2,13 +2,11 @@ package com.pushpal.jetlime.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -20,7 +18,6 @@ import androidx.compose.ui.Modifier
 import com.pushpal.jetlime.data.JetLimeItemsModel
 import com.pushpal.jetlime.data.JetLimeItemsModel.JetLimeItem
 import com.pushpal.jetlime.data.config.JetLimeViewConfig
-import kotlinx.coroutines.flow.collect
 
 /**
  * [JetLimeView] is exposed to be used as composable.
@@ -29,11 +26,6 @@ import kotlinx.coroutines.flow.collect
  * @param jetLimeViewConfig is the config for the view. See [jetLimeViewConfig]
  * @param listState is the state of the LazyColumn which will hold the JetLimeItems.
  */
-@OptIn(
-  ExperimentalAnimationApi::class,
-  ExperimentalTransitionApi::class,
-  ExperimentalFoundationApi::class
-)
 @ExperimentalAnimationApi
 @Composable
 fun JetLimeView(

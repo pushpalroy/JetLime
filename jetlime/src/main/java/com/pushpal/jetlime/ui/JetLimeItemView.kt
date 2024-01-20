@@ -98,6 +98,7 @@ fun JetLimeItemView(
             viewConfig.lineType.intervals,
             viewConfig.lineType.phase
           )
+
           else -> null
         }
         drawLine(
@@ -120,14 +121,16 @@ fun JetLimeItemView(
 
         var finalAlpha = 1f
         itemConfig.iconAnimation?.let { safeIconAnimation ->
-          val infiniteTransition = rememberInfiniteTransition()
+          val infiniteTransition = rememberInfiniteTransition(
+            label = "rememberInfiniteAlphaTransition"
+          )
           val alpha by infiniteTransition.animateFloat(
             initialValue = safeIconAnimation.initialValue,
             targetValue = safeIconAnimation.targetValue,
             animationSpec = infiniteRepeatable(
               animation = safeIconAnimation.keySpecs,
               repeatMode = RepeatMode.Reverse
-            )
+            ), label = "infiniteAlphaTransition"
           )
           finalAlpha = alpha
         }

@@ -45,7 +45,8 @@ fun MultiFloatingActionButton(
       fabIcon.iconRotate ?: 0f
     } else {
       0f
-    }
+    },
+    label = "rotationAnimation"
   )
 
   Column(

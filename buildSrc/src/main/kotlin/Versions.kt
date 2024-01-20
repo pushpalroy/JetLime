@@ -1,8 +1,8 @@
 object Versions {
-  const val compose = "1.1.0"
-  const val androidGradlePlugin = "7.1.0"
+  const val compose = "1.5.1"
+  const val androidGradlePlugin = "8.2.1"
   const val vanniktechGradlePlugin = "0.18.0"
-  const val kotlin = "1.6.10"
+  const val kotlin = "1.9.0"
   const val activity = "1.4.0"
   const val material = "1.5.0"
   const val coreKtx = "1.7.0"

@@ -1,7 +1,6 @@
 package com.pushpal.jetlime.ui.timelines.updatestate
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,7 +21,7 @@ import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.updatestate.ItemsListState.Success
 import com.pushpal.jetlime.ui.timelines.updatestate.util.viewModelProviderFactoryOf
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalTransitionApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun ItemUpdateTimeLine() {

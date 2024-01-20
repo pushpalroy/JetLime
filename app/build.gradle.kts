@@ -5,12 +5,13 @@ plugins {
 }
 
 android {
-  compileSdk = 31
+  namespace = "com.pushpal.jetlime"
+  compileSdk = 34
 
   defaultConfig {
-    applicationId = ProjectProperties.APPLICATION_ID
+    applicationId = "com.pushpal.jetlime"
     minSdk = 21
-    targetSdk = 31
+    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
 
@@ -19,11 +20,18 @@ android {
 
   buildTypes {
     getByName("release") {
-      isMinifyEnabled = false
+      isDebuggable = false
+      isMinifyEnabled = true
+      isShrinkResources = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
       )
+    }
+    getByName("debug") {
+      isDebuggable = true
+      versionNameSuffix = "-debug"
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
   compileOptions {

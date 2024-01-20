@@ -6,8 +6,8 @@ import androidx.compose.runtime.remember
 import com.pushpal.jetlime.ui.util.multifab.MultiFabState.Collapsed
 
 sealed class MultiFabState {
-  object Collapsed : MultiFabState()
-  object Expand : MultiFabState()
+  data object Collapsed : MultiFabState()
+  data object Expand : MultiFabState()
 
   fun isExpanded() = this == Expand
 
