@@ -58,7 +58,7 @@ kapt {
 dependencies {
 
   implementation(project(":jetlime"))
-  //implementation("io.github.pushpalroy:jetlime:1.0.1")
+  //implementation("io.github.pushpalroy:jetlime:1.0.4")
 
   implementation(DependingOn.Android.material)
 

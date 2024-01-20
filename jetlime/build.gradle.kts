@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
   id(Plugins.library)
   id(Plugins.kotlinAndroid)
@@ -59,19 +61,22 @@ dependencies {
 }
 
 mavenPublishing {
+  publishToMavenCentral(SonatypeHost.S01)
+  signAllPublications()
   val artifactId = "jetlime"
   coordinates("io.github.pushpalroy", artifactId, "1.0.4")
 
   pom {
     name.set(artifactId)
-    description.set("A simple yet highly customizable library for showing a TimeLine view in Android.")
+    description.set("A simple library for TimeLine view in Android")
     inceptionYear.set("2022")
+    packaging = "aar"
     url.set("https://github.com/pushpalroy/jetlime/")
     licenses {
       license {
         name.set("MIT License")
         url.set("https://github.com/pushpalroy/jetlime/blob/main/LICENSE")
-        distribution.set("https://opensource.org/license/mit/")
+        distribution.set("repo")
       }
     }
     developers {
@@ -80,6 +85,11 @@ mavenPublishing {
         name.set("Pushpal Roy")
         url.set("https://github.com/pushpalroy/")
       }
+    }
+    scm {
+      url.set("https://github.com/pushpalroy/jetlime")
+      connection.set("scm:git:git://github.com/pushpalroy/jetlime.git")
+      developerConnection.set("scm:git:ssh://git@github.com/pushpalroy/jetlime.git")
     }
   }
 }
