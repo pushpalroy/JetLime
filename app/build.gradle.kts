@@ -5,12 +5,13 @@ plugins {
 }
 
 android {
-  compileSdk = 31
+  namespace = "com.pushpal.jetlime"
+  compileSdk = 34
 
   defaultConfig {
-    applicationId = ProjectProperties.APPLICATION_ID
+    applicationId = "com.pushpal.jetlime"
     minSdk = 21
-    targetSdk = 31
+    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
 

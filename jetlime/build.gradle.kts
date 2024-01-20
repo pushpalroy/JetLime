@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-  compileSdk = 31
+  namespace = "com.pushpal.jetlime"
+  compileSdk = 34
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 31
+    targetSdk = 34
 
     testInstrumentationRunner = DependingOn.AndroidTest.androidJUnitRunner
     consumerProguardFiles("consumer-rules.pro")

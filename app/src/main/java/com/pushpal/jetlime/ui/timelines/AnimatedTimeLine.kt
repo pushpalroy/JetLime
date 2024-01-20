@@ -1,7 +1,6 @@
 package com.pushpal.jetlime.ui.timelines
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
@@ -33,7 +32,7 @@ import com.pushpal.jetlime.ui.util.multifab.MultiFabItem
 import com.pushpal.jetlime.ui.util.multifab.MultiFloatingActionButton
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalTransitionApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun AnimatedTimeLine() {
@@ -59,10 +58,11 @@ fun AnimatedTimeLine() {
         listState = listState
       )
     }
-  ) {
+  ) { paddingValues ->
     JetLimeSurface(
       color = JetLimeTheme.colors.uiBackground,
       modifier = Modifier
+        .padding(paddingValues)
         .fillMaxSize()
     ) {
       JetLimeView(
@@ -95,6 +95,7 @@ fun FAB(
               jetLimeItemConfig = JetLimeItemConfig(iconAnimation = IconAnimation())
             )
           )
+
           2 -> jetLimeItemsModel.removeItem(jetLimeItemsModel.items.lastOrNull())
         }
         listState.scrollToItem(jetLimeItemsModel.items.size)

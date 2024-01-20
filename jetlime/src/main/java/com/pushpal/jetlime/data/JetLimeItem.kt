@@ -1,6 +1,5 @@
 package com.pushpal.jetlime.data
 
-import androidx.compose.animation.core.ExperimentalTransitionApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -46,7 +45,6 @@ class JetLimeItemsModel(list: List<JetLimeItem> = listOf()) {
     }
   }
 
-  @OptIn(ExperimentalTransitionApi::class)
   fun pruneItems() {
     _items.removeAll(items.filter { it.visible.isIdle && !it.visible.targetState })
   }

@@ -3,7 +3,7 @@ package com.pushpal.jetlime.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
@@ -11,7 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -30,23 +30,22 @@ fun HomeScreen() {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = { HomeAppBar(backgroundColor = JetLimeTheme.colors.uiBorder) }
-  ) {
+  ) { paddingValues ->
     HomeContent(
-      modifier = Modifier.fillMaxSize()
+      modifier = Modifier
+        .padding(paddingValues)
+        .fillMaxSize()
     )
   }
 }
 
-@OptIn(
-  ExperimentalMaterialApi::class,
-  ExperimentalAnimationApi::class
-)
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(
   modifier: Modifier = Modifier
 ) {
   val tabs = remember { listOf("Simple", "Animated", "Fancy", "Item Update") }
-  var selectedIndex by remember { mutableStateOf(0) }
+  var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
       backgroundColor = JetLimeTheme.colors.uiBorder,
