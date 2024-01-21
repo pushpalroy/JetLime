@@ -3,14 +3,15 @@
 > A simple yet highly customizable library for showing a TimeLine view in Android.
 
 [![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5.4-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
-[![Compose](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=for-the-badge&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Pull Request](https://img.shields.io/github/issues-pr/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Watchers](https://img.shields.io/github/watchers/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/pushpalroy/jetlime?color=orange&style=for-the-badge)
-![CI-ANDROID-BUILD](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/android_sample_build.yaml?style=for-the-badge&label=Android%20Build%20CI)
+[![License](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=for-the-badge&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
+![CI-ANDROID-BUILD](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/android_sample_build.yaml?style=for-the-badge&label=Build%20CI)
 
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Followers&style=social)](https://github.com/pushpalroy)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pushpalroy?label=Follow&style=social)](https://twitter.com/pushpalroy)
@@ -27,7 +28,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.4")
+  implementation("io.github.pushpalroy:jetlime:1.0.5")
 }
 ```
 

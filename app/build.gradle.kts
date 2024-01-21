@@ -1,21 +1,20 @@
 plugins {
-  id(Plugins.application)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinKapt)
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
 }
 
 android {
-  namespace = "com.pushpal.jetlime"
+  namespace = "com.pushpal.jetlime.sample"
   compileSdk = 34
 
   defaultConfig {
-    applicationId = "com.pushpal.jetlime"
+    applicationId = "com.pushpal.jetlime.sample"
     minSdk = 21
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
 
-    testInstrumentationRunner = DependingOn.AndroidTest.androidJUnitRunner
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -40,45 +39,39 @@ android {
   }
   kotlinOptions {
     jvmTarget = "1.8"
-    freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
   }
   buildFeatures {
     compose = true
   }
   composeOptions {
-    kotlinCompilerExtensionVersion = Versions.compose
+    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
-}
-// Required for annotation processing plugins like Dagger
-kapt {
-  generateStubs = true
-  correctErrorTypes = true
 }
 
 dependencies {
 
   implementation(project(":jetlime"))
-  //implementation("io.github.pushpalroy:jetlime:1.0.4")
+  //implementation(libs.jetlime)
 
-  implementation(DependingOn.Android.material)
+  implementation(libs.material)
 
-  implementation(DependingOn.AndroidX.coreKtx)
-  implementation(DependingOn.AndroidX.appCompat)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.appcompat)
 
-  implementation(DependingOn.AndroidX.Compose.ui)
-  implementation(DependingOn.AndroidX.Compose.material)
-  implementation(DependingOn.AndroidX.Compose.uiTooling)
-  implementation(DependingOn.AndroidX.Compose.uiToolingPreview)
-  implementation(DependingOn.AndroidX.Compose.activity)
-  implementation(DependingOn.AndroidX.Compose.coil)
+  implementation(libs.androidx.compose.ui)
+  implementation(libs.androidx.compose.material)
+  implementation(libs.androidx.compose.ui.tooling)
+  implementation(libs.androidx.compose.ui.tooling.preview)
+  implementation(libs.androidx.activity.compose)
+  implementation(libs.coil.compose)
 
-  implementation(DependingOn.ThirdParty.multiFab)
+  implementation(libs.multi.fab)
 
-  implementation(DependingOn.Lifecycle.runtime)
-  implementation(DependingOn.Lifecycle.viewmodel)
-  implementation(DependingOn.Lifecycle.viewModelCompose)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-  testImplementation(DependingOn.Test.jUnit)
-  androidTestImplementation(DependingOn.AndroidTest.jUnitExtensions)
-  androidTestImplementation(DependingOn.AndroidTest.espressoCore)
+  testImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.espresso.core)
 }

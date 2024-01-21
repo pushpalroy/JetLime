@@ -22,7 +22,7 @@ data class JetLimeViewConfig(
 )
 
 sealed class LineType {
-  object Solid : LineType()
+  data object Solid : LineType()
   class Dashed(
     val intervals: FloatArray = floatArrayOf(20f, 20f),
     val phase: Float = 50f
