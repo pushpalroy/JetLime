@@ -30,8 +30,6 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
   kotlinOptions {
-    freeCompilerArgs =
-      freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn" + "-Xopt-in=kotlin.Experimental"
     jvmTarget = "1.8"
   }
   buildFeatures {
@@ -43,13 +41,13 @@ android {
 }
 
 dependencies {
-  implementation(libs.ui)
-  implementation(libs.androidx.material)
-  implementation(libs.androidx.ui.tooling)
+  implementation(libs.androidx.compose.ui)
+  implementation(libs.androidx.compose.material)
+  implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
 
-  debugApi(libs.androidx.ui.tooling)
+  debugApi(libs.androidx.compose.ui.tooling)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)

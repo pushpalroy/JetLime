@@ -39,7 +39,6 @@ android {
   }
   kotlinOptions {
     jvmTarget = "1.8"
-    freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
   }
   buildFeatures {
     compose = true
@@ -56,13 +55,13 @@ dependencies {
 
   implementation(libs.material)
 
-  implementation(libs.core.ktx)
-  implementation(libs.appcompat)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.appcompat)
 
-  implementation(libs.ui)
-  implementation(libs.androidx.material)
-  implementation(libs.androidx.ui.tooling)
-  implementation(libs.androidx.ui.tooling.preview)
+  implementation(libs.androidx.compose.ui)
+  implementation(libs.androidx.compose.material)
+  implementation(libs.androidx.compose.ui.tooling)
+  implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.activity.compose)
   implementation(libs.coil.compose)
 
