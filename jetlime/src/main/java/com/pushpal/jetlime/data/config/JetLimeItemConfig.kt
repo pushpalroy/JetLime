@@ -30,9 +30,9 @@ data class JetLimeItemConfig(
 }
 
 sealed class IconType {
-  object Empty : IconType()
-  object Checked : IconType()
-  object Filled : IconType()
+  data object Empty : IconType()
+  data object Checked : IconType()
+  data object Filled : IconType()
   class Custom(val iconImage: ImageVector = Icons.Filled.CheckCircle) : IconType()
 }
 

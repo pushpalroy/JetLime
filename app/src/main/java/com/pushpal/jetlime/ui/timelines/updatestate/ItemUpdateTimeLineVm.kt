@@ -35,7 +35,7 @@ class ItemUpdateTimeLineViewModel : ViewModel() {
 }
 
 sealed class ItemsListState {
-  object Empty : ItemsListState()
-  object Loading : ItemsListState()
+  data object Empty : ItemsListState()
+  data object Loading : ItemsListState()
   data class Success(val itemsList: List<Item>) : ItemsListState()
 }
