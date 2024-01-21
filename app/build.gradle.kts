@@ -23,17 +23,17 @@ android {
   signingConfigs {
     // Uncomment this line if we are generating a release build manually from IDE
     // Not needed while build is generated from CI/CD
-        maybeCreate("release").apply {
-            val keystorePropertiesFile = rootProject.file("keystore_release.properties")
-            val keystoreProperties = Properties()
-            if (keystorePropertiesFile.exists()) {
-                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-            }
-            storeFile = file(path = keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-        }
+    //    maybeCreate("release").apply {
+    //        val keystorePropertiesFile = rootProject.file("keystore_release.properties")
+    //        val keystoreProperties = Properties()
+    //        if (keystorePropertiesFile.exists()) {
+    //            keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    //        }
+    //        storeFile = file(path = keystoreProperties["storeFile"] as String)
+    //        storePassword = keystoreProperties["storePassword"] as String
+    //        keyAlias = keystoreProperties["keyAlias"] as String
+    //        keyPassword = keystoreProperties["keyPassword"] as String
+    //    }
   }
 
   buildTypes {
@@ -45,7 +45,7 @@ android {
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
       )
-      signingConfig = signingConfigs.getByName("release")
+      // signingConfig = signingConfigs.getByName("release")
     }
     getByName("debug") {
       isDebuggable = true
