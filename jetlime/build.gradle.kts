@@ -1,9 +1,9 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-  id(Plugins.library)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.vanniktechPublish)
+  id(libs.plugins.android.library.get().pluginId)
+  id(libs.plugins.kotlin.android.get().pluginId)
+  alias(libs.plugins.nexus.vanniktech.publish)
 }
 
 android {
@@ -12,9 +12,7 @@ android {
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 34
-
-    testInstrumentationRunner = DependingOn.AndroidTest.androidJUnitRunner
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
 
@@ -40,24 +38,22 @@ android {
     compose = true
   }
   composeOptions {
-    kotlinCompilerExtensionVersion = Versions.compose
+    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
 }
 
 dependencies {
+  implementation(libs.ui)
+  implementation(libs.androidx.material)
+  implementation(libs.androidx.ui.tooling)
+  implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.constraintlayout.compose)
 
-  implementation(DependingOn.AndroidX.Compose.ui)
-  implementation(DependingOn.AndroidX.Compose.material)
-  implementation(DependingOn.AndroidX.Compose.uiToolingPreview)
-  implementation(DependingOn.AndroidX.Compose.activity)
-  implementation(DependingOn.AndroidX.Compose.constraintLayout)
+  debugApi(libs.androidx.ui.tooling)
 
-  debugApi(DependingOn.AndroidX.Compose.uiTooling)
-
-  testImplementation(DependingOn.Test.jUnit)
-  androidTestImplementation(DependingOn.AndroidTest.jUnitExtensions)
-  androidTestImplementation(DependingOn.AndroidTest.espressoCore)
-  androidTestApi(DependingOn.AndroidTest.uiTestJunit)
+  testImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.espresso.core)
 }
 
 mavenPublishing {

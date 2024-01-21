@@ -1,22 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-  repositories {
-    google()
-    mavenCentral()
-    maven("https://plugins.gradle.org/m2/")
-  }
-  dependencies {
-    classpath(DependingOn.Gradle.androidGradlePlugin)
-    classpath(DependingOn.Gradle.kotlinGradlePlugin)
-    classpath(DependingOn.Gradle.ktlintGradlePlugin)
-    classpath(DependingOn.Gradle.vanniktechGradlePlugin)
-  }
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.nexus.vanniktech.publish) apply false
 }
 
 tasks.register("clean", Delete::class) {
   delete(rootProject.buildDir)
-}
-
-subprojects {
-  apply(plugin = Plugins.ktlint)
 }
