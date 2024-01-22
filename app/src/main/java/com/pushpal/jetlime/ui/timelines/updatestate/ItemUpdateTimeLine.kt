@@ -19,17 +19,12 @@ import com.pushpal.jetlime.ui.JetLimeView
 import com.pushpal.jetlime.ui.theme.JetLimeSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.updatestate.ItemsListState.Success
-import com.pushpal.jetlime.ui.timelines.updatestate.util.viewModelProviderFactoryOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun ItemUpdateTimeLine() {
-  val viewModel: ItemUpdateTimeLineViewModel = viewModel(
-    factory = viewModelProviderFactoryOf {
-      ItemUpdateTimeLineViewModel()
-    }
-  )
+  val viewModel: ItemUpdateTimeLineViewModel = viewModel()
   val itemsListState by viewModel.itemsListState.collectAsState()
 
   JetLimeSurface(
