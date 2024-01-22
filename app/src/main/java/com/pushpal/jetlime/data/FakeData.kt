@@ -1,7 +1,9 @@
 package com.pushpal.jetlime.data
 
+import android.widget.Toast
 import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -63,6 +66,17 @@ object FakeData {
         iconType = IconType.Empty
       )
     ),
+    JetLimeItem {
+      val context = LocalContext.current
+      Text(
+        text = "Click me to show a toast",
+        style = JetLimeTypography.body1,
+        modifier = Modifier
+          .clickable {
+          Toast.makeText(context, "This item has been clicked", Toast.LENGTH_SHORT).show()
+        }
+      )
+    },
     JetLimeItem(
       title = "Blue Lagoon",
       description = "14C Mandel Street",

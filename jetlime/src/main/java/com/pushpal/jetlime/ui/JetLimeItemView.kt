@@ -9,7 +9,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -56,7 +55,8 @@ const val heightFactor = 3
  * @param totalItems is the total number of items
  */
 @Composable
-fun JetLimeItemView(
+internal fun JetLimeItemView(
+  modifier: Modifier = Modifier,
   title: String? = null,
   description: String? = null,
   itemConfig: JetLimeItemConfig,
@@ -64,14 +64,11 @@ fun JetLimeItemView(
   totalItems: Int,
   content: @Composable () -> Unit = {}
 ) {
-  BoxWithConstraints(
-    modifier = Modifier
-      .fillMaxWidth()
-      .background(color = viewConfig.backgroundColor)
-      .height(itemConfig.itemHeight)
-  ) {
-
     ConstraintLayout(
+      modifier = modifier
+        .fillMaxWidth()
+        .background(color = viewConfig.backgroundColor)
+        .height(itemConfig.itemHeight),
       constraintSet = decoupledConstraints(
         lineStartMargin = viewConfig.lineStartMargin,
         lineEndMargin = viewConfig.lineEndMargin
@@ -193,7 +190,6 @@ fun JetLimeItemView(
         content()
       }
     }
-  }
 }
 
 private fun decoupledConstraints(

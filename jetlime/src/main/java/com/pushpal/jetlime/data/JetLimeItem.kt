@@ -26,7 +26,7 @@ class JetLimeItemsModel(
   @Immutable
   data class JetLimeItem(
     val indicator: ImageVector = Icons.Filled.CheckCircle,
-    val title: String,
+    val title: String? = null,
     val description: String? = null,
     val imageUrls: ImmutableList<String>? = null,
     val jetLimeItemConfig: JetLimeItemConfig = JetLimeItemConfig(position = 0),
