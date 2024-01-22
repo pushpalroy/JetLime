@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -17,6 +20,22 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  signingConfigs {
+    // Uncomment this line if we are generating a release build manually from IDE
+    // Not needed while build is generated from CI/CD
+    //    maybeCreate("release").apply {
+    //        val keystorePropertiesFile = rootProject.file("keystore_release.properties")
+    //        val keystoreProperties = Properties()
+    //        if (keystorePropertiesFile.exists()) {
+    //            keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    //        }
+    //        storeFile = file(path = keystoreProperties["storeFile"] as String)
+    //        storePassword = keystoreProperties["storePassword"] as String
+    //        keyAlias = keystoreProperties["keyAlias"] as String
+    //        keyPassword = keystoreProperties["keyPassword"] as String
+    //    }
+  }
+
   buildTypes {
     getByName("release") {
       isDebuggable = false
@@ -26,6 +45,7 @@ android {
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
       )
+      // signingConfig = signingConfigs.getByName("release")
     }
     getByName("debug") {
       isDebuggable = true
@@ -54,22 +74,21 @@ dependencies {
   //implementation(libs.jetlime)
 
   implementation(libs.material)
-
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
-
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.material)
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.activity.compose)
-  implementation(libs.coil.compose)
-
-  implementation(libs.multi.fab)
-
+  implementation(libs.androidx.lifecycle.compose)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+  implementation(libs.kotlinx.collections.immutable)
+  implementation(libs.coil.compose)
+  implementation(libs.multi.fab)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)

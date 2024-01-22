@@ -1,11 +1,13 @@
 package com.pushpal.jetlime.data.config
 
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Immutable
 data class JetLimeViewConfig(
   val backgroundColor: Color = Color(0xFF1C2027),
   val lineColor: Color = Color(0xFF3C9BFF),
@@ -21,6 +23,7 @@ data class JetLimeViewConfig(
   val showIcons: Boolean = true
 )
 
+@Immutable
 sealed class LineType {
   data object Solid : LineType()
   class Dashed(

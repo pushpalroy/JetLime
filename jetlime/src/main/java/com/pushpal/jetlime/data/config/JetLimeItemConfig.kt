@@ -4,11 +4,13 @@ import androidx.compose.animation.core.KeyframesSpec
 import androidx.compose.animation.core.keyframes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Immutable
 data class JetLimeItemConfig(
   var position: Int = 0,
   var titleColor: Color = Color(0xFFFFFFFF),
@@ -18,7 +20,7 @@ data class JetLimeItemConfig(
   var iconColor: Color = Color(0xFF2D4869),
   var iconBorderColor: Color = Color(0xffffffff),
   var iconBackgroundColor: Color = Color(0xffffffff),
-  var itemHeight: Dp = 80.dp
+  var itemHeight: Dp = 64.dp
 ) {
   fun isFirstItem(): Boolean {
     return position == 0
@@ -29,6 +31,7 @@ data class JetLimeItemConfig(
   }
 }
 
+@Immutable
 sealed class IconType {
   data object Empty : IconType()
   data object Checked : IconType()
@@ -36,6 +39,7 @@ sealed class IconType {
   class Custom(val iconImage: ImageVector = Icons.Filled.CheckCircle) : IconType()
 }
 
+@Immutable
 data class IconAnimation(
   val initialValue: Float = 0.5f,
   val targetValue: Float = 1f,

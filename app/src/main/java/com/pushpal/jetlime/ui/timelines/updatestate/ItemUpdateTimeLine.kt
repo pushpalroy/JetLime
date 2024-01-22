@@ -3,7 +3,7 @@ package com.pushpal.jetlime.ui.timelines.updatestate
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -16,49 +16,36 @@ import com.pushpal.jetlime.data.config.IconAnimation
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import com.pushpal.jetlime.data.config.JetLimeViewConfig
 import com.pushpal.jetlime.ui.JetLimeView
-import com.pushpal.jetlime.ui.theme.JetLimeSurface
+import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
-import com.pushpal.jetlime.ui.timelines.updatestate.ItemsListState.Success
-import com.pushpal.jetlime.ui.timelines.updatestate.util.viewModelProviderFactoryOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun ItemUpdateTimeLine() {
-  val viewModel: ItemUpdateTimeLineViewModel = viewModel(
-    factory = viewModelProviderFactoryOf {
-      ItemUpdateTimeLineViewModel()
-    }
-  )
-  val itemsListState by viewModel.itemsListState.collectAsState()
+  val viewModel: ItemUpdateTimeLineViewModel = viewModel()
+  val uiState by viewModel.itemsListState.collectAsStateWithLifecycle()
 
-  JetLimeSurface(
+  JetLimeSampleSurface(
     color = JetLimeTheme.colors.uiBackground,
     modifier = Modifier.fillMaxSize()
   ) {
     val jetLimeItemsModel by remember {
-        derivedStateOf {
-          val jetItemList: MutableList<JetLimeItem> = mutableStateListOf()
-          when (itemsListState) {
-            is Success -> {
-              (itemsListState as Success).itemsList.forEach { item ->
-                jetItemList.add(
-                  JetLimeItem(
-                    title = item.name,
-                    jetLimeItemConfig = JetLimeItemConfig(
-                      position = item.id,
-                      iconAnimation = if (item.activeState) IconAnimation() else null
-                    )
-                  )
-                )
-              }
-            }
-            else -> {
-              // Do nothing
-            }
-          }
-          JetLimeItemsModel(jetItemList)
+      derivedStateOf {
+        val jetItemList: MutableList<JetLimeItem> = mutableStateListOf()
+        uiState.itemsList.forEach { item ->
+          jetItemList.add(
+            JetLimeItem(
+              title = item.name,
+              jetLimeItemConfig = JetLimeItemConfig(
+                position = item.id,
+                iconAnimation = if (item.activeState) IconAnimation() else null
+              )
+            )
+          )
         }
+        JetLimeItemsModel(jetItemList)
+      }
     }
 
     JetLimeView(

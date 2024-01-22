@@ -36,7 +36,7 @@ fun getFakeItems(): MutableList<Item> {
   )
 }
 
-fun MutableList<Item>.modify(index: Int): MutableList<Item> {
+fun MutableList<Item>.modifyActiveState(index: Int): MutableList<Item> {
   return map { item ->
     if (item.id == index) {
       item.copy(

@@ -18,7 +18,7 @@ android {
 
   buildTypes {
     release {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
@@ -46,6 +46,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
+  implementation(libs.kotlinx.collections.immutable)
 
   debugApi(libs.androidx.compose.ui.tooling)
 
@@ -58,7 +59,7 @@ mavenPublishing {
   publishToMavenCentral(SonatypeHost.S01)
   signAllPublications()
   val artifactId = "jetlime"
-  coordinates("io.github.pushpalroy", artifactId, "1.0.5")
+  coordinates("io.github.pushpalroy", artifactId, "1.0.6")
 
   pom {
     name.set(artifactId)

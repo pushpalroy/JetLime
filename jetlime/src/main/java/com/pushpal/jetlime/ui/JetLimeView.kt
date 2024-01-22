@@ -10,6 +10,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,29 +51,16 @@ fun JetLimeView(
     state = listState,
     verticalArrangement = Arrangement.spacedBy(jetLimeViewConfig.itemSpacing)
   ) {
-    items(count = jetLimeItemsModel.items.size) { pos ->
-      jetLimeItemsModel.items[pos].let { jetLimeItem ->
-        val slideInVertically = slideInVertically(
-          initialOffsetY = { a -> -a / 4 },
-          animationSpec = tween(
-            durationMillis = 600,
-            delayMillis = 100,
-            easing = FastOutSlowInEasing
-          )
-        )
-        val shrinkVertically = shrinkVertically(
-          animationSpec = tween(
-            durationMillis = 400,
-            delayMillis = 100,
-            easing = LinearOutSlowInEasing
-          )
-        )
-
+    itemsIndexed(
+      items = jetLimeItemsModel.items,
+      key = { _, item -> item.itemId }
+    ) { pos, item ->
+      item.let { jetLimeItem ->
         if (jetLimeViewConfig.enableItemAnimation) {
           AnimatedVisibility(
             visibleState = jetLimeItem.visible,
-            enter = slideInVertically,
-            exit = shrinkVertically
+            enter = JetLimeViewDefaults.ItemEntryAnimation,
+            exit = JetLimeViewDefaults.ItemExitAnimation
           ) {
             JetLimeItemView(
               title = jetLimeItem.title,
@@ -96,4 +84,22 @@ fun JetLimeView(
       }
     }
   }
+}
+
+object JetLimeViewDefaults {
+  val ItemEntryAnimation = slideInVertically(
+    initialOffsetY = { a -> -a / 4 },
+    animationSpec = tween(
+      durationMillis = 600,
+      delayMillis = 100,
+      easing = FastOutSlowInEasing
+    )
+  )
+  val ItemExitAnimation = shrinkVertically(
+    animationSpec = tween(
+      durationMillis = 400,
+      delayMillis = 100,
+      easing = LinearOutSlowInEasing
+    )
+  )
 }

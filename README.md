@@ -28,7 +28,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.5")
+  implementation("io.github.pushpalroy:jetlime:1.0.6")
 }
 ```
 
