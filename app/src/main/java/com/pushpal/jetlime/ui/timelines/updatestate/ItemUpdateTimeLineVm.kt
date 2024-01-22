@@ -1,41 +1,51 @@
 package com.pushpal.jetlime.ui.timelines.updatestate
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pushpal.jetlime.ui.timelines.updatestate.data.Item
 import com.pushpal.jetlime.ui.timelines.updatestate.data.getFakeItems
-import com.pushpal.jetlime.ui.timelines.updatestate.data.modify
+import com.pushpal.jetlime.ui.timelines.updatestate.data.modifyActiveState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ItemUpdateTimeLineViewModel : ViewModel() {
 
-  var itemsListState = MutableStateFlow<ItemsListState>(ItemsListState.Empty)
-    private set
+  private val _itemsListState = MutableStateFlow(ItemsListState(loading = false))
+  var itemsListState: StateFlow<ItemsListState> = _itemsListState.asStateFlow()
 
   init {
     fetchItems()
   }
 
   private fun fetchItems() {
+    _itemsListState.update { it.copy(loading = true) }
     viewModelScope.launch {
-      itemsListState.value = ItemsListState.Loading
-      itemsListState.value = ItemsListState.Success(itemsList = getFakeItems())
 
-      // Modify items list after 2 seconds delay
+      // Fetch initial items
+      _itemsListState.update { it.copy(itemsList = getFakeItems(), loading = false) }
+
+      // Modify the 2nd item after 2 seconds delay
       delay(2000)
-      itemsListState.value = ItemsListState.Success(itemsList = getFakeItems().modify(2))
+      _itemsListState.update { it.copy(itemsList = getFakeItems().modifyActiveState(2)) }
 
-      // Modify items list after 3 seconds delay
+      // Modify the 3rd item after 2 seconds delay
+      delay(2000)
+      _itemsListState.update { it.copy(itemsList = getFakeItems().modifyActiveState(3)) }
+
+      // Modify the 4th item after 3 seconds delay
       delay(3000)
-      itemsListState.value = ItemsListState.Success(itemsList = getFakeItems().modify(3))
+      _itemsListState.update { it.copy(itemsList = getFakeItems().modifyActiveState(4)) }
     }
   }
 }
 
-sealed class ItemsListState {
-  data object Empty : ItemsListState()
-  data object Loading : ItemsListState()
-  data class Success(val itemsList: List<Item>) : ItemsListState()
-}
+@Immutable
+data class ItemsListState(
+  val itemsList: List<Item> = listOf(),
+  val loading: Boolean = false,
+)

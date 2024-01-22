@@ -14,7 +14,7 @@ import com.pushpal.jetlime.data.JetLimeItemsModel
 import com.pushpal.jetlime.data.config.JetLimeViewConfig
 import com.pushpal.jetlime.data.config.LineType
 import com.pushpal.jetlime.ui.JetLimeView
-import com.pushpal.jetlime.ui.theme.JetLimeSurface
+import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
 
 @ExperimentalAnimationApi
@@ -29,7 +29,7 @@ fun BasicTimeLine() {
     showIcons = true
   )
 
-  JetLimeSurface(
+  JetLimeSampleSurface(
     color = JetLimeTheme.colors.uiBackground,
     modifier = Modifier
       .fillMaxSize()
