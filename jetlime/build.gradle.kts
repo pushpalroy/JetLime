@@ -46,6 +46,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.constraintlayout.compose)
+  implementation(libs.kotlinx.collections.immutable)
 
   debugApi(libs.androidx.compose.ui.tooling)
 

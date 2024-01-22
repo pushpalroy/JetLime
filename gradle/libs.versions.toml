@@ -12,6 +12,7 @@ jetlime = "1.0.5"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlin = "1.9.22"
+kotlinxCollectionsImmutable = "0.3.7"
 ktlint = "12.1.0"
 lifecycleRuntimeKtx = "2.7.0"
 material = "1.11.0"
@@ -38,6 +39,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 multi-fab = { module = "academy.compose.companion:multi-fab", version.ref = "multiFab" }
 jetlime = { module = "io.github.pushpalroy:jetlime", version.ref = "jetlime" }

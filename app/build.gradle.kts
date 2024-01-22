@@ -74,22 +74,20 @@ dependencies {
   //implementation(libs.jetlime)
 
   implementation(libs.material)
-
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
-
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.material)
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.activity.compose)
-  implementation(libs.coil.compose)
-
-  implementation(libs.multi.fab)
-
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+  implementation(libs.kotlinx.collections.immutable)
+  implementation(libs.coil.compose)
+  implementation(libs.multi.fab)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)

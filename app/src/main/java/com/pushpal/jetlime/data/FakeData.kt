@@ -27,9 +27,10 @@ import com.pushpal.jetlime.data.config.IconType
 import com.pushpal.jetlime.data.config.IconType.Filled
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import com.pushpal.jetlime.ui.theme.JetLimeTypography
+import kotlinx.collections.immutable.persistentListOf
 
 object FakeData {
-  val simpleJetLimeItems = mutableListOf(
+  val simpleJetLimeItems = persistentListOf(
     JetLimeItem(
       title = "Green Avenue",
       description = "12/A Green Avenue",
@@ -82,7 +83,7 @@ object FakeData {
     )
   )
 
-  val animatedJetLimeItems = mutableListOf(
+  val animatedJetLimeItems = persistentListOf(
     JetLimeItem(
       title = "Green Avenue",
       description = "12/A Green Avenue",
@@ -146,7 +147,7 @@ object FakeData {
 
   @Composable
   fun ImageList() {
-    val imageUrlsList = listOf(
+    val imageUrlsList = persistentListOf(
       "https://images.unsplash.com/photo-1525183995014-bd94c0750cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=200",
       "https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=500",
       "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=500",
