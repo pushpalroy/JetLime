@@ -16,18 +16,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pushpal.jetlime.EventPointAnimation
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeEvent
-import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeStyle
+import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
+import com.pushpal.jetlime.ui.timelines.updatestate.data.Item
 import com.pushpal.jetlime.ui.timelines.updatestate.data.getFakeItems
 
 @ExperimentalAnimationApi
@@ -41,60 +44,96 @@ fun BasicTimeLineNew() {
     modifier = Modifier.fillMaxSize()
   ) {
     JetLimeColumn(
-      modifier = Modifier.padding(top = 16.dp),
+      modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
       listState = listState,
       style = JetLimeStyle(
-        backgroundColor = JetLimeTheme.colors.uiBackground
+        backgroundColor = JetLimeTheme.colors.uiBackground,
+        gap = 16.dp,
+        pointStartFactor = 1.2f
       )
     ) {
+      JetLimeEvent(
+        style = JetLimeEventStyle(
+          position = EventPosition.start(),
+          pointType = EventPointType.empty()
+        )
+      ) {
+        Event(item = fakeItems[0])
+      }
 
-      fakeItems.forEachIndexed { index, item ->
-        JetLimeEvent(
+      JetLimeEvent(
+        style = JetLimeEventStyle(
+          pointType = EventPointType.filled(),
+          pointAnimation = EventPointAnimation()
+        )
+      ) {
+        Event(item = fakeItems[1])
+      }
+
+      JetLimeEvent(
+        style = JetLimeEventStyle(
+          pointType = EventPointType.empty()
+        )
+      ) {
+        Event(item = fakeItems[2])
+      }
+
+      JetLimeEvent(
+        style = JetLimeEventStyle(
+          pointType = EventPointType.filled(),
+        )
+      ) {
+        Event(item = fakeItems[3])
+      }
+
+      JetLimeEvent(
+        style = JetLimeEventStyle(
+          position = EventPosition.end(),
+          pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
+        )
+      ) {
+        Event(item = fakeItems[4])
+      }
+    }
+  }
+}
+
+@Composable
+fun Event(item: Item) {
+  Box(
+    modifier = Modifier
+      .wrapContentHeight()
+      .fillMaxWidth()
+  ) {
+    Card(
+      modifier = Modifier
+        .fillMaxWidth(0.80f)
+        .align(Alignment.CenterStart)
+        .clickable {},
+      colors = CardDefaults.cardColors(
+        containerColor = Color(0xFF2D4869),
+        contentColor = Color(0xFFFFFFFF),
+      )
+    ) {
+      Text(
+        modifier = Modifier
+          .fillMaxWidth()
+          .wrapContentHeight()
+          .padding(12.dp),
+        color = Color.White,
+        fontSize = 18.sp,
+        text = item.name
+      )
+      item.description?.let {
+        Text(
           modifier = Modifier
-            .padding(horizontal = 16.dp),
-          style = JetLimeEventStyle(
-            position = EventPosition.dynamic(index, fakeItems.size),
-            pointType = EventPointType.filled()
-          )
-        ) {
-          Box(
-            modifier = Modifier
-              .wrapContentHeight()
-              .fillMaxWidth()
-          ) {
-            Card(
-              modifier = Modifier
-                .fillMaxWidth(0.80f)
-                .align(Alignment.CenterStart)
-                .clickable {},
-              colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF2D4869),
-                contentColor = Color(0xFFFFFFFF),
-              )
-            ) {
-              Text(
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .wrapContentHeight()
-                  .padding(12.dp),
-                color = Color.White,
-                fontSize = 18.sp,
-                text = item.name
-              )
-              item.description?.let {
-                Text(
-                  modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(12.dp),
-                  color = Color.White.copy(alpha = 0.8f),
-                  fontSize = 14.sp,
-                  text = it
-                )
-              }
-            }
-          }
-        }
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(12.dp),
+          color = Color.White.copy(alpha = 0.8f),
+          fontSize = 14.sp,
+          text = it
+        )
       }
     }
   }

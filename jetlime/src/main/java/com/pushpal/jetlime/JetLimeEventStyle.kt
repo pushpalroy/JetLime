@@ -1,6 +1,5 @@
 package com.pushpal.jetlime
 
-import androidx.compose.animation.core.KeyframesSpec
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
@@ -21,13 +20,6 @@ class JetLimeEventStyle(
     @Stable
     val Default = JetLimeEventStyle()
   }
-
-  @Immutable
-  data class EventPointAnimation(
-    val initialValue: Float,
-    val targetValue: Float,
-    val keySpecs: KeyframesSpec<Float>,
-  )
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true

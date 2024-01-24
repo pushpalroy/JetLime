@@ -1,10 +1,15 @@
 package com.pushpal.jetlime
 
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -19,30 +24,58 @@ fun JetLimeEvent(
   style: JetLimeEventStyle = JetLimeEventStyle.Default,
   content: @Composable () -> Unit
 ) {
-
   val jetLimeStyle = LocalJetLimeStyle.current
+  val infiniteTransition = rememberInfiniteTransition(label = "RadiusInfiniteTransition")
+  val radiusAnimFactor by if (style.pointAnimation != null) {
+    infiniteTransition.animateFloat(
+      initialValue = style.pointAnimation.initialValue,
+      targetValue = style.pointAnimation.targetValue,
+      animationSpec = style.pointAnimation.animationSpec,
+      label = "RadiusFloatAnimation"
+    )
+  } else {
+    remember { mutableFloatStateOf(1.0f) }
+  }
 
   Box(
     modifier = modifier
       .wrapContentSize()
       .drawBehind {
 
-        val iconRadiusInPx = style.pointRadius.toPx()
-        val iconStrokeWidthInPx = style.pointStrokeWidth.toPx()
+        val xOffset = style.pointRadius.toPx()
+        val yOffset = xOffset * jetLimeStyle.pointStartFactor
+        val radius = xOffset * radiusAnimFactor
+        val strokeWidth = style.pointStrokeWidth.toPx()
+
+        if (style.position.isNotEnd()) {
+          val yShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
+          drawLine(
+            brush = jetLimeStyle.lineBrush,
+            start = Offset(
+              x = xOffset,
+              y = xOffset * 2 + yShift
+            ),
+            end = Offset(
+              x = xOffset,
+              y = this.size.height + yShift
+            ),
+            strokeWidth = jetLimeStyle.lineThickness.toPx()
+          )
+        }
 
         if (style.pointType.type == "Empty" || style.pointType.type == "Filled") {
           drawCircle(
             color = style.pointColor,
-            radius = iconRadiusInPx,
-            center = Offset(x = iconRadiusInPx, y = iconRadiusInPx)
+            radius = radius,
+            center = Offset(x = xOffset, y = yOffset)
           )
         }
 
         if (style.pointType.type == "Filled") {
           drawCircle(
             color = style.pointFillColor,
-            radius = iconRadiusInPx - iconRadiusInPx / 2,
-            center = Offset(x = iconRadiusInPx, y = iconRadiusInPx)
+            radius = radius - radius / 2,
+            center = Offset(x = xOffset, y = yOffset)
           )
         }
 
@@ -51,8 +84,8 @@ fun JetLimeEvent(
             this.withTransform(
               transformBlock = {
                 translate(
-                  left = iconRadiusInPx - painter.intrinsicSize.width / 2f,
-                  top = iconRadiusInPx - painter.intrinsicSize.height / 2f
+                  left = xOffset - painter.intrinsicSize.width / 2f,
+                  top = yOffset - painter.intrinsicSize.height / 2f
                 )
               },
               drawBlock = {
@@ -66,21 +99,12 @@ fun JetLimeEvent(
         }
 
         // Draw icon stroke
-        if (iconStrokeWidthInPx > 0f) {
+        if (strokeWidth > 0f) {
           drawCircle(
             color = style.pointStrokeColor,
-            radius = iconRadiusInPx - iconStrokeWidthInPx / 2,
-            center = Offset(x = iconRadiusInPx, y = iconRadiusInPx),
-            style = Stroke(width = iconStrokeWidthInPx)
-          )
-        }
-
-        if (style.position.isNotEnd()) {
-          drawLine(
-            brush = jetLimeStyle.lineBrush,
-            start = Offset(x = iconRadiusInPx, y = iconRadiusInPx * 2),
-            end = Offset(x = iconRadiusInPx, y = this.size.height),
-            strokeWidth = jetLimeStyle.lineThickness.toPx()
+            radius = radius - strokeWidth / 2,
+            center = Offset(x = xOffset, y = yOffset),
+            style = Stroke(width = strokeWidth)
           )
         }
       }
