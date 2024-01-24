@@ -45,14 +45,12 @@ dependencies {
   implementation(libs.androidx.compose.material3)
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.activity.compose)
-  implementation(libs.androidx.constraintlayout.compose)
   implementation(libs.kotlinx.collections.immutable)
 
   debugApi(libs.androidx.compose.ui.tooling)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.espresso.core)
 }
 
 mavenPublishing {

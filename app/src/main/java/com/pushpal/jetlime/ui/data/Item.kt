@@ -1,4 +1,4 @@
-package com.pushpal.jetlime.ui.timelines.updatestate.data
+package com.pushpal.jetlime.ui.data
 
 data class Item(
   val id: Int = 0,
@@ -35,15 +35,4 @@ fun getFakeItems(): MutableList<Item> {
       name = "Season 6"
     )
   )
-}
-
-fun MutableList<Item>.modifyActiveState(index: Int): MutableList<Item> {
-  return map { item ->
-    if (item.id == index) {
-      item.copy(
-        activeState = true,
-        name = "${item.name} (Now watching)"
-      )
-    } else item
-  }.toMutableList()
 }

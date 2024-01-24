@@ -28,14 +28,14 @@ import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeStyle
 import com.pushpal.jetlime.sample.R
+import com.pushpal.jetlime.ui.data.Item
+import com.pushpal.jetlime.ui.data.getFakeItems
 import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
-import com.pushpal.jetlime.ui.timelines.updatestate.data.Item
-import com.pushpal.jetlime.ui.timelines.updatestate.data.getFakeItems
 
 @ExperimentalAnimationApi
 @Composable
-fun BasicTimeLineNew() {
+fun SimpleTimeLine() {
   val listState = rememberLazyListState()
   val fakeItems = remember { getFakeItems() }
 
@@ -140,8 +140,8 @@ fun Event(item: Item) {
 }
 
 @ExperimentalAnimationApi
-@Preview("Preview Basic TimeLine New")
+@Preview("Preview SimpleTimeLine")
 @Composable
-fun PreviewBasicTimeLineNew() {
-  BasicTimeLineNew()
+fun PreviewSimpleTimeLine() {
+  SimpleTimeLine()
 }
