@@ -14,9 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -79,7 +79,7 @@ fun MultiFloatingActionButton(
         fabState.value = fabState.value.toggleValue()
         stateChanged(fabState.value)
       },
-      backgroundColor = fabOption.iconBackgroundTint,
+      containerColor = fabOption.iconBackgroundTint,
       contentColor = fabOption.iconTint
     ) {
       Icon(
@@ -122,7 +122,7 @@ fun MiniFabItem(
         onFabItemClicked(item)
       },
       modifier = Modifier.size(40.dp),
-      backgroundColor = fabOption.iconBackgroundTint,
+      containerColor = fabOption.iconBackgroundTint,
       contentColor = fabOption.iconTint
     ) {
       Icon(

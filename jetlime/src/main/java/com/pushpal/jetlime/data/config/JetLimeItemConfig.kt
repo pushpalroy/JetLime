@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Deprecated("This class is deprecated")
 @Immutable
 data class JetLimeItemConfig(
   var position: Int = 0,
@@ -31,6 +32,7 @@ data class JetLimeItemConfig(
   }
 }
 
+@Deprecated("This class is deprecated")
 @Immutable
 sealed class IconType {
   data object Empty : IconType()
@@ -39,6 +41,7 @@ sealed class IconType {
   class Custom(val iconImage: ImageVector = Icons.Filled.CheckCircle) : IconType()
 }
 
+@Deprecated("This class is deprecated")
 @Immutable
 data class IconAnimation(
   val initialValue: Float = 0.5f,

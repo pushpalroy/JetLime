@@ -1,8 +1,7 @@
 package com.pushpal.jetlime.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
@@ -58,8 +57,6 @@ fun JetLimeTheme(
 
   ProvideJetLimeColors(colors) {
     MaterialTheme(
-      colors = debugColors(darkTheme),
-      typography = JetLimeTypography,
       shapes = JetLimeShapes,
       content = content
     )
@@ -136,26 +133,3 @@ fun ProvideJetLimeColors(
 private val LocalJetLimeColor = staticCompositionLocalOf<JetLimeColorPalette> {
   error("No JetLimeColorPalette provided")
 }
-
-/**
- * A Material [Colors] implementation which sets all colors to [debugColor] to discourage usage of
- * [MaterialTheme.colors] in preference to [JetLimeTheme.colors].
- */
-fun debugColors(
-  darkTheme: Boolean,
-  debugColor: Color = Color.Red
-) = Colors(
-  primary = debugColor,
-  primaryVariant = debugColor,
-  secondary = debugColor,
-  secondaryVariant = debugColor,
-  background = debugColor,
-  surface = debugColor,
-  error = debugColor,
-  onPrimary = debugColor,
-  onSecondary = debugColor,
-  onBackground = debugColor,
-  onSurface = debugColor,
-  onError = debugColor,
-  isLight = !darkTheme
-)

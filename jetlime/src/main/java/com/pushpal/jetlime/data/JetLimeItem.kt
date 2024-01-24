@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
 import kotlinx.collections.immutable.ImmutableList
 
+@Deprecated("This class has been deprecated")
 class JetLimeItemsModel(
   list: List<JetLimeItem> = listOf()
 ) {
@@ -23,6 +24,7 @@ class JetLimeItemsModel(
     }
   }
 
+  @Deprecated("This class has been deprecated")
   @Immutable
   data class JetLimeItem(
     val indicator: ImageVector = Icons.Filled.CheckCircle,

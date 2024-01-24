@@ -9,10 +9,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Face
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,7 +30,6 @@ import com.pushpal.jetlime.data.config.IconAnimation
 import com.pushpal.jetlime.data.config.IconType
 import com.pushpal.jetlime.data.config.IconType.Filled
 import com.pushpal.jetlime.data.config.JetLimeItemConfig
-import com.pushpal.jetlime.ui.theme.JetLimeTypography
 import kotlinx.collections.immutable.persistentListOf
 
 object FakeData {
@@ -70,7 +70,7 @@ object FakeData {
       val context = LocalContext.current
       Text(
         text = "Click me to show a toast",
-        style = JetLimeTypography.body1,
+        style = MaterialTheme.typography.bodyMedium,
         modifier = Modifier
           .clickable {
           Toast.makeText(context, "This item has been clicked", Toast.LENGTH_SHORT).show()
@@ -117,7 +117,7 @@ object FakeData {
     ) {
       Text(
         text = "Canada 287",
-        style = JetLimeTypography.body1,
+        style = MaterialTheme.typography.bodyMedium,
       )
     },
     JetLimeItem(

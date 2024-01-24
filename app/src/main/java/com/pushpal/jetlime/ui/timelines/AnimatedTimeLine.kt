@@ -5,11 +5,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,8 +38,6 @@ fun AnimatedTimeLine() {
   val jetLimeItemsModel = remember {
     JetLimeItemsModel(list = FakeData.animatedJetLimeItems)
   }
-
-  val scaffoldState = rememberScaffoldState()
   val listState = rememberLazyListState()
   val jetTimeLineViewConfig = JetLimeViewConfig(
     backgroundColor = JetLimeTheme.colors.uiBackground,
@@ -51,7 +48,6 @@ fun AnimatedTimeLine() {
   )
 
   Scaffold(
-    scaffoldState = scaffoldState,
     floatingActionButton = {
       FAB(
         jetLimeItemsModel = jetLimeItemsModel,

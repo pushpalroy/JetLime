@@ -27,6 +27,7 @@ import com.pushpal.jetlime.data.config.JetLimeViewConfig
  * @param jetLimeViewConfig is the config for the view. See [jetLimeViewConfig]
  * @param listState is the state of the LazyColumn which will hold the JetLimeItems.
  */
+@Deprecated("This composable is deprecated")
 @ExperimentalAnimationApi
 @Composable
 fun JetLimeView(
@@ -86,6 +87,7 @@ fun JetLimeView(
   }
 }
 
+@Deprecated("This object is deprecated")
 object JetLimeViewDefaults {
   val ItemEntryAnimation = slideInVertically(
     initialOffsetY = { a -> -a / 4 },

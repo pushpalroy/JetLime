@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Tab
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -21,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.AnimatedTimeLine
-import com.pushpal.jetlime.ui.timelines.BasicTimeLine
+import com.pushpal.jetlime.ui.timelines.BasicTimeLineNew
 import com.pushpal.jetlime.ui.timelines.ModifiedTimeLine
 import com.pushpal.jetlime.ui.timelines.updatestate.ItemUpdateTimeLine
 
@@ -48,7 +50,7 @@ fun HomeContent(
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
-      backgroundColor = JetLimeTheme.colors.uiBorder,
+      containerColor = JetLimeTheme.colors.uiBorder,
       contentColor = JetLimeTheme.colors.accent,
       selectedTabIndex = selectedIndex,
       edgePadding = 16.dp
@@ -69,7 +71,7 @@ fun HomeContent(
     }
 
     when (selectedIndex) {
-      0 -> BasicTimeLine()
+      0 -> BasicTimeLineNew()
       1 -> AnimatedTimeLine()
       2 -> ModifiedTimeLine()
       3 -> ItemUpdateTimeLine()
@@ -77,6 +79,7 @@ fun HomeContent(
   }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeAppBar(
   backgroundColor: Color,
@@ -89,7 +92,9 @@ fun HomeAppBar(
         color = JetLimeTheme.colors.textSecondaryDark
       )
     },
-    backgroundColor = backgroundColor,
+    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+      containerColor = backgroundColor
+    ),
     modifier = modifier
   )
 }

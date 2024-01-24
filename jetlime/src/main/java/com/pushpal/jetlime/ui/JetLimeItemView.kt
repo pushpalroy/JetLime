@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -54,6 +54,7 @@ const val heightFactor = 3
  * @param viewConfig is the config for the entire view. See [JetLimeViewConfig]
  * @param totalItems is the total number of items
  */
+@Deprecated("This function is deprecated")
 @Composable
 internal fun JetLimeItemView(
   modifier: Modifier = Modifier,

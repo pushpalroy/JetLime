@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Deprecated("This class has been deprecated")
 @Immutable
 data class JetLimeViewConfig(
   val backgroundColor: Color = Color(0xFF1C2027),
@@ -23,6 +24,7 @@ data class JetLimeViewConfig(
   val showIcons: Boolean = true
 )
 
+@Deprecated("This class has been deprecated")
 @Immutable
 sealed class LineType {
   data object Solid : LineType()

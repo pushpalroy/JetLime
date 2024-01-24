@@ -1,8 +1,8 @@
 package com.pushpal.jetlime.ui.util.multifab
 
 import android.annotation.SuppressLint
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
@@ -26,8 +26,8 @@ private class FabOptionImpl(
 @SuppressLint("ComposableNaming")
 @Composable
 fun FabOption(
-  iconBackgroundTint: Color = MaterialTheme.colors.primary,
+  iconBackgroundTint: Color = MaterialTheme.colorScheme.primary,
   iconTint: Color = contentColorFor(backgroundColor = iconBackgroundTint),
-  textBackgroundTint: Color = MaterialTheme.colors.primary,
+  textBackgroundTint: Color = MaterialTheme.colorScheme.primary,
   showLabel: Boolean = false
 ): FabOption = FabOptionImpl(iconTint, iconBackgroundTint, textBackgroundTint, showLabel)

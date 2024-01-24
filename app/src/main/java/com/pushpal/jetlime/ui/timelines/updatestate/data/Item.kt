@@ -15,7 +15,8 @@ fun getFakeItems(): MutableList<Item> {
     ),
     Item(
       id = 1,
-      name = "Season 2"
+      name = "Season 2",
+      description = "This is the 2nd season of the amazing JetLime series."
     ),
     Item(
       id = 2,
