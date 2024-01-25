@@ -4,7 +4,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
@@ -23,14 +22,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
-import com.pushpal.jetlime.ui.timelines.SimpleHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.SimpleTimeLines
-import com.pushpal.jetlime.ui.timelines.SimpleVerticalTimeLine
+import com.pushpal.jetlime.ui.timelines.SimpleVerticalLongTimeLine
 
 @Composable
 fun HomeScreen() {
   Scaffold(
-    modifier = Modifier.systemBarsPadding(),
+    modifier = Modifier,
     topBar = { HomeAppBar(backgroundColor = JetLimeTheme.colors.uiBorder) }
   ) { paddingValues ->
     HomeContent(
@@ -46,7 +44,7 @@ fun HomeScreen() {
 fun HomeContent(
   modifier: Modifier = Modifier
 ) {
-  val tabs = remember { listOf("Simple", "SimpleVertical", "SimpleHorizontal") }
+  val tabs = remember { listOf("Simple", "Vertical Scrollable") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
@@ -76,8 +74,7 @@ fun HomeContent(
     ) {
       when (selectedIndex) {
         0 -> SimpleTimeLines()
-        1 -> SimpleVerticalTimeLine()
-        2 -> SimpleHorizontalTimeLine()
+        1 -> SimpleVerticalLongTimeLine()
       }
     }
   }

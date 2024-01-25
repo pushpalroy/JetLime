@@ -18,7 +18,7 @@ import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeRow
 import com.pushpal.jetlime.JetLimeStyle
 import com.pushpal.jetlime.sample.R
-import com.pushpal.jetlime.ui.data.getFakeItems
+import com.pushpal.jetlime.ui.data.getPlanets
 import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
@@ -27,7 +27,7 @@ import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 @Composable
 fun SimpleHorizontalTimeLine() {
   val listState = rememberLazyListState()
-  val fakeItems = remember { getFakeItems() }
+  val items = remember { getPlanets() }
 
   JetLimeSampleSurface(
     color = JetLimeTheme.colors.uiBackground,
@@ -47,7 +47,7 @@ fun SimpleHorizontalTimeLine() {
           pointType = EventPointType.empty()
         )
       ) {
-        HorizontalEventContent(item = fakeItems[0])
+        HorizontalEventContent(item = items[0])
       }
 
       JetLimeEvent(
@@ -55,7 +55,7 @@ fun SimpleHorizontalTimeLine() {
           pointType = EventPointType.filled(),
         )
       ) {
-        HorizontalEventContent(item = fakeItems[1])
+        HorizontalEventContent(item = items[1])
       }
 
       JetLimeEvent(
@@ -63,7 +63,7 @@ fun SimpleHorizontalTimeLine() {
           pointType = EventPointType.empty()
         )
       ) {
-        HorizontalEventContent(item = fakeItems[2])
+        HorizontalEventContent(item = items[2])
       }
 
       JetLimeEvent(
@@ -71,7 +71,7 @@ fun SimpleHorizontalTimeLine() {
           pointType = EventPointType.filled(),
         )
       ) {
-        HorizontalEventContent(item = fakeItems[3])
+        HorizontalEventContent(item = items[3])
       }
 
       JetLimeEvent(
@@ -80,7 +80,7 @@ fun SimpleHorizontalTimeLine() {
           pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
         )
       ) {
-        HorizontalEventContent(item = fakeItems[4])
+        HorizontalEventContent(item = items[4])
       }
     }
   }

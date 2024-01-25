@@ -39,7 +39,7 @@ fun VerticalEventContent(item: Item) {
         modifier = Modifier
           .fillMaxWidth()
           .wrapContentHeight()
-          .padding(12.dp),
+          .padding(horizontal = 12.dp, vertical = 8.dp),
         color = Color.White,
         fontSize = 18.sp,
         text = item.name
@@ -49,7 +49,7 @@ fun VerticalEventContent(item: Item) {
           modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(12.dp),
+            .padding(horizontal = 12.dp, vertical = 8.dp),
           color = Color.White.copy(alpha = 0.8f),
           fontSize = 14.sp,
           text = it
