@@ -12,7 +12,7 @@ import com.pushpal.jetlime.VerticalAlignment.LEFT
 @Immutable
 class JetLimeStyle(
   val backgroundColor: Color = JetLimeDefaults.BackgroundColor,
-  val gap: Dp = JetLimeDefaults.Gap,
+  val contentDistance: Dp = JetLimeDefaults.ContentDistance,
   val itemSpacing: Dp = JetLimeDefaults.ItemSpacing,
   val lineColor: Color = JetLimeDefaults.LineColor,
   val lineThickness: Dp = JetLimeDefaults.LineThickness,

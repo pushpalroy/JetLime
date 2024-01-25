@@ -12,7 +12,7 @@ object JetLimeDefaults {
   val BackgroundColor: Color = Color(0xFF1C2027)
   val LineColor: Color = Color(0xFF3E5C81)
   val LineThickness: Dp = 4.dp
-  val Gap: Dp = 16.dp
+  val ContentDistance: Dp = 16.dp
   val ItemSpacing: Dp = 8.dp
 
   fun lineGradientBrush(

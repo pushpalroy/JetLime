@@ -7,9 +7,13 @@ class EventPointType private constructor(
   val icon: Painter? = null
 ) {
   companion object {
-    fun empty(): EventPointType = EventPointType("Empty")
-    fun filled(): EventPointType = EventPointType("Filled")
-    fun custom(icon: Painter): EventPointType = EventPointType("Custom", icon)
+    val EMPTY = EventPointType("Empty")
+
+    val FILLED = EventPointType("Filled")
+
+    internal const val CUSTOM = "Custom"
+
+    fun custom(icon: Painter): EventPointType = EventPointType(CUSTOM, icon)
   }
 
   override fun equals(other: Any?): Boolean {

@@ -43,7 +43,7 @@ fun SimpleVerticalLongTimeLine() {
         JetLimeEvent(
           style = JetLimeEventStyle(
             position = EventPosition.dynamic(index, items.size),
-            pointType = EventPointType.empty()
+            pointType = EventPointType.EMPTY
           )
         ) {
           VerticalEventContent(item = item)

@@ -15,6 +15,7 @@ import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
+import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeStyle
 import com.pushpal.jetlime.sample.R
@@ -38,13 +39,16 @@ fun SimpleVerticalTimeLine() {
       listState = listState,
       style = JetLimeStyle(
         backgroundColor = JetLimeTheme.colors.uiBackground,
-        lineBrush = JetLimeDefaults.lineGradientBrush()
+        lineBrush = JetLimeDefaults.lineGradientBrush(),
+        contentDistance = JetLimeDefaults.ContentDistance,
+        lineColor = JetLimeDefaults.LineColor,
+        lineThickness = JetLimeDefaults.LineThickness,
       )
     ) {
       JetLimeEvent(
         style = JetLimeEventStyle(
-          position = EventPosition.start(),
-          pointType = EventPointType.empty()
+          position = EventPosition.START,
+          pointType = EventPointType.EMPTY
         )
       ) {
         VerticalEventContent(item = items[0])
@@ -52,7 +56,8 @@ fun SimpleVerticalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.filled(),
+          position = JetLimeEventDefaults.Position,
+          pointType = EventPointType.FILLED,
         )
       ) {
         VerticalEventContent(item = items[1])
@@ -60,7 +65,7 @@ fun SimpleVerticalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.empty()
+          pointType = EventPointType.EMPTY
         )
       ) {
         VerticalEventContent(item = items[2])
@@ -68,7 +73,7 @@ fun SimpleVerticalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.filled(),
+          pointType = EventPointType.FILLED,
         )
       ) {
         VerticalEventContent(item = items[3])
@@ -76,7 +81,7 @@ fun SimpleVerticalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          position = EventPosition.end(),
+          position = EventPosition.END,
           pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
         )
       ) {

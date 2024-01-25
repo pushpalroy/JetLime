@@ -5,21 +5,28 @@ import androidx.compose.runtime.Immutable
 @Immutable
 class EventPosition private constructor(val name: String) {
   companion object {
-    fun start(): EventPosition = EventPosition("Start")
-    fun middle(): EventPosition = EventPosition("Middle")
-    fun end(): EventPosition = EventPosition("End")
 
-    fun dynamic(index: Int, listSize: Int) = eventPosition(index, listSize)
+    val START = EventPosition("Start")
+    val MIDDLE = EventPosition("Middle")
+    val END = EventPosition("End")
 
-    private fun eventPosition(index: Int, listSize: Int) = when (index) {
-      0 -> start()
-      listSize - 1 -> end()
-      else -> middle()
+    fun dynamic(
+      index: Int,
+      listSize: Int
+    ) = eventPosition(index, listSize)
+
+    private fun eventPosition(
+      index: Int,
+      listSize: Int
+    ) = when (index) {
+      0 -> START
+      listSize - 1 -> END
+      else -> MIDDLE
     }
   }
 
   fun isNotEnd(): Boolean {
-    return this != end()
+    return this != END
   }
 
   override fun equals(other: Any?): Boolean {

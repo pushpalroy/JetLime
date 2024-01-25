@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
+import com.pushpal.jetlime.EventPointType.Companion.CUSTOM
 
 @Composable
 fun JetLimeEvent(
@@ -138,8 +139,8 @@ fun VerticalEvent(
       modifier = Modifier
         .defaultMinSize(minHeight = style.pointRadius * 2)
         .padding(
-          start = if (verticalAlignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
-          end = if (verticalAlignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
+          start = if (verticalAlignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+          end = if (verticalAlignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
           bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
         )
     ) {
@@ -186,7 +187,7 @@ fun HorizontalEvent(
           )
         }
 
-        if (style.pointType.type == "Empty" || style.pointType.type == "Filled") {
+        if (style.pointType == EventPointType.EMPTY || style.pointType == EventPointType.FILLED) {
           drawCircle(
             color = style.pointColor,
             radius = radius,
@@ -194,7 +195,7 @@ fun HorizontalEvent(
           )
         }
 
-        if (style.pointType.type == "Filled") {
+        if (style.pointType == EventPointType.FILLED) {
           drawCircle(
             color = style.pointFillColor,
             radius = radius - radius / 2,
@@ -202,7 +203,7 @@ fun HorizontalEvent(
           )
         }
 
-        if (style.pointType.type == "Custom") {
+        if (style.pointType.type == CUSTOM) {
           style.pointType.icon?.let { painter ->
             this.withTransform(
               transformBlock = {
@@ -236,8 +237,8 @@ fun HorizontalEvent(
       modifier = Modifier
         .defaultMinSize(minWidth = style.pointRadius * 2)
         .padding(
-          top = if (horizontalAlignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
-          bottom = if (horizontalAlignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
+          top = if (horizontalAlignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+          bottom = if (horizontalAlignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
           end = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
         )
     ) {

@@ -43,8 +43,8 @@ fun SimpleHorizontalTimeLine() {
     ) {
       JetLimeEvent(
         style = JetLimeEventStyle(
-          position = EventPosition.start(),
-          pointType = EventPointType.empty()
+          position = EventPosition.START,
+          pointType = EventPointType.EMPTY
         )
       ) {
         HorizontalEventContent(item = items[0])
@@ -52,7 +52,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.filled(),
+          pointType = EventPointType.FILLED,
         )
       ) {
         HorizontalEventContent(item = items[1])
@@ -60,7 +60,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.empty()
+          pointType = EventPointType.EMPTY
         )
       ) {
         HorizontalEventContent(item = items[2])
@@ -68,7 +68,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.filled(),
+          pointType = EventPointType.FILLED,
         )
       ) {
         HorizontalEventContent(item = items[3])
@@ -76,7 +76,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          position = EventPosition.end(),
+          position = EventPosition.END,
           pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
         )
       ) {
