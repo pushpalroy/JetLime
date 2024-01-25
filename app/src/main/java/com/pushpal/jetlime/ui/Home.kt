@@ -22,7 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
-import com.pushpal.jetlime.ui.timelines.SimpleTimeLine
+import com.pushpal.jetlime.ui.timelines.SimpleHorizontalTimeLine
+import com.pushpal.jetlime.ui.timelines.SimpleVerticalTimeLine
 
 @Composable
 fun HomeScreen() {
@@ -43,7 +44,7 @@ fun HomeScreen() {
 fun HomeContent(
   modifier: Modifier = Modifier
 ) {
-  val tabs = remember { listOf("Simple") }
+  val tabs = remember { listOf("SimpleVertical", "SimpleHorizontal") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
@@ -68,7 +69,8 @@ fun HomeContent(
     }
 
     when (selectedIndex) {
-      0 -> SimpleTimeLine()
+      0 -> SimpleVerticalTimeLine()
+      1 -> SimpleHorizontalTimeLine()
     }
   }
 }

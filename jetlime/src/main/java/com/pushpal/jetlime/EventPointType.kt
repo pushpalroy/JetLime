@@ -17,9 +17,7 @@ class EventPointType private constructor(
     if (this === other) return true
     if (other !is EventPointType) return false
     if (type != other.type) return false
-    if (icon != other.icon) return false
-
-    return true
+    return icon == other.icon
   }
 
   override fun hashCode(): Int {

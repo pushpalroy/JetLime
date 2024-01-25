@@ -28,9 +28,7 @@ class JetLimeEventStyle(
     if (pointType != other.pointType) return false
     if (pointAnimation != other.pointAnimation) return false
     if (pointColor != other.pointColor) return false
-    if (pointStrokeColor != other.pointStrokeColor) return false
-
-    return true
+    return pointStrokeColor == other.pointStrokeColor
   }
 
   override fun hashCode(): Int {

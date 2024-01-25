@@ -14,12 +14,23 @@ class JetLimeStyle(
   val lineColor: Color = JetLimeDefaults.LineColor,
   val lineThickness: Dp = JetLimeDefaults.LineThickness,
   val lineBrush: Brush = JetLimeDefaults.lineSolidBrush(),
-  val pointStartFactor: Float = 1.0f
+  val pointStartFactor: Float = 1.1f
 ) {
+
+  var alignment: String = VERTICAL
 
   companion object {
     @Stable
     val Default = JetLimeStyle()
+
+    const val VERTICAL = "Vertical"
+    const val HORIZONTAL = "Horizontal"
+  }
+
+  fun addAlignment(alignment: String = VERTICAL): JetLimeStyle {
+    return this.apply {
+      this.alignment = alignment
+    }
   }
 
   override fun equals(other: Any?): Boolean {
@@ -28,9 +39,8 @@ class JetLimeStyle(
     if (backgroundColor != other.backgroundColor) return false
     if (lineColor != other.lineColor) return false
     if (lineThickness != other.lineThickness) return false
-    if (itemSpacing != other.itemSpacing) return false
-
-    return true
+    if (alignment != other.alignment) return false
+    return itemSpacing == other.itemSpacing
   }
 
   override fun hashCode(): Int {
@@ -38,6 +48,7 @@ class JetLimeStyle(
     result = 31 * result + lineColor.hashCode()
     result = 31 * result + lineThickness.hashCode()
     result = 31 * result + itemSpacing.hashCode()
+    result = 31 * result + alignment.hashCode()
     return result
   }
 }

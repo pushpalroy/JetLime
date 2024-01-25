@@ -25,8 +25,7 @@ class EventPosition private constructor(val name: String) {
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
     if (other !is EventPosition) return false
-    if (name != other.name) return false
-    return true
+    return name == other.name
   }
 
   override fun hashCode(): Int {

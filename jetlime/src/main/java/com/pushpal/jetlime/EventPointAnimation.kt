@@ -22,9 +22,7 @@ class EventPointAnimation(
 
     if (initialValue != other.initialValue) return false
     if (targetValue != other.targetValue) return false
-    if (animationSpec != other.animationSpec) return false
-
-    return true
+    return animationSpec == other.animationSpec
   }
 
   override fun hashCode(): Int {
