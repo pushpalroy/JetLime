@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.EventPointAnimation
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeDefaults
@@ -53,6 +54,7 @@ fun SimpleHorizontalTimeLine() {
       JetLimeEvent(
         style = JetLimeEventStyle(
           pointType = EventPointType.FILLED,
+          pointAnimation = EventPointAnimation()
         )
       ) {
         HorizontalEventContent(item = items[1])

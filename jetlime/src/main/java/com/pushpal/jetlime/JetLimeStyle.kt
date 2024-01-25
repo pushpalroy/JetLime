@@ -29,7 +29,7 @@ class JetLimeStyle(
     val Default = JetLimeStyle()
   }
 
-  fun addAlignment(arrangement: Arrangement = VERTICAL): JetLimeStyle {
+  fun alignment(arrangement: Arrangement = VERTICAL): JetLimeStyle {
     return this.apply {
       this.arrangement = arrangement
     }
