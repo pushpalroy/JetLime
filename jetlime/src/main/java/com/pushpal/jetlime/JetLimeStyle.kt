@@ -5,6 +5,9 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import com.pushpal.jetlime.Arrangement.VERTICAL
+import com.pushpal.jetlime.HorizontalAlignment.TOP
+import com.pushpal.jetlime.VerticalAlignment.LEFT
 
 @Immutable
 class JetLimeStyle(
@@ -14,22 +17,21 @@ class JetLimeStyle(
   val lineColor: Color = JetLimeDefaults.LineColor,
   val lineThickness: Dp = JetLimeDefaults.LineThickness,
   val lineBrush: Brush = JetLimeDefaults.lineSolidBrush(),
+  val lineHorizontalAlignment: HorizontalAlignment = TOP,
+  val lineVerticalAlignment: VerticalAlignment = LEFT,
   val pointStartFactor: Float = 1.1f
 ) {
 
-  var alignment: String = VERTICAL
+  var arrangement: Arrangement = VERTICAL
 
   companion object {
     @Stable
     val Default = JetLimeStyle()
-
-    const val VERTICAL = "Vertical"
-    const val HORIZONTAL = "Horizontal"
   }
 
-  fun addAlignment(alignment: String = VERTICAL): JetLimeStyle {
+  fun addAlignment(arrangement: Arrangement = VERTICAL): JetLimeStyle {
     return this.apply {
-      this.alignment = alignment
+      this.arrangement = arrangement
     }
   }
 
@@ -39,7 +41,7 @@ class JetLimeStyle(
     if (backgroundColor != other.backgroundColor) return false
     if (lineColor != other.lineColor) return false
     if (lineThickness != other.lineThickness) return false
-    if (alignment != other.alignment) return false
+    if (arrangement != other.arrangement) return false
     return itemSpacing == other.itemSpacing
   }
 
@@ -48,7 +50,22 @@ class JetLimeStyle(
     result = 31 * result + lineColor.hashCode()
     result = 31 * result + lineThickness.hashCode()
     result = 31 * result + itemSpacing.hashCode()
-    result = 31 * result + alignment.hashCode()
+    result = 31 * result + arrangement.hashCode()
     return result
   }
+}
+
+enum class Arrangement {
+  VERTICAL,
+  HORIZONTAL
+}
+
+enum class HorizontalAlignment {
+  TOP,
+  BOTTOM
+}
+
+enum class VerticalAlignment {
+  LEFT,
+  RIGHT
 }

@@ -8,7 +8,6 @@ class EventPointType private constructor(
 ) {
   companion object {
     fun empty(): EventPointType = EventPointType("Empty")
-    fun checked(): EventPointType = EventPointType("Checked")
     fun filled(): EventPointType = EventPointType("Filled")
     fun custom(icon: Painter): EventPointType = EventPointType("Custom", icon)
   }

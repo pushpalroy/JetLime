@@ -17,8 +17,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.JetLimeStyle.Companion.HORIZONTAL
-import com.pushpal.jetlime.JetLimeStyle.Companion.VERTICAL
+import com.pushpal.jetlime.Arrangement.HORIZONTAL
+import com.pushpal.jetlime.Arrangement.VERTICAL
 
 @Composable
 fun JetLimeEvent(
@@ -39,18 +39,24 @@ fun JetLimeEvent(
     remember { mutableFloatStateOf(1.0f) }
   }
 
-  when (jetLimeStyle.alignment) {
-    VERTICAL -> VerticalEvent(modifier, style, jetLimeStyle, radiusAnimFactor, content)
-    HORIZONTAL -> HorizontalEvent(modifier, style, jetLimeStyle, radiusAnimFactor, content)
+  when (jetLimeStyle.arrangement) {
+    VERTICAL -> VerticalEvent(
+      modifier, style, jetLimeStyle, radiusAnimFactor, jetLimeStyle.lineVerticalAlignment, content
+    )
+
+    HORIZONTAL -> HorizontalEvent(
+      modifier, style, jetLimeStyle, radiusAnimFactor, jetLimeStyle.lineHorizontalAlignment, content
+    )
   }
 }
 
 @Composable
-internal fun VerticalEvent(
+fun VerticalEvent(
   modifier: Modifier,
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
   radiusAnimFactor: Float,
+  verticalAlignment: VerticalAlignment = VerticalAlignment.LEFT,
   content: @Composable () -> Unit
 ) {
   Box(
@@ -58,18 +64,21 @@ internal fun VerticalEvent(
       .wrapContentSize()
       .drawBehind {
 
-        val xOffset = style.pointRadius.toPx()
-        val yOffset = xOffset * jetLimeStyle.pointStartFactor
-        val radius = xOffset * radiusAnimFactor
+        val xOffset = when (verticalAlignment) {
+          VerticalAlignment.LEFT -> style.pointRadius.toPx()
+          VerticalAlignment.RIGHT -> this.size.width - style.pointRadius.toPx()
+        }
+        val yOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
         if (style.position.isNotEnd()) {
-          val yShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
+          val yShift = yOffset * (jetLimeStyle.pointStartFactor - 1)
           drawLine(
             brush = jetLimeStyle.lineBrush,
             start = Offset(
               x = xOffset,
-              y = xOffset * 2 + yShift
+              y = yOffset * 2 + yShift
             ),
             end = Offset(
               x = xOffset,
@@ -129,7 +138,8 @@ internal fun VerticalEvent(
       modifier = Modifier
         .defaultMinSize(minHeight = style.pointRadius * 2)
         .padding(
-          start = style.pointRadius * 2 + jetLimeStyle.gap,
+          start = if (verticalAlignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
+          end = if (verticalAlignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
           bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
         )
     ) {
@@ -139,11 +149,12 @@ internal fun VerticalEvent(
 }
 
 @Composable
-internal fun HorizontalEvent(
+fun HorizontalEvent(
   modifier: Modifier,
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
   radiusAnimFactor: Float,
+  horizontalAlignment: HorizontalAlignment = HorizontalAlignment.TOP,
   content: @Composable () -> Unit
 ) {
   Box(
@@ -151,17 +162,20 @@ internal fun HorizontalEvent(
       .wrapContentSize()
       .drawBehind {
 
-        val yOffset = style.pointRadius.toPx()
-        val xOffset = yOffset * jetLimeStyle.pointStartFactor
-        val radius = yOffset * radiusAnimFactor
+        val yOffset = when (horizontalAlignment) {
+          HorizontalAlignment.TOP -> style.pointRadius.toPx()
+          HorizontalAlignment.BOTTOM -> this.size.height - style.pointRadius.toPx()
+        }
+        val xOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
         if (style.position.isNotEnd()) {
-          val xShift = yOffset * (jetLimeStyle.pointStartFactor - 1)
+          val xShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
           drawLine(
             brush = jetLimeStyle.lineBrush,
             start = Offset(
-              x = yOffset * 2 + xShift,
+              x = xOffset * 2 + xShift,
               y = yOffset
             ),
             end = Offset(
@@ -222,7 +236,8 @@ internal fun HorizontalEvent(
       modifier = Modifier
         .defaultMinSize(minWidth = style.pointRadius * 2)
         .padding(
-          top = style.pointRadius * 2 + jetLimeStyle.gap,
+          top = if (horizontalAlignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
+          bottom = if (horizontalAlignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.gap else 0.dp,
           end = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
         )
     ) {
@@ -230,3 +245,4 @@ internal fun HorizontalEvent(
     }
   }
 }
+

@@ -13,8 +13,8 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.JetLimeStyle.Companion.HORIZONTAL
-import com.pushpal.jetlime.JetLimeStyle.Companion.VERTICAL
+import com.pushpal.jetlime.Arrangement.HORIZONTAL
+import com.pushpal.jetlime.Arrangement.VERTICAL
 
 @Composable
 fun JetLimeColumn(
