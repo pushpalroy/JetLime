@@ -1,7 +1,7 @@
 package com.pushpal.jetlime.ui.timelines
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -31,7 +31,7 @@ fun SimpleHorizontalTimeLine() {
 
   JetLimeSampleSurface(
     color = JetLimeTheme.colors.uiBackground,
-    modifier = Modifier.fillMaxSize()
+    modifier = Modifier.fillMaxWidth()
   ) {
     JetLimeRow(
       modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
