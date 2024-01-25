@@ -22,7 +22,7 @@ fun JetLimeColumn(
   style: JetLimeStyle = JetLimeStyle.Default,
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  content: @Composable () -> Unit
+  content: @Composable JetLimeListScope.() -> Unit
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.addAlignment(VERTICAL)) {
     LazyColumn(
@@ -36,7 +36,7 @@ fun JetLimeColumn(
       contentPadding = contentPadding,
     ) {
       item {
-        content()
+        JetLimeListScope().content()
       }
     }
   }
@@ -48,7 +48,7 @@ fun JetLimeRow(
   style: JetLimeStyle = JetLimeStyle.Default,
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  content: @Composable () -> Unit
+  content: @Composable JetLimeListScope.() -> Unit
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.addAlignment(HORIZONTAL)) {
     LazyRow(
@@ -62,7 +62,7 @@ fun JetLimeRow(
       contentPadding = contentPadding,
     ) {
       item {
-        content()
+        JetLimeListScope().content()
       }
     }
   }

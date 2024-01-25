@@ -21,6 +21,8 @@ import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
 import com.pushpal.jetlime.EventPointType.Companion.CUSTOM
 
+class JetLimeListScope
+
 @Composable
 fun JetLimeEvent(
   modifier: Modifier = Modifier,
@@ -89,7 +91,7 @@ fun VerticalEvent(
           )
         }
 
-        if (style.pointType.type == "Empty" || style.pointType.type == "Filled") {
+        if (style.pointType == EventPointType.EMPTY || style.pointType == EventPointType.FILLED) {
           drawCircle(
             color = style.pointColor,
             radius = radius,
@@ -97,7 +99,7 @@ fun VerticalEvent(
           )
         }
 
-        if (style.pointType.type == "Filled") {
+        if (style.pointType == EventPointType.FILLED) {
           drawCircle(
             color = style.pointFillColor,
             radius = radius - radius / 2,
@@ -105,7 +107,7 @@ fun VerticalEvent(
           )
         }
 
-        if (style.pointType.type == "Custom") {
+        if (style.pointType.type == CUSTOM) {
           style.pointType.icon?.let { painter ->
             this.withTransform(
               transformBlock = {
@@ -246,4 +248,3 @@ fun HorizontalEvent(
     }
   }
 }
-
