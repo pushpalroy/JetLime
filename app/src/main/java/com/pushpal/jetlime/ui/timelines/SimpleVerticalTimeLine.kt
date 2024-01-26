@@ -15,7 +15,6 @@ import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
-import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeStyle
@@ -38,7 +37,7 @@ fun SimpleVerticalTimeLine() {
     JetLimeColumn(
       modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
       listState = listState,
-      style = JetLimeStyle(
+      style = JetLimeStyle.columnStyle(
         backgroundColor = JetLimeTheme.colors.uiBackground,
         lineBrush = JetLimeDefaults.lineGradientBrush(),
         contentDistance = JetLimeDefaults.ContentDistance,
@@ -59,7 +58,7 @@ fun SimpleVerticalTimeLine() {
         style = JetLimeEventStyle(
           position = JetLimeEventDefaults.Position,
           pointType = EventPointType.filled(0.8f),
-          pointAnimation = EventPointAnimation()
+          pointAnimation = EventPointAnimation(),
         )
       ) {
         VerticalEventContent(item = items[1])

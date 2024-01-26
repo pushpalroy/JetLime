@@ -1,6 +1,7 @@
 package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 
 /**
  * Represents a position of an event within a sequence, such as the start, middle, or end.
@@ -28,6 +29,7 @@ class EventPosition private constructor(val name: String) {
      * @param listSize The total size of the list.
      * @return [EventPosition] corresponding to the index in the list.
      */
+    @Stable
     fun dynamic(
       index: Int,
       listSize: Int
@@ -36,6 +38,7 @@ class EventPosition private constructor(val name: String) {
     /**
      * Internal function to determine the event position based on index and list size.
      */
+    @Stable
     private fun eventPosition(
       index: Int,
       listSize: Int
@@ -52,6 +55,7 @@ class EventPosition private constructor(val name: String) {
    *
    * @return `true` if the current position is not the end, `false` otherwise.
    */
+  @Stable
   fun isNotEnd(): Boolean {
     return this != END
   }

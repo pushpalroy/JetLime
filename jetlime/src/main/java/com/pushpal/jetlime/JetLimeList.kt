@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -30,12 +32,14 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
 @Composable
 fun JetLimeColumn(
   modifier: Modifier = Modifier,
-  style: JetLimeStyle = JetLimeStyle.Default,
+  style: JetLimeStyle = JetLimeStyle.columnStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
   content: @Composable JetLimeListScope.() -> Unit
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(VERTICAL)) {
+    val items = remember { mutableStateListOf<@Composable () -> Unit>() }
+    JetLimeListScope(items).content()
     LazyColumn(
       modifier = modifier,
       state = listState,
@@ -46,8 +50,8 @@ fun JetLimeColumn(
       userScrollEnabled = true,
       contentPadding = contentPadding,
     ) {
-      item {
-        JetLimeListScope().content()
+      items(items.size) { index ->
+        items[index]()
       }
     }
   }
@@ -67,12 +71,14 @@ fun JetLimeColumn(
 @Composable
 fun JetLimeRow(
   modifier: Modifier = Modifier,
-  style: JetLimeStyle = JetLimeStyle.Default,
+  style: JetLimeStyle = JetLimeStyle.rowStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
   content: @Composable JetLimeListScope.() -> Unit
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(HORIZONTAL)) {
+    val items = remember { mutableStateListOf<@Composable () -> Unit>() }
+    JetLimeListScope(items).content()
     LazyRow(
       modifier = modifier,
       state = listState,
@@ -83,8 +89,8 @@ fun JetLimeRow(
       userScrollEnabled = true,
       contentPadding = contentPadding,
     ) {
-      item {
-        JetLimeListScope().content()
+      items(items.size) { index ->
+        items[index]()
       }
     }
   }

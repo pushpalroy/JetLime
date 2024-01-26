@@ -9,6 +9,20 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
 import com.pushpal.jetlime.HorizontalAlignment.TOP
 import com.pushpal.jetlime.VerticalAlignment.LEFT
 
+/**
+ * Represents the style configuration for JetLime.
+ * This class defines the styling parameters for JetLime components, such as background color, content distance, item spacing, and line properties.
+ *
+ * @property backgroundColor The background color of the JetLime component.
+ * @property contentDistance The distance of content from the JetLime component's start.
+ * @property itemSpacing The spacing between items in the JetLime component.
+ * @property lineColor The color of the line in the JetLime component.
+ * @property lineThickness The thickness of the line in the JetLime component.
+ * @property lineBrush The brush used for the line in the JetLime component.
+ * @property pointStartFactor The factor determining the start position of the point in the line.
+ * @property lineHorizontalAlignment The horizontal alignment of the line.
+ * @property lineVerticalAlignment The vertical alignment of the line.
+ */
 @Immutable
 class JetLimeStyle(
   val backgroundColor: Color = JetLimeDefaults.BackgroundColor,
@@ -17,18 +31,90 @@ class JetLimeStyle(
   val lineColor: Color = JetLimeDefaults.LineColor,
   val lineThickness: Dp = JetLimeDefaults.LineThickness,
   val lineBrush: Brush = JetLimeDefaults.lineSolidBrush(),
+  val pointStartFactor: Float = 1.1f,
   val lineHorizontalAlignment: HorizontalAlignment = TOP,
   val lineVerticalAlignment: VerticalAlignment = LEFT,
-  val pointStartFactor: Float = 1.1f
 ) {
 
   var arrangement: Arrangement = VERTICAL
 
   companion object {
+    /**
+     * Creates a column style configuration for JetLime.
+     *
+     * @param backgroundColor The background color of the JetLime component.
+     * @param contentDistance The distance of content from the JetLime component's start.
+     * @param itemSpacing The spacing between items in the JetLime component.
+     * @param lineColor The color of the line in the JetLime component.
+     * @param lineThickness The thickness of the line in the JetLime component.
+     * @param lineBrush The brush used for the line in the JetLime component.
+     * @param pointStartFactor The factor determining the start position of the point in the line.
+     * @param lineVerticalAlignment The vertical alignment of the line.
+     * @return A [JetLimeStyle] instance configured for column arrangement.
+     */
     @Stable
-    val Default = JetLimeStyle()
+    fun columnStyle(
+      backgroundColor: Color = JetLimeDefaults.BackgroundColor,
+      contentDistance: Dp = JetLimeDefaults.ContentDistance,
+      itemSpacing: Dp = JetLimeDefaults.ItemSpacing,
+      lineColor: Color = JetLimeDefaults.LineColor,
+      lineThickness: Dp = JetLimeDefaults.LineThickness,
+      lineBrush: Brush = JetLimeDefaults.lineSolidBrush(),
+      pointStartFactor: Float = 1.1f,
+      lineVerticalAlignment: VerticalAlignment = LEFT,
+    ) = JetLimeStyle(
+      backgroundColor,
+      contentDistance,
+      itemSpacing,
+      lineColor,
+      lineThickness,
+      lineBrush,
+      pointStartFactor,
+      lineVerticalAlignment = lineVerticalAlignment
+    )
+
+    /**
+     * Creates a row style configuration for JetLime.
+     *
+     * @param backgroundColor The background color of the JetLime component.
+     * @param contentDistance The distance of content from the JetLime component's start.
+     * @param itemSpacing The spacing between items in the JetLime component.
+     * @param lineColor The color of the line in the JetLime component.
+     * @param lineThickness The thickness of the line in the JetLime component.
+     * @param lineBrush The brush used for the line in the JetLime component.
+     * @param pointStartFactor The factor determining the start position of the point in the line.
+     * @param lineHorizontalAlignment The horizontal alignment of the line.
+     * @return A [JetLimeStyle] instance configured for row arrangement.
+     */
+    @Stable
+    fun rowStyle(
+      backgroundColor: Color = JetLimeDefaults.BackgroundColor,
+      contentDistance: Dp = JetLimeDefaults.ContentDistance,
+      itemSpacing: Dp = JetLimeDefaults.ItemSpacing,
+      lineColor: Color = JetLimeDefaults.LineColor,
+      lineThickness: Dp = JetLimeDefaults.LineThickness,
+      lineBrush: Brush = JetLimeDefaults.lineSolidBrush(),
+      pointStartFactor: Float = 1.1f,
+      lineHorizontalAlignment: HorizontalAlignment = TOP,
+    ) = JetLimeStyle(
+      backgroundColor,
+      contentDistance,
+      itemSpacing,
+      lineColor,
+      lineThickness,
+      lineBrush,
+      pointStartFactor,
+      lineHorizontalAlignment = lineHorizontalAlignment
+    )
   }
 
+  /**
+   * Sets the alignment of the JetLime component.
+   *
+   * @param arrangement The desired arrangement (either VERTICAL or HORIZONTAL).
+   * @return A [JetLimeStyle] instance with the updated arrangement.
+   */
+  @Stable
   fun alignment(arrangement: Arrangement = VERTICAL): JetLimeStyle {
     return this.apply {
       this.arrangement = arrangement
@@ -63,16 +149,28 @@ class JetLimeStyle(
   }
 }
 
+/**
+ * Enum representing the possible arrangements for JetLime components.
+ */
+@Stable
 enum class Arrangement {
   VERTICAL,
   HORIZONTAL
 }
 
+/**
+ * Enum representing the horizontal alignment options for JetLime components.
+ */
+@Stable
 enum class HorizontalAlignment {
   TOP,
   BOTTOM
 }
 
+/**
+ * Enum representing the vertical alignment options for JetLime components.
+ */
+@Stable
 enum class VerticalAlignment {
   LEFT,
   RIGHT

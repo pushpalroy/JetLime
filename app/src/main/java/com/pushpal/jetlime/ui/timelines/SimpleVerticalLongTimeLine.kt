@@ -13,7 +13,6 @@ import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
-import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventStyle
 import com.pushpal.jetlime.JetLimeStyle
 import com.pushpal.jetlime.ui.data.getCharacters

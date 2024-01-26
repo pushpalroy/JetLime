@@ -1,6 +1,7 @@
 package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.painter.Painter
 
 /**
@@ -32,6 +33,7 @@ class EventPointType private constructor(
      * @param icon The icon for the custom event point type.
      * @return A new instance of [EventPointType] with the custom icon.
      */
+    @Stable
     fun custom(icon: Painter): EventPointType = EventPointType(type = CUSTOM, icon = icon)
 
     /**
@@ -40,6 +42,7 @@ class EventPointType private constructor(
      * @param fillPercent The percentage of fill for the event point.
      * @return A new instance of [EventPointType] with the filled icon.
      */
+    @Stable
     fun filled(fillPercent: Float): EventPointType =
       EventPointType(type = FILLED, fillPercent = fillPercent)
   }
@@ -49,6 +52,7 @@ class EventPointType private constructor(
    *
    * @return `true` if the current EventPointType is filled, `false` otherwise.
    */
+  @Stable
   fun isFilled(): Boolean {
     return this.type == FILLED
   }
@@ -58,6 +62,7 @@ class EventPointType private constructor(
    *
    * @return `true` if the current EventPointType is custom, `false` otherwise.
    */
+  @Stable
   fun isCustom(): Boolean {
     return this.type == CUSTOM
   }
@@ -67,6 +72,7 @@ class EventPointType private constructor(
    *
    * @return `true` if the current EventPointType is empty or filled, `false` otherwise.
    */
+  @Stable
   fun isEmptyOrFilled(): Boolean {
     return this == EMPTY || this.type == FILLED
   }
