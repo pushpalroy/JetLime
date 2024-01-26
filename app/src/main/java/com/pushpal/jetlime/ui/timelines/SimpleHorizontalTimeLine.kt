@@ -53,7 +53,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.FILLED,
+          pointType = EventPointType.filled(0.9f),
           pointAnimation = EventPointAnimation()
         )
       ) {
@@ -70,7 +70,7 @@ fun SimpleHorizontalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.FILLED,
+          pointType = EventPointType.filled(0.1f),
         )
       ) {
         HorizontalEventContent(item = items[3])

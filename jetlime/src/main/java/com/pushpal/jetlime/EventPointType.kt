@@ -1,5 +1,6 @@
 package com.pushpal.jetlime
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.painter.Painter
 
 /**
@@ -9,16 +10,18 @@ import androidx.compose.ui.graphics.painter.Painter
  * @property type The name of the event point type.
  * @property icon An optional icon associated with the event point type.
  */
+@Immutable
 class EventPointType private constructor(
   val type: String,
-  val icon: Painter? = null
+  val icon: Painter? = null,
+  val fillPercent: Float? = null
 ) {
   companion object {
     /** Represents an empty event point type. */
     val EMPTY = EventPointType("Empty")
 
-    /** Represents a filled event point type. */
-    val FILLED = EventPointType("Filled")
+    /** Internal constant used for filled event point types. */
+    internal const val FILLED = "Filled"
 
     /** Internal constant used for custom event point types. */
     internal const val CUSTOM = "Custom"
@@ -29,7 +32,43 @@ class EventPointType private constructor(
      * @param icon The icon for the custom event point type.
      * @return A new instance of [EventPointType] with the custom icon.
      */
-    fun custom(icon: Painter): EventPointType = EventPointType(CUSTOM, icon)
+    fun custom(icon: Painter): EventPointType = EventPointType(type = CUSTOM, icon = icon)
+
+    /**
+     * Creates a filled event point type with a specified fill percentage.
+     *
+     * @param fillPercent The percentage of fill for the event point.
+     * @return A new instance of [EventPointType] with the filled icon.
+     */
+    fun filled(fillPercent: Float): EventPointType =
+      EventPointType(type = FILLED, fillPercent = fillPercent)
+  }
+
+  /**
+   * A helper function to check if the current [EventPointType] is [FILLED]
+   *
+   * @return `true` if the current EventPointType is filled, `false` otherwise.
+   */
+  fun isFilled(): Boolean {
+    return this.type == FILLED
+  }
+
+  /**
+   * A helper function to check if the current [EventPointType] is [CUSTOM]
+   *
+   * @return `true` if the current EventPointType is custom, `false` otherwise.
+   */
+  fun isCustom(): Boolean {
+    return this.type == CUSTOM
+  }
+
+  /**
+   * A helper function to check if the current [EventPointType] is [EMPTY] or [FILLED]
+   *
+   * @return `true` if the current EventPointType is empty or filled, `false` otherwise.
+   */
+  fun isEmptyOrFilled(): Boolean {
+    return this == EMPTY || this.type == FILLED
   }
 
   /**
@@ -43,6 +82,7 @@ class EventPointType private constructor(
     if (this === other) return true
     if (other !is EventPointType) return false
     if (type != other.type) return false
+    if (fillPercent != other.fillPercent) return false
     return icon == other.icon
   }
 
@@ -55,6 +95,7 @@ class EventPointType private constructor(
   override fun hashCode(): Int {
     var result = type.hashCode()
     result = 31 * result + icon.hashCode()
+    result = 31 * result + fillPercent.hashCode()
     return result
   }
 }

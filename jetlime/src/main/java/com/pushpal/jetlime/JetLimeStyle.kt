@@ -39,18 +39,26 @@ class JetLimeStyle(
     if (this === other) return true
     if (other !is JetLimeStyle) return false
     if (backgroundColor != other.backgroundColor) return false
+    if (contentDistance != other.contentDistance) return false
+    if (itemSpacing != other.itemSpacing) return false
     if (lineColor != other.lineColor) return false
     if (lineThickness != other.lineThickness) return false
-    if (arrangement != other.arrangement) return false
-    return itemSpacing == other.itemSpacing
+    if (lineBrush != other.lineBrush) return false
+    if (lineHorizontalAlignment != other.lineHorizontalAlignment) return false
+    if (lineVerticalAlignment != other.lineVerticalAlignment) return false
+    return pointStartFactor == other.pointStartFactor
   }
 
   override fun hashCode(): Int {
     var result = backgroundColor.hashCode()
+    result = 31 * result + contentDistance.hashCode()
+    result = 31 * result + itemSpacing.hashCode()
     result = 31 * result + lineColor.hashCode()
     result = 31 * result + lineThickness.hashCode()
-    result = 31 * result + itemSpacing.hashCode()
-    result = 31 * result + arrangement.hashCode()
+    result = 31 * result + lineBrush.hashCode()
+    result = 31 * result + lineHorizontalAlignment.hashCode()
+    result = 31 * result + lineVerticalAlignment.hashCode()
+    result = 31 * result + pointStartFactor.hashCode()
     return result
   }
 }

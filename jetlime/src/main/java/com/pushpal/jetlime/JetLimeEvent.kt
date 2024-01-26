@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -19,10 +21,20 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
-import com.pushpal.jetlime.EventPointType.Companion.CUSTOM
 
+/**
+ * Represents a scope for JetLimeList.
+ */
+@Stable
 class JetLimeListScope
 
+/**
+ * Composable function for creating a JetLime event.
+ *
+ * @param modifier The modifier to be applied to the event.
+ * @param style The style of the JetLime event, defaulting to `JetLimeEventStyle.Default`.
+ * @param content The composable content inside the event.
+ */
 @Composable
 fun JetLimeEvent(
   modifier: Modifier = Modifier,
@@ -30,43 +42,39 @@ fun JetLimeEvent(
   content: @Composable () -> Unit
 ) {
   val jetLimeStyle = LocalJetLimeStyle.current
-  val infiniteTransition = rememberInfiniteTransition(label = "RadiusInfiniteTransition")
-  val radiusAnimFactor by if (style.pointAnimation != null) {
-    infiniteTransition.animateFloat(
-      initialValue = style.pointAnimation.initialValue,
-      targetValue = style.pointAnimation.targetValue,
-      animationSpec = style.pointAnimation.animationSpec,
-      label = "RadiusFloatAnimation"
-    )
-  } else {
-    remember { mutableFloatStateOf(1.0f) }
-  }
 
   when (jetLimeStyle.arrangement) {
     VERTICAL -> VerticalEvent(
-      modifier, style, jetLimeStyle, radiusAnimFactor, jetLimeStyle.lineVerticalAlignment, content
+      modifier, style, jetLimeStyle, content
     )
 
     HORIZONTAL -> HorizontalEvent(
-      modifier, style, jetLimeStyle, radiusAnimFactor, jetLimeStyle.lineHorizontalAlignment, content
+      modifier, style, jetLimeStyle, content
     )
   }
 }
 
+/**
+ * Composable function for creating a vertical layout for the JetLime event.
+ *
+ * @param modifier The modifier to be applied to the event.
+ * @param style The style of the JetLime event.
+ * @param jetLimeStyle The JetLime style configuration.
+ * @param content The composable content inside the event.
+ */
 @Composable
 fun VerticalEvent(
   modifier: Modifier,
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
-  radiusAnimFactor: Float,
-  verticalAlignment: VerticalAlignment = VerticalAlignment.LEFT,
   content: @Composable () -> Unit
 ) {
+  val verticalAlignment = remember { jetLimeStyle.lineVerticalAlignment }
+  val radiusAnimFactor by calculateRadiusAnimFactor(style)
   Box(
     modifier = modifier
       .wrapContentSize()
       .drawBehind {
-
         val xOffset = when (verticalAlignment) {
           VerticalAlignment.LEFT -> style.pointRadius.toPx()
           VerticalAlignment.RIGHT -> this.size.width - style.pointRadius.toPx()
@@ -91,7 +99,7 @@ fun VerticalEvent(
           )
         }
 
-        if (style.pointType == EventPointType.EMPTY || style.pointType == EventPointType.FILLED) {
+        if (style.pointType.isEmptyOrFilled()) {
           drawCircle(
             color = style.pointColor,
             radius = radius,
@@ -99,15 +107,15 @@ fun VerticalEvent(
           )
         }
 
-        if (style.pointType == EventPointType.FILLED) {
+        if (style.pointType.isFilled()) {
           drawCircle(
             color = style.pointFillColor,
-            radius = radius - radius / 2,
+            radius = radius - radius * (1 - (style.pointType.fillPercent ?: 1f)),
             center = Offset(x = xOffset, y = yOffset)
           )
         }
 
-        if (style.pointType.type == CUSTOM) {
+        if (style.pointType.isCustom()) {
           style.pointType.icon?.let { painter ->
             this.withTransform(
               transformBlock = {
@@ -137,34 +145,59 @@ fun VerticalEvent(
         }
       }
   ) {
-    Box(
-      modifier = Modifier
-        .defaultMinSize(minHeight = style.pointRadius * 2)
-        .padding(
-          start = if (verticalAlignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          end = if (verticalAlignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
-        )
-    ) {
-      content()
-    }
+    PlaceVerticalEventContent(style, jetLimeStyle, verticalAlignment, content)
   }
 }
 
+/**
+ * Composable function to place the content within a vertical JetLime event.
+ *
+ * @param style The style of the JetLime event.
+ * @param jetLimeStyle The JetLime style configuration.
+ * @param alignment The vertical alignment for the event.
+ * @param content The composable content to be placed.
+ */
+@Composable
+private fun PlaceVerticalEventContent(
+  style: JetLimeEventStyle,
+  jetLimeStyle: JetLimeStyle,
+  alignment: VerticalAlignment,
+  content: @Composable () -> Unit
+) {
+  Box(
+    modifier = Modifier
+      .defaultMinSize(minHeight = style.pointRadius * 2)
+      .padding(
+        start = if (alignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+        end = if (alignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+        bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
+      )
+  ) {
+    content()
+  }
+}
+
+/**
+ * Composable function for creating a horizontal layout for the JetLime event.
+ *
+ * @param modifier The modifier to be applied to the event.
+ * @param style The style of the JetLime event.
+ * @param jetLimeStyle The JetLime style configuration.
+ * @param content The composable content inside the event.
+ */
 @Composable
 fun HorizontalEvent(
   modifier: Modifier,
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
-  radiusAnimFactor: Float,
-  horizontalAlignment: HorizontalAlignment = HorizontalAlignment.TOP,
   content: @Composable () -> Unit
 ) {
+  val horizontalAlignment = remember { jetLimeStyle.lineHorizontalAlignment }
+  val radiusAnimFactor by calculateRadiusAnimFactor(style)
   Box(
     modifier = modifier
       .wrapContentSize()
       .drawBehind {
-
         val yOffset = when (horizontalAlignment) {
           HorizontalAlignment.TOP -> style.pointRadius.toPx()
           HorizontalAlignment.BOTTOM -> this.size.height - style.pointRadius.toPx()
@@ -189,7 +222,7 @@ fun HorizontalEvent(
           )
         }
 
-        if (style.pointType == EventPointType.EMPTY || style.pointType == EventPointType.FILLED) {
+        if (style.pointType.isEmptyOrFilled()) {
           drawCircle(
             color = style.pointColor,
             radius = radius,
@@ -197,15 +230,15 @@ fun HorizontalEvent(
           )
         }
 
-        if (style.pointType == EventPointType.FILLED) {
+        if (style.pointType.isFilled()) {
           drawCircle(
             color = style.pointFillColor,
-            radius = radius - radius / 2,
+            radius = radius - radius * (1 - (style.pointType.fillPercent ?: 1f)),
             center = Offset(x = xOffset, y = yOffset)
           )
         }
 
-        if (style.pointType.type == CUSTOM) {
+        if (style.pointType.isCustom()) {
           style.pointType.icon?.let { painter ->
             this.withTransform(
               transformBlock = {
@@ -235,16 +268,55 @@ fun HorizontalEvent(
         }
       }
   ) {
-    Box(
-      modifier = Modifier
-        .defaultMinSize(minWidth = style.pointRadius * 2)
-        .padding(
-          top = if (horizontalAlignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          bottom = if (horizontalAlignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          end = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
-        )
-    ) {
-      content()
-    }
+    PlaceHorizontalEventContent(style, jetLimeStyle, horizontalAlignment, content)
+  }
+}
+
+/**
+ * Composable function to place the content within a horizontal JetLime event.
+ *
+ * @param style The style of the JetLime event.
+ * @param jetLimeStyle The JetLime style configuration.
+ * @param alignment The horizontal alignment for the event.
+ * @param content The composable content to be placed.
+ */
+@Composable
+private fun PlaceHorizontalEventContent(
+  style: JetLimeEventStyle,
+  jetLimeStyle: JetLimeStyle,
+  alignment: HorizontalAlignment,
+  content: @Composable () -> Unit
+) {
+  Box(
+    modifier = Modifier
+      .defaultMinSize(minWidth = style.pointRadius * 2)
+      .padding(
+        top = if (alignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+        bottom = if (alignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
+        end = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
+      )
+  ) {
+    content()
+  }
+}
+
+/**
+ * Calculates and returns the radius animation factor for a given JetLime event style.
+ *
+ * @param style The style of the JetLime event.
+ * @return The calculated radius animation factor as a [Float].
+ */
+@Composable
+private fun calculateRadiusAnimFactor(style: JetLimeEventStyle): State<Float> {
+  val infiniteTransition = rememberInfiniteTransition(label = "RadiusInfiniteTransition")
+  return if (style.pointAnimation != null) {
+    infiniteTransition.animateFloat(
+      initialValue = style.pointAnimation.initialValue,
+      targetValue = style.pointAnimation.targetValue,
+      animationSpec = style.pointAnimation.animationSpec,
+      label = "RadiusFloatAnimation"
+    )
+  } else {
+    remember { mutableFloatStateOf(1.0f) }
   }
 }

@@ -7,8 +7,10 @@ import androidx.compose.runtime.Composable
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SimpleTimeLines() {
-  Column {
-    SimpleHorizontalTimeLine()
-    SimpleVerticalTimeLine()
-  }
+  // Column {
+  //   SimpleHorizontalTimeLine()
+  //   SimpleVerticalTimeLine()
+  // }
+
+  SimpleVerticalTimeLine()
 }

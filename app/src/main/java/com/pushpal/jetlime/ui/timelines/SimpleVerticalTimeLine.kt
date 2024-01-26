@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.EventPointAnimation
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
@@ -57,7 +58,8 @@ fun SimpleVerticalTimeLine() {
       JetLimeEvent(
         style = JetLimeEventStyle(
           position = JetLimeEventDefaults.Position,
-          pointType = EventPointType.FILLED,
+          pointType = EventPointType.filled(0.8f),
+          pointAnimation = EventPointAnimation()
         )
       ) {
         VerticalEventContent(item = items[1])
@@ -73,7 +75,7 @@ fun SimpleVerticalTimeLine() {
 
       JetLimeEvent(
         style = JetLimeEventStyle(
-          pointType = EventPointType.FILLED,
+          pointType = EventPointType.filled(0.5f)
         )
       ) {
         VerticalEventContent(item = items[3])
