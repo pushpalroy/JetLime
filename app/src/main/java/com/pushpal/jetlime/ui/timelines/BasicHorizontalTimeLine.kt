@@ -36,7 +36,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.EventPointType
-import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
 import com.pushpal.jetlime.sample.R
@@ -45,31 +44,21 @@ import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
-  val listState = rememberLazyListState()
+fun BasicHorizontalTimeLine(modifier: Modifier = Modifier) {
   val items = remember { getPlanets() }
 
   Surface(
     modifier = modifier.fillMaxWidth(),
   ) {
     JetLimeRow(
-      modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
-      listState = listState,
-      style = JetLimeDefaults.rowStyle(
-        lineBrush = JetLimeDefaults.lineGradientBrush(),
-      ),
+      modifier = Modifier.padding(vertical = 32.dp, horizontal = 16.dp),
     ) {
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.EMPTY,
-        ),
-      ) {
+      JetLimeEvent {
         HorizontalEventContent(item = items[0])
       }
 
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.filled(0.9f),
           pointAnimation = JetLimeEventDefaults.pointAnimation(),
         ),
       ) {
@@ -86,7 +75,7 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
 
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.filled(0.1f),
+          pointType = EventPointType.filled(0.2f),
         ),
       ) {
         HorizontalEventContent(item = items[3])
@@ -106,8 +95,8 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
 }
 
 @ExperimentalAnimationApi
-@Preview("Preview SimpleHorizontalTimeLine")
+@Preview("Preview BasicHorizontalTimeLine")
 @Composable
-private fun PreviewSimpleHorizontalTimeLine() {
-  SimpleVerticalTimeLine()
+private fun PreviewBasicHorizontalTimeLine() {
+  BasicHorizontalTimeLine()
 }

@@ -25,6 +25,7 @@
 package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
@@ -54,6 +55,7 @@ class JetLimeEventStyle internal constructor(
 
   var position: EventPosition = EventPosition.END
 
+  @Stable
   fun setPosition(position: EventPosition): JetLimeEventStyle {
     return this.apply {
       this.position = position

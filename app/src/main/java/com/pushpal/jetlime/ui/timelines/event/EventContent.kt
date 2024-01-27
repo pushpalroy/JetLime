@@ -88,7 +88,7 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
     Card(
       modifier = Modifier
         .fillMaxWidth()
-        .height(80.dp)
+        .height(120.dp)
         .align(Alignment.CenterStart)
         .clickable {},
     ) {
@@ -101,6 +101,17 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
         fontSize = 18.sp,
         text = item.name,
       )
+      item.description?.let {
+        Text(
+          modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+          color = Color.White.copy(alpha = 0.8f),
+          fontSize = 14.sp,
+          text = it,
+        )
+      }
     }
   }
 }
