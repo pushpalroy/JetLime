@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>JetLimeEventStyle</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            jetlime
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":jetlime:dokkaHtml/release">androidJvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="jetlime::com.pushpal.jetlime/JetLimeEventStyle///PointingToDeclaration//-1761194290">
+  <div class="breadcrumbs"><a href="../../../index.html">jetlime</a><span class="delimiter">/</span><a href="../index.html">com.pushpal.jetlime</a><span class="delimiter">/</span><span class="current">JetLimeEventStyle</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Jet</span><wbr></wbr><span>Lime</span><wbr></wbr><span>Event</span><wbr></wbr><span><span>Style</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Immutable.html"><span class="token annotation builtin">Immutable</span></a></div></div><span class="token keyword">class </span><a href="index.html">JetLimeEventStyle</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>position<span class="token operator">: </span><a href="../-event-position/index.html">EventPosition</a><span class="token operator"> = </span>JetLimeEventDefaults.Position<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointType<span class="token operator">: </span><a href="../-event-point-type/index.html">EventPointType</a><span class="token operator"> = </span>JetLimeEventDefaults.PointType<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointColor<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointFillColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointFillColor<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointRadius<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><span class="token operator"> = </span>JetLimeEventDefaults.PointRadius<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointAnimation<span class="token operator">: </span><a href="../-event-point-animation/index.html">EventPointAnimation</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointStrokeWidth<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><span class="token operator"> = </span>JetLimeEventDefaults.PointStrokeWidth<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pointStrokeColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointStrokeColor</span></span><span class="token punctuation">)</span></div><p class="paragraph">Represents the style configuration for an event in a JetLime UI component. This class encapsulates various styling properties such as position, point type, colors, radius, animation, and stroke attributes for an event point.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-951965621%2FConstructors%2F-1761194290" anchor-label="JetLimeEventStyle" id="-951965621%2FConstructors%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-jet-lime-event-style.html"><span>Jet</span><wbr></wbr><span>Lime</span><wbr></wbr><span>Event</span><wbr></wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-951965621%2FConstructors%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="../-event-position/index.html">EventPosition</a><span class="token operator"> = </span>JetLimeEventDefaults.Position<span class="token punctuation">, </span></span><span class="parameter ">pointType<span class="token operator">: </span><a href="../-event-point-type/index.html">EventPointType</a><span class="token operator"> = </span>JetLimeEventDefaults.PointType<span class="token punctuation">, </span></span><span class="parameter ">pointColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointColor<span class="token punctuation">, </span></span><span class="parameter ">pointFillColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointFillColor<span class="token punctuation">, </span></span><span class="parameter ">pointRadius<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><span class="token operator"> = </span>JetLimeEventDefaults.PointRadius<span class="token punctuation">, </span></span><span class="parameter ">pointAnimation<span class="token operator">: </span><a href="../-event-point-animation/index.html">EventPointAnimation</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">pointStrokeWidth<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a><span class="token operator"> = </span>JetLimeEventDefaults.PointStrokeWidth<span class="token punctuation">, </span></span><span class="parameter ">pointStrokeColor<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a><span class="token operator"> = </span>JetLimeEventDefaults.PointStrokeColor</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-1396670231%2FClasslikes%2F-1761194290" anchor-label="Companion" id="-1396670231%2FClasslikes%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1396670231%2FClasslikes%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="251973028%2FProperties%2F-1761194290" anchor-label="pointAnimation" id="251973028%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-animation.html"><span>point</span><wbr></wbr><span><span>Animation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="251973028%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-animation.html">pointAnimation</a><span class="token operator">: </span><a href="../-event-point-animation/index.html">EventPointAnimation</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Optional animation for the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1680519205%2FProperties%2F-1761194290" anchor-label="pointColor" id="1680519205%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-color.html"><span>point</span><wbr></wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1680519205%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-color.html">pointColor</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></div><div class="brief "><p class="paragraph">The color of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1176616200%2FProperties%2F-1761194290" anchor-label="pointFillColor" id="1176616200%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-fill-color.html"><span>point</span><wbr></wbr><span>Fill</span><wbr></wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1176616200%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-fill-color.html">pointFillColor</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></div><div class="brief "><p class="paragraph">The fill color of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1799796320%2FProperties%2F-1761194290" anchor-label="pointRadius" id="1799796320%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-radius.html"><span>point</span><wbr></wbr><span><span>Radius</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1799796320%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-radius.html">pointRadius</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></div><div class="brief "><p class="paragraph">The radius of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-107068355%2FProperties%2F-1761194290" anchor-label="pointStrokeColor" id="-107068355%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-stroke-color.html"><span>point</span><wbr></wbr><span>Stroke</span><wbr></wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-107068355%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-stroke-color.html">pointStrokeColor</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color.html">Color</a></div><div class="brief "><p class="paragraph">The stroke color of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1798558918%2FProperties%2F-1761194290" anchor-label="pointStrokeWidth" id="-1798558918%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-stroke-width.html"><span>point</span><wbr></wbr><span>Stroke</span><wbr></wbr><span><span>Width</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1798558918%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-stroke-width.html">pointStrokeWidth</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp.html">Dp</a></div><div class="brief "><p class="paragraph">The stroke width of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-939877896%2FProperties%2F-1761194290" anchor-label="pointType" id="-939877896%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="point-type.html"><span>point</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-939877896%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="point-type.html">pointType</a><span class="token operator">: </span><a href="../-event-point-type/index.html">EventPointType</a></div><div class="brief "><p class="paragraph">The type of the event point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1113465297%2FProperties%2F-1761194290" anchor-label="position" id="-1113465297%2FProperties%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position.html"><span><span>position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1113465297%2FProperties%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="position.html">position</a><span class="token operator">: </span><a href="../-event-position/index.html">EventPosition</a></div><div class="brief "><p class="paragraph">The position of the event in the UI component.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-585432247%2FFunctions%2F-1761194290" anchor-label="equals" id="-585432247%2FFunctions%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-585432247%2FFunctions%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Checks if this instance is equal to another object. Two instances of <a href="index.html">JetLimeEventStyle</a> are considered equal if they have the same values for all properties.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1861247107%2FFunctions%2F-1761194290" anchor-label="hashCode" id="-1861247107%2FFunctions%2F-1761194290" data-filterable-set=":jetlime:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":jetlime:dokkaHtml/release" data-filterable-set=":jetlime:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hash-code.html"><span>hash</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1861247107%2FFunctions%2F-1761194290"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":jetlime:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Returns a hash code value for the object, consistent with the definition of equality for the class. This supports the use in hash tables, like those provided by <code class="lang-kotlin">HashMap</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

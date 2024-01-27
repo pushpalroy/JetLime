@@ -4,6 +4,7 @@ plugins {
   id(libs.plugins.android.library.get().pluginId)
   id(libs.plugins.kotlin.android.get().pluginId)
   alias(libs.plugins.nexus.vanniktech.publish)
+  alias(libs.plugins.dokka)
 }
 
 android {
@@ -47,10 +48,23 @@ dependencies {
   implementation(libs.androidx.activity.compose)
   implementation(libs.kotlinx.collections.immutable)
 
+  implementation(libs.dokka.android)
   debugApi(libs.androidx.compose.ui.tooling)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
+}
+
+tasks.dokkaHtml.configure {
+  outputDirectory.set(file("../docs/html"))
+  pluginsMapConfiguration.set(
+    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}""")
+  )
+  dokkaSourceSets {
+    named("main") {
+      noAndroidSdkLink.set(false)
+    }
+  }
 }
 
 mavenPublishing {
