@@ -22,7 +22,7 @@ android {
       isMinifyEnabled = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
+        "proguard-rules.pro",
       )
     }
   }
@@ -58,7 +58,7 @@ dependencies {
 tasks.dokkaHtml.configure {
   outputDirectory.set(file("../docs/html"))
   pluginsMapConfiguration.set(
-    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}""")
+    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""),
   )
   dokkaSourceSets {
     named("main") {

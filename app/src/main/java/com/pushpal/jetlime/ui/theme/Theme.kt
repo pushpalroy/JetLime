@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -13,52 +37,51 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-private val LightColorPalette = JetLimeColorPalette(
-  brand = White,
-  accent = JetLimeColor,
-  uiBackground = Neutral0,
-  uiBorder = VeryLightGrey,
-  uiFloated = FunctionalRed,
-  textPrimary = TextPrimary,
-  textSecondary = TextSecondary,
-  textSecondaryDark = TextSecondaryDark,
-  error = FunctionalRed,
-  isDark = false,
-  buttonTextColor = White
-)
+private val LightColorPalette =
+  JetLimeColorPalette(
+    brand = White,
+    accent = JetLimeColor,
+    uiBackground = Neutral0,
+    uiBorder = VeryLightGrey,
+    uiFloated = FunctionalRed,
+    textPrimary = TextPrimary,
+    textSecondary = TextSecondary,
+    textSecondaryDark = TextSecondaryDark,
+    error = FunctionalRed,
+    isDark = false,
+    buttonTextColor = White,
+  )
 
-private val DarkColorPalette = JetLimeColorPalette(
-  brand = Shadow1,
-  accent = Ocean2,
-  uiBackground = GreyBg,
-  uiBorder = GreyBgDark,
-  uiFloated = Ocean2,
-  textPrimary = Shadow1,
-  textSecondary = Neutral0,
-  textSecondaryDark = Neutral0,
-  error = FunctionalRedDark,
-  isDark = true,
-  buttonTextColor = Ocean2
-)
+private val DarkColorPalette =
+  JetLimeColorPalette(
+    brand = Shadow1,
+    accent = Ocean2,
+    uiBackground = GreyBg,
+    uiBorder = GreyBgDark,
+    uiFloated = Ocean2,
+    textPrimary = Shadow1,
+    textSecondary = Neutral0,
+    textSecondaryDark = Neutral0,
+    error = FunctionalRedDark,
+    isDark = true,
+    buttonTextColor = Ocean2,
+  )
 
 @Composable
-fun JetLimeTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable () -> Unit
-) {
+fun JetLimeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
   val colors = if (darkTheme) DarkColorPalette else LightColorPalette
 
   val sysUiController = LocalSysUiController.current
   SideEffect {
     sysUiController.setSystemBarsColor(
-      color = colors.uiBackground.copy(alpha = AlphaNearOpaque)
+      color = colors.uiBackground.copy(alpha = ALPHA_NEAR_OPAQUE),
     )
   }
 
   ProvideJetLimeColors(colors) {
     MaterialTheme(
       shapes = JetLimeShapes,
-      content = content
+      content = content,
     )
   }
 }
@@ -84,7 +107,7 @@ class JetLimeColorPalette(
   textSecondary: Color,
   error: Color,
   isDark: Boolean,
-  buttonTextColor: Color
+  buttonTextColor: Color,
 ) {
   var accent by mutableStateOf(accent)
     private set
@@ -121,15 +144,13 @@ class JetLimeColorPalette(
 }
 
 @Composable
-fun ProvideJetLimeColors(
-  colors: JetLimeColorPalette,
-  content: @Composable () -> Unit
-) {
+fun ProvideJetLimeColors(colors: JetLimeColorPalette, content: @Composable () -> Unit) {
   val colorPalette = remember { colors }
   colorPalette.update(colors)
   CompositionLocalProvider(LocalJetLimeColor provides colorPalette, content = content)
 }
 
-private val LocalJetLimeColor = staticCompositionLocalOf<JetLimeColorPalette> {
-  error("No JetLimeColorPalette provided")
-}
+private val LocalJetLimeColor =
+  staticCompositionLocalOf<JetLimeColorPalette> {
+    error("No JetLimeColorPalette provided")
+  }

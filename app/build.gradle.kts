@@ -1,6 +1,3 @@
-import java.util.Properties
-import java.io.FileInputStream
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -43,7 +40,7 @@ android {
       isShrinkResources = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
+        "proguard-rules.pro",
       )
       // signingConfig = signingConfigs.getByName("release")
     }
@@ -71,7 +68,7 @@ android {
 dependencies {
 
   implementation(project(":jetlime"))
-  //implementation(libs.jetlime)
+  // implementation(libs.jetlime)
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.compose.ui)

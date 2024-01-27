@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime
 
 import androidx.compose.animation.core.animateFloat
@@ -37,18 +61,24 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
   fun JetLimeEvent(
     modifier: Modifier = Modifier,
     style: JetLimeEventStyle = JetLimeEventStyle.Default,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
   ) {
     val jetLimeStyle = LocalJetLimeStyle.current
 
     items.add {
       when (jetLimeStyle.arrangement) {
         VERTICAL -> VerticalEvent(
-          modifier, style, jetLimeStyle, content
+          style,
+          jetLimeStyle,
+          modifier,
+          content,
         )
 
         HORIZONTAL -> HorizontalEvent(
-          modifier, style, jetLimeStyle, content
+          style,
+          jetLimeStyle,
+          modifier,
+          content,
         )
       }
     }
@@ -63,11 +93,11 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
    * @param content The composable content inside the event.
    */
   @Composable
-  fun VerticalEvent(
-    modifier: Modifier,
+  internal fun VerticalEvent(
     style: JetLimeEventStyle,
     jetLimeStyle: JetLimeStyle,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
   ) {
     val verticalAlignment = remember { jetLimeStyle.lineVerticalAlignment }
     val radiusAnimFactor by calculateRadiusAnimFactor(style)
@@ -89,13 +119,13 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
               brush = jetLimeStyle.lineBrush,
               start = Offset(
                 x = xOffset,
-                y = yOffset * 2 + yShift
+                y = yOffset * 2 + yShift,
               ),
               end = Offset(
                 x = xOffset,
-                y = this.size.height + yShift
+                y = this.size.height + yShift,
               ),
-              strokeWidth = jetLimeStyle.lineThickness.toPx()
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
             )
           }
 
@@ -103,7 +133,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
             drawCircle(
               color = style.pointColor,
               radius = radius,
-              center = Offset(x = xOffset, y = yOffset)
+              center = Offset(x = xOffset, y = yOffset),
             )
           }
 
@@ -111,7 +141,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
             drawCircle(
               color = style.pointFillColor,
               radius = radius - radius * (1 - (style.pointType.fillPercent ?: 1f)),
-              center = Offset(x = xOffset, y = yOffset)
+              center = Offset(x = xOffset, y = yOffset),
             )
           }
 
@@ -121,7 +151,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
                 transformBlock = {
                   translate(
                     left = xOffset - painter.intrinsicSize.width / 2f,
-                    top = yOffset - painter.intrinsicSize.height / 2f
+                    top = yOffset - painter.intrinsicSize.height / 2f,
                   )
                 },
                 drawBlock = {
@@ -130,7 +160,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
                       draw(intrinsicSize)
                     }
                   }
-                }
+                },
               )
             }
           }
@@ -141,10 +171,10 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
               color = style.pointStrokeColor,
               radius = radius - strokeWidth / 2,
               center = Offset(x = xOffset, y = yOffset),
-              style = Stroke(width = strokeWidth)
+              style = Stroke(width = strokeWidth),
             )
           }
-        }
+        },
     ) {
       PlaceVerticalEventContent(style, jetLimeStyle, verticalAlignment, content)
     }
@@ -163,16 +193,28 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
     style: JetLimeEventStyle,
     jetLimeStyle: JetLimeStyle,
     alignment: VerticalAlignment,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
   ) {
     Box(
       modifier = Modifier
         .defaultMinSize(minHeight = style.pointRadius * 2)
         .padding(
-          start = if (alignment == VerticalAlignment.LEFT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          end = if (alignment == VerticalAlignment.RIGHT) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
-        )
+          start = if (alignment == VerticalAlignment.LEFT) {
+            style.pointRadius * 2 + jetLimeStyle.contentDistance
+          } else {
+            0.dp
+          },
+          end = if (alignment == VerticalAlignment.RIGHT) {
+            style.pointRadius * 2 + jetLimeStyle.contentDistance
+          } else {
+            0.dp
+          },
+          bottom = if (style.position.isNotEnd()) {
+            jetLimeStyle.itemSpacing
+          } else {
+            0.dp
+          },
+        ),
     ) {
       content()
     }
@@ -187,11 +229,11 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
    * @param content The composable content inside the event.
    */
   @Composable
-  fun HorizontalEvent(
-    modifier: Modifier,
+  internal fun HorizontalEvent(
     style: JetLimeEventStyle,
     jetLimeStyle: JetLimeStyle,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
   ) {
     val horizontalAlignment = remember { jetLimeStyle.lineHorizontalAlignment }
     val radiusAnimFactor by calculateRadiusAnimFactor(style)
@@ -213,13 +255,13 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
               brush = jetLimeStyle.lineBrush,
               start = Offset(
                 x = xOffset * 2 + xShift,
-                y = yOffset
+                y = yOffset,
               ),
               end = Offset(
                 x = this.size.width + xShift,
-                y = yOffset
+                y = yOffset,
               ),
-              strokeWidth = jetLimeStyle.lineThickness.toPx()
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
             )
           }
 
@@ -227,7 +269,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
             drawCircle(
               color = style.pointColor,
               radius = radius,
-              center = Offset(x = xOffset, y = yOffset)
+              center = Offset(x = xOffset, y = yOffset),
             )
           }
 
@@ -235,7 +277,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
             drawCircle(
               color = style.pointFillColor,
               radius = radius - radius * (1 - (style.pointType.fillPercent ?: 1f)),
-              center = Offset(x = xOffset, y = yOffset)
+              center = Offset(x = xOffset, y = yOffset),
             )
           }
 
@@ -245,7 +287,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
                 transformBlock = {
                   translate(
                     left = xOffset - painter.intrinsicSize.width / 2f,
-                    top = yOffset - painter.intrinsicSize.height / 2f
+                    top = yOffset - painter.intrinsicSize.height / 2f,
                   )
                 },
                 drawBlock = {
@@ -254,7 +296,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
                       draw(intrinsicSize)
                     }
                   }
-                }
+                },
               )
             }
           }
@@ -265,10 +307,10 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
               color = style.pointStrokeColor,
               radius = radius - strokeWidth / 2,
               center = Offset(x = xOffset, y = yOffset),
-              style = Stroke(width = strokeWidth)
+              style = Stroke(width = strokeWidth),
             )
           }
-        }
+        },
     ) {
       PlaceHorizontalEventContent(style, jetLimeStyle, horizontalAlignment, content)
     }
@@ -287,16 +329,28 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
     style: JetLimeEventStyle,
     jetLimeStyle: JetLimeStyle,
     alignment: HorizontalAlignment,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
   ) {
     Box(
       modifier = Modifier
         .defaultMinSize(minWidth = style.pointRadius * 2)
         .padding(
-          top = if (alignment == HorizontalAlignment.TOP) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          bottom = if (alignment == HorizontalAlignment.BOTTOM) style.pointRadius * 2 + jetLimeStyle.contentDistance else 0.dp,
-          end = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp
-        )
+          top = if (alignment == HorizontalAlignment.TOP) {
+            style.pointRadius * 2 + jetLimeStyle.contentDistance
+          } else {
+            0.dp
+          },
+          bottom = if (alignment == HorizontalAlignment.BOTTOM) {
+            style.pointRadius * 2 + jetLimeStyle.contentDistance
+          } else {
+            0.dp
+          },
+          end = if (style.position.isNotEnd()) {
+            jetLimeStyle.itemSpacing
+          } else {
+            0.dp
+          },
+        ),
     ) {
       content()
     }
@@ -316,7 +370,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
         initialValue = style.pointAnimation.initialValue,
         targetValue = style.pointAnimation.targetValue,
         animationSpec = style.pointAnimation.animationSpec,
-        label = "RadiusFloatAnimation"
+        label = "RadiusFloatAnimation",
       )
     } else {
       remember { mutableFloatStateOf(1.0f) }

@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -26,24 +50,22 @@ import com.pushpal.jetlime.ui.timelines.SimpleTimeLines
 import com.pushpal.jetlime.ui.timelines.SimpleVerticalLongTimeLine
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(modifier: Modifier = Modifier) {
   Scaffold(
-    modifier = Modifier,
-    topBar = { HomeAppBar(backgroundColor = JetLimeTheme.colors.uiBorder) }
+    modifier = modifier,
+    topBar = { HomeAppBar(backgroundColor = JetLimeTheme.colors.uiBorder) },
   ) { paddingValues ->
     HomeContent(
       modifier = Modifier
         .padding(paddingValues)
-        .fillMaxSize()
+        .fillMaxSize(),
     )
   }
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeContent(
-  modifier: Modifier = Modifier
-) {
+fun HomeContent(modifier: Modifier = Modifier) {
   val tabs = remember { listOf("Simple", "Vertical Scrollable") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
@@ -51,7 +73,7 @@ fun HomeContent(
       containerColor = JetLimeTheme.colors.uiBorder,
       contentColor = JetLimeTheme.colors.accent,
       selectedTabIndex = selectedIndex,
-      edgePadding = 16.dp
+      edgePadding = 16.dp,
     ) {
       tabs.forEachIndexed { index, title ->
         Tab(
@@ -61,16 +83,16 @@ fun HomeContent(
           text = {
             Text(
               text = title,
-              color = JetLimeTheme.colors.buttonTextColor
+              color = JetLimeTheme.colors.buttonTextColor,
             )
-          }
+          },
         )
       }
     }
 
     JetLimeSampleSurface(
       color = JetLimeTheme.colors.uiBackground,
-      modifier = Modifier.fillMaxSize()
+      modifier = Modifier.fillMaxSize(),
     ) {
       when (selectedIndex) {
         0 -> SimpleTimeLines()
@@ -82,26 +104,23 @@ fun HomeContent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeAppBar(
-  backgroundColor: Color,
-  modifier: Modifier = Modifier
-) {
+fun HomeAppBar(backgroundColor: Color, modifier: Modifier = Modifier) {
   TopAppBar(
     title = {
       Text(
         text = "JetLime Samples",
-        color = JetLimeTheme.colors.textSecondaryDark
+        color = JetLimeTheme.colors.textSecondaryDark,
       )
     },
     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-      containerColor = backgroundColor
+      containerColor = backgroundColor,
     ),
-    modifier = modifier
+    modifier = modifier,
   )
 }
 
 @Preview("Preview HomeScreen")
 @Composable
-fun PreviewHomeScreen() {
+private fun PreviewHomeScreen() {
   HomeScreen()
 }

@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
@@ -30,19 +54,13 @@ class EventPosition private constructor(val name: String) {
      * @return [EventPosition] corresponding to the index in the list.
      */
     @Stable
-    fun dynamic(
-      index: Int,
-      listSize: Int
-    ) = eventPosition(index, listSize)
+    fun dynamic(index: Int, listSize: Int) = eventPosition(index, listSize)
 
     /**
      * Internal function to determine the event position based on index and list size.
      */
     @Stable
-    private fun eventPosition(
-      index: Int,
-      listSize: Int
-    ) = when (index) {
+    private fun eventPosition(index: Int, listSize: Int) = when (index) {
       0 -> START
       listSize - 1 -> END
       else -> MIDDLE

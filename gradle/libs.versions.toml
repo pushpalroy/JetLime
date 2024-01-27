@@ -9,11 +9,11 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlin = "1.9.22"
 kotlinxCollectionsImmutable = "0.3.7"
-ktlint = "12.1.0"
 lifecycleRuntimeKtx = "2.7.0"
 material3Version = "1.1.2"
 vanniktech = "0.27.0"
 dokka = "1.9.10"
+spotless = "6.25.0"
 
 [libraries]
 # Android
@@ -38,6 +38,6 @@ dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", v
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 nexus-vanniktech-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka"}
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless"}

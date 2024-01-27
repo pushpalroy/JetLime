@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime.ui.theme
 
 import androidx.compose.foundation.BorderStroke
@@ -30,28 +54,26 @@ fun JetLimeSampleSurface(
   contentColor: Color = JetLimeTheme.colors.textSecondary,
   border: BorderStroke? = null,
   elevation: Dp = 0.dp,
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
   Box(
-    modifier = modifier
+    modifier =
+    modifier
       .shadow(elevation = elevation, shape = shape, clip = false)
       .zIndex(elevation.value)
       .then(if (border != null) Modifier.border(border, shape) else Modifier)
       .background(
         color = getBackgroundColorForElevation(color, elevation),
-        shape = shape
+        shape = shape,
       )
-      .clip(shape)
+      .clip(shape),
   ) {
     CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
   }
 }
 
 @Composable
-private fun getBackgroundColorForElevation(
-  color: Color,
-  elevation: Dp
-): Color {
+private fun getBackgroundColorForElevation(color: Color, elevation: Dp): Color {
   return if (elevation > 0.dp) {
     color.withElevation(elevation)
   } else {

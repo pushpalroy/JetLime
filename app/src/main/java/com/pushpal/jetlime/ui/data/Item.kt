@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime.ui.data
 
 data class Item(
@@ -11,7 +35,12 @@ fun getCharacters(): MutableList<Item> {
   return mutableListOf(
     Item(id = 0, name = "Spider-Man", description = "The web-slinging hero of New York"),
     Item(id = 1, name = "Iron Man", description = "Genius inventor in a high-tech suit"),
-    Item(id = 2, name = "Thor", description = "Thor, the mighty Asgardian god of thunder, known for his heroic deeds and wielding the powerful hammer Mjolnir."),
+    Item(
+      id = 2,
+      name = "Thor",
+      description = "Thor, the mighty Asgardian god of thunder, known for his heroic deeds and " +
+        "wielding the powerful hammer Mjolnir.",
+    ),
     Item(id = 3, name = "Hulk", description = "Green-skinned, incredibly strong hero"),
     Item(id = 4, name = "Black Widow", description = "Expert spy and combatant"),
     Item(id = 5, name = "Captain America", description = "Super soldier with a shield"),
@@ -38,7 +67,7 @@ fun getCharacters(): MutableList<Item> {
     Item(id = 26, name = "Daredevil", description = "Blind hero with heightened senses"),
     Item(id = 27, name = "Jessica Jones", description = "Private investigator with super strength"),
     Item(id = 28, name = "Luke Cage", description = "Hero with unbreakable skin"),
-    Item(id = 29, name = "Iron Fist", description = "Martial artist with a mystical force")
+    Item(id = 29, name = "Iron Fist", description = "Martial artist with a mystical force"),
   )
 }
 
@@ -58,6 +87,6 @@ fun getPlanets(): MutableList<Item> {
     Item(id = 11, name = "Spartax", description = "Planet ruled by Star-Lord's father"),
     Item(id = 12, name = "Maveth", description = "Barren and remote planet"),
     Item(id = 13, name = "Olympia", description = "Home of the Eternals"),
-    Item(id = 14, name = "Nidavellir", description = "Dwarven realm, creators of Mjolnir")
+    Item(id = 14, name = "Nidavellir", description = "Dwarven realm, creators of Mjolnir"),
   )
 }

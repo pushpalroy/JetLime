@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2024 Pushpal Roy
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
 package com.pushpal.jetlime.ui.timelines.event
 
 import androidx.compose.foundation.clickable
@@ -19,11 +43,11 @@ import androidx.compose.ui.unit.sp
 import com.pushpal.jetlime.ui.data.Item
 
 @Composable
-fun VerticalEventContent(item: Item) {
+fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
   Box(
-    modifier = Modifier
+    modifier = modifier
       .wrapContentHeight()
-      .fillMaxWidth()
+      .fillMaxWidth(),
   ) {
     Card(
       modifier = Modifier
@@ -33,7 +57,7 @@ fun VerticalEventContent(item: Item) {
       colors = CardDefaults.cardColors(
         containerColor = Color(0xFF2D4869),
         contentColor = Color(0xFFFFFFFF),
-      )
+      ),
     ) {
       Text(
         modifier = Modifier
@@ -42,7 +66,7 @@ fun VerticalEventContent(item: Item) {
           .padding(horizontal = 12.dp, vertical = 8.dp),
         color = Color.White,
         fontSize = 18.sp,
-        text = item.name
+        text = item.name,
       )
       item.description?.let {
         Text(
@@ -52,7 +76,7 @@ fun VerticalEventContent(item: Item) {
             .padding(horizontal = 12.dp, vertical = 8.dp),
           color = Color.White.copy(alpha = 0.8f),
           fontSize = 14.sp,
-          text = it
+          text = it,
         )
       }
     }
@@ -60,11 +84,11 @@ fun VerticalEventContent(item: Item) {
 }
 
 @Composable
-fun HorizontalEventContent(item: Item) {
+fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
   Box(
-    modifier = Modifier
+    modifier = modifier
       .wrapContentHeight()
-      .width(160.dp)
+      .width(160.dp),
   ) {
     Card(
       modifier = Modifier
@@ -75,7 +99,7 @@ fun HorizontalEventContent(item: Item) {
       colors = CardDefaults.cardColors(
         containerColor = Color(0xFF2D4869),
         contentColor = Color(0xFFFFFFFF),
-      )
+      ),
     ) {
       Text(
         modifier = Modifier
@@ -84,7 +108,7 @@ fun HorizontalEventContent(item: Item) {
           .padding(12.dp),
         color = Color.White,
         fontSize = 18.sp,
-        text = item.name
+        text = item.name,
       )
     }
   }
