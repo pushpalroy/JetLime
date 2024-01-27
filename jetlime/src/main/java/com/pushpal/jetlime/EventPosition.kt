@@ -34,7 +34,7 @@ import androidx.compose.runtime.Stable
  * @property name The name of the event position.
  */
 @Immutable
-class EventPosition private constructor(val name: String) {
+class EventPosition internal constructor(val name: String) {
   companion object {
 
     /** Represents the start position in a sequence. */

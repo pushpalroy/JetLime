@@ -36,10 +36,10 @@ import androidx.compose.runtime.Immutable
  * @property animationSpec The specification of the animation, including duration, easing, and repeat behavior.
  */
 @Immutable
-class EventPointAnimation(
-  val initialValue: Float = 1.0f,
-  val targetValue: Float = 1.2f,
-  val animationSpec: InfiniteRepeatableSpec<Float> = JetLimeEventDefaults.PointAnimation,
+class EventPointAnimation internal constructor(
+  val initialValue: Float,
+  val targetValue: Float,
+  val animationSpec: InfiniteRepeatableSpec<Float>,
 ) {
   /**
    * Compares this EventPointAnimation with another object for equality.

@@ -56,7 +56,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
 @Composable
 fun JetLimeColumn(
   modifier: Modifier = Modifier,
-  style: JetLimeStyle = JetLimeStyle.columnStyle(),
+  style: JetLimeStyle = JetLimeDefaults.columnStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
   content: @Composable JetLimeListScope.() -> Unit,
@@ -95,7 +95,7 @@ fun JetLimeColumn(
 @Composable
 fun JetLimeRow(
   modifier: Modifier = Modifier,
-  style: JetLimeStyle = JetLimeStyle.rowStyle(),
+  style: JetLimeStyle = JetLimeDefaults.rowStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
   content: @Composable JetLimeListScope.() -> Unit,

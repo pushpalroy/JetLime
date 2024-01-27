@@ -51,7 +51,7 @@ fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
   ) {
     Card(
       modifier = Modifier
-        .fillMaxWidth(0.80f)
+        .fillMaxWidth(0.9f)
         .align(Alignment.CenterStart)
         .clickable {},
       colors = CardDefaults.cardColors(

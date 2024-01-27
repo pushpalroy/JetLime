@@ -60,7 +60,7 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
   @Composable
   fun JetLimeEvent(
     modifier: Modifier = Modifier,
-    style: JetLimeEventStyle = JetLimeEventStyle.Default,
+    style: JetLimeEventStyle = JetLimeEventDefaults.eventStyle(),
     content: @Composable () -> Unit,
   ) {
     val jetLimeStyle = LocalJetLimeStyle.current

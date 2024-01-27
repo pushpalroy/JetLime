@@ -24,6 +24,8 @@
 */
 package com.pushpal.jetlime
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -31,19 +33,22 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.HorizontalAlignment.TOP
+import com.pushpal.jetlime.VerticalAlignment.LEFT
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 object JetLimeDefaults {
-  val BackgroundColor: Color = Color(0xFF1C2027)
-  val LineColor: Color = Color(0xFF3E5C81)
-  val LineThickness: Dp = 4.dp
-  val ContentDistance: Dp = 16.dp
-  val ItemSpacing: Dp = 8.dp
+  private val LineThickness: Dp = 4.dp
+  private val ContentDistance: Dp = 16.dp
+  private val ItemSpacing: Dp = 8.dp
 
+  @Composable
   fun lineGradientBrush(
-    colors: List<Color> = listOf(
-      Color(0xFF3E5C81),
-      Color(0xFF2A9E36),
-      Color(0xFFBB1F67),
+    colors: ImmutableList<Color> = persistentListOf(
+      MaterialTheme.colorScheme.primary,
+      MaterialTheme.colorScheme.secondary,
+      MaterialTheme.colorScheme.tertiary,
     ),
     start: Offset = Offset.Zero,
     end: Offset = Offset.Infinite,
@@ -57,7 +62,93 @@ object JetLimeDefaults {
     )
   }
 
-  fun lineSolidBrush(color: Color = LineColor): Brush {
+  @Composable
+  fun lineSolidBrush(color: Color = MaterialTheme.colorScheme.primary): Brush {
     return SolidColor(color)
   }
+
+  @Composable
+  internal fun jetLimeStyle(
+    backgroundColor: Color,
+    contentDistance: Dp,
+    itemSpacing: Dp,
+    lineThickness: Dp,
+    lineBrush: Brush,
+    pointStartFactor: Float,
+    lineHorizontalAlignment: HorizontalAlignment = TOP,
+    lineVerticalAlignment: VerticalAlignment = LEFT,
+  ): JetLimeStyle {
+    return JetLimeStyle(
+      backgroundColor = backgroundColor,
+      contentDistance = contentDistance,
+      itemSpacing = itemSpacing,
+      lineThickness = lineThickness,
+      lineBrush = lineBrush,
+      pointStartFactor = pointStartFactor,
+      lineHorizontalAlignment = lineHorizontalAlignment,
+      lineVerticalAlignment = lineVerticalAlignment,
+    )
+  }
+
+  /**
+   * Creates a column style configuration for JetLime.
+   *
+   * @param backgroundColor The background color of the JetLime component.
+   * @param contentDistance The distance of content from the JetLime component's start.
+   * @param itemSpacing The spacing between items in the JetLime component.
+   * @param lineThickness The thickness of the line in the JetLime component.
+   * @param lineBrush The brush used for the line in the JetLime component.
+   * @param pointStartFactor The factor determining the start position of the point in the line.
+   * @param lineVerticalAlignment The vertical alignment of the line.
+   * @return A [JetLimeStyle] instance configured for column arrangement.
+   */
+  @Composable
+  fun columnStyle(
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    contentDistance: Dp = ContentDistance,
+    itemSpacing: Dp = ItemSpacing,
+    lineThickness: Dp = LineThickness,
+    lineBrush: Brush = lineSolidBrush(),
+    pointStartFactor: Float = 1.1f,
+    lineVerticalAlignment: VerticalAlignment = LEFT,
+  ) = jetLimeStyle(
+    backgroundColor,
+    contentDistance,
+    itemSpacing,
+    lineThickness,
+    lineBrush,
+    pointStartFactor,
+    lineVerticalAlignment = lineVerticalAlignment,
+  )
+
+  /**
+   * Creates a row style configuration for JetLime.
+   *
+   * @param backgroundColor The background color of the JetLime component.
+   * @param contentDistance The distance of content from the JetLime component's start.
+   * @param itemSpacing The spacing between items in the JetLime component.
+   * @param lineThickness The thickness of the line in the JetLime component.
+   * @param lineBrush The brush used for the line in the JetLime component.
+   * @param pointStartFactor The factor determining the start position of the point in the line.
+   * @param lineHorizontalAlignment The horizontal alignment of the line.
+   * @return A [JetLimeStyle] instance configured for row arrangement.
+   */
+  @Composable
+  fun rowStyle(
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    contentDistance: Dp = ContentDistance,
+    itemSpacing: Dp = ItemSpacing,
+    lineThickness: Dp = LineThickness,
+    lineBrush: Brush = lineSolidBrush(),
+    pointStartFactor: Float = 1.1f,
+    lineHorizontalAlignment: HorizontalAlignment = TOP,
+  ) = jetLimeStyle(
+    backgroundColor,
+    contentDistance,
+    itemSpacing,
+    lineThickness,
+    lineBrush,
+    pointStartFactor,
+    lineHorizontalAlignment = lineHorizontalAlignment,
+  )
 }

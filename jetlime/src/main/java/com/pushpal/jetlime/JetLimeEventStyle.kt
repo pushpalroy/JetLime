@@ -25,7 +25,6 @@
 package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
@@ -43,22 +42,16 @@ import androidx.compose.ui.unit.Dp
  * @property pointStrokeColor The stroke color of the event point.
  */
 @Immutable
-class JetLimeEventStyle(
-  val position: EventPosition = JetLimeEventDefaults.Position,
-  val pointType: EventPointType = JetLimeEventDefaults.PointType,
-  val pointColor: Color = JetLimeEventDefaults.PointColor,
-  val pointFillColor: Color = JetLimeEventDefaults.PointFillColor,
-  val pointRadius: Dp = JetLimeEventDefaults.PointRadius,
-  val pointAnimation: EventPointAnimation? = null,
-  val pointStrokeWidth: Dp = JetLimeEventDefaults.PointStrokeWidth,
-  val pointStrokeColor: Color = JetLimeEventDefaults.PointStrokeColor,
+class JetLimeEventStyle internal constructor(
+  val position: EventPosition,
+  val pointType: EventPointType,
+  val pointColor: Color,
+  val pointFillColor: Color,
+  val pointRadius: Dp,
+  val pointAnimation: EventPointAnimation?,
+  val pointStrokeWidth: Dp,
+  val pointStrokeColor: Color,
 ) {
-  companion object {
-    /** The default style for JetLime event. */
-    @Stable
-    val Default = JetLimeEventStyle()
-  }
-
   /**
    * Checks if this instance is equal to another object. Two instances of [JetLimeEventStyle] are
    * considered equal if they have the same values for all properties.
@@ -68,7 +61,7 @@ class JetLimeEventStyle(
    */
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
-    if (other !is JetLimeEventStyle) return false
+    if (other == null || other !is JetLimeEventStyle) return false
     if (position != other.position) return false
     if (pointType != other.pointType) return false
     if (pointColor != other.pointColor) return false

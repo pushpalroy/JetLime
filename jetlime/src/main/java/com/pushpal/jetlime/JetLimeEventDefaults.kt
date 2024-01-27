@@ -29,20 +29,55 @@ import androidx.compose.animation.core.InfiniteRepeatableSpec
 import androidx.compose.animation.core.RepeatMode.Reverse
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 object JetLimeEventDefaults {
-  val Position: EventPosition = EventPosition.MIDDLE
-  val PointType: EventPointType = EventPointType.EMPTY
-  val PointColor: Color = Color(0xFF2D4869)
-  val PointFillColor: Color = Color(0xffffffff)
-  val PointRadius: Dp = 12.dp
-  val PointStrokeWidth: Dp = 2.dp
-  val PointStrokeColor: Color = Color(0xffffffff)
-  val PointAnimation: InfiniteRepeatableSpec<Float> = infiniteRepeatable(
+  private val Position: EventPosition = EventPosition.MIDDLE
+  private val PointType: EventPointType = EventPointType.filled(0.5f)
+  private val PointRadius: Dp = 12.dp
+  private val PointStrokeWidth: Dp = 2.dp
+  private val PointAnimation: InfiniteRepeatableSpec<Float> = infiniteRepeatable(
     animation = tween(800, easing = FastOutLinearInEasing),
     repeatMode = Reverse,
   )
+
+  @Composable
+  fun eventStyle(
+    position: EventPosition = Position,
+    pointType: EventPointType = PointType,
+    pointColor: Color = MaterialTheme.colorScheme.onPrimary,
+    pointFillColor: Color = MaterialTheme.colorScheme.primary,
+    pointRadius: Dp = PointRadius,
+    pointAnimation: EventPointAnimation? = null,
+    pointStrokeWidth: Dp = PointStrokeWidth,
+    pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
+  ): JetLimeEventStyle {
+    return JetLimeEventStyle(
+      position = position,
+      pointType = pointType,
+      pointColor = pointColor,
+      pointFillColor = pointFillColor,
+      pointRadius = pointRadius,
+      pointAnimation = pointAnimation,
+      pointStrokeWidth = pointStrokeWidth,
+      pointStrokeColor = pointStrokeColor,
+    )
+  }
+
+  @Composable
+  fun pointAnimation(
+    initialValue: Float = 1.0f,
+    targetValue: Float = 1.2f,
+    animationSpec: InfiniteRepeatableSpec<Float> = PointAnimation,
+  ): EventPointAnimation {
+    return EventPointAnimation(
+      initialValue = initialValue,
+      targetValue = targetValue,
+      animationSpec = animationSpec,
+    )
+  }
 }

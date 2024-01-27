@@ -28,23 +28,20 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.EventPointAnimation
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeDefaults
-import com.pushpal.jetlime.JetLimeEventStyle
+import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
-import com.pushpal.jetlime.JetLimeStyle
 import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.data.getPlanets
-import com.pushpal.jetlime.ui.theme.JetLimeSampleSurface
-import com.pushpal.jetlime.ui.theme.JetLimeTheme
 import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 
 @ExperimentalAnimationApi
@@ -53,20 +50,18 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
   val listState = rememberLazyListState()
   val items = remember { getPlanets() }
 
-  JetLimeSampleSurface(
-    color = JetLimeTheme.colors.uiBackground,
+  Surface(
     modifier = modifier.fillMaxWidth(),
   ) {
     JetLimeRow(
       modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
       listState = listState,
-      style = JetLimeStyle(
-        backgroundColor = JetLimeTheme.colors.uiBackground,
+      style = JetLimeDefaults.rowStyle(
         lineBrush = JetLimeDefaults.lineGradientBrush(),
       ),
     ) {
       JetLimeEvent(
-        style = JetLimeEventStyle(
+        style = JetLimeEventDefaults.eventStyle(
           position = EventPosition.START,
           pointType = EventPointType.EMPTY,
         ),
@@ -75,16 +70,16 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
       }
 
       JetLimeEvent(
-        style = JetLimeEventStyle(
+        style = JetLimeEventDefaults.eventStyle(
           pointType = EventPointType.filled(0.9f),
-          pointAnimation = EventPointAnimation(),
+          pointAnimation = JetLimeEventDefaults.pointAnimation(),
         ),
       ) {
         HorizontalEventContent(item = items[1])
       }
 
       JetLimeEvent(
-        style = JetLimeEventStyle(
+        style = JetLimeEventDefaults.eventStyle(
           pointType = EventPointType.EMPTY,
         ),
       ) {
@@ -92,7 +87,7 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
       }
 
       JetLimeEvent(
-        style = JetLimeEventStyle(
+        style = JetLimeEventDefaults.eventStyle(
           pointType = EventPointType.filled(0.1f),
         ),
       ) {
@@ -100,10 +95,9 @@ fun SimpleHorizontalTimeLine(modifier: Modifier = Modifier) {
       }
 
       JetLimeEvent(
-        style = JetLimeEventStyle(
+        style = JetLimeEventDefaults.eventStyle(
           position = EventPosition.END,
-          pointType =
-          EventPointType.custom(
+          pointType = EventPointType.custom(
             icon = painterResource(id = R.drawable.icon_check),
           ),
         ),

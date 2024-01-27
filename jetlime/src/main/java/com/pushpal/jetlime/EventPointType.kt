@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.painter.Painter
  * @property icon An optional icon associated with the event point type.
  */
 @Immutable
-class EventPointType private constructor(
+class EventPointType internal constructor(
   val type: String,
   val icon: Painter? = null,
   val fillPercent: Float? = null,
