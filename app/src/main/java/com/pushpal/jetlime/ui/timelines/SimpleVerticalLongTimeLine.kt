@@ -34,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.EventPosition
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEventDefaults
@@ -57,11 +56,9 @@ fun SimpleVerticalLongTimeLine(modifier: Modifier = Modifier) {
         lineBrush = JetLimeDefaults.lineGradientBrush(),
       ),
     ) {
-      items.forEachIndexed { index, item ->
+      items.forEach { item ->
         JetLimeEvent(
-          style = JetLimeEventDefaults.eventStyle(
-            position = EventPosition.dynamic(index, items.size),
-          ),
+          style = JetLimeEventDefaults.eventStyle(),
         ) {
           VerticalEventContent(item = item)
         }

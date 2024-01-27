@@ -38,10 +38,10 @@ class EventPosition internal constructor(val name: String) {
   companion object {
 
     /** Represents the start position in a sequence. */
-    val START = EventPosition("Start")
+    private val START = EventPosition("Start")
 
     /** Represents the middle position in a sequence. */
-    val MIDDLE = EventPosition("Middle")
+    private val MIDDLE = EventPosition("Middle")
 
     /** Represents the end position in a sequence. */
     val END = EventPosition("End")
@@ -61,8 +61,8 @@ class EventPosition internal constructor(val name: String) {
      */
     @Stable
     private fun eventPosition(index: Int, listSize: Int) = when (index) {
-      0 -> START
       listSize - 1 -> END
+      0 -> START
       else -> MIDDLE
     }
   }

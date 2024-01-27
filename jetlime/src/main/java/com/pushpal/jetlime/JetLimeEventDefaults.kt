@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 object JetLimeEventDefaults {
-  private val Position: EventPosition = EventPosition.MIDDLE
   private val PointType: EventPointType = EventPointType.filled(0.5f)
   private val PointRadius: Dp = 12.dp
   private val PointStrokeWidth: Dp = 2.dp
@@ -47,7 +46,6 @@ object JetLimeEventDefaults {
 
   @Composable
   fun eventStyle(
-    position: EventPosition = Position,
     pointType: EventPointType = PointType,
     pointColor: Color = MaterialTheme.colorScheme.onPrimary,
     pointFillColor: Color = MaterialTheme.colorScheme.primary,
@@ -57,7 +55,6 @@ object JetLimeEventDefaults {
     pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
   ): JetLimeEventStyle {
     return JetLimeEventStyle(
-      position = position,
       pointType = pointType,
       pointColor = pointColor,
       pointFillColor = pointFillColor,

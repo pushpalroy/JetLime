@@ -62,7 +62,7 @@ fun JetLimeColumn(
   content: @Composable JetLimeListScope.() -> Unit,
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(VERTICAL)) {
-    val items = remember { mutableStateListOf<@Composable () -> Unit>() }
+    val items = remember { mutableStateListOf<@Composable (EventPosition) -> Unit>() }
     JetLimeListScope(items).content()
     LazyColumn(
       modifier = modifier,
@@ -75,7 +75,7 @@ fun JetLimeColumn(
       contentPadding = contentPadding,
     ) {
       items(items.size) { index ->
-        items[index]()
+        items[index](EventPosition.dynamic(index, items.size))
       }
     }
   }
@@ -101,7 +101,7 @@ fun JetLimeRow(
   content: @Composable JetLimeListScope.() -> Unit,
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(HORIZONTAL)) {
-    val items = remember { mutableStateListOf<@Composable () -> Unit>() }
+    val items = remember { mutableStateListOf<@Composable (EventPosition) -> Unit>() }
     JetLimeListScope(items).content()
     LazyRow(
       modifier = modifier,
@@ -114,7 +114,7 @@ fun JetLimeRow(
       contentPadding = contentPadding,
     ) {
       items(items.size) { index ->
-        items[index]()
+        items[index](EventPosition.dynamic(index, items.size))
       }
     }
   }

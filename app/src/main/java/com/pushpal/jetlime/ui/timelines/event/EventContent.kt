@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,10 +53,6 @@ fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
         .fillMaxWidth(0.9f)
         .align(Alignment.CenterStart)
         .clickable {},
-      colors = CardDefaults.cardColors(
-        containerColor = Color(0xFF2D4869),
-        contentColor = Color(0xFFFFFFFF),
-      ),
     ) {
       Text(
         modifier = Modifier
@@ -96,10 +91,6 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
         .height(80.dp)
         .align(Alignment.CenterStart)
         .clickable {},
-      colors = CardDefaults.cardColors(
-        containerColor = Color(0xFF2D4869),
-        contentColor = Color(0xFFFFFFFF),
-      ),
     ) {
       Text(
         modifier = Modifier

@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.Dp
  */
 @Immutable
 class JetLimeEventStyle internal constructor(
-  val position: EventPosition,
   val pointType: EventPointType,
   val pointColor: Color,
   val pointFillColor: Color,
@@ -52,6 +51,15 @@ class JetLimeEventStyle internal constructor(
   val pointStrokeWidth: Dp,
   val pointStrokeColor: Color,
 ) {
+
+  var position: EventPosition = EventPosition.END
+
+  fun setPosition(position: EventPosition): JetLimeEventStyle {
+    return this.apply {
+      this.position = position
+    }
+  }
+
   /**
    * Checks if this instance is equal to another object. Two instances of [JetLimeEventStyle] are
    * considered equal if they have the same values for all properties.

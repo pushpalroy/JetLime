@@ -48,7 +48,9 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
 /**
  * Represents a scope for JetLimeList.
  */
-class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
+class JetLimeListScope(
+  private val items: MutableList<@Composable (eventPosition: EventPosition) -> Unit>,
+) {
 
   /**
    * Composable function for creating a JetLime event.
@@ -68,14 +70,14 @@ class JetLimeListScope(private val items: MutableList<@Composable () -> Unit>) {
     items.add {
       when (jetLimeStyle.arrangement) {
         VERTICAL -> VerticalEvent(
-          style,
+          style.setPosition(it),
           jetLimeStyle,
           modifier,
           content,
         )
 
         HORIZONTAL -> HorizontalEvent(
-          style,
+          style.setPosition(it),
           jetLimeStyle,
           modifier,
           content,
