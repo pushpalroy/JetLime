@@ -25,7 +25,7 @@
 package com.pushpal.jetlime.ui.timelines
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -37,34 +37,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.EventPointType
+import com.pushpal.jetlime.HorizontalAlignment.BOTTOM
 import com.pushpal.jetlime.ItemsList
-import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
-import com.pushpal.jetlime.VerticalAlignment.RIGHT
+import com.pushpal.jetlime.JetLimeRow
 import com.pushpal.jetlime.sample.R
-import com.pushpal.jetlime.ui.data.getCharacters
-import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
+import com.pushpal.jetlime.ui.data.getPlanets
+import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
-  val items = remember { getCharacters().subList(0, 4) }
+fun CustomizedHorizontalTimeLine(modifier: Modifier = Modifier) {
+  val items = remember { getPlanets() }
 
   Surface(
-    modifier = modifier.fillMaxSize(),
+    modifier = modifier.fillMaxWidth(),
   ) {
-    JetLimeColumn(
-      modifier = Modifier.padding(16.dp),
+    JetLimeRow(
+      modifier = Modifier.padding(vertical = 32.dp, horizontal = 16.dp),
       itemsList = ItemsList(items),
       keyExtractor = { item -> item.id },
-      style = JetLimeDefaults.columnStyle(
-        contentDistance = 32.dp,
+      style = JetLimeDefaults.rowStyle(
+        contentDistance = 16.dp,
         itemSpacing = 16.dp,
         lineThickness = 2.dp,
         lineBrush = JetLimeDefaults.lineSolidBrush(color = Color(0xFF2196F3)),
-        lineVerticalAlignment = RIGHT,
+        lineHorizontalAlignment = BOTTOM,
       ),
     ) { index, item, position ->
       JetLimeEvent(
@@ -89,15 +89,15 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
           pointStrokeColor = MaterialTheme.colorScheme.onBackground,
         ),
       ) {
-        VerticalEventContent(item = item)
+        HorizontalEventContent(item = item)
       }
     }
   }
 }
 
 @ExperimentalAnimationApi
-@Preview("Preview CustomizedVerticalTimeLine")
+@Preview("Preview CustomizedHorizontalTimeLine")
 @Composable
-private fun PreviewCustomizedVerticalTimeLine() {
-  CustomizedVerticalTimeLine()
+private fun PreviewCustomizedHorizontalTimeLine() {
+  CustomizedHorizontalTimeLine()
 }

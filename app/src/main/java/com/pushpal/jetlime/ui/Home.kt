@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.ui.timelines.BasicHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.BasicVerticalTimeLine
+import com.pushpal.jetlime.ui.timelines.CustomizedHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.CustomizedVerticalTimeLine
 import com.pushpal.jetlime.ui.timelines.VerticalDynamicTimeLine
 
@@ -108,7 +109,12 @@ fun HomeContent(modifier: Modifier = Modifier) {
         }
 
         1 -> VerticalDynamicTimeLine()
-        2 -> CustomizedVerticalTimeLine()
+        2 -> {
+          Column {
+            CustomizedHorizontalTimeLine()
+            CustomizedVerticalTimeLine()
+          }
+        }
       }
     }
   }
