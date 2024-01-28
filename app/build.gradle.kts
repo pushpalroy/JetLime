@@ -1,6 +1,3 @@
-import java.util.Properties
-import java.io.FileInputStream
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -43,7 +40,7 @@ android {
       isShrinkResources = true
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
+        "proguard-rules.pro",
       )
       // signingConfig = signingConfigs.getByName("release")
     }
@@ -71,26 +68,19 @@ android {
 dependencies {
 
   implementation(project(":jetlime"))
-  //implementation(libs.jetlime)
+  // implementation(libs.jetlime)
 
-  implementation(libs.material)
   implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.appcompat)
   implementation(libs.androidx.compose.ui)
-  implementation(libs.androidx.compose.material)
+  implementation(libs.androidx.compose.material3)
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.compose.ui.tooling.preview)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.lifecycle.compose)
   implementation(libs.androidx.lifecycle.runtime.ktx)
-  implementation(libs.androidx.lifecycle.viewmodel.ktx)
-  implementation(libs.androidx.lifecycle.viewmodel.compose)
 
   implementation(libs.kotlinx.collections.immutable)
-  implementation(libs.coil.compose)
-  implementation(libs.multi.fab)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.espresso.core)
 }
