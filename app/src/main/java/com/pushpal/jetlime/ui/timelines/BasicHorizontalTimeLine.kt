@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
@@ -52,7 +53,7 @@ fun BasicHorizontalTimeLine(modifier: Modifier = Modifier) {
   ) {
     JetLimeRow(
       modifier = Modifier.padding(vertical = 32.dp, horizontal = 16.dp),
-      items = items,
+      itemsList = ItemsList(items),
       keyExtractor = { item -> item.id },
     ) { index, item, position ->
       JetLimeEvent(

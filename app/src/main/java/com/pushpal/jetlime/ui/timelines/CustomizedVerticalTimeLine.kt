@@ -27,7 +27,6 @@ package com.pushpal.jetlime.ui.timelines
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -37,10 +36,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.EventPointType
+import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
+import com.pushpal.jetlime.VerticalAlignment.RIGHT
 import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.data.getCharacters
 import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
@@ -55,14 +56,14 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
   ) {
     JetLimeColumn(
       modifier = Modifier.padding(16.dp),
-      items = items,
+      itemsList = ItemsList(items),
       keyExtractor = { item -> item.id },
       style = JetLimeDefaults.columnStyle(
         contentDistance = 32.dp,
         itemSpacing = 16.dp,
         lineThickness = 2.dp,
         lineBrush = JetLimeDefaults.lineGradientBrush(),
-        pointStartFactor = 3f,
+        lineVerticalAlignment = RIGHT,
       ),
     ) { index, item, position ->
       JetLimeEvent(

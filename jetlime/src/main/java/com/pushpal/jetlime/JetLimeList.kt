@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -43,23 +42,45 @@ import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
 
 /**
- * A composable function that creates a vertically scrolling list (column) with JetLime styling.
- * It uses the standard LazyColumn composable from Jetpack Compose but adds additional styling
- * and configuration options defined by JetLime.
+ * A composable function that creates a vertical timeline interface with a list of items.
  *
- * @param modifier A [Modifier] applied to the column.
- * @param style The [JetLimeStyle] to apply to the column.
- * @param listState The state object to be used to control or observe the list's scroll position.
- * @param contentPadding The padding to apply to the content inside the column.
- * @param content A composable lambda defining the content of the column.
+ * This function sets up a LazyColumn layout for displaying items in a vertical timeline format. It allows for customization
+ * of its appearance and behavior through various parameters.
+ *
+ * Example usage:
+ *
+ * ```
+ *  val items = remember { getItemsList() }
+ *
+ *  JetLimeColumn(
+ *   itemsList = ItemsList(items),
+ *   keyExtractor = { item -> item.id },
+ *   style = JetLimeDefaults.columnStyle(),
+ *  ) { index, item, position ->
+ *     JetLimeEvent(
+ *      style = JetLimeEventDefaults.eventStyle(position = position)
+ *     ) {
+ *        ComposableContent(item = item)
+ *       }
+ *    }
+ * ```
+ *
+ * @param T The type of items in the items list.
+ * @param itemsList A list of items to be displayed in the JetLimeColumn.
+ * @param modifier A modifier to be applied to the LazyColumn.
+ * @param style The JetLime style configuration. Defaults to a predefined column style.
+ * @param listState The state object to be used for the LazyColumn.
+ * @param contentPadding The padding to apply to the content inside the LazyColumn.
+ * @param keyExtractor A function to extract keys from items for optimization purposes.
+ * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
 fun <T> JetLimeColumn(
+  itemsList: ItemsList<T>,
   modifier: Modifier = Modifier,
   style: JetLimeStyle = JetLimeDefaults.columnStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  items: List<T>,
   keyExtractor: (T) -> Any = {},
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
@@ -74,8 +95,11 @@ fun <T> JetLimeColumn(
       userScrollEnabled = true,
       contentPadding = contentPadding,
     ) {
-      itemsIndexed(items = items, key = { _, item -> keyExtractor(item) }) { index, item ->
-        val eventPosition = EventPosition.dynamic(index, items.size)
+      itemsIndexed(
+        items = itemsList.items,
+        key = { _, item -> keyExtractor(item) },
+      ) { index, item ->
+        val eventPosition = EventPosition.dynamic(index, itemsList.items.size)
         itemContent(index, item, eventPosition)
       }
     }
@@ -83,23 +107,45 @@ fun <T> JetLimeColumn(
 }
 
 /**
- * A composable function that creates a horizontally scrolling list (row) with JetLime styling.
- * Similar to JetLimeColumn, it is a customized version of the standard LazyRow composable
- * from Jetpack Compose with additional styling and configuration options provided by JetLime.
+ * A composable function that creates a horizontal timeline interface with a list of items.
  *
- * @param modifier A [Modifier] applied to the row.
- * @param style The [JetLimeStyle] to apply to the row.
- * @param listState The state object to be used to control or observe the list's scroll position.
- * @param contentPadding The padding to apply to the content inside the row.
- * @param content A composable lambda defining the content of the row.
+ * This function sets up a LazyRow layout for displaying items in a horizontal timeline format. It allows for customization
+ * of its appearance and behavior through various parameters.
+ *
+ * Example usage:
+ *
+ * ```
+ *  val items = remember { getItemsList() }
+ *
+ *  JetLimeRow(
+ *   itemsList = ItemsList(items),
+ *   keyExtractor = { item -> item.id },
+ *   style = JetLimeDefaults.rowStyle(),
+ *  ) { index, item, position ->
+ *     JetLimeEvent(
+ *      style = JetLimeEventDefaults.eventStyle(position = position)
+ *     ) {
+ *        ComposableContent(item = item)
+ *       }
+ *    }
+ * ```
+ *
+ * @param T The type of items in the items list.
+ * @param itemsList A list of items to be displayed in the JetLimeRow.
+ * @param modifier A modifier to be applied to the LazyRow.
+ * @param style The JetLime style configuration. Defaults to a predefined row style.
+ * @param listState The state object to be used for the LazyRow.
+ * @param contentPadding The padding to apply to the content inside the LazyRow.
+ * @param keyExtractor A function to extract keys from items for optimization purposes.
+ * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
 fun <T> JetLimeRow(
+  itemsList: ItemsList<T>,
   modifier: Modifier = Modifier,
   style: JetLimeStyle = JetLimeDefaults.rowStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  items: List<T>,
   keyExtractor: (T) -> Any = {},
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
@@ -114,8 +160,11 @@ fun <T> JetLimeRow(
       userScrollEnabled = true,
       contentPadding = contentPadding,
     ) {
-      itemsIndexed(items = items, key = { _, item -> keyExtractor(item) }) { index, item ->
-        val eventPosition = EventPosition.dynamic(index, items.size)
+      itemsIndexed(
+        items = itemsList.items,
+        key = { _, item -> keyExtractor(item) },
+      ) { index, item ->
+        val eventPosition = EventPosition.dynamic(index, itemsList.items.size)
         itemContent(index, item, eventPosition)
       }
     }
@@ -123,8 +172,9 @@ fun <T> JetLimeRow(
 }
 
 /**
- * A CompositionLocal providing the current [JetLimeStyle]. This can be used to propagate the
- * JetLime styling down the composable tree and allow child composables to access and utilize
- * the current style.
+ * A CompositionLocal providing the current [JetLimeStyle].
+ *
+ * This is used to provide a default or overridden style configuration down the composition tree. Accessing this without a provider
+ * will result in an error, ensuring that the style is always defined when used within a composable context.
  */
 val LocalJetLimeStyle = compositionLocalOf<JetLimeStyle> { error("No JetLimeStyle provided") }

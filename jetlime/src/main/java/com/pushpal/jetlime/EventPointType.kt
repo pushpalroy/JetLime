@@ -33,7 +33,8 @@ import androidx.compose.ui.graphics.painter.Painter
  * different types of event points such as empty, filled, or custom types with specific icons.
  *
  * @property type The name of the event point type.
- * @property icon An optional icon associated with the event point type.
+ * @property icon An optional [Painter] icon associated with the event point type.
+ * @property fillPercent An optional percentage value for the [FILLED] type
  */
 @Immutable
 class EventPointType internal constructor(
@@ -51,12 +52,13 @@ class EventPointType internal constructor(
     /** Internal constant used for custom event point types. */
     internal const val CUSTOM = "Custom"
 
+    /** The default value of [EventPointType] */
     val Default = filled()
 
     /**
-     * Creates a custom event point type with a specified icon.
+     * Creates a custom event point type with a specified [Painter] icon.
      *
-     * @param icon The icon for the custom event point type.
+     * @param icon The [Painter] icon for the custom event point type.
      * @return A new instance of [EventPointType] with the custom icon.
      */
     @Stable

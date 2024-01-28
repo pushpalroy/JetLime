@@ -24,8 +24,6 @@
 */
 package com.pushpal.jetlime.ui.timelines.event
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,7 +32,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -43,60 +40,60 @@ import com.pushpal.jetlime.ui.data.Item
 
 @Composable
 fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
-    Card(
-      modifier = modifier
-        .fillMaxWidth(0.9f)
-    ) {
+  Card(
+    modifier = modifier
+      .fillMaxWidth(0.9f),
+  ) {
+    Text(
+      modifier = Modifier
+        .fillMaxWidth()
+        .wrapContentHeight()
+        .padding(horizontal = 12.dp, vertical = 8.dp),
+      color = Color.White,
+      fontSize = 18.sp,
+      text = item.name,
+    )
+    item.description?.let {
       Text(
         modifier = Modifier
           .fillMaxWidth()
           .wrapContentHeight()
           .padding(horizontal = 12.dp, vertical = 8.dp),
-        color = Color.White,
-        fontSize = 18.sp,
-        text = item.name,
+        color = Color.White.copy(alpha = 0.8f),
+        fontSize = 14.sp,
+        text = it,
       )
-      item.description?.let {
-        Text(
-          modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-          color = Color.White.copy(alpha = 0.8f),
-          fontSize = 14.sp,
-          text = it,
-        )
-      }
+    }
   }
 }
 
 @Composable
 fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
-    Card(
-      modifier = modifier
+  Card(
+    modifier = modifier
+      .fillMaxWidth()
+      .height(120.dp)
+      .width(160.dp),
+  ) {
+    Text(
+      modifier = Modifier
         .fillMaxWidth()
-        .height(120.dp)
-        .width(160.dp)
-    ) {
+        .wrapContentHeight()
+        .padding(12.dp),
+      color = Color.White,
+      fontSize = 18.sp,
+      text = item.name,
+    )
+    item.description?.let {
       Text(
         modifier = Modifier
           .fillMaxWidth()
           .wrapContentHeight()
-          .padding(12.dp),
-        color = Color.White,
-        fontSize = 18.sp,
-        text = item.name,
+          .padding(horizontal = 12.dp, vertical = 8.dp),
+        color = Color.White.copy(alpha = 0.8f),
+        fontSize = 14.sp,
+        text = it,
       )
-      item.description?.let {
-        Text(
-          modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-          color = Color.White.copy(alpha = 0.8f),
-          fontSize = 14.sp,
-          text = it,
-        )
-      }
     }
+  }
 }

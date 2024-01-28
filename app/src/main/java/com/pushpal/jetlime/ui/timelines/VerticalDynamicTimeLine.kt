@@ -24,7 +24,6 @@
 */
 package com.pushpal.jetlime.ui.timelines
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
@@ -49,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
@@ -66,6 +66,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
   val context = LocalContext.current
 
   Scaffold(
+    modifier = modifier,
     floatingActionButton = {
       Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -101,7 +102,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
     },
   ) { paddingValues ->
     Surface(
-      modifier = modifier
+      modifier = Modifier
         .padding(paddingValues)
         .fillMaxSize(),
     ) {
@@ -111,7 +112,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
         style = JetLimeDefaults.columnStyle(
           lineBrush = JetLimeDefaults.lineGradientBrush(),
         ),
-        items = items,
+        itemsList = ItemsList(items),
         keyExtractor = { item -> item.id },
       ) { index, item, position ->
         JetLimeEvent(

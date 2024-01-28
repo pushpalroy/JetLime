@@ -46,16 +46,34 @@ import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
 
 /**
- * Composable function for creating a JetLime event.
+ * Composable function for creating a [JetLimeColumn] or [JetLimeRow] event.
+ *
+ * Example usage:
+ *
+ * ```
+ *  val items = remember { getItemsList() }
+ *
+ *  JetLimeColumn(
+ *   itemsList = ItemsList(items),
+ *   keyExtractor = { item -> item.id },
+ *   style = JetLimeDefaults.columnStyle(),
+ *  ) { index, item, position ->
+ *     JetLimeEvent(
+ *      style = JetLimeEventDefaults.eventStyle(position = position)
+ *     ) {
+ *        ComposableContent(item = item)
+ *       }
+ *    }
+ * ```
  *
  * @param modifier The modifier to be applied to the event.
- * @param style The style of the JetLime event, defaulting to `JetLimeEventStyle.Default`.
+ * @param style The style of the [JetLimeColumn] or [JetLimeRow] event, defaulting to [JetLimeEventDefaults.eventStyle].
  * @param content The composable content inside the event.
  */
 @Composable
 fun JetLimeEvent(
   modifier: Modifier = Modifier,
-  style: JetLimeEventStyle = JetLimeEventDefaults.eventStyle(),
+  style: JetLimeEventStyle = JetLimeEventDefaults.eventStyle(EventPosition.END),
   content: @Composable () -> Unit,
 ) {
   val jetLimeStyle = LocalJetLimeStyle.current
@@ -79,10 +97,11 @@ fun JetLimeEvent(
 
 /**
  * Composable function for creating a vertical layout for the JetLime event.
+ * This composable is used internally for a [JetLimeColumn].
  *
+ * @param style The style of the [JetLimeEvent].
+ * @param jetLimeStyle The [JetLimeEvent] style configuration.
  * @param modifier The modifier to be applied to the event.
- * @param style The style of the JetLime event.
- * @param jetLimeStyle The JetLime style configuration.
  * @param content The composable content inside the event.
  */
 @Composable
@@ -112,7 +131,7 @@ internal fun VerticalEvent(
             brush = jetLimeStyle.lineBrush,
             start = Offset(
               x = xOffset,
-              y = yOffset * 2 + yShift,
+              y = yOffset,
             ),
             end = Offset(
               x = xOffset,
@@ -174,9 +193,9 @@ internal fun VerticalEvent(
 }
 
 /**
- * Composable function to place the content within a vertical JetLime event.
+ * Composable function to place the content within a [VerticalEvent].
  *
- * @param style The style of the JetLime event.
+ * @param style The style of the [JetLimeEvent].
  * @param jetLimeStyle The JetLime style configuration.
  * @param alignment The vertical alignment for the event.
  * @param content The composable content to be placed.
@@ -214,11 +233,12 @@ private fun PlaceVerticalEventContent(
 }
 
 /**
- * Composable function for creating a horizontal layout for the JetLime event.
+ * Composable function for creating a horizontal layout for the [JetLimeEvent].
+ * This composable is used internally for a [JetLimeRow].
  *
+ * @param style The style of the [JetLimeEvent].
+ * @param jetLimeStyle The [JetLimeEvent] style configuration.
  * @param modifier The modifier to be applied to the event.
- * @param style The style of the JetLime event.
- * @param jetLimeStyle The JetLime style configuration.
  * @param content The composable content inside the event.
  */
 @Composable
@@ -247,7 +267,7 @@ internal fun HorizontalEvent(
           drawLine(
             brush = jetLimeStyle.lineBrush,
             start = Offset(
-              x = xOffset * 2 + xShift,
+              x = xOffset,
               y = yOffset,
             ),
             end = Offset(
@@ -310,11 +330,11 @@ internal fun HorizontalEvent(
 }
 
 /**
- * Composable function to place the content within a horizontal JetLime event.
+ * Composable function to place the content within a [HorizontalEvent].
  *
- * @param style The style of the JetLime event.
+ * @param style The style of the [JetLimeEvent].
  * @param jetLimeStyle The JetLime style configuration.
- * @param alignment The horizontal alignment for the event.
+ * @param alignment The vertical alignment for the event.
  * @param content The composable content to be placed.
  */
 @Composable
@@ -350,9 +370,10 @@ private fun PlaceHorizontalEventContent(
 }
 
 /**
- * Calculates and returns the radius animation factor for a given JetLime event style.
+ * Calculates and returns the radius animation factor for a given [JetLimeEventStyle].
+ * The result defaults to 1.0f if [JetLimeEventStyle.pointAnimation] is not set or null.
  *
- * @param style The style of the JetLime event.
+ * @param style The style of the [JetLimeEvent].
  * @return The calculated radius animation factor as a [Float].
  */
 @Composable

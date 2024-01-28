@@ -30,11 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
 /**
- * Represents the style configuration for an event in a JetLime UI component.
+ * Represents the style configuration for an event in a [JetLimeEvent] UI component.
  * This class encapsulates various styling properties such as position, point type, colors, radius, animation, and stroke attributes for an event point.
  *
- * @property position The position of the event in the UI component.
- * @property pointType The type of the event point.
+ * @property pointType The type of the event point: Empty, Filled or Custom.
  * @property pointColor The color of the event point.
  * @property pointFillColor The fill color of the event point.
  * @property pointRadius The radius of the event point.
@@ -53,8 +52,18 @@ class JetLimeEventStyle internal constructor(
   val pointStrokeColor: Color,
 ) {
 
+  /** The position of the event in the UI component. */
   var position: EventPosition = EventPosition.END
 
+  /**
+   * Sets the position of the [JetLimeEvent].
+   *
+   * This function allows for changing the position of a JetLime event. It modifies the current
+   * instance of [JetLimeEventStyle], setting its position property to the specified [EventPosition].
+   *
+   * @param position The [EventPosition] to set for the JetLime event.
+   * @return A [JetLimeEventStyle] instance with the updated position.
+   */
   @Stable
   fun setPosition(position: EventPosition): JetLimeEventStyle {
     return this.apply {

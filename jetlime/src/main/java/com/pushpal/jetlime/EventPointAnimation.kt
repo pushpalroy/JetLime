@@ -29,7 +29,9 @@ import androidx.compose.runtime.Immutable
 
 /**
  * Represents an animation configuration for an event point in a UI component.
- * This animation defines how an event point should animate, including its initial value, target value, and the specification of the animation.
+ * This animation defines how an event point (circle) should animate, including its initial value, target value, and the specification of the animation.
+ *
+ * - See [JetLimeEventDefaults.pointAnimation] for the default point animation used in a [JetLimeEvent].
  *
  * @property initialValue The starting value of the animation.
  * @property targetValue The ending value of the animation.
