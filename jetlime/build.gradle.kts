@@ -56,7 +56,7 @@ dependencies {
 }
 
 tasks.dokkaHtml.configure {
-  outputDirectory.set(file("../docs/html"))
+  outputDirectory.set(file("../docs"))
   pluginsMapConfiguration.set(
     mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""),
   )
