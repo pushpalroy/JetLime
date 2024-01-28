@@ -32,6 +32,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -50,10 +51,19 @@ import com.pushpal.jetlime.ui.timelines.CustomizedVerticalTimeLine
 import com.pushpal.jetlime.ui.timelines.VerticalDynamicTimeLine
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+  modifier: Modifier = Modifier,
+  isDarkTheme: Boolean = false,
+  onThemeChange: ((Boolean) -> Unit) = {},
+) {
   Scaffold(
     modifier = modifier,
-    topBar = { HomeAppBar() },
+    topBar = {
+      HomeAppBar(
+        isDarkTheme = isDarkTheme,
+        onThemeChange = onThemeChange,
+      )
+    },
   ) { paddingValues ->
     HomeContent(
       modifier = Modifier
@@ -106,11 +116,21 @@ fun HomeContent(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeAppBar(modifier: Modifier = Modifier) {
+fun HomeAppBar(
+  isDarkTheme: Boolean,
+  modifier: Modifier = Modifier,
+  onThemeChange: ((Boolean) -> Unit)?,
+) {
   TopAppBar(
     title = {
       Text(
         text = "JetLime Samples",
+      )
+    },
+    actions = {
+      Switch(
+        checked = isDarkTheme,
+        onCheckedChange = onThemeChange,
       )
     },
     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),

@@ -27,6 +27,7 @@ package com.pushpal.jetlime.ui.timelines
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -62,16 +63,16 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
         contentDistance = 32.dp,
         itemSpacing = 16.dp,
         lineThickness = 2.dp,
-        lineBrush = JetLimeDefaults.lineGradientBrush(),
+        lineBrush = JetLimeDefaults.lineSolidBrush(color = Color(0xFF2196F3)),
         lineVerticalAlignment = RIGHT,
       ),
     ) { index, item, position ->
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
           position = position,
-          pointColor = Color(0xFFFF9800),
-          pointFillColor = Color(0xFF006B04),
-          pointRadius = 10.dp,
+          pointColor = Color(0xFF2889D6),
+          pointFillColor = Color(0xFFD5F2FF),
+          pointRadius = 14.dp,
           pointAnimation = if (index == 2) JetLimeEventDefaults.pointAnimation() else null,
           pointType = when (index) {
             1 -> EventPointType.filled(0.8f)
@@ -85,7 +86,7 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
             4 -> 0.dp
             else -> 2.dp
           },
-          pointStrokeColor = Color(0xFFFFFFFF),
+          pointStrokeColor = MaterialTheme.colorScheme.onBackground,
         ),
       ) {
         VerticalEventContent(item = item)

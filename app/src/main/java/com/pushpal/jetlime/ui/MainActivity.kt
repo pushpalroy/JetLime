@@ -27,19 +27,25 @@ package com.pushpal.jetlime.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    // Displaying edge-to-edge
-    WindowCompat.setDecorFitsSystemWindows(window, false)
-
     setContent {
-      JetLimeTheme(darkTheme = true) {
-        HomeScreen()
+      var isDarkTheme by remember { mutableStateOf(true) }
+      JetLimeTheme(darkTheme = isDarkTheme) {
+        HomeScreen(
+          isDarkTheme = isDarkTheme,
+          onThemeChange = {
+            isDarkTheme = it
+          },
+        )
       }
     }
   }

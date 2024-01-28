@@ -33,7 +33,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pushpal.jetlime.ui.data.Item
@@ -49,8 +49,8 @@ fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
         .fillMaxWidth()
         .wrapContentHeight()
         .padding(horizontal = 12.dp, vertical = 8.dp),
-      color = Color.White,
-      fontSize = 18.sp,
+      fontSize = 16.sp,
+      fontWeight = FontWeight.SemiBold,
       text = item.name,
     )
     item.description?.let {
@@ -59,7 +59,6 @@ fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
           .fillMaxWidth()
           .wrapContentHeight()
           .padding(horizontal = 12.dp, vertical = 8.dp),
-        color = Color.White.copy(alpha = 0.8f),
         fontSize = 14.sp,
         text = it,
       )
@@ -80,8 +79,8 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
         .fillMaxWidth()
         .wrapContentHeight()
         .padding(12.dp),
-      color = Color.White,
-      fontSize = 18.sp,
+      fontSize = 16.sp,
+      fontWeight = FontWeight.SemiBold,
       text = item.name,
     )
     item.description?.let {
@@ -90,7 +89,6 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
           .fillMaxWidth()
           .wrapContentHeight()
           .padding(horizontal = 12.dp, vertical = 8.dp),
-        color = Color.White.copy(alpha = 0.8f),
         fontSize = 14.sp,
         text = it,
       )
