@@ -32,9 +32,9 @@ dependencies {
 }
 ```
 
-## Usage
+## ✍️ Usage
 
-### Add items in a Vertical Timeline 
+### 👇 Add items in a Vertical Timeline 
 
 Use the `JetLimeColumn`.
 
@@ -55,7 +55,7 @@ JetLimeColumn(
   }
 }
 ```
-### Add items in a Horizontal Timeline 
+### 👉 Add items in a Horizontal Timeline 
 
 Use the `JetLimeRow`.
 
@@ -77,7 +77,7 @@ JetLimeRow(
 }
 ```
 
-### Modify `JetLimeColumn` Style
+### ⚡ Modify `JetLimeColumn` Style
 
 Use the `JetLimeDefaults.columnStyle()`.
 
@@ -94,7 +94,7 @@ JetLimeColumn(
   // Code to add events
 }
 ```
-### Modify `JetLimeRow` Style
+### ⚡ Modify `JetLimeRow` Style
 
 Use the `JetLimeDefaults.rowStyle()`.
 
@@ -112,7 +112,7 @@ JetLimeRow(
 }
 ```
 
-### Modify `JetLimeEvent` Style
+### ⚡ Modify `JetLimeEvent` Style
 
 Use the `JetLimeEventDefaults.eventStyle()`.
 
@@ -134,9 +134,9 @@ JetLimeEvent(
 ```
 
 
-### JetLimeColumn and JetLimeRow Properties
+### 🎯 JetLimeColumn and JetLimeRow Properties
 
-#### Alignment
+#### 🌀 Alignment
 
 The timeline line and point circles can be set to either side.
 
@@ -152,7 +152,7 @@ For a `JetLimeRow` the alignment can be set to `TOP` or `BOTTOM`.
 lineHorizontalAlignment = TOP or BOTTOM // Default is TOP
 ```
 
-#### Line Style
+#### 🌀 Line Style
 
 The line can be drawn by passing a `Brush` object to `lineBrush` in a `columnStyle` or `rowStyle`.
 Default values can also be used from `JetLimeDefaults` and colors can be modified for quick setup:
@@ -165,22 +165,22 @@ or
 lineBrush = JetLimeDefaults.solidBrush()
 ```
 
-#### Content Distance
+#### 🌀 Content Distance
 
 The `contentDistance` in `Dp` specifies how far the timeline line should be from the timeline content.
 
-#### Item Spacing
+#### 🌀 Item Spacing
 
 The `itemSpacing` in `Dp` specifies the gap between the event items.
 
-#### Line Thickness
+#### 🌀 Line Thickness
 
 The `lineThickness` in `Dp` the thickness of the timeline line.
 
 
-### JetLimeEvent Properties
+### 🎯 JetLimeEvent Properties
 
-#### Position
+#### 🌀 Position
 
 We always need to pass the position to the `eventStyle` that will be received in the JetLimeColumn lambda.
 This is needed so that JetLimeColumn can calculate the position of an event in the list at any time.
@@ -202,7 +202,7 @@ JetLimeColumn(
 }
 ```
 
-#### Point Type
+#### 🌀 Point Type
 
 The `pointType` of type `EventPointType` specifies the style of the point circle.
 It can be any of the three types: `EMPTY`, `FILLED` or `CUSTOM`.
@@ -225,7 +225,7 @@ This can be used to use a custom icon instead of the default types defined.
 pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
 ```
 
-#### Point Animation
+#### 🌀 Point Animation
 
 The `pointAnimation` of type `EventPointAnimation` specifies the animation of the point circle.
 
@@ -237,28 +237,28 @@ pointAnimation = JetLimeEventDefaults.pointAnimation()
 To use a custom animation `initialValue`, `targetValue` and `animationSpec` can be passed to `pointAnimation()`.
 `animationSpec` should be of the type `InfiniteRepeatableSpec<Float>`.
 
-#### Point Color
+#### 🌀 Point Color
 
 The `pointColor` is the color of the event point circle background.
 
-#### Point Fill Color
+#### 🌀 Point Fill Color
 
 The `pointFillColor` is the fill color of the event point circle which is drawn over the `pointColor`.
 
-#### Point Radius
+#### 🌀 Point Radius
 
 The `pointRadius` in `Dp` is the radius of the point circle.
 
-#### Point Stroke Width
+#### 🌀 Point Stroke Width
 
 The `pointStrokeWidth` in `Dp` is the width of the circle border.
 
-#### Point Stroke Color
+#### 🌀 Point Stroke Color
 
 The `pointStrokeColor` is the color of the circle border.
 
 
-### Inspiration
+### ☀️ Inspiration
 
 [Timeline-View by Vipul Asri](https://github.com/vipulasri/Timeline-View)
 
@@ -270,7 +270,7 @@ Would love to receive contributions! Read [contribution guidelines](CONTRIBUTING
 
 Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/pushpalroy/jetlime/discussions).
 
-## License
+## 📃 License
 
 ```
 MIT License
