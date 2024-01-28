@@ -2,7 +2,7 @@
 
 > A simple yet highly customizable library for showing a TimeLine view in Android.
 
-[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.5.4-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
+[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.6.0-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -18,9 +18,9 @@
 
 #### Made with ❤ using Compose
 
-|                 Simple                 |                 Animated                 |                 Fancy                 |                 Item Update                 |
-|:--------------------------------------:|:----------------------------------------:|:-------------------------------------:|:-------------------------------------------:|
-| <img src="art/simple.png" width=200 /> | <img src="art/animated.gif" width=200 /> | <img src="art/fancy.png" width=200 /> | <img src="art/item_update.gif" width=200 /> |
+|                 Basic                 |                 Dynamic                 |                 Custom                 |
+|:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|
+| <img src="art/basic.png" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> |
 
 ## Implementation
 
@@ -28,7 +28,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:1.0.6")
+  implementation("io.github.pushpalroy:jetlime:2.0.0")
 }
 ```
 

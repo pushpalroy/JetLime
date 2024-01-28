@@ -24,28 +24,59 @@
 */
 package com.pushpal.jetlime.ui
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+import com.pushpal.jetlime.ui.theme.DarkColorPalette
 import com.pushpal.jetlime.ui.theme.JetLimeTheme
+import com.pushpal.jetlime.ui.theme.LightColorPalette
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     setContent {
-      var isDarkTheme by remember { mutableStateOf(true) }
-      JetLimeTheme(darkTheme = isDarkTheme) {
+      var darkTheme by remember { mutableStateOf(true) }
+      JetLimeTheme(darkTheme = darkTheme) {
+        UiControllerEffect(darkTheme)
         HomeScreen(
-          isDarkTheme = isDarkTheme,
+          isDarkTheme = darkTheme,
           onThemeChange = {
-            isDarkTheme = it
+            darkTheme = it
           },
         )
+      }
+    }
+  }
+}
+
+@Composable
+fun UiControllerEffect(isDarkTheme: Boolean) {
+  val view = LocalView.current
+  val colors = if (isDarkTheme) {
+    DarkColorPalette
+  } else {
+    LightColorPalette
+  }
+  if (!view.isInEditMode) {
+    SideEffect {
+      val window = (view.context as Activity).window.apply {
+        statusBarColor = colors.background.toArgb()
+        navigationBarColor = colors.background.toArgb()
+      }
+      WindowCompat.getInsetsController(window, view).apply {
+        isAppearanceLightStatusBars = isDarkTheme
+        isAppearanceLightNavigationBars = isDarkTheme
       }
     }
   }

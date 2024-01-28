@@ -30,7 +30,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-private val DarkColorPalette = darkColorScheme(
+val DarkColorPalette = darkColorScheme(
   primary = DarkColors.Primary,
   onPrimary = DarkColors.OnPrimary,
   primaryContainer = DarkColors.PrimaryContainer,
@@ -62,7 +62,7 @@ private val DarkColorPalette = darkColorScheme(
   scrim = DarkColors.Scrim,
 )
 
-private val LightColorPalette = lightColorScheme(
+val LightColorPalette = lightColorScheme(
   primary = LightColors.Primary,
   onPrimary = LightColors.OnPrimary,
   primaryContainer = LightColors.PrimaryContainer,
@@ -95,12 +95,7 @@ private val LightColorPalette = lightColorScheme(
 )
 
 @Composable
-fun JetLimeTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  content:
-  @Composable()
-  () -> Unit,
-) {
+fun JetLimeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
   val colors = if (darkTheme) {
     DarkColorPalette
   } else {
