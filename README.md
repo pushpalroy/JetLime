@@ -20,7 +20,7 @@ Made with ❤ using Compose
 
 |                 Basic                 |                 Dynamic                 |                 Custom                 |
 |:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|
-| <img src="art/basic.png" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> |
+| <img src="art/basic.gif" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> |
 
 ## 🚀 Implementation
 
@@ -76,6 +76,8 @@ JetLimeRow(
   }
 }
 ```
+
+Pass the `keyExtractor` lambda to define how your `key` will be used in the internal Lazy lists. 
 
 ### ⚡ Modify `JetLimeColumn` Style
 
