@@ -69,7 +69,6 @@ object JetLimeDefaults {
 
   @Composable
   internal fun jetLimeStyle(
-    backgroundColor: Color,
     contentDistance: Dp,
     itemSpacing: Dp,
     lineThickness: Dp,
@@ -79,7 +78,6 @@ object JetLimeDefaults {
     lineVerticalAlignment: VerticalAlignment = LEFT,
   ): JetLimeStyle {
     return JetLimeStyle(
-      backgroundColor = backgroundColor,
       contentDistance = contentDistance,
       itemSpacing = itemSpacing,
       lineThickness = lineThickness,
@@ -93,7 +91,6 @@ object JetLimeDefaults {
   /**
    * Creates a column style configuration for JetLime.
    *
-   * @param backgroundColor The background color of the JetLime component.
    * @param contentDistance The distance of content from the JetLime component's start.
    * @param itemSpacing The spacing between items in the JetLime component.
    * @param lineThickness The thickness of the line in the JetLime component.
@@ -104,7 +101,6 @@ object JetLimeDefaults {
    */
   @Composable
   fun columnStyle(
-    backgroundColor: Color = MaterialTheme.colorScheme.background,
     contentDistance: Dp = ContentDistance,
     itemSpacing: Dp = ItemSpacing,
     lineThickness: Dp = LineThickness,
@@ -112,7 +108,6 @@ object JetLimeDefaults {
     pointStartFactor: Float = 1.1f,
     lineVerticalAlignment: VerticalAlignment = LEFT,
   ) = jetLimeStyle(
-    backgroundColor,
     contentDistance,
     itemSpacing,
     lineThickness,
@@ -124,7 +119,6 @@ object JetLimeDefaults {
   /**
    * Creates a row style configuration for JetLime.
    *
-   * @param backgroundColor The background color of the JetLime component.
    * @param contentDistance The distance of content from the JetLime component's start.
    * @param itemSpacing The spacing between items in the JetLime component.
    * @param lineThickness The thickness of the line in the JetLime component.
@@ -135,7 +129,6 @@ object JetLimeDefaults {
    */
   @Composable
   fun rowStyle(
-    backgroundColor: Color = MaterialTheme.colorScheme.background,
     contentDistance: Dp = ContentDistance,
     itemSpacing: Dp = ItemSpacing,
     lineThickness: Dp = LineThickness,
@@ -143,7 +136,6 @@ object JetLimeDefaults {
     pointStartFactor: Float = 1.1f,
     lineHorizontalAlignment: HorizontalAlignment = TOP,
   ) = jetLimeStyle(
-    backgroundColor,
     contentDistance,
     itemSpacing,
     lineThickness,

@@ -46,7 +46,6 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  */
 @Immutable
 class JetLimeStyle internal constructor(
-  val backgroundColor: Color,
   val contentDistance: Dp,
   val itemSpacing: Dp,
   val lineThickness: Dp,
@@ -74,7 +73,6 @@ class JetLimeStyle internal constructor(
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
     if (other !is JetLimeStyle) return false
-    if (backgroundColor != other.backgroundColor) return false
     if (contentDistance != other.contentDistance) return false
     if (itemSpacing != other.itemSpacing) return false
     if (lineThickness != other.lineThickness) return false
@@ -85,8 +83,7 @@ class JetLimeStyle internal constructor(
   }
 
   override fun hashCode(): Int {
-    var result = backgroundColor.hashCode()
-    result = 31 * result + contentDistance.hashCode()
+    var result = contentDistance.hashCode()
     result = 31 * result + itemSpacing.hashCode()
     result = 31 * result + lineThickness.hashCode()
     result = 31 * result + lineBrush.hashCode()

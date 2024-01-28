@@ -25,36 +25,33 @@
 package com.pushpal.jetlime.ui.timelines
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
+import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.ui.data.Item
 import com.pushpal.jetlime.ui.data.getCharacters
@@ -66,6 +63,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
   val listState = rememberLazyListState()
   val items = remember { mutableStateListOf<Item>() }
   val allCharacters = getCharacters().distinct()
+  val context = LocalContext.current
 
   Scaffold(
     floatingActionButton = {
@@ -81,7 +79,6 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
                 items.add(newItem)
               }
             }
-            Log.e("VerticalDynamicTimeLine","Items: ${items.toList()}")
           },
           containerColor = MaterialTheme.colorScheme.secondaryContainer,
           contentColor = MaterialTheme.colorScheme.secondary,
@@ -94,7 +91,6 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
             if (items.isNotEmpty()) {
               items.removeAt(items.size - 1)
             }
-            Log.e("VerticalDynamicTimeLine","Items: ${items.toList()}")
           },
           containerColor = MaterialTheme.colorScheme.secondaryContainer,
           contentColor = MaterialTheme.colorScheme.secondary,
@@ -115,13 +111,18 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
         style = JetLimeDefaults.columnStyle(
           lineBrush = JetLimeDefaults.lineGradientBrush(),
         ),
-      ) {
-        items.forEach { item ->
-          JetLimeEvent(
-            style = JetLimeEventDefaults.eventStyle(),
-          ) {
-            VerticalEventContent(item = item)
-          }
+        items = items,
+        keyExtractor = { item -> item.id },
+      ) { index, item, position ->
+        JetLimeEvent(
+          modifier = Modifier.clickable {
+            Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
+          },
+          style = JetLimeEventDefaults.eventStyle(
+            position = position,
+          ),
+        ) {
+          VerticalEventContent(item = item)
         }
       }
     }

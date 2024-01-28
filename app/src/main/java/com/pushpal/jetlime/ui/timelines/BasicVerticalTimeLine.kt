@@ -24,62 +24,52 @@
 */
 package com.pushpal.jetlime.ui.timelines
 
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.JetLimeColumn
+import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
-import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.data.getCharacters
 import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
 @Composable
 fun BasicVerticalTimeLine(modifier: Modifier = Modifier) {
-  val items = remember { getCharacters() }
+  val items = remember { getCharacters().subList(0, 4) }
+  val context = LocalContext.current
 
   Surface(
     modifier = modifier.fillMaxSize(),
   ) {
     JetLimeColumn(
       modifier = Modifier.padding(16.dp),
-    ) {
-      JetLimeEvent {
-        VerticalEventContent(item = items[0])
-      }
-
+      items = items,
+      keyExtractor = { item -> item.id },
+    ) { index, item, position ->
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
-          pointAnimation = JetLimeEventDefaults.pointAnimation(),
+          position = position,
+          pointAnimation = if (index == 2) JetLimeEventDefaults.pointAnimation() else null,
+          pointType = if (index == 1) EventPointType.filled(0.8f) else EventPointType.Default,
         ),
       ) {
-        VerticalEventContent(item = items[1])
-      }
-
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.filled(0.8f),
-        ),
-      ) {
-        VerticalEventContent(item = items[2])
-      }
-
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.custom(
-            icon = painterResource(id = R.drawable.icon_check),
-          ),
-        ),
-      ) {
-        VerticalEventContent(item = items[4])
+        VerticalEventContent(
+          modifier = Modifier.clickable {
+            Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
+          },
+          item = item,
+        )
       }
     }
   }

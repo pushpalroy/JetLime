@@ -43,16 +43,9 @@ import com.pushpal.jetlime.ui.data.Item
 
 @Composable
 fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier
-      .wrapContentHeight()
-      .fillMaxWidth(),
-  ) {
     Card(
-      modifier = Modifier
+      modifier = modifier
         .fillMaxWidth(0.9f)
-        .align(Alignment.CenterStart)
-        .clickable {},
     ) {
       Text(
         modifier = Modifier
@@ -74,23 +67,16 @@ fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
           text = it,
         )
       }
-    }
   }
 }
 
 @Composable
 fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier
-      .wrapContentHeight()
-      .width(160.dp),
-  ) {
     Card(
-      modifier = Modifier
+      modifier = modifier
         .fillMaxWidth()
         .height(120.dp)
-        .align(Alignment.CenterStart)
-        .clickable {},
+        .width(160.dp)
     ) {
       Text(
         modifier = Modifier
@@ -113,5 +99,4 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
         )
       }
     }
-  }
 }

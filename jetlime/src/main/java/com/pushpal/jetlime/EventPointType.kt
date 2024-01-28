@@ -51,6 +51,8 @@ class EventPointType internal constructor(
     /** Internal constant used for custom event point types. */
     internal const val CUSTOM = "Custom"
 
+    val Default = filled()
+
     /**
      * Creates a custom event point type with a specified icon.
      *
@@ -67,7 +69,7 @@ class EventPointType internal constructor(
      * @return A new instance of [EventPointType] with the filled icon.
      */
     @Stable
-    fun filled(fillPercent: Float): EventPointType =
+    fun filled(fillPercent: Float = 0.5f): EventPointType =
       EventPointType(type = FILLED, fillPercent = fillPercent)
   }
 

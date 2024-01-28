@@ -24,21 +24,21 @@
 */
 package com.pushpal.jetlime.ui.timelines
 
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.EventPointType
+import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
-import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.data.getPlanets
 import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 
@@ -46,49 +46,27 @@ import com.pushpal.jetlime.ui.timelines.event.HorizontalEventContent
 @Composable
 fun BasicHorizontalTimeLine(modifier: Modifier = Modifier) {
   val items = remember { getPlanets() }
-
+  val context = LocalContext.current
   Surface(
     modifier = modifier.fillMaxWidth(),
   ) {
     JetLimeRow(
       modifier = Modifier.padding(vertical = 32.dp, horizontal = 16.dp),
-    ) {
-      JetLimeEvent {
-        HorizontalEventContent(item = items[0])
-      }
-
+      items = items,
+      keyExtractor = { item -> item.id },
+    ) { index, item, position ->
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
-          pointAnimation = JetLimeEventDefaults.pointAnimation(),
+          position = position,
+          pointAnimation = if (index == 1) JetLimeEventDefaults.pointAnimation() else null,
         ),
       ) {
-        HorizontalEventContent(item = items[1])
-      }
-
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.EMPTY,
-        ),
-      ) {
-        HorizontalEventContent(item = items[2])
-      }
-
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.filled(0.2f),
-        ),
-      ) {
-        HorizontalEventContent(item = items[3])
-      }
-
-      JetLimeEvent(
-        style = JetLimeEventDefaults.eventStyle(
-          pointType = EventPointType.custom(
-            icon = painterResource(id = R.drawable.icon_check),
-          ),
-        ),
-      ) {
-        HorizontalEventContent(item = items[4])
+        HorizontalEventContent(
+          modifier = Modifier.clickable {
+            Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
+          },
+          item = item,
+        )
       }
     }
   }
