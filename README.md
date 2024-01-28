@@ -1,6 +1,6 @@
-# JetLime ⏱️
+# JetLime 🍋
 
-> A simple yet highly customizable library for showing a TimeLine interface in Android.
+> A simple yet highly customizable library for showing a TimeLine interface in Jetpack Compose.
 
 [![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.6.0-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?color=blue&style=for-the-badge)
@@ -16,13 +16,13 @@
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Followers&style=social)](https://github.com/pushpalroy)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pushpalroy?label=Follow&style=social)](https://twitter.com/pushpalroy)
 
-#### Made with ❤ using Compose
+Made with ❤ using Compose
 
 |                 Basic                 |                 Dynamic                 |                 Custom                 |
 |:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|
 | <img src="art/basic.png" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> |
 
-## Implementation
+## 🚀 Implementation
 
 In `build.gradle` of app module, include the following dependency
 
@@ -34,7 +34,9 @@ dependencies {
 
 ## Usage
 
-### To add items in a vertical timeline use the `JetLimeColumn`
+### Add items in a Vertical Timeline 
+
+Use the `JetLimeColumn`.
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) }
@@ -53,7 +55,9 @@ JetLimeColumn(
   }
 }
 ```
-### To add items in a horizontal timeline use the `JetLimeRow`
+### Add items in a Horizontal Timeline 
+
+Use the `JetLimeRow`.
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) }
@@ -73,7 +77,9 @@ JetLimeRow(
 }
 ```
 
-### To modify `JetLimeColumn` style, use `JetLimeDefaults.columnStyle()`
+### Modify `JetLimeColumn` Style
+
+Use the `JetLimeDefaults.columnStyle()`.
 
 ```kotlin
 JetLimeColumn(
@@ -88,7 +94,9 @@ JetLimeColumn(
   // Code to add events
 }
 ```
-### To modify `JetLimeRow` style, use `JetLimeDefaults.rowStyle()`
+### Modify `JetLimeRow` Style
+
+Use the `JetLimeDefaults.rowStyle()`.
 
 ```kotlin
 JetLimeRow(
@@ -104,7 +112,9 @@ JetLimeRow(
 }
 ```
 
-### To modify a `JetLimeEvent` style, play around with `JetLimeEventDefaults.eventStyle()`
+### Modify `JetLimeEvent` Style
+
+Use the `JetLimeEventDefaults.eventStyle()`.
 
 ```kotlin
 JetLimeEvent(
@@ -123,7 +133,8 @@ JetLimeEvent(
 }
 ```
 
-### `JetLimeColumn` and `JetLimeRow` properties
+
+### JetLimeColumn and JetLimeRow Properties
 
 #### Alignment
 
@@ -141,7 +152,7 @@ For a `JetLimeRow` the alignment can be set to `TOP` or `BOTTOM`.
 lineHorizontalAlignment = TOP or BOTTOM // Default is TOP
 ```
 
-#### Line style
+#### Line Style
 
 The line can be drawn by passing a `Brush` object to `lineBrush` in a `columnStyle` or `rowStyle`.
 Default values can also be used from `JetLimeDefaults` and colors can be modified for quick setup:
@@ -154,19 +165,20 @@ or
 lineBrush = JetLimeDefaults.solidBrush()
 ```
 
-#### Content distance
+#### Content Distance
 
 The `contentDistance` in `Dp` specifies how far the timeline line should be from the timeline content.
 
-#### Item spacing
+#### Item Spacing
 
 The `itemSpacing` in `Dp` specifies the gap between the event items.
 
-#### Line thickness
+#### Line Thickness
 
 The `lineThickness` in `Dp` the thickness of the timeline line.
 
-### `JetLimeEvent` properties
+
+### JetLimeEvent Properties
 
 #### Position
 
@@ -190,7 +202,7 @@ JetLimeColumn(
 }
 ```
 
-#### Point type
+#### Point Type
 
 The `pointType` of type `EventPointType` specifies the style of the point circle.
 It can be any of the three types: `EMPTY`, `FILLED` or `CUSTOM`.
@@ -213,7 +225,7 @@ This can be used to use a custom icon instead of the default types defined.
 pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
 ```
 
-#### Point animation
+#### Point Animation
 
 The `pointAnimation` of type `EventPointAnimation` specifies the animation of the point circle.
 
@@ -225,32 +237,40 @@ pointAnimation = JetLimeEventDefaults.pointAnimation()
 To use a custom animation `initialValue`, `targetValue` and `animationSpec` can be passed to `pointAnimation()`.
 `animationSpec` should be of the type `InfiniteRepeatableSpec<Float>`.
 
-#### Point color
+#### Point Color
 
 The `pointColor` is the color of the event point circle background.
 
-#### Point fill color
+#### Point Fill Color
 
 The `pointFillColor` is the fill color of the event point circle which is drawn over the `pointColor`.
 
-#### Point radius
+#### Point Radius
 
 The `pointRadius` in `Dp` is the radius of the point circle.
 
-#### Point stroke width
+#### Point Stroke Width
 
 The `pointStrokeWidth` in `Dp` is the width of the circle border.
 
-#### Point stroke color
+#### Point Stroke Color
 
 The `pointStrokeColor` is the color of the circle border.
 
 
-#### Got inspired by:
+### Inspiration
 
 [Timeline-View by Vipul Asri](https://github.com/vipulasri/Timeline-View)
 
-### License
+## 🤝 Contribution
+
+Would love to receive contributions! Read [contribution guidelines](CONTRIBUTING.md) for more information regarding contribution.
+
+## 💬 Discuss?
+
+Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/pushpalroy/jetlime/discussions).
+
+## License
 
 ```
 MIT License
