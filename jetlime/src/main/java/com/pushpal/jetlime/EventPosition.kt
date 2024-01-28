@@ -44,7 +44,7 @@ class EventPosition internal constructor(val name: String) {
     private val MIDDLE = EventPosition("Middle")
 
     /** Represents the end position in a sequence. */
-    val END = EventPosition("End")
+    internal val END = EventPosition("End")
 
     /**
      * Determines the event position dynamically based on the index and the size of the list.
