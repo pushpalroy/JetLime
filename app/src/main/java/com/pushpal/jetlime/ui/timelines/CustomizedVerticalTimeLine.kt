@@ -58,7 +58,7 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
     JetLimeColumn(
       modifier = Modifier.padding(16.dp),
       itemsList = ItemsList(items),
-      keyExtractor = { item -> item.id },
+      key = { _, item -> item.id },
       style = JetLimeDefaults.columnStyle(
         contentDistance = 32.dp,
         itemSpacing = 16.dp,

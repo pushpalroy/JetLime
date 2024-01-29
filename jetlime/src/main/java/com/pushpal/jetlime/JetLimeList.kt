@@ -54,7 +54,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  *
  *  JetLimeColumn(
  *   itemsList = ItemsList(items),
- *   keyExtractor = { item -> item.id },
+ *   key = { _, item -> item.id },
  *   style = JetLimeDefaults.columnStyle(),
  *  ) { index, item, position ->
  *     JetLimeEvent(
@@ -71,7 +71,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  * @param style The JetLime style configuration. Defaults to a predefined column style.
  * @param listState The state object to be used for the LazyColumn.
  * @param contentPadding The padding to apply to the content inside the LazyColumn.
- * @param keyExtractor A function to extract keys from items for optimization purposes.
+ * @param key A factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key.
  * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
@@ -81,7 +81,7 @@ fun <T> JetLimeColumn(
   style: JetLimeStyle = JetLimeDefaults.columnStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  keyExtractor: (T) -> Any = {},
+  key: ((index: Int, item: T) -> Any)? = null,
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(VERTICAL)) {
@@ -97,7 +97,7 @@ fun <T> JetLimeColumn(
     ) {
       itemsIndexed(
         items = itemsList.items,
-        key = { _, item -> keyExtractor(item) },
+        key = key,
       ) { index, item ->
         val eventPosition = EventPosition.dynamic(index, itemsList.items.size)
         itemContent(index, item, eventPosition)
@@ -119,7 +119,7 @@ fun <T> JetLimeColumn(
  *
  *  JetLimeRow(
  *   itemsList = ItemsList(items),
- *   keyExtractor = { item -> item.id },
+ *   key = { _, item -> item.id },
  *   style = JetLimeDefaults.rowStyle(),
  *  ) { index, item, position ->
  *     JetLimeEvent(
@@ -136,7 +136,7 @@ fun <T> JetLimeColumn(
  * @param style The JetLime style configuration. Defaults to a predefined row style.
  * @param listState The state object to be used for the LazyRow.
  * @param contentPadding The padding to apply to the content inside the LazyRow.
- * @param keyExtractor A function to extract keys from items for optimization purposes.
+ * @param key A factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key.
  * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
@@ -146,7 +146,7 @@ fun <T> JetLimeRow(
   style: JetLimeStyle = JetLimeDefaults.rowStyle(),
   listState: LazyListState = rememberLazyListState(),
   contentPadding: PaddingValues = PaddingValues(0.dp),
-  keyExtractor: (T) -> Any = {},
+  key: ((index: Int, item: T) -> Any)? = null,
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
   CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(HORIZONTAL)) {
@@ -162,7 +162,7 @@ fun <T> JetLimeRow(
     ) {
       itemsIndexed(
         items = itemsList.items,
-        key = { _, item -> keyExtractor(item) },
+        key = key,
       ) { index, item ->
         val eventPosition = EventPosition.dynamic(index, itemsList.items.size)
         itemContent(index, item, eventPosition)

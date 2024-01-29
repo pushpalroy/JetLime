@@ -44,7 +44,7 @@ val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
 JetLimeColumn(
   modifier = Modifier.padding(16.dp),
   itemsList = ItemsList(items),
-  keyExtractor = { item -> item.id },
+  key = { _, item -> item.id },
 ) { index, item, position ->
   JetLimeEvent(
     style = JetLimeEventDefaults.eventStyle(
@@ -65,7 +65,7 @@ val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
 JetLimeRow(
   modifier = Modifier.padding(16.dp),
   itemsList = ItemsList(items),
-  keyExtractor = { item -> item.id },
+  key = { _, item -> item.id },
 ) { index, item, position ->
   JetLimeEvent(
     style = JetLimeEventDefaults.eventStyle(
@@ -77,7 +77,8 @@ JetLimeRow(
 }
 ```
 
-Pass the `keyExtractor` lambda to define how your `key` will be used in the internal Lazy lists. 
+Pass the `key` to define factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed.
+This key will be used by a LazyColumn or LazyRow internally.
 
 ### ⚡ Modify `JetLimeColumn` Style
 
@@ -193,7 +194,7 @@ This classification is needed to render correct lines for start and end items.
 ```kotlin
 JetLimeColumn(
   itemsList = ItemsList(items),
-  keyExtractor = { item -> item.id },
+  key = { _, item -> item.id },
 ) { index, item, position ->
   JetLimeEvent(
     style = JetLimeEventDefaults.eventStyle(

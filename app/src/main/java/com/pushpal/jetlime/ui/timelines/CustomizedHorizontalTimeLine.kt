@@ -58,7 +58,7 @@ fun CustomizedHorizontalTimeLine(modifier: Modifier = Modifier) {
     JetLimeRow(
       modifier = Modifier.padding(vertical = 32.dp, horizontal = 16.dp),
       itemsList = ItemsList(items),
-      keyExtractor = { item -> item.id },
+      key = { _, item -> item.id },
       style = JetLimeDefaults.rowStyle(
         contentDistance = 16.dp,
         itemSpacing = 16.dp,
