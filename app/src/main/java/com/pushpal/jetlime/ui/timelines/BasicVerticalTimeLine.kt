@@ -56,7 +56,7 @@ fun BasicVerticalTimeLine(modifier: Modifier = Modifier) {
     JetLimeColumn(
       modifier = Modifier.padding(16.dp),
       itemsList = ItemsList(items),
-      keyExtractor = { item -> item.id },
+      key = { _, item -> item.id },
     ) { index, item, position ->
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(

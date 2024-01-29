@@ -122,7 +122,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
           lineBrush = JetLimeDefaults.lineGradientBrush(),
         ),
         itemsList = ItemsList(items),
-        keyExtractor = { item -> item.id },
+        key = { _, item -> item.id },
       ) { index, item, position ->
         JetLimeEvent(
           modifier = Modifier.clickable {

@@ -55,7 +55,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  *
  *  JetLimeColumn(
  *   itemsList = ItemsList(items),
- *   keyExtractor = { item -> item.id },
+ *   key = { _, item -> item.id },
  *   style = JetLimeDefaults.columnStyle(),
  *  ) { index, item, position ->
  *     JetLimeEvent(
