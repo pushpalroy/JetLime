@@ -80,6 +80,11 @@ JetLimeRow(
 Pass the `key` to define factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed.
 This key will be used by a LazyColumn or LazyRow internally.
 
+If we want to add items dynamically from a data source, we should use `mutableStateListOf`, so that our list can be observed as a state:
+```kotlin
+val items = remember { mutableStateListOf<MyItem>() }
+```
+
 ### ⚡ Modify `JetLimeColumn` Style
 
 Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html).
