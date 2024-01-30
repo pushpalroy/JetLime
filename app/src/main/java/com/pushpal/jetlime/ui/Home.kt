@@ -49,6 +49,7 @@ import com.pushpal.jetlime.ui.timelines.BasicHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.BasicVerticalTimeLine
 import com.pushpal.jetlime.ui.timelines.CustomizedHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.CustomizedVerticalTimeLine
+import com.pushpal.jetlime.ui.timelines.ExtendedVerticalTimeLine
 import com.pushpal.jetlime.ui.timelines.VerticalDynamicTimeLine
 
 @Composable
@@ -77,7 +78,7 @@ fun HomeScreen(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(modifier: Modifier = Modifier) {
-  val tabs = remember { listOf("Basic", "Dynamic", "Custom") }
+  val tabs = remember { listOf("Basic", "Dynamic", "Custom", "Extended") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
@@ -115,6 +116,8 @@ fun HomeContent(modifier: Modifier = Modifier) {
             CustomizedVerticalTimeLine()
           }
         }
+
+        3 -> ExtendedVerticalTimeLine()
       }
     }
   }

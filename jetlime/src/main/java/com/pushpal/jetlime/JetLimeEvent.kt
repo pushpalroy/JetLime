@@ -377,7 +377,7 @@ private fun PlaceHorizontalEventContent(
  * @return The calculated radius animation factor as a [Float].
  */
 @Composable
-private fun calculateRadiusAnimFactor(style: JetLimeEventStyle): State<Float> {
+internal fun calculateRadiusAnimFactor(style: JetLimeEventStyle): State<Float> {
   val infiniteTransition = rememberInfiniteTransition(label = "RadiusInfiniteTransition")
   return if (style.pointAnimation != null) {
     infiniteTransition.animateFloat(

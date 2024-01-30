@@ -41,8 +41,7 @@ import com.pushpal.jetlime.ui.data.Item
 @Composable
 fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
   Card(
-    modifier = modifier
-      .fillMaxWidth(0.9f),
+    modifier = modifier,
   ) {
     Text(
       modifier = Modifier
