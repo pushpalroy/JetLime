@@ -18,9 +18,9 @@
 
 Made with ❤ using Compose
 
-|                 Basic                 |                 Dynamic                 |                 Custom                 |
-|:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|
-| <img src="art/basic.gif" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> |
+|                 Basic                 |                 Dynamic                 |                 Custom                 | Extended                                 |
+|:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|------------------------------------------|
+| <img src="art/basic.gif" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> | <img src="art/extended.png" width=200 /> |
 
 ## 🚀 Implementation
 
@@ -28,7 +28,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.0.1")
+  implementation("io.github.pushpalroy:jetlime:2.1.0")
 }
 ```
 
@@ -36,7 +36,7 @@ dependencies {
 
 ### 👇 Add items in a Vertical Timeline
 
-Use the [JetLimeColumn](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-column.html).
+Use the [JetLimeColumn](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
@@ -57,7 +57,7 @@ JetLimeColumn(
 ```
 ### 👉 Add items in a Horizontal Timeline
 
-Use the [JetLimeRow](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-row.html).
+Use the [JetLimeRow](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-row.html)
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
@@ -85,9 +85,36 @@ If we want to add items dynamically from a data source, we should use `mutableSt
 val items = remember { mutableStateListOf<MyItem>() }
 ```
 
+### ✨ Add Extended events to a Vertical Timeline
+
+Use the `JetLimeExtendedEvent` with a [JetLimeColumn](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
+Using this we can pass an additional content to draw on the left side of the timeline.
+
+```kotlin
+val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
+
+JetLimeColumn(
+  modifier = Modifier.padding(16.dp),
+  itemsList = ItemsList(items),
+  key = { _, item -> item.id },
+  style = JetLimeDefaults.columnStyle(contentDistance = 24.dp),
+) { index, item, position ->
+  JetLimeExtendedEvent(
+    style = JetLimeEventDefaults.eventStyle(
+      position = position
+    ),
+    additionalContent = {
+      // Additional content here
+    }
+  ) {
+    // Content here
+  }
+}
+```
+
 ### ⚡ Modify `JetLimeColumn` Style
 
-Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html).
+Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html)
 
 ```kotlin
 JetLimeColumn(
@@ -104,7 +131,7 @@ JetLimeColumn(
 ```
 ### ⚡ Modify `JetLimeRow` Style
 
-Use the [JetLimeDefaults.rowStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/row-style.html).
+Use the [JetLimeDefaults.rowStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/row-style.html)
 
 ```kotlin
 JetLimeRow(
@@ -122,7 +149,7 @@ JetLimeRow(
 
 ### ⚡ Modify `JetLimeEvent` Style
 
-Use the [JetLimeEventDefaults.eventStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html).
+Use the [JetLimeEventDefaults.eventStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html)
 
 ```kotlin
 JetLimeEvent(
@@ -148,13 +175,13 @@ JetLimeEvent(
 
 The timeline line and point circles can be set to either side.
 
-For a `JetLimeColumn` the alignment can be set to [LEFT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#825393495%2FClasslikes%2F-1761194290) or [RIGHT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#861885460%2FClasslikes%2F-1761194290).
+For a `JetLimeColumn` the alignment can be set to [LEFT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#825393495%2FClasslikes%2F-1761194290) or [RIGHT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#861885460%2FClasslikes%2F-1761194290)
 
 ```kotlin
 lineVerticalAlignment = LEFT or RIGHT // Default is LEFT
 ```
 
-For a `JetLimeRow` the alignment can be set to [TOP](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#769734623%2FClasslikes%2F-1761194290) or [BOTTOM](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#-1737811223%2FClasslikes%2F-1761194290).
+For a `JetLimeRow` the alignment can be set to [TOP](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#769734623%2FClasslikes%2F-1761194290) or [BOTTOM](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#-1737811223%2FClasslikes%2F-1761194290)
 
 ```kotlin
 lineHorizontalAlignment = TOP or BOTTOM // Default is TOP

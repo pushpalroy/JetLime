@@ -24,10 +24,15 @@
 */
 package com.pushpal.jetlime.ui.data
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+
 data class Item(
   val id: Int = 0,
   var name: String,
-  var date: String = "",
+  var info: String = "",
+  var images: ImmutableList<Int> = persistentListOf(),
+  var showActions: Boolean = false,
   val description: String? = null,
 )
 
@@ -89,4 +94,18 @@ fun getPlanets(): MutableList<Item> {
     Item(id = 13, name = "Olympia", description = "Home of the Eternals"),
     Item(id = 14, name = "Nidavellir", description = "Dwarven realm, creators of Mjolnir"),
   )
+}
+
+val placeNames = listOf(
+  "Central Park", "Harbor View", "Visited Oak Street?", "Maple Avenue", "River Road",
+  "Sunset Boulevard", "Pine Lane", "Elm Street", "Cedar Drive", "Willow Way",
+)
+val activityNames = listOf(
+  "Walking", "Running", "Cycling", "Hiking", "Swimming",
+  "Reading", "Drawing", "Cooking", "Gardening", "Fishing",
+)
+
+fun String.extractFirstTime(): String? {
+  val timePattern = "\\d{1,2}:\\d{2} [APM]{2}".toRegex()
+  return timePattern.find(this)?.value
 }
