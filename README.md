@@ -20,7 +20,7 @@ Made with ❤ using Compose
 
 |                 Basic                 |                 Dynamic                 |                 Custom                 | Extended                                 |
 |:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|------------------------------------------|
-| <img src="art/basic.gif" width=200 /> | <img src="art/dynamic.gif" width=200 /> | <img src="art/custom.png" width=200 /> | <img src="art/extended.png" width=200 /> |
+| <img src="art/basic.gif" width=180 /> | <img src="art/dynamic.gif" width=180 /> | <img src="art/custom.png" width=180 /> | <img src="art/extended.png" width=180 /> |
 
 ## 🚀 Implementation
 
