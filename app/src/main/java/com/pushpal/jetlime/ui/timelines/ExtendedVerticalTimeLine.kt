@@ -36,12 +36,11 @@ import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.EventPointAnimation
-import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
@@ -52,6 +51,13 @@ import com.pushpal.jetlime.ui.data.activityNames
 import com.pushpal.jetlime.ui.data.placeNames
 import com.pushpal.jetlime.ui.timelines.event.ExtendedEventAdditionalContent
 import com.pushpal.jetlime.ui.timelines.event.ExtendedEventContent
+import com.pushpal.jetlime.ui.timelines.event.activityDescription
+import com.pushpal.jetlime.ui.timelines.event.activityInfo
+import com.pushpal.jetlime.ui.timelines.event.decidePointAnimation
+import com.pushpal.jetlime.ui.timelines.event.decidePointType
+import com.pushpal.jetlime.ui.timelines.event.placeDescription
+import com.pushpal.jetlime.ui.timelines.event.placeImages
+import com.pushpal.jetlime.ui.timelines.event.placeInfo
 
 @OptIn(ExperimentalComposeApi::class)
 @ExperimentalAnimationApi
@@ -61,32 +67,13 @@ fun ExtendedVerticalTimeLine(modifier: Modifier = Modifier) {
   val context = LocalContext.current
 
   // Generate sample data to populate in the list
-  LaunchedEffect(Unit) {
-    for (i in 0 until 15) {
-      items.add(
-        Item(
-          id = i,
-          name = placeNames[i % placeNames.size],
-          info = placeInfo(i),
-          description = placeDescription(i),
-        ),
-      )
-      items.add(
-        Item(
-          id = i + 15,
-          name = activityNames[i % activityNames.size],
-          info = activityInfo(i),
-          description = activityDescription(i),
-        ),
-      )
-    }
-  }
+  GenerateDataEffect(items)
 
   Surface(
     modifier = modifier.fillMaxSize(),
   ) {
     JetLimeColumn(
-      modifier = Modifier.padding(16.dp),
+      modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
       itemsList = ItemsList(items),
       key = { _, item -> item.id },
       style = JetLimeDefaults.columnStyle(contentDistance = 24.dp),
@@ -97,6 +84,7 @@ fun ExtendedVerticalTimeLine(modifier: Modifier = Modifier) {
           pointAnimation = index.decidePointAnimation(),
           pointType = index.decidePointType(),
         ),
+        additionalContentMaxWidth = 88.dp,
         additionalContent = {
           ExtendedEventAdditionalContent(
             modifier = Modifier
@@ -122,35 +110,30 @@ fun ExtendedVerticalTimeLine(modifier: Modifier = Modifier) {
   }
 }
 
-private fun placeInfo(i: Int) = "Address ${i + 1}, City, Country"
-
-private fun placeDescription(i: Int) = "Visited at ${10 + i % 12}:${
-  if (i % 2 == 0) {
-    "00"
-  } else {
-    "30"
-  }
-} AM"
-
-private fun activityInfo(i: Int) = "${1 + i / 2} mi . ${15 + i * 2} min"
-
-private fun activityDescription(i: Int) = "${1 + i % 12}:${if (i % 2 == 0) "00" else "30"} PM - " +
-  "${1 + (i + 1) % 12}:${if ((i + 1) % 2 == 0) "00" else "30"} PM"
-
-fun Int.decidePointType(): EventPointType {
-  return when (this) {
-    1 -> EventPointType.filled(
-      0.8f,
-    )
-
-    4 -> EventPointType.filled(0.2f)
-    else -> EventPointType.Default
-  }
-}
-
 @Composable
-fun Int.decidePointAnimation(): EventPointAnimation? {
-  return if (this == 2) JetLimeEventDefaults.pointAnimation() else null
+private fun GenerateDataEffect(items: SnapshotStateList<Item>) {
+  LaunchedEffect(Unit) {
+    for (i in 0 until 15) {
+      items.add(
+        Item(
+          id = i,
+          name = placeNames[i % placeNames.size],
+          info = placeInfo(i),
+          description = placeDescription(i),
+          images = placeImages(i),
+          showActions = i == 2,
+        ),
+      )
+      items.add(
+        Item(
+          id = i + 15,
+          name = activityNames[i % activityNames.size],
+          info = activityInfo(i),
+          description = activityDescription(i),
+        ),
+      )
+    }
+  }
 }
 
 @ExperimentalAnimationApi

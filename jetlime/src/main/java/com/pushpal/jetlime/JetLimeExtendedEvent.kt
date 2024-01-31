@@ -42,7 +42,9 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.JetLimeEventDefaults.AdditionalContentMaxWidth
 
 /**
  * Should only be used with a [JetLimeColumn] for a vertical arrangement of events.
@@ -50,7 +52,7 @@ import androidx.compose.ui.unit.dp
  * Composable function for creating a [JetLimeColumn] event which has 2 slots for content.
  * The main content will be drawn on the right side of the timeline and the additional content
  * will be drawn on the left side of the timeline. The additional content is optional, and has
- * a maximum width constraint defined by the [AdditionalContentMaxWidth].
+ * a maximum width constraint defined by the [JetLimeEventDefaults.AdditionalContentMaxWidth].
  *
  * Example usage:
  *
@@ -74,6 +76,7 @@ import androidx.compose.ui.unit.dp
  * @param modifier The modifier to be applied to the event.
  * @param style The style of the [JetLimeColumn] event, defaulting to [JetLimeEventDefaults.eventStyle].
  * @param additionalContent The optional additional content of the event, placed on the left side of timeline.
+ * @param additionalContentMaxWidth The maximum width allowed for [additionalContent]
  * @param content The main content of the event, placed on the right side of timeline.
  */
 @ExperimentalComposeApi
@@ -82,6 +85,7 @@ fun JetLimeExtendedEvent(
   modifier: Modifier = Modifier,
   style: JetLimeEventStyle = JetLimeEventDefaults.eventStyle(EventPosition.END),
   additionalContent: @Composable (BoxScope.() -> Unit) = { },
+  additionalContentMaxWidth: Dp = AdditionalContentMaxWidth,
   content: @Composable () -> Unit,
 ) {
   val jetLimeStyle = LocalJetLimeStyle.current
@@ -93,7 +97,7 @@ fun JetLimeExtendedEvent(
     // Variable for keeping track of the X position where the timeline will be drawn
     var timelineXOffset by remember { mutableFloatStateOf(0f) }
     // Maximum width for additional content
-    val maxAdditionalContentWidth = with(LocalDensity.current) { AdditionalContentMaxWidth.toPx() }
+    val maxAdditionalContentWidth = with(LocalDensity.current) { additionalContentMaxWidth.toPx() }
 
     Layout(
       content = {
@@ -224,11 +228,3 @@ fun JetLimeExtendedEvent(
     }
   }
 }
-
-/**
- * Maximum width allowed to for the additional content composable, that will be drawn on the
- * left side of the timeline. As the content is thought to have more preference than additional
- * content, it is assumed that additional content will be used for drawing ui that will consume
- * relatively lesser space. Hence this constraint has been enforced in this design.
- */
-private val AdditionalContentMaxWidth = 72.dp

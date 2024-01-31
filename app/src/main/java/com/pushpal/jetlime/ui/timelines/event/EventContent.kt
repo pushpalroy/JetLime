@@ -24,24 +24,42 @@
 */
 package com.pushpal.jetlime.ui.timelines.event
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pushpal.jetlime.EventPointAnimation
+import com.pushpal.jetlime.EventPointType
+import com.pushpal.jetlime.JetLimeEventDefaults
+import com.pushpal.jetlime.sample.R.drawable
 import com.pushpal.jetlime.ui.data.Item
 import com.pushpal.jetlime.ui.data.extractFirstTime
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
@@ -151,6 +169,89 @@ fun ExtendedEventContent(item: Item, modifier: Modifier = Modifier) {
           text = it,
         )
       }
+      if (item.images.isNotEmpty()) {
+        Column {
+          Row {
+            item.images.forEach {
+              Image(
+                modifier = Modifier
+                  .size(100.dp)
+                  .padding(top = 12.dp, end = 8.dp)
+                  .clip(
+                    RoundedCornerShape(5),
+                  ),
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = it),
+                contentDescription = null,
+              )
+            }
+          }
+          Spacer(modifier = Modifier.height(10.dp))
+          Text(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.secondary,
+            fontSize = 12.sp,
+            text = "From Google Photos",
+          )
+          Spacer(modifier = Modifier.height(8.dp))
+        }
+      }
+
+      if (item.showActions) {
+        Row(modifier = Modifier.padding(top = 8.dp)) {
+          Button(onClick = {}) {
+            Icon(Icons.Filled.Check, "Add item")
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text = "Yes")
+          }
+          Spacer(modifier = Modifier.width(8.dp))
+          Button(onClick = {}) {
+            Icon(Icons.Filled.Edit, "Edit item")
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text = "Edit")
+          }
+        }
+      }
     }
+  }
+}
+
+@Composable
+fun Int.decidePointAnimation(): EventPointAnimation? {
+  return if (this == 2) JetLimeEventDefaults.pointAnimation() else null
+}
+
+fun placeImages(i: Int) = if (i == 1) {
+  persistentListOf(
+    drawable.image_1,
+    drawable.image_2,
+  )
+} else {
+  persistentListOf()
+}
+
+fun placeInfo(i: Int) = "Address ${i + 1}, City, Country"
+
+fun placeDescription(i: Int) = "Visited at ${10 + i % 12}:${
+  if (i % 2 == 0) {
+    "00"
+  } else {
+    "30"
+  }
+} AM"
+
+fun activityInfo(i: Int) = "${1 + i / 2} mi . ${15 + i * 2} min"
+
+fun activityDescription(i: Int) = "${1 + i % 12}:${if (i % 2 == 0) "00" else "30"} PM - " +
+  "${1 + (i + 1) % 12}:${if ((i + 1) % 2 == 0) "00" else "30"} PM"
+
+fun Int.decidePointType(): EventPointType {
+  return when (this) {
+    1 -> EventPointType.filled(
+      0.8f,
+    )
+
+    4 -> EventPointType.filled(0.2f)
+    else -> EventPointType.Default
   }
 }
