@@ -24,19 +24,24 @@
 */
 package com.pushpal.jetlime.ui.timelines.event
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pushpal.jetlime.ui.data.Item
+import com.pushpal.jetlime.ui.data.extractFirstTime
 
 @Composable
 fun VerticalEventContent(item: Item, modifier: Modifier = Modifier) {
@@ -91,6 +96,61 @@ fun HorizontalEventContent(item: Item, modifier: Modifier = Modifier) {
         fontSize = 14.sp,
         text = it,
       )
+    }
+  }
+}
+
+@Composable
+fun ExtendedEventAdditionalContent(item: Item, modifier: Modifier = Modifier) {
+  Card(modifier = modifier) {
+    Text(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 8.dp, horizontal = 16.dp),
+      fontSize = 12.sp,
+      text = item.description?.extractFirstTime() ?: "",
+      textAlign = TextAlign.Center,
+    )
+  }
+}
+
+@Composable
+fun ExtendedEventContent(item: Item, modifier: Modifier = Modifier) {
+  Surface(
+    modifier = modifier
+      .wrapContentHeight(),
+  ) {
+    Column(
+      modifier = Modifier.padding(bottom = 8.dp),
+    ) {
+      Text(
+        modifier = Modifier
+          .fillMaxWidth()
+          .wrapContentHeight()
+          .padding(bottom = 4.dp),
+        fontSize = 14.sp,
+        fontWeight = FontWeight.SemiBold,
+        text = item.name,
+      )
+      Text(
+        modifier = Modifier
+          .fillMaxWidth()
+          .wrapContentHeight()
+          .padding(bottom = 2.dp),
+        color = MaterialTheme.colorScheme.secondary,
+        fontSize = 12.sp,
+        text = item.info,
+      )
+      item.description?.let {
+        Text(
+          modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+          color = MaterialTheme.colorScheme.secondary,
+          fontSize = 12.sp,
+          text = it,
+        )
+      }
     }
   }
 }

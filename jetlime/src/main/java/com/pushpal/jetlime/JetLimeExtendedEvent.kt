@@ -44,24 +44,60 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 
+/**
+ * Should only be used with a [JetLimeColumn] for a vertical arrangement of events.
+ *
+ * Composable function for creating a [JetLimeColumn] event which has 2 slots for content.
+ * The main content will be drawn on the right side of the timeline and the additional content
+ * will be drawn on the left side of the timeline. The additional content is optional, and has
+ * a maximum width constraint defined by the [AdditionalContentMaxWidth].
+ *
+ * Example usage:
+ *
+ * ```
+ *  val items = remember { getItemsList() }
+ *
+ *  JetLimeColumn(
+ *   itemsList = ItemsList(items),
+ *   key = { _, item -> item.id },
+ *   style = JetLimeDefaults.columnStyle(),
+ *  ) { index, item, position ->
+ *     JetLimeExtendedEvent(
+ *      style = JetLimeEventDefaults.eventStyle(position = position),
+ *      additionalContent = { ComposableAdditionalContent(item.icon) }
+ *     ) {
+ *        ComposableMainContent(item = item.content)
+ *       }
+ *    }
+ * ```
+ *
+ * @param modifier The modifier to be applied to the event.
+ * @param style The style of the [JetLimeColumn] event, defaulting to [JetLimeEventDefaults.eventStyle].
+ * @param additionalContent The optional additional content of the event, placed on the left side of timeline.
+ * @param content The main content of the event, placed on the right side of timeline.
+ */
 @ExperimentalComposeApi
 @Composable
 fun JetLimeExtendedEvent(
   modifier: Modifier = Modifier,
   style: JetLimeEventStyle = JetLimeEventDefaults.eventStyle(EventPosition.END),
-  additionalContent: @Composable (BoxScope.() -> Unit) = {},
+  additionalContent: @Composable (BoxScope.() -> Unit) = { },
   content: @Composable () -> Unit,
 ) {
   val jetLimeStyle = LocalJetLimeStyle.current
   val strokeWidth = with(LocalDensity.current) { style.pointStrokeWidth.toPx() }
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
 
+  // BoxWithConstraints provides its own constraints which we can use for layout
   BoxWithConstraints(modifier = modifier) {
+    // Variable for keeping track of the X position where the timeline will be drawn
     var timelineXOffset by remember { mutableFloatStateOf(0f) }
+    // Maximum width for additional content
     val maxAdditionalContentWidth = with(LocalDensity.current) { AdditionalContentMaxWidth.toPx() }
 
     Layout(
       content = {
+        // Box for main content with optional padding at the bottom
         Box(
           modifier = Modifier.padding(
             bottom = if (style.position.isNotEnd()) {
@@ -73,51 +109,62 @@ fun JetLimeExtendedEvent(
         ) {
           content()
         }
+        // Additional content passed as a composable lambda
         additionalContent()
       },
     ) { measurables, constraints ->
+      // Ensuring that there is at least one child in the layout
       require(measurables.isNotEmpty()) {
-        "JetLimeEvent should have at-least one child for content"
+        "JetLimeExtendedEvent should have at-least one child for content"
       }
+      // Thickness of the line drawn for the timeline
+      val timelineThickness = jetLimeStyle.lineThickness.toPx()
+      // Distance between the content/additional content and the timeline
+      val contentDistance = jetLimeStyle.contentDistance.toPx()
 
+      // Extracting the first and potentially second child for layout
       val contentMeasurable = measurables.first()
-      val additionalMeasurable = measurables.getOrNull(1)
+      val additionalContentMeasurable = measurables.getOrNull(1)
 
-      val additionalPlaceable = additionalMeasurable?.let { measurable ->
+      // Measuring the additional content if it exists
+      val additionalContentPlaceable = additionalContentMeasurable?.let { measurable ->
+        // Calculating intrinsic width and adjusting it according to the maximum allowed width
         val intrinsicWidth = measurable.minIntrinsicWidth(constraints.maxHeight)
         val adjustedMinWidth = intrinsicWidth.coerceAtMost(maxAdditionalContentWidth.toInt())
         val newConstraints = constraints.copy(
           minWidth = adjustedMinWidth,
           maxWidth = maxAdditionalContentWidth.toInt(),
         )
-        measurable.measure(newConstraints)
-      }
-      val contentHeight = contentMeasurable.minIntrinsicHeight(constraints.maxWidth)
-      timelineXOffset = (additionalPlaceable?.width?.toFloat() ?: 0f) +
-        jetLimeStyle.contentDistance.toPx()
-
-      val contentWidth = constraints.maxWidth -
-        (timelineXOffset + jetLimeStyle.contentDistance.toPx())
-
-      val contentPlaceable = contentMeasurable.let { measurable ->
-        val intrinsicWidth = measurable.minIntrinsicWidth(constraints.maxHeight)
-        val newConstraints = constraints.copy(
-          minWidth = intrinsicWidth,
-          maxWidth = contentWidth.toInt(),
-          maxHeight = contentHeight,
-        )
+        // Measuring the additional content with the new constraints
         measurable.measure(newConstraints)
       }
 
-      val contentX = timelineXOffset + jetLimeStyle.lineThickness.toPx() +
-        jetLimeStyle.contentDistance.toPx()
+      // Calculating the X offset for the timeline based on the width of the additional content
+      timelineXOffset = (additionalContentPlaceable?.width?.toFloat() ?: 0f) + contentDistance
 
-      layout(constraints.maxWidth, contentHeight) {
-        additionalPlaceable?.placeRelative(x = 0, y = 0)
-        contentPlaceable.placeRelative(x = contentX.toInt(), y = 0)
+      // Calculating the X offset and width available for the main content
+      val contentXOffset = timelineXOffset + timelineThickness + contentDistance
+      val contentWidth = constraints.maxWidth - contentXOffset
+
+      // Measuring the main content with the calculated width
+      val contentPlaceable = contentMeasurable.measure(
+        constraints.copy(minWidth = 0, maxWidth = contentWidth.toInt()),
+      )
+
+      // Determining the height of the layout based on the measured content
+      val contentHeight = contentPlaceable.height
+      val layoutHeight = additionalContentPlaceable?.let { additional ->
+        maxOf(contentHeight, additional.height)
+      } ?: contentHeight
+
+      // Placing the measured composables in the layout
+      layout(constraints.maxWidth, layoutHeight) {
+        additionalContentPlaceable?.placeRelative(x = 0, y = 0)
+        contentPlaceable.placeRelative(x = contentXOffset.toInt(), y = 0)
       }
     }
 
+    // Drawing on canvas for additional graphical elements
     Canvas(modifier = Modifier.matchParentSize()) {
       val yOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
       val radius = style.pointRadius.toPx() * radiusAnimFactor
@@ -178,4 +225,10 @@ fun JetLimeExtendedEvent(
   }
 }
 
-private val AdditionalContentMaxWidth = 64.dp
+/**
+ * Maximum width allowed to for the additional content composable, that will be drawn on the
+ * left side of the timeline. As the content is thought to have more preference than additional
+ * content, it is assumed that additional content will be used for drawing ui that will consume
+ * relatively lesser space. Hence this constraint has been enforced in this design.
+ */
+private val AdditionalContentMaxWidth = 72.dp

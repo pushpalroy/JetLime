@@ -24,10 +24,16 @@
 */
 package com.pushpal.jetlime.ui.data
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 data class Item(
   val id: Int = 0,
   var name: String,
-  var date: String = "",
+  var info: String = "",
+  var images: ImmutableList<String> = persistentListOf(),
   val description: String? = null,
 )
 
@@ -89,4 +95,29 @@ fun getPlanets(): MutableList<Item> {
     Item(id = 13, name = "Olympia", description = "Home of the Eternals"),
     Item(id = 14, name = "Nidavellir", description = "Dwarven realm, creators of Mjolnir"),
   )
+}
+
+val placeNames = listOf(
+  "Central Park", "Harbor View", "Oak Street", "Maple Avenue", "River Road",
+  "Sunset Boulevard", "Pine Lane", "Elm Street", "Cedar Drive", "Willow Way",
+)
+val activityNames = listOf(
+  "Walking", "Running", "Cycling", "Hiking", "Swimming",
+  "Reading", "Drawing", "Cooking", "Gardening", "Fishing",
+)
+
+fun String.extractFirstTime(): String? {
+  val timePattern = "\\d{1,2}:\\d{2} [APM]{2}".toRegex()
+  return timePattern.find(this)?.value?.convertTo24HourFormat()
+}
+
+fun String.convertTo24HourFormat(): String? {
+  return try {
+    val originalFormat = SimpleDateFormat("h:mm a", Locale.US)
+    val targetFormat = SimpleDateFormat("HH:mm", Locale.US)
+    val date = originalFormat.parse(this)
+    date?.let { targetFormat.format(it) }
+  } catch (e: Exception) {
+    null // Returns null if parsing fails
+  }
 }
