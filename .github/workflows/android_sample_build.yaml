@@ -5,7 +5,7 @@ on:
 
 jobs:
   debug-build:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       # Code checkout
       - name: Checkout code
@@ -49,7 +49,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: |
-            /Users/runner/work/jetlime/jetlime/build/reports/androidTests/connected/debug/
+            jetlime/build/reports/tests/testDebugUnitTest/
+            jetlime/build/reports/androidTests/connected/
 
       # Generate debug build
       - name: Build Android app
