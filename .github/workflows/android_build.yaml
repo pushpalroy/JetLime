@@ -14,7 +14,7 @@ jobs:
 
       # Setup Android and Gradle
       - name: Job set up
-        uses: /composite/job-setup
+        uses: ./composite/job-setup
 
       # Generate debug build
       - name: Build Android app
