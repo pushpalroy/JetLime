@@ -14,7 +14,7 @@ jobs:
 
       # Setup Android and Gradle
       - name: Job set up
-        uses: ./.github/workflows/composite/job-setup
+        uses: /composite/job-setup
 
       # Run UI Tests in library
       - name: Run Android Instrumented Tests
