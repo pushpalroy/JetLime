@@ -3,6 +3,10 @@ description: Sets up Android and Gradle
 runs:
   using: "composite"
   steps:
+    # Code checkout
+    - name: Checkout code
+      id: checkout_code
+      uses: actions/checkout@v4
 
     # Setup java
     - name: Setup JDK 17

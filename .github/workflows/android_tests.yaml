@@ -7,14 +7,9 @@ jobs:
   run-library-tests:
     runs-on: macos-latest
     steps:
-      # Code checkout
-      - name: Checkout code
-        id: checkout_code
-        uses: actions/checkout@v4
-
       # Setup Android and Gradle
       - name: Job set up
-        uses: ./composite/job-setup
+        uses: ./.github/workflows/composite
 
       # Run UI Tests in library
       - name: Run Android Instrumented Tests
