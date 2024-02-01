@@ -1,0 +1,34 @@
+name: JetLime Tests CI
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-library-tests:
+    runs-on: macos-latest
+    steps:
+      # Code checkout
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v4
+
+      # Setup Android and Gradle
+      - name: Job set up
+        uses: ./.github/workflows/composite
+
+      # Run UI Tests in library
+      - name: Run Android Instrumented Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        id: run_library_ui_tests
+        with:
+          api-level: 29
+          script: ./gradlew :jetlime:connectedCheck
+
+      # Upload reports to artifact
+      - name: Upload Android Tests Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            jetlime/build/reports/tests/testDebugUnitTest/
+            jetlime/build/reports/androidTests/connected/

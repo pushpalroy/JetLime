@@ -41,6 +41,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
@@ -209,6 +210,7 @@ private fun PlaceVerticalEventContent(
 ) {
   Box(
     modifier = Modifier
+      .testTag("VerticalEventContentBox")
       .defaultMinSize(minHeight = style.pointRadius * 2)
       .padding(
         start = if (alignment == VerticalAlignment.LEFT) {
@@ -346,6 +348,7 @@ private fun PlaceHorizontalEventContent(
 ) {
   Box(
     modifier = Modifier
+      .testTag("HorizontalEventContentBox")
       .defaultMinSize(minWidth = style.pointRadius * 2)
       .padding(
         top = if (alignment == HorizontalAlignment.TOP) {

@@ -11,7 +11,8 @@
 ![Watchers](https://img.shields.io/github/watchers/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/pushpalroy/jetlime?color=orange&style=for-the-badge)
 [![License](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=for-the-badge&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
-![CI-ANDROID-BUILD](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/android_sample_build.yaml?style=for-the-badge&label=Build%20CI)
+[![Sample Build CI](https://github.com/pushpalroy/jetlime/actions/workflows/android_build.yaml/badge.svg?style=for-the-badge&label=JetLime%20Tests)](https://github.com/pushpalroy/jetlime/actions/workflows/android_build.yaml)
+[![JetLime Tests CI](https://github.com/pushpalroy/jetlime/actions/workflows/android_tests.yaml/badge.svg?style=for-the-badge&label=Sample%20Build)](https://github.com/pushpalroy/jetlime/actions/workflows/android_tests.yaml)
 
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Followers&style=social)](https://github.com/pushpalroy)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pushpalroy?label=Follow&style=social)](https://twitter.com/pushpalroy)
