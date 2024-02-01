@@ -21,7 +21,6 @@ runs:
     - uses: actions/cache@v3
       name: Cache Gradle for quicker builds
       id: caching_gradle
-      shell: bash
       with:
         path: |
           ~/.gradle/caches
