@@ -5,7 +5,7 @@ on:
 
 jobs:
   sample-debug-build:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       # Code checkout
       - name: Checkout code
