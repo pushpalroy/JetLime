@@ -1,0 +1,35 @@
+name: Android and Gradle Job Setup
+description: Sets up Android and Gradle
+runs:
+  using: "composite"
+  steps:
+
+    # Code checkout
+    - name: Checkout code
+      id: checkout_code
+      uses: actions/checkout@v4
+
+    # Setup java
+    - name: Setup JDK 17
+      id: setup_jdk
+      uses: actions/setup-java@v4
+      with:
+        distribution: "zulu"
+        java-version: 17
+
+    # Grant execute permission for gradlew
+    - name: Grant execute permission for gradlew
+      id: grant_gradle_permission
+      run: chmod +x gradlew
+
+    # Caching gradle packages
+    - uses: actions/cache@v3
+      name: Cache Gradle for quicker builds
+      id: caching_gradle
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-

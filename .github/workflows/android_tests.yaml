@@ -1,0 +1,37 @@
+name: JetLime Tests CI
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-library-tests:
+    runs-on: macos-latest
+    steps:
+      # Setup Android and Gradle
+      - name: Job set up
+        uses: ./.github/workflows/composite/job-setup
+
+      # Run UI Tests in library
+      - name: Run Android Instrumented Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        id: run_library_ui_tests
+        with:
+          api-level: 29
+          script: ./gradlew :jetlime:connectedCheck
+
+      # Upload reports to artifact
+      - name: Upload Android Tests Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            jetlime/build/reports/tests/testDebugUnitTest/
+            jetlime/build/reports/androidTests/connected/
+
+      # Publish test reports
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          check_name: JetLime Tests CI
+          files: test-results/**/*.xml

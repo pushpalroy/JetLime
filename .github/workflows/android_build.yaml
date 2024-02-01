@@ -1,0 +1,18 @@
+name: Sample Build CI
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sample-debug-build:
+    runs-on: macos-latest
+    steps:
+      # Setup Android and Gradle
+      - name: Job set up
+        uses: ./.github/workflows/composite/job-setup
+
+      # Generate debug build
+      - name: Build Android app
+        id: generate_debug_build
+        if: always()
+        run: ./gradlew assembleDebug --stacktrace --info
