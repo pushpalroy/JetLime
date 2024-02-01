@@ -32,11 +32,3 @@ jobs:
           path: |
             jetlime/build/reports/tests/testDebugUnitTest/
             jetlime/build/reports/androidTests/connected/
-
-      # Publish test reports
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          check_name: JetLime Tests CI
-          files: test-results/**/*.xml
