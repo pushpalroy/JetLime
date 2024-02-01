@@ -14,12 +14,14 @@ runs:
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
       id: grant_gradle_permission
+      shell: bash
       run: chmod +x gradlew
 
     # Caching gradle packages
     - uses: actions/cache@v3
       name: Cache Gradle for quicker builds
       id: caching_gradle
+      shell: bash
       with:
         path: |
           ~/.gradle/caches
