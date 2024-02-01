@@ -13,6 +13,7 @@ android {
 
   defaultConfig {
     minSdk = 21
+    testOptions.targetSdk = 34
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
@@ -52,7 +53,11 @@ dependencies {
   debugApi(libs.androidx.compose.ui.tooling)
 
   testImplementation(libs.junit)
+  debugImplementation(libs.androidx.ui.test.manifest)
+  androidTestImplementation(libs.androidx.compose.ui.test)
+  androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.truth)
 }
 
 tasks.dokkaHtml.configure {

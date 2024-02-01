@@ -37,6 +37,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Run Android Instrumented Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        id: run_library_ui_tests
+        with:
+          api-level: 29
+          script: ./gradlew :jetlime:connectedCheck
+
+      - name: Upload Android Tests Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            /Users/runner/work/jetlime/jetlime/build/reports/androidTests/connected/debug/
+
       # Generate debug build
       - name: Build Android app
         id: generate_debug_build
