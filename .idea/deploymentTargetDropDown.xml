@@ -2,22 +2,13 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="JetLimeColumnTest">
-        <State />
-      </entry>
       <entry key="JetLimeRowTest">
         <State />
       </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="jetLimeColumn_appliesCustomEvenStyle()">
-        <State />
-      </entry>
-      <entry key="jetLimeColumn_eventHandlesClick()">
-        <State />
-      </entry>
-      <entry key="jetLimeColumn_handlesDynamicContent()">
+      <entry key="jetLimeColumn_displaysItems()">
         <State />
       </entry>
     </value>

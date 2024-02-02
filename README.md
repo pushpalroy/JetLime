@@ -38,7 +38,7 @@ dependencies {
 
 ### 👇 Add items in a Vertical Timeline
 
-Use the [JetLimeColumn](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
+Use the [JetLimeColumn](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
@@ -59,7 +59,7 @@ JetLimeColumn(
 ```
 ### 👉 Add items in a Horizontal Timeline
 
-Use the [JetLimeRow](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-row.html)
+Use the [JetLimeRow](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-row.html)
 
 ```kotlin
 val items = remember { mutableListOf(Item1, Item2, Item3) } // Any type of items
@@ -89,7 +89,7 @@ val items = remember { mutableStateListOf<MyItem>() }
 
 ### ✨ Add Extended events to a Vertical Timeline
 
-Use the `JetLimeExtendedEvent` with a [JetLimeColumn](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
+Use the [JetLimeExtendedEvent](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-extended-event.html) with a [JetLimeColumn](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
 Using this we can pass an additional content to draw on the left side of the timeline.
 
 ```kotlin
@@ -116,7 +116,7 @@ JetLimeColumn(
 
 ### ⚡ Modify `JetLimeColumn` Style
 
-Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html)
+Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html)
 
 ```kotlin
 JetLimeColumn(
@@ -133,7 +133,7 @@ JetLimeColumn(
 ```
 ### ⚡ Modify `JetLimeRow` Style
 
-Use the [JetLimeDefaults.rowStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/row-style.html)
+Use the [JetLimeDefaults.rowStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/row-style.html)
 
 ```kotlin
 JetLimeRow(
@@ -151,7 +151,7 @@ JetLimeRow(
 
 ### ⚡ Modify `JetLimeEvent` Style
 
-Use the [JetLimeEventDefaults.eventStyle()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html)
+Use the [JetLimeEventDefaults.eventStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html)
 
 ```kotlin
 JetLimeEvent(
@@ -177,13 +177,13 @@ JetLimeEvent(
 
 The timeline line and point circles can be set to either side.
 
-For a `JetLimeColumn` the alignment can be set to [LEFT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#825393495%2FClasslikes%2F-1761194290) or [RIGHT](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#861885460%2FClasslikes%2F-1761194290)
+For a `JetLimeColumn` the alignment can be set to [LEFT](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#825393495%2FClasslikes%2F-1761194290) or [RIGHT](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-vertical-alignment/index.html#861885460%2FClasslikes%2F-1761194290)
 
 ```kotlin
 lineVerticalAlignment = LEFT or RIGHT // Default is LEFT
 ```
 
-For a `JetLimeRow` the alignment can be set to [TOP](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#769734623%2FClasslikes%2F-1761194290) or [BOTTOM](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#-1737811223%2FClasslikes%2F-1761194290)
+For a `JetLimeRow` the alignment can be set to [TOP](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#769734623%2FClasslikes%2F-1761194290) or [BOTTOM](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-horizontal-alignment/index.html#-1737811223%2FClasslikes%2F-1761194290)
 
 ```kotlin
 lineHorizontalAlignment = TOP or BOTTOM // Default is TOP
@@ -191,8 +191,8 @@ lineHorizontalAlignment = TOP or BOTTOM // Default is TOP
 
 #### 💨 Line Style
 
-The line can be drawn by passing a `Brush` object to [lineBrush](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-brush.html) in a `columnStyle` or `rowStyle`.
-Default values can also be used from [JetLimeDefaults](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/index.html) and colors can be modified for quick setup:
+The line can be drawn by passing a `Brush` object to [lineBrush](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-brush.html) in a `columnStyle` or `rowStyle`.
+Default values can also be used from [JetLimeDefaults](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/index.html) and colors can be modified for quick setup:
 
 ```kotlin
 lineBrush = JetLimeDefaults.lineGradientBrush()
@@ -204,15 +204,15 @@ lineBrush = JetLimeDefaults.solidBrush()
 
 #### 💨 Content Distance
 
-The [contentDistance](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-style/content-distance.html) in `Dp` specifies how far the timeline line should be from the timeline content.
+The [contentDistance](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/content-distance.html) in `Dp` specifies how far the timeline line should be from the timeline content.
 
 #### 💨 Item Spacing
 
-The [itemSpacing](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-style/item-spacing.html) in `Dp` specifies the gap between the event items.
+The [itemSpacing](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/item-spacing.html) in `Dp` specifies the gap between the event items.
 
 #### 💨 Line Thickness
 
-The [lineThickness](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-thickness.html) in `Dp` the thickness of the timeline line.
+The [lineThickness](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-thickness.html) in `Dp` the thickness of the timeline line.
 
 ---
 
@@ -220,9 +220,9 @@ The [lineThickness](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jet
 
 #### 💨 Position
 
-We always need to pass the position to the [eventStyle](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html) that will be received in the JetLimeColumn lambda.
+We always need to pass the position to the [eventStyle](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html) that will be received in the JetLimeColumn lambda.
 This is needed so that JetLimeColumn can calculate the position of an event in the list at any time.
-Based on the calculation it will assign either of the three [EventPosition](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-event-position/index.html): `START`, `MIDDLE` or `END`.
+Based on the calculation it will assign either of the three [EventPosition](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-position/index.html): `START`, `MIDDLE` or `END`.
 This classification is needed to render correct lines for start and end items.
 
 ```kotlin
@@ -242,7 +242,7 @@ JetLimeColumn(
 
 #### 💨 Point Type
 
-The `pointType` of type [EventPointType](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-event-point-type/index.html) specifies the style of the point circle.
+The `pointType` of type [EventPointType](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-type/index.html) specifies the style of the point circle.
 It can be any of the three types: `EMPTY`, `FILLED` or `CUSTOM`.
 
 For using `EMPTY`
@@ -251,12 +251,12 @@ For using `EMPTY`
 pointType = EventPointType.EMPTY
 ```
 
-For using `FILLED`, the [filled()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html#-1342152058%2FFunctions%2F-1761194290) function has to be used which takes an optional `fillPercent`
+For using `FILLED`, the [filled()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html#-1342152058%2FFunctions%2F-1761194290) function has to be used which takes an optional `fillPercent`
 
 ```kotlin
 pointType = EventPointType.filled(0.8f)
 ```
-For using `CUSTOM`, the [custom()](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html#-2135258840%2FFunctions%2F-1761194290) function has to be used which takes an `icon` of `Painter`.
+For using `CUSTOM`, the [custom()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html#-2135258840%2FFunctions%2F-1761194290) function has to be used which takes an `icon` of `Painter`.
 This can be used to use a custom icon instead of the default types defined.
 
 ```kotlin
@@ -265,7 +265,7 @@ pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_ch
 
 #### 💨 Point Animation
 
-The `pointAnimation` of type [EventPointAnimation](https://pushpalroy.github.io/jetlime/jetlime/com.pushpal.jetlime/-event-point-animation/index.html) specifies the animation of the point circle.
+The `pointAnimation` of type [EventPointAnimation](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-animation/index.html) specifies the animation of the point circle.
 
 To enable the default animation
 
@@ -296,7 +296,7 @@ The `pointStrokeWidth` in `Dp` is the width of the circle border.
 The `pointStrokeColor` is the color of the circle border.
 
 ## 📃 Documentation
-The full API documentation is available here: [JetLime Documentation](https://pushpalroy.github.io/jetlime/index.html)
+The full API documentation is available here: [JetLime Documentation](https://pushpalroy.github.io/JetLime/index.html)
 
 ### ☀️ Inspiration
 
