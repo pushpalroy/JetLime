@@ -66,21 +66,30 @@ android {
 }
 
 dependencies {
-
+  // Local library
   implementation(project(":jetlime"))
+
+  // Maven library - For testing
   // implementation(libs.jetlime)
 
-  implementation(libs.androidx.core.ktx)
+  // Compose
+  // BOM
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.material3)
   implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.compose.ui.tooling.preview)
+
+  // Non Compose
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.lifecycle.compose)
-  implementation(libs.androidx.lifecycle.runtime.ktx)
 
+  // Others
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.kotlinx.collections.immutable)
 
+  // Test
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.test.runner)
