@@ -1,5 +1,4 @@
 #!/bin/bash
 
-echo "Running spotless"
-./gradlew clean spotlessApply
-git add .
+echo "Running dokkaHtml"
+./gradlew dokkaHtml
