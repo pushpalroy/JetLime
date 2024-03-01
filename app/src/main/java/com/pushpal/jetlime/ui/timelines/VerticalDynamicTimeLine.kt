@@ -125,9 +125,13 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier) {
         key = { _, item -> item.id },
       ) { index, item, position ->
         JetLimeEvent(
-          modifier = Modifier.clickable {
-            Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
-          },
+          modifier = Modifier.then(
+            remember {
+              Modifier.clickable {
+                Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
+              }
+            },
+          ),
           style = JetLimeEventDefaults.eventStyle(
             position = position,
           ),

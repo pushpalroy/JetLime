@@ -43,18 +43,27 @@ android {
 }
 
 dependencies {
+  // Compose
+  // BOM
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.material3)
-  implementation(libs.androidx.compose.ui.tooling)
-  implementation(libs.androidx.activity.compose)
-  implementation(libs.kotlinx.collections.immutable)
 
+  // Compose
+  // Not in BOM
+  implementation(libs.androidx.activity.compose)
+
+  // Non Compose
   implementation(libs.dokka.android)
+  implementation(libs.kotlinx.collections.immutable)
   debugApi(libs.androidx.compose.ui.tooling)
 
-  testImplementation(libs.junit)
-  debugImplementation(libs.androidx.ui.test.manifest)
+  // Test
+  // Compose BOM
   androidTestImplementation(libs.androidx.compose.ui.test)
+  debugImplementation(libs.androidx.ui.test.manifest)
+  // Others
+  testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.truth)
@@ -76,7 +85,7 @@ mavenPublishing {
   publishToMavenCentral(SonatypeHost.S01)
   signAllPublications()
   val artifactId = "jetlime"
-  coordinates("io.github.pushpalroy", artifactId, "2.1.0")
+  coordinates("io.github.pushpalroy", artifactId, "2.1.1")
 
   pom {
     name.set(artifactId)
