@@ -2,7 +2,7 @@
 
 > A simple yet highly customizable library for showing a TimeLine interface in Jetpack Compose.
 
-[![Compose](https://img.shields.io/badge/Jetpack%20Compose-1.6.0-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/versions/all-channel)
+[![Compose Compiler](https://img.shields.io/badge/Compose%20Compiler-1.5.10-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -30,7 +30,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.1.0")
+  implementation("io.github.pushpalroy:jetlime:2.1.1")
 }
 ```
 
