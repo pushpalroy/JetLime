@@ -38,6 +38,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
@@ -126,6 +128,7 @@ internal fun VerticalEvent(
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
+        // Line
         if (style.position.isNotEnd()) {
           val yShift = yOffset * (jetLimeStyle.pointStartFactor - 1)
           drawLine(
@@ -142,14 +145,14 @@ internal fun VerticalEvent(
           )
         }
 
-        if (style.pointType.isEmptyOrFilled()) {
-          drawCircle(
-            color = style.pointColor,
-            radius = radius,
-            center = Offset(x = xOffset, y = yOffset),
-          )
-        }
+        // Point background
+        drawCircle(
+          color = style.pointColor,
+          radius = radius,
+          center = Offset(x = xOffset, y = yOffset),
+        )
 
+        // Point center fill
         if (style.pointType.isFilled()) {
           drawCircle(
             color = style.pointFillColor,
@@ -157,20 +160,23 @@ internal fun VerticalEvent(
             center = Offset(x = xOffset, y = yOffset),
           )
         }
-
+        // Point custom icon
         if (style.pointType.isCustom()) {
           style.pointType.icon?.let { painter ->
+            val pointSizeInPixels = style.pointRadius.toPx() * 2.4f * radiusAnimFactor
+            val iconSize = Size(pointSizeInPixels, pointSizeInPixels)
             this.withTransform(
               transformBlock = {
                 translate(
-                  left = xOffset - painter.intrinsicSize.width / 2f,
-                  top = yOffset - painter.intrinsicSize.height / 2f,
+                  left = xOffset - iconSize.width / 2f,
+                  top = yOffset - iconSize.height / 2f,
                 )
               },
               drawBlock = {
                 this.drawIntoCanvas {
                   with(painter) {
-                    draw(intrinsicSize)
+                    val tint = style.pointType.tint?.let { ColorFilter.tint(it) }
+                    draw(size = iconSize, colorFilter = tint)
                   }
                 }
               },
@@ -178,7 +184,7 @@ internal fun VerticalEvent(
           }
         }
 
-        // Draw icon stroke
+        // Point border
         if (strokeWidth > 0f) {
           drawCircle(
             color = style.pointStrokeColor,
@@ -264,6 +270,7 @@ internal fun HorizontalEvent(
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
+        // Line
         if (style.position.isNotEnd()) {
           val xShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
           drawLine(
@@ -280,14 +287,14 @@ internal fun HorizontalEvent(
           )
         }
 
-        if (style.pointType.isEmptyOrFilled()) {
-          drawCircle(
-            color = style.pointColor,
-            radius = radius,
-            center = Offset(x = xOffset, y = yOffset),
-          )
-        }
+        // Point background
+        drawCircle(
+          color = style.pointColor,
+          radius = radius,
+          center = Offset(x = xOffset, y = yOffset),
+        )
 
+        // Point center fill
         if (style.pointType.isFilled()) {
           drawCircle(
             color = style.pointFillColor,
@@ -296,19 +303,23 @@ internal fun HorizontalEvent(
           )
         }
 
+        // Point custom icon
         if (style.pointType.isCustom()) {
           style.pointType.icon?.let { painter ->
+            val pointSizeInPixels = style.pointRadius.toPx() * 2.4f * radiusAnimFactor
+            val iconSize = Size(pointSizeInPixels, pointSizeInPixels)
             this.withTransform(
               transformBlock = {
                 translate(
-                  left = xOffset - painter.intrinsicSize.width / 2f,
-                  top = yOffset - painter.intrinsicSize.height / 2f,
+                  left = xOffset - iconSize.width / 2f,
+                  top = yOffset - iconSize.height / 2f,
                 )
               },
               drawBlock = {
                 this.drawIntoCanvas {
                   with(painter) {
-                    draw(intrinsicSize)
+                    val tint = style.pointType.tint?.let { ColorFilter.tint(it) }
+                    draw(size = iconSize, colorFilter = tint)
                   }
                 }
               },
@@ -316,7 +327,7 @@ internal fun HorizontalEvent(
           }
         }
 
-        // Draw icon stroke
+        // Point border
         if (strokeWidth > 0f) {
           drawCircle(
             color = style.pointStrokeColor,

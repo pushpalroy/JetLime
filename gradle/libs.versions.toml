@@ -1,10 +1,10 @@
 [versions]
-composeBom = "2024.02.01"
+composeBom = "2024.03.00"
 compose-compiler = "1.5.10"
 activityCompose = "1.8.2"
-agp = "8.2.2"
+agp = "8.3.1"
 coreKtx = "1.12.0"
-jetlime = "2.1.1"
+jetlime = "2.2.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlin = "1.9.22"

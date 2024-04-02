@@ -30,7 +30,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.1.1")
+  implementation("io.github.pushpalroy:jetlime:2.2.0")
 }
 ```
 
@@ -257,10 +257,10 @@ For using `FILLED`, the [filled()](https://pushpalroy.github.io/JetLime/jetlime/
 pointType = EventPointType.filled(0.8f)
 ```
 For using `CUSTOM`, the [custom()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html#-2135258840%2FFunctions%2F-1761194290) function has to be used which takes an `icon` of `Painter`.
-This can be used to use a custom icon instead of the default types defined.
+This can be used to use a custom icon instead of the default types defined. An optional `tint` can also be applied on the icon.
 
 ```kotlin
-pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check))
+pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check), tint = Color.Green)
 ```
 
 #### 💨 Point Animation

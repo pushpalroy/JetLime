@@ -50,17 +50,17 @@ import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
 @ExperimentalAnimationApi
 @Composable
 fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
-  val items = remember { getCharacters().subList(0, 4) }
+  val items = remember { getCharacters().subList(0, 5) }
 
   Surface(
     modifier = modifier.fillMaxSize(),
   ) {
     JetLimeColumn(
-      modifier = Modifier.padding(16.dp),
+      modifier = Modifier.padding(horizontal = 16.dp),
       itemsList = ItemsList(items),
       key = { _, item -> item.id },
       style = JetLimeDefaults.columnStyle(
-        contentDistance = 32.dp,
+        contentDistance = 24.dp,
         itemSpacing = 16.dp,
         lineThickness = 2.dp,
         lineBrush = JetLimeDefaults.lineSolidBrush(color = Color(0xFF2196F3)),
@@ -70,20 +70,33 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
           position = position,
-          pointColor = Color(0xFF2889D6),
-          pointFillColor = Color(0xFFD5F2FF),
-          pointRadius = 14.dp,
-          pointAnimation = if (index == 2) JetLimeEventDefaults.pointAnimation() else null,
+          pointFillColor = Color(0xFFCCEFFF),
+          pointRadius = 12.dp,
+          pointColor = when (index) {
+            3, 4 -> Color.White
+            else -> Color(0xFF2889D6)
+          },
+          pointAnimation = when (index) {
+            1, 4 -> JetLimeEventDefaults.pointAnimation()
+            else -> null
+          },
           pointType = when (index) {
-            1 -> EventPointType.filled(0.8f)
+            1 -> EventPointType.filled(0.7f) // 70% fill
             3 -> EventPointType.custom(
               icon = painterResource(id = R.drawable.icon_check),
+              tint = Color(0xFF649228),
             )
 
-            else -> EventPointType.Default
+            4 -> EventPointType.custom(
+              icon = painterResource(id = R.drawable.icon_change),
+              tint = Color(0xFFFF5722),
+            )
+
+            else -> EventPointType.Default // Default style for rest
           },
           pointStrokeWidth = when (index) {
-            3 -> 0.dp
+            2, 4 -> 0.dp
+            3 -> 1.dp
             else -> 2.dp
           },
           pointStrokeColor = MaterialTheme.colorScheme.onBackground,
