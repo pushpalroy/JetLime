@@ -15,7 +15,7 @@ $dokka.location:com.pushpal.jetlime/EventPointAnimation/targetValue/#/PointingTo
 $dokka.location:com.pushpal.jetlime/EventPointType.Companion///PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/index.html
 $dokka.location:com.pushpal.jetlime/EventPointType.Companion/Default/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/-default.html
 $dokka.location:com.pushpal.jetlime/EventPointType.Companion/EMPTY/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/-e-m-p-t-y.html
-$dokka.location:com.pushpal.jetlime/EventPointType.Companion/custom/#androidx.compose.ui.graphics.painter.Painter/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/custom.html
+$dokka.location:com.pushpal.jetlime/EventPointType.Companion/custom/#androidx.compose.ui.graphics.painter.Painter#androidx.compose.ui.graphics.Color?/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/custom.html
 $dokka.location:com.pushpal.jetlime/EventPointType.Companion/filled/#kotlin.Float/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/-companion/filled.html
 $dokka.location:com.pushpal.jetlime/EventPointType///PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/index.html
 $dokka.location:com.pushpal.jetlime/EventPointType/equals/#kotlin.Any?/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/equals.html
@@ -25,6 +25,7 @@ $dokka.location:com.pushpal.jetlime/EventPointType/icon/#/PointingToDeclaration/
 $dokka.location:com.pushpal.jetlime/EventPointType/isCustom/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/is-custom.html
 $dokka.location:com.pushpal.jetlime/EventPointType/isEmptyOrFilled/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/is-empty-or-filled.html
 $dokka.location:com.pushpal.jetlime/EventPointType/isFilled/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/is-filled.html
+$dokka.location:com.pushpal.jetlime/EventPointType/tint/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/tint.html
 $dokka.location:com.pushpal.jetlime/EventPointType/type/#/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-point-type/type.html
 $dokka.location:com.pushpal.jetlime/EventPosition.Companion///PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-position/-companion/index.html
 $dokka.location:com.pushpal.jetlime/EventPosition.Companion/dynamic/#kotlin.Int#kotlin.Int/PointingToDeclaration/jetlime/com.pushpal.jetlime/-event-position/-companion/dynamic.html
