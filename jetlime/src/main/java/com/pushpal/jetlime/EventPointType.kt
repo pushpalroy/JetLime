@@ -66,10 +66,8 @@ class EventPointType internal constructor(
      * @return A new instance of [EventPointType] with the custom icon.
      */
     @Stable
-    fun custom(
-      icon: Painter,
-      tint: Color? = null,
-    ): EventPointType = EventPointType(type = CUSTOM, icon = icon, tint = tint)
+    fun custom(icon: Painter, tint: Color? = null): EventPointType =
+      EventPointType(type = CUSTOM, icon = icon, tint = tint)
 
     /**
      * Creates a filled event point type with a specified fill percentage.
