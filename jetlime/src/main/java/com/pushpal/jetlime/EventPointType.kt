@@ -26,6 +26,7 @@ package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 
 /**
@@ -34,12 +35,14 @@ import androidx.compose.ui.graphics.painter.Painter
  *
  * @property type The name of the event point type.
  * @property icon An optional [Painter] icon associated with the event point type.
+ * @property tint An optional tint [Color] overlay for the icon.
  * @property fillPercent An optional percentage value for the [FILLED] type
  */
 @Immutable
 class EventPointType internal constructor(
   val type: String,
   val icon: Painter? = null,
+  val tint: Color? = null,
   val fillPercent: Float? = null,
 ) {
   companion object {
@@ -59,10 +62,14 @@ class EventPointType internal constructor(
      * Creates a custom event point type with a specified [Painter] icon.
      *
      * @param icon The [Painter] icon for the custom event point type.
+     * @param tint The optional tint [Color] of the custom icon.
      * @return A new instance of [EventPointType] with the custom icon.
      */
     @Stable
-    fun custom(icon: Painter): EventPointType = EventPointType(type = CUSTOM, icon = icon)
+    fun custom(
+      icon: Painter,
+      tint: Color? = null,
+    ): EventPointType = EventPointType(type = CUSTOM, icon = icon, tint = tint)
 
     /**
      * Creates a filled event point type with a specified fill percentage.
@@ -116,6 +123,7 @@ class EventPointType internal constructor(
     if (this === other) return true
     if (other !is EventPointType) return false
     if (type != other.type) return false
+    if (tint != other.tint) return false
     if (fillPercent != other.fillPercent) return false
     return icon == other.icon
   }
@@ -129,6 +137,7 @@ class EventPointType internal constructor(
   override fun hashCode(): Int {
     var result = type.hashCode()
     result = 31 * result + icon.hashCode()
+    result = 31 * result + tint.hashCode()
     result = 31 * result + fillPercent.hashCode()
     return result
   }
