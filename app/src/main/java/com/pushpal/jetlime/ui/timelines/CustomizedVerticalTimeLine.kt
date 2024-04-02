@@ -42,7 +42,7 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
-import com.pushpal.jetlime.VerticalAlignment.LEFT
+import com.pushpal.jetlime.VerticalAlignment.RIGHT
 import com.pushpal.jetlime.sample.R
 import com.pushpal.jetlime.ui.data.getCharacters
 import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
@@ -64,7 +64,7 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
         itemSpacing = 16.dp,
         lineThickness = 2.dp,
         lineBrush = JetLimeDefaults.lineSolidBrush(color = Color(0xFF2196F3)),
-        lineVerticalAlignment = LEFT,
+        lineVerticalAlignment = RIGHT,
       ),
     ) { index, item, position ->
       JetLimeEvent(
