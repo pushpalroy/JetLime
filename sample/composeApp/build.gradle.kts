@@ -151,8 +151,13 @@ compose.desktop {
 
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = "com.pushpal.jetlime.sample"
+      packageName = "JetLime Samples"
       packageVersion = "1.0.0"
+
+      windows {
+        // Automatically create a desktop shortcut on windows
+        shortcut = true
+      }
     }
   }
 }

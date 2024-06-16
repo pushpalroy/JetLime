@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="composeApp-desktop">
     <output-path>$PROJECT_DIR$/sample/composeApp/build/libs</output-path>
-    <root id="archive" name="composeApp-desktop.jar">
-      <element id="module-output" name="JetLime.sample.composeApp.desktopMain" />
-    </root>
+    <root id="archive" name="composeApp-desktop.jar" />
   </artifact>
 </component>

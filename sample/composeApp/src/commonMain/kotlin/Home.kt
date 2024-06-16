@@ -25,6 +25,7 @@
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -107,7 +108,10 @@ fun HomeContent(modifier: Modifier = Modifier) {
     Surface(
       modifier = Modifier.fillMaxSize(),
     ) {
-      Scaffold(snackbarHost = { SnackbarHost(snackbarState) }) {
+      Scaffold(
+        snackbarHost = { SnackbarHost(snackbarState) },
+        contentWindowInsets = WindowInsets(0.dp),
+      ) {
         when (selectedIndex) {
           0 -> {
             Column {

@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="jetlime-desktop">
     <output-path>$PROJECT_DIR$/jetlime/build/libs</output-path>
-    <root id="archive" name="jetlime-desktop.jar">
-      <element id="module-output" name="JetLime.jetlime.desktopMain" />
-    </root>
+    <root id="archive" name="jetlime-desktop.jar" />
   </artifact>
 </component>

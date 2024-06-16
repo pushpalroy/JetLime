@@ -29,6 +29,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -71,6 +72,7 @@ fun VerticalDynamicTimeLine(modifier: Modifier = Modifier, showSnackbar: (messag
 
   Scaffold(
     modifier = modifier,
+    contentWindowInsets = WindowInsets(0.dp),
     floatingActionButton = {
       Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
