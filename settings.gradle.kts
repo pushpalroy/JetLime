@@ -7,12 +7,11 @@ pluginManagement {
   }
 }
 dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
     google()
     mavenCentral()
   }
 }
 rootProject.name = "JetLime"
-include(":app")
+include(":sample:composeApp")
 include(":jetlime")

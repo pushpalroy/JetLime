@@ -1,0 +1,3 @@
+<resources>
+  <style name="Theme.JetLime" parent="android:Theme.Material.NoActionBar" />
+</resources>
