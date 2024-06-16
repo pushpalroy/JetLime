@@ -1,16 +1,14 @@
-import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-  alias(libs.plugins.android.library)
-  alias(libs.plugins.kotlin.multiplatform)
-  alias(libs.plugins.jetbrains.compose)
-  alias(libs.plugins.compose.compiler)
-  alias(libs.plugins.nexus.vanniktech.publish)
-  alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -57,16 +55,20 @@ kotlin {
     androidMain.dependencies {
       implementation(compose.preview)
       implementation(libs.androidx.activity.compose)
-      implementation(libs.dokka.android)
     }
     commonMain.dependencies {
       implementation(compose.runtime)
       implementation(compose.foundation)
       implementation(compose.material3)
       implementation(compose.ui)
+      implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
 
-      api(libs.kotlinx.collections.immutable)
+      // Local library
+      implementation(project(":jetlime"))
+
+      // Maven library - For testing
+      // implementation(libs.jetlime)
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
@@ -75,7 +77,7 @@ kotlin {
 }
 
 android {
-  namespace = "com.pushpal.jetlime"
+  namespace = "com.pushpal.jetlime.sample"
   compileSdk = 34
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -83,25 +85,54 @@ android {
   sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
   defaultConfig {
+    applicationId = "com.pushpal.jetlime.sample"
     minSdk = 21
-    testOptions.targetSdk = 34
+    targetSdk = 34
+    versionCode = 1
+    versionName = "1.0"
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles("consumer-rules.pro")
   }
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
   }
+
+  signingConfigs {
+    // Uncomment this line if we are generating a release build manually from IDE
+    // Not needed while build is generated from CI/CD
+    //    maybeCreate("release").apply {
+    //        val keystorePropertiesFile = rootProject.file("keystore_release.properties")
+    //        val keystoreProperties = Properties()
+    //        if (keystorePropertiesFile.exists()) {
+    //            keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    //        }
+    //        storeFile = file(path = keystoreProperties["storeFile"] as String)
+    //        storePassword = keystoreProperties["storePassword"] as String
+    //        keyAlias = keystoreProperties["keyAlias"] as String
+    //        keyPassword = keystoreProperties["keyPassword"] as String
+    //    }
+  }
+
   buildTypes {
-    release {
+    getByName("release") {
+      isDebuggable = false
       isMinifyEnabled = false
+      isShrinkResources = false
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro",
       )
+      // signingConfig = signingConfigs.getByName("release")
+    }
+    getByName("debug") {
+      isDebuggable = true
+      versionNameSuffix = "-debug"
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -109,67 +140,19 @@ android {
   buildFeatures {
     compose = true
   }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-  }
-
   dependencies {
-    debugApi(compose.uiTooling)
-
-    // Test
-    // Compose BOM
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    // Others
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.truth)
+    debugImplementation(compose.uiTooling)
   }
 }
 
-tasks.dokkaHtml.configure {
-  outputDirectory.set(file("../docs"))
-  pluginsMapConfiguration.set(
-    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""),
-  )
-  dokkaSourceSets {
-    named("commonMain") {
-      noAndroidSdkLink.set(false)
-    }
-  }
-}
+compose.desktop {
+  application {
+    mainClass = "MainKt"
 
-mavenPublishing {
-  publishToMavenCentral(SonatypeHost.S01)
-  signAllPublications()
-  val artifactId = "jetlime"
-  coordinates("io.github.pushpalroy", artifactId, "2.2.0")
-
-  pom {
-    name.set(artifactId)
-    description.set("A simple library for TimeLine view in Android")
-    inceptionYear.set("2022")
-    packaging = "aar"
-    url.set("https://github.com/pushpalroy/jetlime/")
-    licenses {
-      license {
-        name.set("MIT License")
-        url.set("https://github.com/pushpalroy/jetlime/blob/main/LICENSE")
-        distribution.set("repo")
-      }
-    }
-    developers {
-      developer {
-        id.set("pushpalroy")
-        name.set("Pushpal Roy")
-        url.set("https://github.com/pushpalroy/")
-      }
-    }
-    scm {
-      url.set("https://github.com/pushpalroy/jetlime")
-      connection.set("scm:git:git://github.com/pushpalroy/jetlime.git")
-      developerConnection.set("scm:git:ssh://git@github.com/pushpalroy/jetlime.git")
+    nativeDistributions {
+      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+      packageName = "com.pushpal.jetlime.sample"
+      packageVersion = "1.0.0"
     }
   }
 }

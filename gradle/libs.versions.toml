@@ -3,11 +3,12 @@ composeBom = "2024.03.00"
 compose-compiler = "1.5.10"
 activityCompose = "1.8.2"
 agp = "8.3.1"
+compose-plugin = "1.6.10"
 coreKtx = "1.12.0"
 jetlime = "2.2.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
-kotlin = "1.9.22"
+kotlin = "2.0.0"
 kotlinxCollectionsImmutable = "0.3.7"
 lifecycleRuntimeKtx = "2.7.0"
 truth = "1.3.0"
@@ -48,7 +49,10 @@ dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", v
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nexus-vanniktech-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka"}
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless"}
