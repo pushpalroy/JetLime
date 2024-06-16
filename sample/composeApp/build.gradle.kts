@@ -5,10 +5,10 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.compose.compiler)
+  alias(libs.plugins.kotlin.multiplatform)
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.jetbrains.compose)
+  alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -18,12 +18,14 @@ kotlin {
     browser {
       commonWebpackConfig {
         outputFileName = "composeApp.js"
-        devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-          static = (static ?: mutableListOf()).apply {
-            // Serve sources to debug inside browser
-            add(project.projectDir.path)
+        devServer =
+          (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+            static =
+              (static ?: mutableListOf()).apply {
+                // Serve sources to debug inside browser
+                add(project.projectDir.path)
+              }
           }
-        }
       }
     }
     binaries.executable()
@@ -41,7 +43,7 @@ kotlin {
   listOf(
     iosX64(),
     iosArm64(),
-    iosSimulatorArm64()
+    iosSimulatorArm64(),
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
       baseName = "ComposeApp"

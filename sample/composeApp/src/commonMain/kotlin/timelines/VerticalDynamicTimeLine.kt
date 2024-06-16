@@ -61,7 +61,10 @@ import timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun VerticalDynamicTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: String) -> Unit) {
+fun VerticalDynamicTimeLine(
+  modifier: Modifier = Modifier,
+  showSnackbar: (message: String) -> Unit,
+) {
   val listState = rememberLazyListState()
   val items = remember { mutableStateListOf<Item>() }
   val allCharacters = getCharacters().distinct()

@@ -22,24 +22,14 @@
 * SOFTWARE.
 *
 */
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import theme.JetLimeTheme
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
 
-@Composable
-@Preview
-fun App() {
-  var darkTheme by remember { mutableStateOf(true) }
-  JetLimeTheme(darkTheme = darkTheme) {
-    HomeScreen(
-      isDarkTheme = darkTheme,
-      onThemeChange = {
-        darkTheme = it
-      },
-    )
+fun main() = application {
+  Window(
+    onCloseRequest = ::exitApplication,
+    title = "JetLime Samples",
+  ) {
+    App()
   }
 }

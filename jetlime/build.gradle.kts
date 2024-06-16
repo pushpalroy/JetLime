@@ -20,12 +20,14 @@ kotlin {
     browser {
       commonWebpackConfig {
         outputFileName = "composeApp.js"
-        devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-          static = (static ?: mutableListOf()).apply {
-            // Serve sources to debug inside browser
-            add(project.projectDir.path)
+        devServer =
+          (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+            static =
+              (static ?: mutableListOf()).apply {
+                // Serve sources to debug inside browser
+                add(project.projectDir.path)
+              }
           }
-        }
       }
     }
     binaries.executable()
@@ -43,7 +45,7 @@ kotlin {
   listOf(
     iosX64(),
     iosArm64(),
-    iosSimulatorArm64()
+    iosSimulatorArm64(),
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
       baseName = "ComposeApp"

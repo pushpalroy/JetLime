@@ -43,7 +43,10 @@ import timelines.event.HorizontalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun BasicHorizontalTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: String) -> Unit) {
+fun BasicHorizontalTimeLine(
+  modifier: Modifier = Modifier,
+  showSnackbar: (message: String) -> Unit,
+) {
   val items = remember { getPlanets() }
 
   Surface(

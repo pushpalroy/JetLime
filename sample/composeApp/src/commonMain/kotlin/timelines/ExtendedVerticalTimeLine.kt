@@ -60,7 +60,10 @@ import timelines.event.placeInfo
 @OptIn(ExperimentalComposeApi::class)
 @ExperimentalAnimationApi
 @Composable
-fun ExtendedVerticalTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: String) -> Unit) {
+fun ExtendedVerticalTimeLine(
+  modifier: Modifier = Modifier,
+  showSnackbar: (message: String) -> Unit,
+) {
   val items = remember { mutableStateListOf<Item>() }
 
   // Generate sample data to populate in the list

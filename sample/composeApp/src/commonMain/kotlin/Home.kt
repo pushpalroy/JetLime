@@ -22,7 +22,6 @@
 * SOFTWARE.
 *
 */
-
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
