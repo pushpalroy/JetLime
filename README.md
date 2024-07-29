@@ -30,7 +30,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.2.0")
+  implementation("io.github.pushpalroy:jetlime:2.2.1")
 }
 ```
 
