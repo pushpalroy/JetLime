@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.Dp
@@ -107,6 +108,7 @@ object JetLimeDefaults {
     itemSpacing: Dp,
     lineThickness: Dp,
     lineBrush: Brush,
+    pathEffect: PathEffect?,
     lineHorizontalAlignment: HorizontalAlignment = TOP,
     lineVerticalAlignment: VerticalAlignment = LEFT,
   ): JetLimeStyle {
@@ -115,6 +117,7 @@ object JetLimeDefaults {
       itemSpacing = itemSpacing,
       lineThickness = lineThickness,
       lineBrush = lineBrush,
+      pathEffect = pathEffect,
       lineHorizontalAlignment = lineHorizontalAlignment,
       lineVerticalAlignment = lineVerticalAlignment,
     )
@@ -136,12 +139,14 @@ object JetLimeDefaults {
     itemSpacing: Dp = ItemSpacing,
     lineThickness: Dp = LineThickness,
     lineBrush: Brush = lineSolidBrush(),
+    pathEffect: PathEffect? = null,
     lineVerticalAlignment: VerticalAlignment = LEFT,
   ) = jetLimeStyle(
     contentDistance,
     itemSpacing,
     lineThickness,
     lineBrush,
+    pathEffect,
     lineVerticalAlignment = lineVerticalAlignment,
   )
 
@@ -161,12 +166,14 @@ object JetLimeDefaults {
     itemSpacing: Dp = ItemSpacing,
     lineThickness: Dp = LineThickness,
     lineBrush: Brush = lineSolidBrush(),
+    pathEffect: PathEffect? = null,
     lineHorizontalAlignment: HorizontalAlignment = TOP,
   ) = jetLimeStyle(
     contentDistance,
     itemSpacing,
     lineThickness,
     lineBrush,
+    pathEffect,
     lineHorizontalAlignment = lineHorizontalAlignment,
   )
 }

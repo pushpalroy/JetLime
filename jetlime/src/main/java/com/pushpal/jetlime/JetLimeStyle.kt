@@ -27,6 +27,7 @@ package com.pushpal.jetlime
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.unit.Dp
 import com.pushpal.jetlime.Arrangement.VERTICAL
 
@@ -53,6 +54,7 @@ class JetLimeStyle internal constructor(
   val itemSpacing: Dp,
   val lineThickness: Dp,
   val lineBrush: Brush,
+  val pathEffect: PathEffect?,
   val lineHorizontalAlignment: HorizontalAlignment,
   val lineVerticalAlignment: VerticalAlignment,
 ) {
