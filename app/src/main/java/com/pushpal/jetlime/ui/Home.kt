@@ -45,6 +45,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pushpal.jetlime.ui.timelines.BasicDashedTimeLine
 import com.pushpal.jetlime.ui.timelines.BasicHorizontalTimeLine
 import com.pushpal.jetlime.ui.timelines.BasicVerticalTimeLine
 import com.pushpal.jetlime.ui.timelines.CustomizedHorizontalTimeLine
@@ -78,7 +79,7 @@ fun HomeScreen(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(modifier: Modifier = Modifier) {
-  val tabs = remember { listOf("Basic", "Dynamic", "Custom", "Extended") }
+  val tabs = remember { listOf("Basic", "Dashed", "Dynamic", "Custom", "Extended") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   Column(modifier = modifier) {
     ScrollableTabRow(
@@ -109,15 +110,16 @@ fun HomeContent(modifier: Modifier = Modifier) {
           }
         }
 
-        1 -> VerticalDynamicTimeLine()
-        2 -> {
+        1 -> BasicDashedTimeLine()
+        2 -> VerticalDynamicTimeLine()
+        3 -> {
           Column {
             CustomizedHorizontalTimeLine()
             CustomizedVerticalTimeLine()
           }
         }
 
-        3 -> ExtendedVerticalTimeLine()
+        4 -> ExtendedVerticalTimeLine()
       }
     }
   }

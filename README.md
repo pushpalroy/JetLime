@@ -20,9 +20,11 @@
 
 Made with ❤ using Compose
 
-|                 Basic                 |                 Dynamic                 |                 Custom                 | Extended                                 |
-|:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|------------------------------------------|
-| <img src="art/basic.gif" width=180 /> | <img src="art/dynamic.gif" width=180 /> | <img src="art/custom.png" width=180 /> | <img src="art/extended.png" width=180 /> |
+|                  Basic                  | Dashed                                   |                  Dynamic                  |
+|:---------------------------------------:|------------------------------------------|:-----------------------------------------:|
+|  <img src="art/basic.gif" width=180 />  | <img src="art/dashed.png" width=180 />   |  <img src="art/dynamic.gif" width=180 />  |
+|                 Custom                  | Extended                                 |                                           |
+| <img src="art/custom.png" width=180 />  | <img src="art/extended.png" width=180 /> |                                           |
 
 ## 🚀 Implementation
 
@@ -200,6 +202,17 @@ lineBrush = JetLimeDefaults.lineGradientBrush()
 or
 
 lineBrush = JetLimeDefaults.solidBrush()
+```
+
+A dashed/dotted line can also be drawn using the `pathEffect` property by passing a `PathEffect` to a `columnStyle` or `rowStyle`.
+
+```kotlin
+style = JetLimeDefaults.columnStyle(
+        pathEffect = PathEffect.dashPathEffect(
+          intervals = floatArrayOf(30f, 30f),
+          phase = 0f,
+        )
+      )
 ```
 
 #### 💨 Content Distance
