@@ -49,7 +49,7 @@ import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
 @ExperimentalAnimationApi
 @Composable
 fun BasicDashedTimeLine(modifier: Modifier = Modifier) {
-  val items = remember { getCharacters().subList(0, 4) }
+  val items = remember { getCharacters().subList(0, 7) }
   val context = LocalContext.current
 
   Surface(
@@ -59,7 +59,6 @@ fun BasicDashedTimeLine(modifier: Modifier = Modifier) {
       modifier = Modifier.padding(16.dp),
       itemsList = ItemsList(items),
       style = JetLimeDefaults.columnStyle(
-        lineBrush = JetLimeDefaults.lineGradientBrush(),
         pathEffect = PathEffect.dashPathEffect(
           intervals = floatArrayOf(30f, 30f),
           phase = 0f,
