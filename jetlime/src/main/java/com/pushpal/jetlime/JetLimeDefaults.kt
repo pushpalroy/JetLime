@@ -98,6 +98,7 @@ object JetLimeDefaults {
    * @param itemSpacing The spacing between items in the JetLime component.
    * @param lineThickness The thickness of the line in the JetLime component.
    * @param lineBrush The brush used for the line in the JetLime component.
+   * @param pathEffect the effect applied to the geometry of the timeline to obtain a dashed pattern.
    * @param lineHorizontalAlignment The horizontal alignment of the line in the JetLime component.
    * @param lineVerticalAlignment The vertical alignment of the line in the JetLime component.
    * @return A [JetLimeStyle] object configured with the given parameters.
@@ -130,6 +131,7 @@ object JetLimeDefaults {
    * @param itemSpacing The spacing between items in the JetLime component.
    * @param lineThickness The thickness of the line in the JetLime component.
    * @param lineBrush The brush used for the line in the JetLime component.
+   * @param pathEffect the effect applied to the geometry of the timeline to obtain a dashed pattern.
    * @param lineVerticalAlignment The vertical alignment of the line: [LEFT] or [RIGHT]
    * @return A [JetLimeStyle] instance configured for column arrangement.
    */
@@ -157,6 +159,7 @@ object JetLimeDefaults {
    * @param itemSpacing The spacing between items in the JetLime component.
    * @param lineThickness The thickness of the line in the JetLime component.
    * @param lineBrush The brush used for the line in the JetLime component.
+   * @param pathEffect the effect applied to the geometry of the timeline to obtain a dashed pattern.
    * @param lineHorizontalAlignment The horizontal alignment of the line: [TOP] or [BOTTOM]
    * @return A [JetLimeStyle] instance configured for row arrangement.
    */

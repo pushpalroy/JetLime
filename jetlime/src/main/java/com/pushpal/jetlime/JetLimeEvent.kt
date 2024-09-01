@@ -142,7 +142,7 @@ internal fun VerticalEvent(
               y = this.size.height + yShift,
             ),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),
-            pathEffect = jetLimeStyle.pathEffect
+            pathEffect = jetLimeStyle.pathEffect,
           )
         }
 
@@ -285,7 +285,7 @@ internal fun HorizontalEvent(
               y = yOffset,
             ),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),
-            pathEffect = jetLimeStyle.pathEffect
+            pathEffect = jetLimeStyle.pathEffect,
           )
         }
 

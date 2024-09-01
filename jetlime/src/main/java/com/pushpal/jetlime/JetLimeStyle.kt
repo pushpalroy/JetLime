@@ -45,6 +45,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  * @param itemSpacing The spacing between items in the JetLime component.
  * @param lineThickness The thickness of the line in the JetLime component.
  * @param lineBrush The brush used for the line in the JetLime component.
+ * @param pathEffect the effect applied to the geometry of the timeline to obtain a dashed pattern.
  * @param lineHorizontalAlignment The horizontal alignment of the line in the JetLime component.
  * @param lineVerticalAlignment The vertical alignment of the line in the JetLime component.
  */
@@ -95,6 +96,7 @@ class JetLimeStyle internal constructor(
     if (itemSpacing != other.itemSpacing) return false
     if (lineThickness != other.lineThickness) return false
     if (lineBrush != other.lineBrush) return false
+    if (pathEffect != other.pathEffect) return false
     if (lineHorizontalAlignment != other.lineHorizontalAlignment) return false
     return lineVerticalAlignment == other.lineVerticalAlignment
   }
@@ -112,6 +114,7 @@ class JetLimeStyle internal constructor(
     result = 31 * result + itemSpacing.hashCode()
     result = 31 * result + lineThickness.hashCode()
     result = 31 * result + lineBrush.hashCode()
+    result = 31 * result + pathEffect.hashCode()
     result = 31 * result + lineHorizontalAlignment.hashCode()
     result = 31 * result + lineVerticalAlignment.hashCode()
     return result
