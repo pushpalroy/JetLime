@@ -20,9 +20,11 @@
 
 Made with ❤ using Compose
 
-|                 Basic                 | Dashed                                 |                 Dynamic                 |                 Custom                 | Extended                                 |
-|:-------------------------------------:|----------------------------------------|:---------------------------------------:|:--------------------------------------:|------------------------------------------|
-| <img src="art/basic.gif" width=180 /> | <img src="art/dashed.gif" width=180 /> | <img src="art/dynamic.gif" width=180 /> | <img src="art/custom.png" width=180 /> | <img src="art/extended.png" width=180 /> |
+|                  Basic                  | Dashed                                   |                  Dynamic                  |
+|:---------------------------------------:|------------------------------------------|:-----------------------------------------:|
+|  <img src="art/basic.gif" width=180 />  | <img src="art/dashed.png" width=180 />   |  <img src="art/dynamic.gif" width=180 />  |
+|                 Custom                  | Extended                                 |                                           |
+| <img src="art/custom.png" width=180 />  | <img src="art/extended.png" width=180 /> |                                           |
 
 ## 🚀 Implementation
 
