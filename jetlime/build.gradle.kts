@@ -85,7 +85,7 @@ mavenPublishing {
   publishToMavenCentral(SonatypeHost.S01)
   signAllPublications()
   val artifactId = "jetlime"
-  coordinates("io.github.pushpalroy", artifactId, "2.2.1")
+  coordinates("io.github.pushpalroy", artifactId, "2.3.0")
 
   pom {
     name.set(artifactId)
