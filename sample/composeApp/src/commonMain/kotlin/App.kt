@@ -31,7 +31,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import theme.JetLimeTheme
 
 @Composable
-@Preview
 fun App() {
   var darkTheme by remember { mutableStateOf(true) }
   JetLimeTheme(darkTheme = darkTheme) {
@@ -42,4 +41,10 @@ fun App() {
       },
     )
   }
+}
+
+@Composable
+@Preview
+private fun AppPreview() {
+  App()
 }

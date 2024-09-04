@@ -46,10 +46,7 @@ import timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun BasicDashedTimeLine(
-  modifier: Modifier = Modifier,
-  showSnackbar: (message: String) -> Unit,
-) {
+fun BasicDashedTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: String) -> Unit) {
   val items = remember { getCharacters().subList(0, 7) }
 
   Surface(
