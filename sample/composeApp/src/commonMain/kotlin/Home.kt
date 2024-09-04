@@ -158,7 +158,7 @@ fun HomeAppBar(
   )
 }
 
-@Preview
+@Preview("Preview HomeScreen")
 @Composable
 private fun PreviewHomeScreen() {
   HomeScreen()

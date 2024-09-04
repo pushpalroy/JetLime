@@ -2,8 +2,8 @@
 
 > A simple yet highly customizable library for showing a TimeLine interface in Jetpack Compose.
 
-[![Compose Compiler](https://img.shields.io/badge/Compose%20Compiler-1.5.10-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?color=blue&style=for-the-badge)
+[![Compose Compiler](https://img.shields.io/badge/Compose%20Compiler-1.5.15-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -20,9 +20,11 @@
 
 Made with ❤ using Compose
 
-|                 Basic                 |                 Dynamic                 |                 Custom                 | Extended                                 |
-|:-------------------------------------:|:---------------------------------------:|:--------------------------------------:|------------------------------------------|
-| <img src="art/basic.gif" width=180 /> | <img src="art/dynamic.gif" width=180 /> | <img src="art/custom.png" width=180 /> | <img src="art/extended.png" width=180 /> |
+|                  Basic                  | Dashed                                   |                  Dynamic                  |
+|:---------------------------------------:|------------------------------------------|:-----------------------------------------:|
+|  <img src="art/basic.gif" width=180 />  | <img src="art/dashed.png" width=180 />   |  <img src="art/dynamic.gif" width=180 />  |
+|                 Custom                  | Extended                                 |                                           |
+| <img src="art/custom.png" width=180 />  | <img src="art/extended.png" width=180 /> |                                           |
 
 ## 🚀 Implementation
 
@@ -30,7 +32,7 @@ In `build.gradle` of app module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.2.0")
+  implementation("io.github.pushpalroy:jetlime:2.3.0")
 }
 ```
 
@@ -200,6 +202,17 @@ lineBrush = JetLimeDefaults.lineGradientBrush()
 or
 
 lineBrush = JetLimeDefaults.solidBrush()
+```
+
+A dashed/dotted line can also be drawn using the `pathEffect` property by passing a `PathEffect` to a `columnStyle` or `rowStyle`.
+
+```kotlin
+style = JetLimeDefaults.columnStyle(
+        pathEffect = PathEffect.dashPathEffect(
+          intervals = floatArrayOf(30f, 30f),
+          phase = 0f,
+        )
+      )
 ```
 
 #### 💨 Content Distance
