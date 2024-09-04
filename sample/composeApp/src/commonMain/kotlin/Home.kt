@@ -48,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import timelines.BasicDashedTimeLine
 import timelines.BasicHorizontalTimeLine
 import timelines.BasicVerticalTimeLine
 import timelines.CustomizedHorizontalTimeLine
@@ -81,7 +82,7 @@ fun HomeScreen(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(modifier: Modifier = Modifier) {
-  val tabs = remember { listOf("Basic", "Dynamic", "Custom", "Extended") }
+  val tabs = remember { listOf("Basic", "Dashed", "Dynamic", "Custom", "Extended") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   val snackbarState = remember { SnackbarHostState() }
   val coroutineScope = rememberCoroutineScope()
@@ -119,15 +120,16 @@ fun HomeContent(modifier: Modifier = Modifier) {
             }
           }
 
-          1 -> VerticalDynamicTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
-          2 -> {
+          1 -> BasicDashedTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+          2 -> VerticalDynamicTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+          3 -> {
             Column {
               CustomizedHorizontalTimeLine()
               CustomizedVerticalTimeLine()
             }
           }
 
-          3 -> ExtendedVerticalTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+          4 -> ExtendedVerticalTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
         }
       }
     }
@@ -158,7 +160,7 @@ fun HomeAppBar(
   )
 }
 
-@Preview("Preview HomeScreen")
+@Preview
 @Composable
 private fun PreviewHomeScreen() {
   HomeScreen()

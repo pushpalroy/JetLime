@@ -22,9 +22,8 @@
 * SOFTWARE.
 *
 */
-package com.pushpal.jetlime.ui.timelines
+package timelines
 
-import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,8 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.ItemsList
@@ -43,14 +40,17 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
-import com.pushpal.jetlime.ui.data.getCharacters
-import com.pushpal.jetlime.ui.timelines.event.VerticalEventContent
+import data.getCharacters
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
 @Composable
-fun BasicDashedTimeLine(modifier: Modifier = Modifier) {
+fun BasicDashedTimeLine(
+  modifier: Modifier = Modifier,
+  showSnackbar: (message: String) -> Unit,
+) {
   val items = remember { getCharacters().subList(0, 7) }
-  val context = LocalContext.current
 
   Surface(
     modifier = modifier.fillMaxSize(),
@@ -75,7 +75,7 @@ fun BasicDashedTimeLine(modifier: Modifier = Modifier) {
       ) {
         VerticalEventContent(
           modifier = Modifier.clickable {
-            Toast.makeText(context, "Clicked on item: $index", Toast.LENGTH_SHORT).show()
+            showSnackbar("Clicked on item: $index")
           },
           item = item,
         )
@@ -85,8 +85,8 @@ fun BasicDashedTimeLine(modifier: Modifier = Modifier) {
 }
 
 @ExperimentalAnimationApi
-@Preview("Preview BasicDashedTimeLine")
+@Preview
 @Composable
 private fun PreviewBasicDashedTimeLine() {
-  BasicDashedTimeLine()
+  BasicDashedTimeLine {}
 }
