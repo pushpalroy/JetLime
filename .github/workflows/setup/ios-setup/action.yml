@@ -14,5 +14,5 @@ runs:
     - shell: bash
       name: Install Dependencies
       run: |
-        cd iosApp
+        cd sample/iosApp
         pod install --verbose
