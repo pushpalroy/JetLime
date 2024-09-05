@@ -1,4 +1,4 @@
-name: Check PR
+name: Build
 
 on:
   pull_request:
@@ -9,7 +9,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  buildAndroid:
+    name: Build Android
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
 
@@ -27,5 +28,55 @@ jobs:
       - name: Set up Gradle
         id: set_up_gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          arguments: assembleDebug spotlessCheck
+
+      # Build and verify Android
+      - name: Build and verify Android
+        run: ./scripts/build_android.sh
+
+  buildWeb:
+    name: Build Web
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      # Code checkout
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v4
+
+      # Setup Java
+      - name: Java set up
+        uses: ./.github/workflows/composite
+
+      # Setup Gradle
+      - name: Set up Gradle
+        id: set_up_gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Build and verify Web
+      - name: Build and verify Web
+        run: ./scripts/build_web.sh
+
+  buildMacOS:
+    name: Build MacOS
+    runs-on: macos-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      # Code checkout
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v4
+
+      # Setup Java
+      - name: Java set up
+        uses: ./.github/workflows/composite
+
+      # Setup Gradle
+      - name: Set up Gradle
+        id: set_up_gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Build and verify MacOS
+      - name: Build and verify MacOS
+        run: ./scripts/build_macos.sh

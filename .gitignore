@@ -13,6 +13,9 @@
 # Kotlin libraries
 .kotlin/
 
+app/
+distributions/
+
 # Generated files
 bin/
 gen/
