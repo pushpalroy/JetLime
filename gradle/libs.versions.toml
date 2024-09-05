@@ -1,5 +1,5 @@
 [versions]
-activityCompose = "1.9.1"
+activityCompose = "1.9.2"
 agp = "8.5.2"
 compose-plugin = "1.6.11"
 jetlime = "3.0.0"
