@@ -2,7 +2,7 @@
 activityCompose = "1.9.1"
 agp = "8.5.2"
 compose-plugin = "1.6.11"
-jetlime = "2.3.0"
+jetlime = "3.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.20-RC2"

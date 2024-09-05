@@ -15,9 +15,9 @@ plugins {
 
 kotlin {
   cocoapods {
-    summary = "JetLime KMM Library"
+    summary = "JetLime KMP Library"
     homepage = "https://github.com/pushpalroy/JetLime"
-    version = "2.3.0"
+    version = "3.0.0"
     ios.deploymentTarget = "14.0"
     framework {
       baseName = "JetLime"
@@ -151,14 +151,21 @@ tasks.dokkaHtml.configure {
 }
 
 mavenPublishing {
+  // Configure publishing to Maven Central
   publishToMavenCentral(SonatypeHost.S01)
-  signAllPublications()
-  val artifactId = "jetlime"
-  coordinates("io.github.pushpalroy", artifactId, "2.3.0")
 
+  // Enable GPG signing for all publications
+  signAllPublications()
+
+  val artifactId = "jetlime"
+
+  // Define coordinates for the published artifact
+  coordinates("io.github.pushpalroy", artifactId, "3.0.0")
+
+  // Configure POM metadata for the published artifact
   pom {
     name.set(artifactId)
-    description.set("A simple library for TimeLine view in Compose")
+    description.set("A simple KMP library for TimeLine view in Compose")
     inceptionYear.set("2022")
     packaging = "aar"
     url.set("https://github.com/pushpalroy/jetlime/")
@@ -169,6 +176,7 @@ mavenPublishing {
         distribution.set("repo")
       }
     }
+    // Specify developer information
     developers {
       developer {
         id.set("pushpalroy")
@@ -176,6 +184,7 @@ mavenPublishing {
         url.set("https://github.com/pushpalroy/")
       }
     }
+    // Specify SCM information
     scm {
       url.set("https://github.com/pushpalroy/jetlime")
       connection.set("scm:git:git://github.com/pushpalroy/jetlime.git")

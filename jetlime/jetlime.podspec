@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'jetlime'
-    spec.version                  = '2.3.0'
+    spec.version                  = '3.0.0'
     spec.homepage                 = 'https://github.com/pushpalroy/JetLime'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'JetLime KMM Library'
+    spec.summary                  = 'JetLime KMP Library'
     spec.vendored_frameworks      = 'build/cocoapods/framework/JetLime.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target    = '14.0'
