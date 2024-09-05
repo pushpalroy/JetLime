@@ -1,9 +1,9 @@
 # JetLime 🍋
 
-> A simple yet highly customizable library for showing a TimeLine interface in Jetpack Compose.
+> A simple yet highly customizable library for showing a TimeLine interface in Compose Multiplatform.
 
 [![Compose Compiler](https://img.shields.io/badge/Compose%20Compiler-1.5.15-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blue.svg?color=blue&style=for-the-badge)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.0.20-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)

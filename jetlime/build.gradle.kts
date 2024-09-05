@@ -158,7 +158,7 @@ mavenPublishing {
 
   pom {
     name.set(artifactId)
-    description.set("A simple library for TimeLine view in Android")
+    description.set("A simple library for TimeLine view in Compose")
     inceptionYear.set("2022")
     packaging = "aar"
     url.set("https://github.com/pushpalroy/jetlime/")
