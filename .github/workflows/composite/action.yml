@@ -8,7 +8,7 @@ runs:
       id: setup_jdk
       uses: actions/setup-java@v4
       with:
-        distribution: "zulu"
+        distribution: "corretto"
         java-version: 17
 
     # Grant execute permission for gradlew
