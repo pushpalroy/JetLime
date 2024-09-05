@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.compose)
   alias(libs.plugins.compose.compiler)
+  alias(libs.plugins.kotlin.cocoapods)
 }
 
 kotlin {
@@ -45,6 +46,18 @@ kotlin {
     iosSimulatorArm64(),
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
+      baseName = "ComposeApp"
+      isStatic = true
+    }
+  }
+
+  cocoapods {
+    version = "1.0.0"
+    summary = "JetLime Sample App"
+    homepage = "empty"
+    ios.deploymentTarget = "14.0"
+    podfile = project.file("../iosApp/Podfile")
+    framework {
       baseName = "ComposeApp"
       isStatic = true
     }

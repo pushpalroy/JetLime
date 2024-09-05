@@ -1,7 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -9,12 +8,24 @@ plugins {
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.jetbrains.compose)
   alias(libs.plugins.compose.compiler)
+  alias(libs.plugins.kotlin.cocoapods)
   alias(libs.plugins.nexus.vanniktech.publish)
   alias(libs.plugins.dokka)
 }
 
 kotlin {
-  @OptIn(ExperimentalWasmDsl::class)
+  cocoapods {
+    summary = "JetLime KMM Library"
+    homepage = "https://github.com/pushpalroy/JetLime"
+    version = "2.3.0"
+    ios.deploymentTarget = "14.0"
+    framework {
+      baseName = "JetLime"
+      isStatic = true
+    }
+  }
+
+  @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
   wasmJs {
     moduleName = "composeApp"
     browser {

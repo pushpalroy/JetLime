@@ -7,6 +7,7 @@ plugins {
   alias(libs.plugins.nexus.vanniktech.publish) apply false
   alias(libs.plugins.dokka) apply false
   alias(libs.plugins.spotless) apply false
+  alias(libs.plugins.kotlin.cocoapods) apply false
 }
 
 // Compose Compiler Metrics
