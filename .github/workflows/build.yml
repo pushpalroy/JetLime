@@ -1,7 +1,10 @@
 name: Build
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
     types: [ opened, synchronize, reopened, ready_for_review ]
 
 concurrency:
@@ -20,14 +23,9 @@ jobs:
         id: checkout_code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Java set up
-        uses: ./.github/workflows/composite
-
-      # Setup Gradle
-      - name: Set up Gradle
-        id: set_up_gradle
-        uses: gradle/actions/setup-gradle@v4
+      # Setup Java and Gradle
+      - name: Java and Gradle set up
+        uses: ./.github/workflows/setup/java-setup
 
       # Grant execute permission for script
       - name: Grant execute permission for script
@@ -38,6 +36,36 @@ jobs:
       # Build and verify Android
       - name: Build and verify Android
         run: ./scripts/build_android.sh
+
+  buildiOS:
+    name: Build iOS
+    runs-on: macos-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      # Code checkout
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v4
+
+      # Setup Java and Gradle
+      - name: Java and Gradle set up
+        uses: ./.github/workflows/setup/java-setup
+
+      # Grant execute permission for script
+      - name: Grant execute permission for script
+        id: grant_script_permission
+        shell: bash
+        run: chmod +x ./scripts/build_android.sh
+
+      # Setup iOS
+      - name: iOS set up
+        uses: ./.github/workflows/setup/ios-setup
+
+      # Build iOS app
+      - name: Build iOS app
+        id: build_ios_debug
+        run: xcodebuild build -workspace sample/iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 8' -verbose
 
   buildWeb:
     name: Build Web
@@ -50,14 +78,9 @@ jobs:
         id: checkout_code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Java set up
-        uses: ./.github/workflows/composite
-
-      # Setup Gradle
-      - name: Set up Gradle
-        id: set_up_gradle
-        uses: gradle/actions/setup-gradle@v4
+      # Setup Java and Gradle
+      - name: Java and Gradle set up
+        uses: ./.github/workflows/setup/java-setup
 
       # Grant execute permission for script
       - name: Grant execute permission for script
@@ -80,14 +103,9 @@ jobs:
         id: checkout_code
         uses: actions/checkout@v4
 
-      # Setup Java
-      - name: Java set up
-        uses: ./.github/workflows/composite
-
-      # Setup Gradle
-      - name: Set up Gradle
-        id: set_up_gradle
-        uses: gradle/actions/setup-gradle@v4
+      # Setup Java and Gradle
+      - name: Java and Gradle set up
+        uses: ./.github/workflows/setup/java-setup
 
       # Grant execute permission for script
       - name: Grant execute permission for script

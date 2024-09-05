@@ -1,5 +1,5 @@
-name: Android and Gradle Job Setup
-description: Sets up Android and Gradle
+name: Java and Gradle Job Setup
+description: Sets up Java and Gradle
 runs:
   using: "composite"
   steps:
@@ -28,3 +28,8 @@ runs:
         key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+
+    # Setup Gradle
+    - name: Set up Gradle
+      id: set_up_gradle
+      uses: gradle/actions/setup-gradle@v4

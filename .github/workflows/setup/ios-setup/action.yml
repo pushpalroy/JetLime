@@ -1,0 +1,18 @@
+name: iOS set up
+description: Sets up Kotlin Native and Cocoapods
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: ./gradlew :sample:composeApp:generateDummyFramework
+
+    - name: Set up cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+        version: latest
+
+    - shell: bash
+      name: Install Dependencies
+      run: |
+        cd iosApp
+        pod install --verbose
