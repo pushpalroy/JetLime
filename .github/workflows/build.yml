@@ -65,7 +65,7 @@ jobs:
       # Build iOS app
       - name: Build iOS app
         id: build_ios_debug
-        run: xcodebuild build -workspace sample/iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphoneos -destination name='iPhone 8' -verbose
+        run: xcodebuild build -workspace sample/iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator -verbose
 
   buildWeb:
     name: Build Web
