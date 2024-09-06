@@ -15,16 +15,17 @@
 ![Sample Build CI](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/build.yml?style=for-the-badge&label=Sample%20Build)
 ![badge][badge-android] ![badge][badge-ios] ![badge][badge-jvm] ![badge][badge-web]
 
-[![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Followers&style=social)](https://github.com/pushpalroy)
-[![Twitter Follow](https://img.shields.io/twitter/follow/pushpalroy?label=Follow&style=social)](https://twitter.com/pushpalroy)
-
-Made with ❤ using Compose
-
 |                  Basic                  | Dashed                                   |                  Dynamic                  |
 |:---------------------------------------:|------------------------------------------|:-----------------------------------------:|
 |  <img src="art/basic.gif" width=180 />  | <img src="art/dashed.png" width=180 />   |  <img src="art/dynamic.gif" width=180 />  |
 |                 Custom                  | Extended                                 |                                           |
 | <img src="art/custom.png" width=180 />  | <img src="art/extended.png" width=180 /> |                                           |
+
+### Supported Platform Samples
+
+|                     Android                      | iOS                                          |                     Desktop                     | Web                                         |
+|:------------------------------------------------:|----------------------------------------------|:-----------------------------------------------:|---------------------------------------------|
+| <img src="art/platform/android.png" width=120 /> | <img src="art/platform/iOS.png" width=120 /> | <img src="art/platform/desktop.png" width=240/> | <img src="art/platform/web.png" width=240/> |
 
 ## 🚀 Implementation
 
