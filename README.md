@@ -1,9 +1,9 @@
 # JetLime 🍋
 
-> A simple yet highly customizable library for showing a TimeLine interface in Jetpack Compose.
+> A simple yet highly customizable UI library to show a timeline view in Compose Multiplatform.
 
-[![Compose Compiler](https://img.shields.io/badge/Compose%20Compiler-1.5.15-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blue.svg?color=blue&style=for-the-badge)
+[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.6.11-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.0.20-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -12,8 +12,8 @@
 ![Issues](https://img.shields.io/github/issues/pushpalroy/jetlime?color=orange&style=for-the-badge)
 [![License](https://img.shields.io/github/license/pushpalroy/jetlime?color=blue&style=for-the-badge&logo=appveyor)](https://github.com/pushpalroy/jetlime/blob/master/LICENSE)
 
-![Sample Build CI](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/android_build.yaml?style=for-the-badge&label=Sample%20Build)
-![JetLime Tests CI](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/android_tests.yaml?style=for-the-badge&label=JetLime%20Tests)
+![Sample Build CI](https://img.shields.io/github/actions/workflow/status/pushpalroy/jetlime/build.yml?style=for-the-badge&label=Sample%20Build)
+![badge][badge-android] ![badge][badge-ios] ![badge][badge-jvm] ![badge][badge-web]
 
 [![Github Followers](https://img.shields.io/github/followers/pushpalroy?label=Followers&style=social)](https://github.com/pushpalroy)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pushpalroy?label=Follow&style=social)](https://twitter.com/pushpalroy)
@@ -28,11 +28,11 @@ Made with ❤ using Compose
 
 ## 🚀 Implementation
 
-In `build.gradle` of app module, include the following dependency
+In `build.gradle` of shared module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:2.3.0")
+  implementation("io.github.pushpalroy:jetlime:3.0.0")
 }
 ```
 
@@ -349,3 +349,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+[badge-android]: http://img.shields.io/badge/Android-grey?style=for-the-badge&logo=appveyor
+[badge-ios]: http://img.shields.io/badge/iOS-grey?style=for-the-badge&logo=appveyor
+[badge-jvm]: http://img.shields.io/badge/JVM-grey?style=for-the-badge&logo=appveyor
+[badge-web]: http://img.shields.io/badge/Web-grey?style=for-the-badge&logo=appveyor
