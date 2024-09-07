@@ -7,6 +7,9 @@ on:
     branches: [ main ]
     types: [ opened, synchronize, reopened, ready_for_review ]
 
+permissions:
+  contents: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -68,7 +71,7 @@ jobs:
         run: ./scripts/build_web.sh
 
       - name: Deploy Web
-        uses: JamesIves/github-pages-deploy-action@4.6.0
+        uses: JamesIves/github-pages-deploy-action@4.6.4
         with:
           branch: gh-pages
           folder: sample/composeApp/build/dist/wasmJs/productionExecutable
