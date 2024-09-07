@@ -68,7 +68,7 @@ jobs:
         run: ./scripts/build_web.sh
 
       - name: Deploy Web
-        uses: JamesIves/github-pages-deploy-action@4.6.4
+        uses: JamesIves/github-pages-deploy-action@4.6.0
         with:
           branch: gh-pages
           folder: sample/composeApp/build/dist/wasmJs/productionExecutable
