@@ -71,6 +71,7 @@ jobs:
         run: ./scripts/build_web.sh
 
       - name: Deploy Web
+        if: matrix.platform == 'web'
         uses: JamesIves/github-pages-deploy-action@4.6.4
         with:
           branch: gh-pages
