@@ -13,11 +13,21 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
         platform: [ android, ios, web, desktop ]
+        include:
+          - platform: android
+            os: ubuntu-latest
+          - platform: web
+            os: ubuntu-latest
+          - platform: ios
+            os: macos-latest
+          - platform: desktop
+            os: macos-latest
+
+    runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
