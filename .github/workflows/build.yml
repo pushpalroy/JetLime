@@ -40,6 +40,7 @@ jobs:
         if: matrix.platform == 'ios'
         uses: ./.github/workflows/setup/ios-setup
 
+      # Android
       - name: Grant execute permission for Android script
         if: matrix.platform == 'android'
         run: chmod +x ./scripts/build_android.sh
@@ -48,6 +49,7 @@ jobs:
         if: matrix.platform == 'android'
         run: ./scripts/build_android.sh
 
+      # iOS
       - name: Grant execute permission for iOS script
         if: matrix.platform == 'ios'
         run: chmod +x ./scripts/build_ios.sh
@@ -56,6 +58,7 @@ jobs:
         if: matrix.platform == 'ios'
         run: ./scripts/build_ios.sh
 
+      # Web
       - name: Grant execute permission for Web script
         if: matrix.platform == 'web'
         run: chmod +x ./scripts/build_web.sh
@@ -64,6 +67,13 @@ jobs:
         if: matrix.platform == 'web'
         run: ./scripts/build_web.sh
 
+      - name: Deploy Web
+        uses: JamesIves/github-pages-deploy-action@4.6.4
+        with:
+          branch: gh-pages
+          folder: sample/composeApp/build/dist/wasmJs/productionExecutable
+
+      # MacOS
       - name: Grant execute permission for MacOS script
         if: matrix.platform == 'desktop'
         run: chmod +x ./scripts/build_macos.sh
