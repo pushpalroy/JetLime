@@ -33,7 +33,7 @@ In `build.gradle` of shared module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:3.0.0")
+  implementation("io.github.pushpalroy:jetlime:3.0.1")
 }
 ```
 

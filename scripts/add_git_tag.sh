@@ -2,7 +2,7 @@
 
 # Script to add annotated tag with version number to the main branch
 # This script should be executed with the correct version number after every release to MavenCentral
-TAG="3.0.0"
+TAG="3.0.1"
 COMMENT="Release $TAG"
 BRANCH="main"
 
