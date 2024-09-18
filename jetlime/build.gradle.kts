@@ -147,7 +147,7 @@ mavenPublishing {
   val artifactId = "jetlime"
 
   // Define coordinates for the published artifact
-  coordinates("io.github.pushpalroy", artifactId, libs.versions.jetlime.toString())
+  coordinates("io.github.pushpalroy", artifactId, "3.0.1")
 
   // Configure POM metadata for the published artifact
   pom {
