@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -9,9 +10,15 @@ plugins {
   alias(libs.plugins.jetbrains.compose)
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.cocoapods)
+  alias(libs.plugins.compose.compiler.report.generator)
 }
 
 kotlin {
+  js(IR) {
+    browser()
+    binaries.executable()
+  }
+
   @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
   wasmJs {
     moduleName = "composeApp"
@@ -86,6 +93,9 @@ kotlin {
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
+    }
+    jsMain.dependencies {
+      implementation(compose.html.core)
     }
   }
 }

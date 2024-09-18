@@ -15,11 +15,13 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ android, ios, web, desktop ]
+        platform: [ android, ios, web-wasm, web-js, desktop ]
         include:
           - platform: android
             os: ubuntu-latest
-          - platform: web
+          - platform: web-wasm
+            os: ubuntu-latest
+          - platform: web-js
             os: ubuntu-latest
           - platform: ios
             os: macos-latest
@@ -58,14 +60,23 @@ jobs:
         if: matrix.platform == 'ios'
         run: ./scripts/build_ios.sh
 
-      # Web
-      - name: Grant execute permission for Web script
-        if: matrix.platform == 'web'
-        run: chmod +x ./scripts/build_web.sh
+      # Web-WASM
+      - name: Grant execute permission for Web WASM script
+        if: matrix.platform == 'web-wasm'
+        run: chmod +x ./scripts/build_web_wasm.sh
 
-      - name: Build Web
-        if: matrix.platform == 'web'
-        run: ./scripts/build_web.sh
+      - name: Build Web WASM
+        if: matrix.platform == 'web-wasm'
+        run: ./scripts/build_web_wasm.sh
+
+      # Web-WASM
+      - name: Grant execute permission for Web JS script
+        if: matrix.platform == 'web-js'
+        run: chmod +x ./scripts/build_web_js.sh
+
+      - name: Build Web JS
+        if: matrix.platform == 'web-js'
+        run: ./scripts/build_web_js.sh
 
       # MacOS
       - name: Grant execute permission for MacOS script

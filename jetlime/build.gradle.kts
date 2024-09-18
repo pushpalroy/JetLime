@@ -24,6 +24,11 @@ kotlin {
     }
   }
 
+  js(IR) {
+    browser()
+    binaries.library()
+  }
+
   @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
   wasmJs {
     browser {
@@ -31,7 +36,7 @@ kotlin {
         enabled = false
       }
     }
-    binaries.executable()
+    binaries.library()
   }
 
   androidTarget {
@@ -61,7 +66,6 @@ kotlin {
       implementation(compose.material3)
       implementation(compose.ui)
       implementation(compose.components.uiToolingPreview)
-
       api(libs.kotlinx.collections.immutable)
     }
     desktopMain.dependencies {
