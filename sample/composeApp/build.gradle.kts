@@ -9,9 +9,15 @@ plugins {
   alias(libs.plugins.jetbrains.compose)
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.cocoapods)
+  alias(libs.plugins.compose.compiler.report.generator)
 }
 
 kotlin {
+  js(IR) {
+    browser()
+    binaries.executable()
+  }
+
   @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
   wasmJs {
     moduleName = "composeApp"
@@ -34,7 +40,7 @@ kotlin {
   androidTarget {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
-      jvmTarget.set(JvmTarget.JVM_1_8)
+      jvmTarget.set(JvmTarget.JVM_17)
     }
   }
 
@@ -86,6 +92,9 @@ kotlin {
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
+    }
+    jsMain.dependencies {
+      implementation(compose.html.core)
     }
   }
 }
@@ -148,8 +157,8 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   buildFeatures {
     compose = true

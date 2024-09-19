@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.dokka) apply false
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.kotlin.cocoapods) apply false
+  alias(libs.plugins.compose.compiler.report.generator) apply false
 }
 
 // Compose Compiler Metrics

@@ -1,7 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
   alias(libs.plugins.android.library)
@@ -15,9 +14,9 @@ plugins {
 
 kotlin {
   cocoapods {
+    version = "3.0.1"
     summary = "JetLime KMP Library"
     homepage = "https://github.com/pushpalroy/JetLime"
-    version = "3.0.0"
     ios.deploymentTarget = "14.0"
     framework {
       baseName = "JetLime"
@@ -25,44 +24,33 @@ kotlin {
     }
   }
 
+  js(IR) {
+    browser()
+    binaries.library()
+  }
+
   @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
   wasmJs {
-    moduleName = "composeApp"
     browser {
-      commonWebpackConfig {
-        outputFileName = "composeApp.js"
-        devServer =
-          (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-            static =
-              (static ?: mutableListOf()).apply {
-                // Serve sources to debug inside browser
-                add(project.projectDir.path)
-              }
-          }
+      testTask {
+        enabled = false
       }
     }
-    binaries.executable()
+    binaries.library()
   }
 
   androidTarget {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
-      jvmTarget.set(JvmTarget.JVM_1_8)
+      jvmTarget.set(JvmTarget.JVM_17)
     }
   }
 
   jvm("desktop")
 
-  listOf(
-    iosX64(),
-    iosArm64(),
-    iosSimulatorArm64(),
-  ).forEach { iosTarget ->
-    iosTarget.binaries.framework {
-      baseName = "ComposeApp"
-      isStatic = true
-    }
-  }
+  iosX64()
+  iosArm64()
+  iosSimulatorArm64()
 
   sourceSets {
     val desktopMain by getting
@@ -78,7 +66,6 @@ kotlin {
       implementation(compose.material3)
       implementation(compose.ui)
       implementation(compose.components.uiToolingPreview)
-
       api(libs.kotlinx.collections.immutable)
     }
     desktopMain.dependencies {
@@ -116,8 +103,8 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   buildFeatures {
     compose = true
@@ -160,7 +147,7 @@ mavenPublishing {
   val artifactId = "jetlime"
 
   // Define coordinates for the published artifact
-  coordinates("io.github.pushpalroy", artifactId, "3.0.0")
+  coordinates("io.github.pushpalroy", artifactId, "3.0.1")
 
   // Configure POM metadata for the published artifact
   pom {

@@ -179,6 +179,7 @@ fun JetLimeExtendedEvent(
           start = Offset(x = timelineXOffset, y = yOffset),
           end = Offset(x = timelineXOffset, y = this.size.height),
           strokeWidth = jetLimeStyle.lineThickness.toPx(),
+          pathEffect = jetLimeStyle.pathEffect,
         )
       }
 
