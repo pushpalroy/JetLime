@@ -10,6 +10,7 @@ plugins {
   alias(libs.plugins.kotlin.cocoapods)
   alias(libs.plugins.nexus.vanniktech.publish)
   alias(libs.plugins.dokka)
+  alias(libs.plugins.kotlin.binary.compatibility)
 }
 
 kotlin {

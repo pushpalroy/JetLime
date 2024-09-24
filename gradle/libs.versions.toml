@@ -1,18 +1,19 @@
 [versions]
-activityCompose = "1.9.2"
+kotlin = "2.0.20-RC2"
 agp = "8.5.2"
-compose-plugin = "1.6.11"
 jetlime = "3.0.1"
+jetbrainsCompose = "1.6.11"
+activityCompose = "1.9.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-kotlin = "2.0.20-RC2"
-kotlinxCollectionsImmutable = "0.3.7"
-truth = "1.3.0"
-vanniktech = "0.28.0"
+immutableCollections = "0.3.7"
+truth = "1.4.2"
+vanniktech = "0.29.0"
 dokka = "1.9.20"
 report = "1.4.0"
 spotless = "6.25.0"
 androidxTest = "1.6.2"
+kotlinBinaryCompatibility = "0.16.3"
 
 [libraries]
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
@@ -22,7 +23,7 @@ androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "immutableCollections" }
 jetlime = { module = "io.github.pushpalroy:jetlime", version.ref = "jetlime" }
 junit = { module = "junit:junit", version.ref = "junit" }
 dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
@@ -30,7 +31,7 @@ dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", v
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrainsCompose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-compiler-report-generator = { id = "dev.shreyaspatil.compose-compiler-report-generator", version.ref = "report" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -38,3 +39,4 @@ kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref =
 nexus-vanniktech-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+kotlin-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinBinaryCompatibility" }
