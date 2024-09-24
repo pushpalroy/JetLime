@@ -76,6 +76,6 @@ fun BasicVerticalTimeLine(modifier: Modifier = Modifier, showSnackbar: (message:
 @ExperimentalAnimationApi
 @Preview
 @Composable
-private fun PreviewBasicVerticalTimeLine() {
+private fun BasicVerticalTimeLinePreview() {
   BasicVerticalTimeLine {}
 }
