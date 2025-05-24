@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.dokka.gradle.DokkaBasePlugin
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -125,15 +126,26 @@ android {
   }
 }
 
-tasks.dokkaHtml.configure {
-  outputDirectory.set(file("../docs"))
-  pluginsMapConfiguration.set(
-    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""),
-  )
+
+dokka {
   dokkaSourceSets {
-    named("commonMain") {
-      noAndroidSdkLink.set(false)
+    pluginsConfiguration {
+
     }
+    pluginsConfiguration {
+      html {
+        separateInheritedMembers = true
+      }
+    }
+    commonMain {
+      enableAndroidDocumentationLink = false
+    }
+  }
+}
+
+tasks {
+  dokkaGeneratePublicationHtml {
+    outputDirectory = file("../docs")
   }
 }
 
