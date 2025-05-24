@@ -16,17 +16,17 @@ plugins {
 // https://github.com/androidx/androidx/blob/androidx-main/compose/compiler/design/compiler-metrics.md#enabling-metrics
 subprojects {
   tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
+    compilerOptions {
       if (project.findProperty("composeCompilerReports") == "true") {
-        freeCompilerArgs += listOf(
+        freeCompilerArgs.addAll(
           "-P",
-          "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.buildDir.absolutePath}/compose_compiler",
+          "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.layout.buildDirectory.get().asFile.absolutePath}/compose_compiler",
         )
       }
       if (project.findProperty("composeCompilerMetrics") == "true") {
-        freeCompilerArgs += listOf(
+        freeCompilerArgs.addAll(
           "-P",
-          "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.buildDir.absolutePath}/compose_compiler",
+          "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.layout.buildDirectory.get().asFile.absolutePath}/compose_compiler",
         )
       }
     }
@@ -35,7 +35,7 @@ subprojects {
   configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
       target("**/*.kt")
-      targetExclude("$buildDir/**/*.kt")
+      targetExclude("${project.layout.buildDirectory.get()}/**/*.kt")
       targetExclude("bin/**/*.kt")
       ktlint()
         .setEditorConfigPath("$rootDir/.editorconfig")
