@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.*
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.multiplatform)
@@ -8,22 +12,9 @@ plugins {
   alias(libs.plugins.dokka)
 }
 
-// Dokka V2 extension
-// Shared configuration without deprecated properties
-dokka {
-  moduleName.set("jetlime")
-  dokkaSourceSets.configureEach {
-    enableAndroidDocumentationLink.set(true)
-    val moduleDoc = rootProject.file("dokkaModule.md")
-    val packageDoc = rootProject.file("dokkaPackage.md")
-    if (moduleDoc.exists()) includes.from(moduleDoc.path)
-    if (packageDoc.exists()) includes.from(packageDoc.path)
-  }
-}
-
 kotlin {
   cocoapods {
-    version = "4.1.1"
+    version = "3.0.1"
     summary = "JetLime KMP Library"
     homepage = "https://github.com/pushpalroy/JetLime"
     ios.deploymentTarget = "14.0"
@@ -49,9 +40,9 @@ kotlin {
   }
 
   androidTarget {
-    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
-      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+      jvmTarget.set(JvmTarget.JVM_17)
     }
   }
 
@@ -67,6 +58,7 @@ kotlin {
     androidMain.dependencies {
       implementation(compose.preview)
       implementation(libs.androidx.activity.compose)
+      implementation(libs.dokka.android)
     }
     commonMain.dependencies {
       implementation(compose.runtime)
@@ -84,15 +76,15 @@ kotlin {
 
 android {
   namespace = "com.pushpal.jetlime"
-  compileSdk = 36
+  compileSdk = 34
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   sourceSets["main"].res.srcDirs("src/androidMain/res")
   sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
   defaultConfig {
-    minSdk = 23
-    testOptions.targetSdk = 36
+    minSdk = 21
+    testOptions.targetSdk = 34
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
@@ -121,8 +113,8 @@ android {
   dependencies {
     debugApi(compose.uiTooling)
 
-    // Android UI tests
-    androidTestImplementation(platform(libs.androidx.compose.bom))
+    // Test
+    // Compose BOM
     androidTestImplementation(libs.androidx.compose.ui.test)
     debugImplementation(libs.androidx.ui.test.manifest)
     // Others
@@ -133,23 +125,51 @@ android {
   }
 }
 
-// Compose Compiler metrics/reports
-composeCompiler {
-  reportsDestination = layout.buildDirectory.dir("compose_compiler/reports")
-  metricsDestination = layout.buildDirectory.dir("compose_compiler/metrics")
+
+dokka {
+  dokkaSourceSets {
+    pluginsConfiguration {
+
+    }
+    pluginsConfiguration {
+      html {
+        separateInheritedMembers = true
+      }
+    }
+    commonMain {
+      enableAndroidDocumentationLink = false
+    }
+  }
+}
+
+tasks {
+  dokkaGeneratePublicationHtml {
+    outputDirectory = file("../docs")
+  }
+}
+
+publishing {
+  repositories {
+    maven("https://europe-west3-maven.pkg.dev/mik-music/trainyapp") {
+      credentials {
+        username = "_json_key_base64"
+        password = System.getenv("GOOGLE_KEY")?.toByteArray()?.let {
+          Base64.getEncoder().encodeToString(it)
+        }
+      }
+
+      authentication {
+        create<BasicAuthentication>("basic")
+      }
+    }
+  }
 }
 
 mavenPublishing {
-  // Configure publishing to Maven Central
-  publishToMavenCentral()
-
-  // Enable GPG signing for all publications
-  signAllPublications()
-
   val artifactId = "jetlime"
 
   // Define coordinates for the published artifact
-  coordinates("io.github.pushpalroy", artifactId, "4.1.1")
+  coordinates("com.trainyapp", artifactId, "3.3.0-SNAPSHOT")
 
   // Configure POM metadata for the published artifact
   pom {
@@ -180,18 +200,4 @@ mavenPublishing {
       developerConnection.set("scm:git:ssh://git@github.com/pushpalroy/jetlime.git")
     }
   }
-}
-
-// Copy Dokka output into root docs directory (legacy location expected by project)
-tasks.register<Copy>("syncDokkaToDocs") {
-  description = "Sync Dokka HTML output to root docs directory"
-  group = "documentation"
-  dependsOn("dokkaGenerateHtml")
-  val srcDir = layout.buildDirectory.dir("dokka/html")
-  val destDir = rootProject.layout.projectDirectory.dir("docs")
-  doFirst {
-    delete(destDir)
-  }
-  from(srcDir)
-  into(destDir)
 }

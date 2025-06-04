@@ -26,6 +26,7 @@ package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
@@ -52,6 +53,7 @@ class JetLimeEventStyle internal constructor(
   val pointAnimation: EventPointAnimation?,
   val pointStrokeWidth: Dp,
   val pointStrokeColor: Color,
+  val lineBrush: Brush?
 ) {
 
   /** The position of the event in the UI component. */

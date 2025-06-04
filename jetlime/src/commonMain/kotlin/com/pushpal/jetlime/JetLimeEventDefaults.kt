@@ -31,6 +31,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -70,6 +71,7 @@ object JetLimeEventDefaults {
    * @param pointAnimation The animation for the point, if any.
    * @param pointStrokeWidth The stroke width of the point. Defaults to [PointStrokeWidth].
    * @param pointStrokeColor The stroke color of the point. Defaults to the primary color from MaterialTheme's color scheme.
+   * @param lineBrush the [Brush] for drawing the line to the next event
    * @return A [JetLimeEventStyle] object configured with the given parameters.
    */
   @Composable
@@ -83,7 +85,8 @@ object JetLimeEventDefaults {
     pointAnimation: EventPointAnimation? = null,
     pointStrokeWidth: Dp = PointStrokeWidth,
     pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
-  ): JetLimeEventStyle = JetLimeEventStyle(
+    lineBrush: Brush? = null,
+    ): JetLimeEventStyle = JetLimeEventStyle(
     pointPlacement = pointPlacement,
     pointType = pointType,
     pointColor = pointColor,
@@ -92,7 +95,8 @@ object JetLimeEventDefaults {
     pointAnimation = pointAnimation,
     pointStrokeWidth = pointStrokeWidth,
     pointStrokeColor = pointStrokeColor,
-  ).apply {
+    lineBrush = lineBrush,
+    ).apply {
     this.position = position
   }
 
