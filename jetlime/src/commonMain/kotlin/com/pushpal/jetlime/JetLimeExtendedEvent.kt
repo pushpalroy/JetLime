@@ -98,7 +98,7 @@ fun JetLimeExtendedEvent(
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   val layoutDirection = LocalLayoutDirection.current
   val isRtl = layoutDirection == LayoutDirection.Rtl
-  val lineBrush = style.lineBrush ?: jetLimeStyle.lineBrush
+  val lineBrush = remember(style, jetLimeStyle) { style.lineBrush ?: jetLimeStyle.lineBrush }
 
   BoxWithConstraints(modifier = modifier) {
     var logicalTimelineXOffset by remember { mutableFloatStateOf(0f) }
