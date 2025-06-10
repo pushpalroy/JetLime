@@ -114,7 +114,7 @@ class JetLimeStyle internal constructor(
     result = 31 * result + itemSpacing.hashCode()
     result = 31 * result + lineThickness.hashCode()
     result = 31 * result + lineBrush.hashCode()
-    result = 31 * result + pathEffect.hashCode()
+    result = 31 * result + (pathEffect?.hashCode() ?: 0)
     result = 31 * result + lineHorizontalAlignment.hashCode()
     result = 31 * result + lineVerticalAlignment.hashCode()
     return result

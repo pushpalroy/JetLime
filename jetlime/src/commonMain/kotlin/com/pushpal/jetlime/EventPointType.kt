@@ -134,9 +134,9 @@ class EventPointType internal constructor(
    */
   override fun hashCode(): Int {
     var result = type.hashCode()
-    result = 31 * result + icon.hashCode()
-    result = 31 * result + tint.hashCode()
-    result = 31 * result + fillPercent.hashCode()
+    result = 31 * result + (icon?.hashCode() ?: 0)
+    result = 31 * result + (tint?.hashCode() ?: 0)
+    result = 31 * result + (fillPercent?.hashCode() ?: 0)
     return result
   }
 }

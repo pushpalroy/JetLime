@@ -14,7 +14,7 @@ plugins {
 
 kotlin {
   cocoapods {
-    version = "3.0.1"
+    version = "3.1.0"
     summary = "JetLime KMP Library"
     homepage = "https://github.com/pushpalroy/JetLime"
     ios.deploymentTarget = "14.0"
@@ -147,7 +147,7 @@ mavenPublishing {
   val artifactId = "jetlime"
 
   // Define coordinates for the published artifact
-  coordinates("io.github.pushpalroy", artifactId, "3.0.1")
+  coordinates("io.github.pushpalroy", artifactId, "3.1.0")
 
   // Configure POM metadata for the published artifact
   pom {
