@@ -103,7 +103,7 @@ class JetLimeEventStyle internal constructor(
     result = 31 * result + pointColor.hashCode()
     result = 31 * result + pointFillColor.hashCode()
     result = 31 * result + pointRadius.hashCode()
-    result = 31 * result + pointAnimation.hashCode()
+    result = 31 * result + (pointAnimation?.hashCode() ?: 0)
     result = 31 * result + pointStrokeWidth.hashCode()
     result = 31 * result + pointStrokeColor.hashCode()
 

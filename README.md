@@ -2,8 +2,8 @@
 
 > A simple yet highly customizable UI library to show a timeline view in Compose Multiplatform.
 
-[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.6.11-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.20-blue.svg?color=blue&style=for-the-badge)
+[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.8.1-blue?style=for-the-badge&logo=appveyor)](https://developer.android.com/jetpack/androidx/releases/compose)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.1.21-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -33,7 +33,7 @@ In `build.gradle` of shared module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:3.0.1")
+  implementation("io.github.pushpalroy:jetlime:3.1.0")
 }
 ```
 
