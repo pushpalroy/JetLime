@@ -1,31 +1,29 @@
 [versions]
-activityCompose = "1.9.2"
-agp = "8.5.2"
-compose-plugin = "1.6.11"
-jetlime = "3.0.1"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-kotlin = "2.0.20-RC2"
-kotlinxCollectionsImmutable = "0.3.7"
-truth = "1.3.0"
-vanniktech = "0.28.0"
-dokka = "1.9.20"
-report = "1.4.0"
-spotless = "6.25.0"
-androidxTest = "1.6.2"
+kotlin = "2.2.0"
+agp = "8.12.0"
+activityCompose = "1.10.1"
+compose-plugin = "1.8.2"
+kotlinxCollectionsImmutable = "0.4.0"
+truth = "1.4.4"
+vanniktech = "0.34.0"
+dokka = "2.0.0"
+spotless = "7.2.1"
+report = "1.4.2"
+junitVersion = "1.3.0"
+androidxTest = "1.7.0"
+composeBom = "2025.07.00"
 
 [libraries]
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTest" }
 androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
-jetlime = { module = "io.github.pushpalroy:jetlime", version.ref = "jetlime" }
-junit = { module = "junit:junit", version.ref = "junit" }
-dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
+junit = { module = "junit:junit", version = "4.13.2" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

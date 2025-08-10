@@ -81,18 +81,16 @@ object JetLimeEventDefaults {
     pointAnimation: EventPointAnimation? = null,
     pointStrokeWidth: Dp = PointStrokeWidth,
     pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
-  ): JetLimeEventStyle {
-    return JetLimeEventStyle(
-      pointType = pointType,
-      pointColor = pointColor,
-      pointFillColor = pointFillColor,
-      pointRadius = pointRadius,
-      pointAnimation = pointAnimation,
-      pointStrokeWidth = pointStrokeWidth,
-      pointStrokeColor = pointStrokeColor,
-    ).apply {
-      this.position = position
-    }
+  ): JetLimeEventStyle = JetLimeEventStyle(
+    pointType = pointType,
+    pointColor = pointColor,
+    pointFillColor = pointFillColor,
+    pointRadius = pointRadius,
+    pointAnimation = pointAnimation,
+    pointStrokeWidth = pointStrokeWidth,
+    pointStrokeColor = pointStrokeColor,
+  ).apply {
+    this.position = position
   }
 
   /**
@@ -108,11 +106,9 @@ object JetLimeEventDefaults {
     initialValue: Float = 1.0f,
     targetValue: Float = 1.2f,
     animationSpec: InfiniteRepeatableSpec<Float> = PointAnimation,
-  ): EventPointAnimation {
-    return EventPointAnimation(
-      initialValue = initialValue,
-      targetValue = targetValue,
-      animationSpec = animationSpec,
-    )
-  }
+  ): EventPointAnimation = EventPointAnimation(
+    initialValue = initialValue,
+    targetValue = targetValue,
+    animationSpec = animationSpec,
+  )
 }

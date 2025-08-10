@@ -1,7 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.multiplatform)
@@ -40,9 +36,9 @@ kotlin {
   }
 
   androidTarget {
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
-      jvmTarget.set(JvmTarget.JVM_17)
+      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
   }
 
@@ -58,7 +54,6 @@ kotlin {
     androidMain.dependencies {
       implementation(compose.preview)
       implementation(libs.androidx.activity.compose)
-      implementation(libs.dokka.android)
     }
     commonMain.dependencies {
       implementation(compose.runtime)
@@ -76,7 +71,7 @@ kotlin {
 
 android {
   namespace = "com.pushpal.jetlime"
-  compileSdk = 34
+  compileSdk = 36
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -84,7 +79,7 @@ android {
 
   defaultConfig {
     minSdk = 21
-    testOptions.targetSdk = 34
+    testOptions.targetSdk = 36
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
@@ -113,8 +108,8 @@ android {
   dependencies {
     debugApi(compose.uiTooling)
 
-    // Test
-    // Compose BOM
+    // Android UI tests
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test)
     debugImplementation(libs.androidx.ui.test.manifest)
     // Others
@@ -125,6 +120,13 @@ android {
   }
 }
 
+// Compose Compiler metrics/reports
+composeCompiler {
+  reportsDestination = layout.buildDirectory.dir("compose_compiler/reports")
+  metricsDestination = layout.buildDirectory.dir("compose_compiler/metrics")
+}
+
+// Dokka
 tasks.dokkaHtml.configure {
   outputDirectory.set(file("../docs"))
   pluginsMapConfiguration.set(
@@ -139,7 +141,7 @@ tasks.dokkaHtml.configure {
 
 mavenPublishing {
   // Configure publishing to Maven Central
-  publishToMavenCentral(SonatypeHost.S01)
+  publishToMavenCentral()
 
   // Enable GPG signing for all publications
   signAllPublications()

@@ -57,7 +57,5 @@ class ItemsList<T>(val items: List<T>) {
    *
    * @return The hash code value for this `ItemsList`.
    */
-  override fun hashCode(): Int {
-    return items.hashCode()
-  }
+  override fun hashCode(): Int = items.hashCode()
 }

@@ -12,6 +12,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    name: Spotless check
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4.1.7
+      - name: Set up JDK
+        uses: actions/setup-java@v4.3.0
+        with:
+          distribution: 'corretto'
+          java-version: 17
+      - name: spotless
+        run: ./gradlew spotlessCheck
+
   build:
     strategy:
       matrix:
@@ -32,7 +46,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
 
       - name: Java and Gradle set up
         if: matrix.platform != 'ios'
@@ -69,7 +83,7 @@ jobs:
         if: matrix.platform == 'web-wasm'
         run: ./scripts/build_web_wasm.sh
 
-      # Web-WASM
+      # Web-JS
       - name: Grant execute permission for Web JS script
         if: matrix.platform == 'web-js'
         run: chmod +x ./scripts/build_web_js.sh
