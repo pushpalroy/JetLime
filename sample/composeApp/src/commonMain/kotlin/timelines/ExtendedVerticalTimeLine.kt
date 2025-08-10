@@ -40,7 +40,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.pushpal.jetlime.EventPointType
 import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
@@ -49,9 +48,6 @@ import com.pushpal.jetlime.JetLimeExtendedEvent
 import data.Item
 import data.activityNames
 import data.placeNames
-import jetlime.sample.composeapp.generated.resources.Res
-import jetlime.sample.composeapp.generated.resources.icon_check
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import timelines.event.ExtendedEventAdditionalContent
 import timelines.event.ExtendedEventContent
@@ -91,10 +87,7 @@ fun ExtendedVerticalTimeLine(
           pointRadius = 14.dp,
           pointColor = Color.White,
           pointStrokeColor = MaterialTheme.colorScheme.onPrimaryContainer,
-          pointType = EventPointType.custom(
-            icon = painterResource(Res.drawable.icon_check),
-          ),
-          //pointType = index.decidePointType(),
+          pointType = index.decidePointType(),
         ),
         additionalContentMaxWidth = 88.dp,
         additionalContent = {

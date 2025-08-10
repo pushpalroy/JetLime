@@ -185,20 +185,20 @@ fun JetLimeExtendedEvent(
         )
       }
 
-      if (style.pointType.isEmptyOrFilled()) {
-        drawCircle(
-          color = style.pointColor,
-          radius = radius,
-          center = Offset(x = timelineXOffset, y = yOffset),
-        )
-      }
-
       drawCircle(
         color = style.pointColor,
         radius = radius,
         center = Offset(x = timelineXOffset, y = yOffset),
       )
 
+      if (style.pointType.isFilled()) {
+        val fillPercent = style.pointType.fillPercent?.coerceIn(0f, 1f) ?: 1f
+        drawCircle(
+          color = style.pointFillColor,
+          radius = radius * fillPercent,
+          center = Offset(x = timelineXOffset, y = yOffset),
+        )
+      }
       if (style.pointType.isCustom()) {
         val pointSizeInPixels = style.pointRadius.toPx() * 2.4f * radiusAnimFactor
         val iconSize = Size(pointSizeInPixels, pointSizeInPixels)

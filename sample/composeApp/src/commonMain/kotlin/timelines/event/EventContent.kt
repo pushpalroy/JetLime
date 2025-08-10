@@ -58,6 +58,7 @@ import com.pushpal.jetlime.JetLimeEventDefaults
 import data.Item
 import data.extractFirstTime
 import jetlime.sample.composeapp.generated.resources.Res
+import jetlime.sample.composeapp.generated.resources.icon_check
 import jetlime.sample.composeapp.generated.resources.image_1
 import jetlime.sample.composeapp.generated.resources.image_2
 import kotlinx.collections.immutable.persistentListOf
@@ -220,7 +221,7 @@ fun ExtendedEventContent(item: Item, modifier: Modifier = Modifier) {
 
 @Composable
 fun Int.decidePointAnimation(): EventPointAnimation? =
-  if (this == 2) JetLimeEventDefaults.pointAnimation() else null
+  if (this == 3) JetLimeEventDefaults.pointAnimation() else null
 
 fun placeImages(i: Int) = if (i == 1) {
   persistentListOf(
@@ -246,11 +247,20 @@ fun activityInfo(i: Int) = "${1 + i / 2} mi . ${15 + i * 2} min"
 fun activityDescription(i: Int) = "${1 + i % 12}:${if (i % 2 == 0) "00" else "30"} PM - " +
   "${1 + (i + 1) % 12}:${if ((i + 1) % 2 == 0) "00" else "30"} PM"
 
+@Composable
 fun Int.decidePointType(): EventPointType = when (this) {
   1 -> EventPointType.filled(
     0.8f,
   )
 
-  4 -> EventPointType.filled(0.2f)
+  2, 3 -> EventPointType.custom(
+    icon = painterResource(Res.drawable.icon_check),
+  )
+
+  4 -> EventPointType.filled(
+    0.4f,
+  )
+
+  5 -> EventPointType.Default
   else -> EventPointType.Default
 }
