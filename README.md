@@ -33,7 +33,7 @@ In `build.gradle` of shared module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:3.0.1")
+  implementation("io.github.pushpalroy:jetlime:4.0.0")
 }
 ```
 
@@ -320,6 +320,64 @@ The full API documentation is available here: [JetLime Documentation](https://pu
 ## 🤝 Contribution
 
 Would love to receive contributions! Read [contribution guidelines](CONTRIBUTING.md) for more information regarding contribution.
+
+### 🚀 Deploying to Maven Central
+
+This guide outlines the steps to publish a new version of the **Jetlime** library to **Maven Central**.
+
+***
+
+#### Step 1: Update the Version
+
+First, you need to **bump the version number** of the library. This is typically done within the `build.gradle.kts` file, specifically in the `coordinates(...)` call.
+
+***
+
+#### Step 2: Ensure GPG Key & Credentials
+
+Before publishing, you must configure your GPG signing key and Maven Central credentials.
+
+1.  **GPG Key Configuration**: Export your GPG key and configure it in your `~/.gradle/gradle.properties` file by setting the `signing.keyId`, `signing.password`, and `signing.secretKeyRingFile` properties.
+2.  **Sonatype Token**: Generate a token from the [Sonatype Central Portal](https://central.sonatype.com/account/security/api-keys/).
+3.  **Credential Configuration**: Add your Sonatype token to your `~/.gradle/gradle.properties` file or set them as environment variables:
+
+    ```properties
+    mavenCentralUsername=<your-token-id>
+    mavenCentralPassword=<your-token-secret>
+    ```
+
+***
+
+#### Step 3: Publish Locally (Test)
+
+It's highly recommended to perform a local publish first to ensure all artifacts are correctly generated.
+
+1.  **Run the local publish command:**
+    ```bash
+    ./gradlew publishToMavenLocal
+    ```
+2.  **Verify artifacts:** Check the `~/.m2/repository/io/github/pushpalroy/jetlime/<version>/` directory to confirm that the artifacts for your new version have been successfully created.
+
+***
+
+#### Step 4: Publish to Maven Central
+
+Once local verification is complete, you can publish the library to Maven Central.
+
+1.  **Execute the publish command:**
+    ```bash
+    ./gradlew publishToMavenCentral --stacktrace
+    ```
+    The `--stacktrace` option provides detailed error logs, which are useful for debugging any issues during the deployment process.
+
+***
+
+#### Step 5: Verify the Release
+
+After a successful publish, you should confirm that the new version is available publicly.
+
+1.  **Search Maven Central:** Navigate to the [Maven Central Search](https://central.sonatype.com/search) and search for your library to confirm that the new version is live and its artifacts are present.
+
 
 ## 💬 Discuss?
 
