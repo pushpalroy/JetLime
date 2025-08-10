@@ -71,14 +71,12 @@ object JetLimeDefaults {
     start: Offset = Offset.Zero,
     end: Offset = Offset.Infinite,
     tileMode: TileMode = TileMode.Clamp,
-  ): Brush {
-    return Brush.linearGradient(
-      colors = colors,
-      start = start,
-      end = end,
-      tileMode = tileMode,
-    )
-  }
+  ): Brush = Brush.linearGradient(
+    colors = colors,
+    start = start,
+    end = end,
+    tileMode = tileMode,
+  )
 
   /**
    * Creates a solid color brush for lines in [JetLimeColumn] or [JetLimeRow] components.
@@ -87,9 +85,7 @@ object JetLimeDefaults {
    * @return A [Brush] object representing a solid color.
    */
   @Composable
-  fun lineSolidBrush(color: Color = MaterialTheme.colorScheme.primary): Brush {
-    return SolidColor(color)
-  }
+  fun lineSolidBrush(color: Color = MaterialTheme.colorScheme.primary): Brush = SolidColor(color)
 
   /**
    * Creates a default [JetLimeStyle] object with specified parameters.
@@ -112,17 +108,15 @@ object JetLimeDefaults {
     pathEffect: PathEffect?,
     lineHorizontalAlignment: HorizontalAlignment = TOP,
     lineVerticalAlignment: VerticalAlignment = LEFT,
-  ): JetLimeStyle {
-    return JetLimeStyle(
-      contentDistance = contentDistance,
-      itemSpacing = itemSpacing,
-      lineThickness = lineThickness,
-      lineBrush = lineBrush,
-      pathEffect = pathEffect,
-      lineHorizontalAlignment = lineHorizontalAlignment,
-      lineVerticalAlignment = lineVerticalAlignment,
-    )
-  }
+  ): JetLimeStyle = JetLimeStyle(
+    contentDistance = contentDistance,
+    itemSpacing = itemSpacing,
+    lineThickness = lineThickness,
+    lineBrush = lineBrush,
+    pathEffect = pathEffect,
+    lineHorizontalAlignment = lineHorizontalAlignment,
+    lineVerticalAlignment = lineVerticalAlignment,
+  )
 
   /**
    * Creates a column style configuration for [JetLimeColumn].

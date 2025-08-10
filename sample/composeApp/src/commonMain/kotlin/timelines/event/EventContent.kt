@@ -219,9 +219,8 @@ fun ExtendedEventContent(item: Item, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Int.decidePointAnimation(): EventPointAnimation? {
-  return if (this == 2) JetLimeEventDefaults.pointAnimation() else null
-}
+fun Int.decidePointAnimation(): EventPointAnimation? =
+  if (this == 2) JetLimeEventDefaults.pointAnimation() else null
 
 fun placeImages(i: Int) = if (i == 1) {
   persistentListOf(
@@ -247,13 +246,11 @@ fun activityInfo(i: Int) = "${1 + i / 2} mi . ${15 + i * 2} min"
 fun activityDescription(i: Int) = "${1 + i % 12}:${if (i % 2 == 0) "00" else "30"} PM - " +
   "${1 + (i + 1) % 12}:${if ((i + 1) % 2 == 0) "00" else "30"} PM"
 
-fun Int.decidePointType(): EventPointType {
-  return when (this) {
-    1 -> EventPointType.filled(
-      0.8f,
-    )
+fun Int.decidePointType(): EventPointType = when (this) {
+  1 -> EventPointType.filled(
+    0.8f,
+  )
 
-    4 -> EventPointType.filled(0.2f)
-    else -> EventPointType.Default
-  }
+  4 -> EventPointType.filled(0.2f)
+  else -> EventPointType.Default
 }

@@ -65,10 +65,8 @@ class JetLimeEventStyle internal constructor(
    * @return A [JetLimeEventStyle] instance with the updated position.
    */
   @Stable
-  fun setPosition(position: EventPosition): JetLimeEventStyle {
-    return this.apply {
-      this.position = position
-    }
+  fun setPosition(position: EventPosition): JetLimeEventStyle = this.apply {
+    this.position = position
   }
 
   /**

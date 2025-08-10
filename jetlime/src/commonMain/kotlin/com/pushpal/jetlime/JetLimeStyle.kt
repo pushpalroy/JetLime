@@ -74,10 +74,8 @@ class JetLimeStyle internal constructor(
    * @return A [JetLimeStyle] instance with the updated arrangement.
    */
   @Stable
-  internal fun alignment(arrangement: Arrangement): JetLimeStyle {
-    return this.apply {
-      this.arrangement = arrangement
-    }
+  internal fun alignment(arrangement: Arrangement): JetLimeStyle = this.apply {
+    this.arrangement = arrangement
   }
 
   /**

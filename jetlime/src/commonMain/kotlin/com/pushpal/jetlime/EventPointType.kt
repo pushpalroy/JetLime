@@ -86,9 +86,7 @@ class EventPointType internal constructor(
    * @return `true` if the current EventPointType is filled, `false` otherwise.
    */
   @Stable
-  fun isFilled(): Boolean {
-    return this.type == FILLED
-  }
+  fun isFilled(): Boolean = this.type == FILLED
 
   /**
    * A helper function to check if the current [EventPointType] is [CUSTOM]
@@ -96,9 +94,7 @@ class EventPointType internal constructor(
    * @return `true` if the current EventPointType is custom, `false` otherwise.
    */
   @Stable
-  fun isCustom(): Boolean {
-    return this.type == CUSTOM
-  }
+  fun isCustom(): Boolean = this.type == CUSTOM
 
   /**
    * A helper function to check if the current [EventPointType] is [EMPTY] or [FILLED]
@@ -106,9 +102,7 @@ class EventPointType internal constructor(
    * @return `true` if the current EventPointType is empty or filled, `false` otherwise.
    */
   @Stable
-  fun isEmptyOrFilled(): Boolean {
-    return this == EMPTY || this.type == FILLED
-  }
+  fun isEmptyOrFilled(): Boolean = this == EMPTY || this.type == FILLED
 
   /**
    * Checks if this instance is equal to another object. Two instances of [EventPointType] are
