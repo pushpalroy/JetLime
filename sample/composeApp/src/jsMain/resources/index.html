@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>JetLime Sample</title>
-  <script type="application/javascript" src="skiko.js"></script>
-  <script type="application/javascript" src="composeApp.js"></script>
+  <!-- skiko.js might still be okay in head if it's non-blocking, but moving both is safer for testing -->
 </head>
 <body>
 <canvas id="ComposeTarget"></canvas>
+<script type="application/javascript" src="skiko.js"></script>
+<script type="application/javascript" src="composeApp.js"></script>
 </body>
 </html>

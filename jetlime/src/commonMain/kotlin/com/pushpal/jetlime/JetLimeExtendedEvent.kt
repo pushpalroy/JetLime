@@ -37,6 +37,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
@@ -183,35 +185,36 @@ fun JetLimeExtendedEvent(
         )
       }
 
-      if (style.pointType.isEmptyOrFilled()) {
-        drawCircle(
-          color = style.pointColor,
-          radius = radius,
-          center = Offset(x = timelineXOffset, y = yOffset),
-        )
-      }
+      drawCircle(
+        color = style.pointColor,
+        radius = radius,
+        center = Offset(x = timelineXOffset, y = yOffset),
+      )
 
       if (style.pointType.isFilled()) {
+        val fillPercent = style.pointType.fillPercent?.coerceIn(0f, 1f) ?: 1f
         drawCircle(
           color = style.pointFillColor,
-          radius = radius - radius * (1 - (style.pointType.fillPercent ?: 1f)),
+          radius = radius * fillPercent,
           center = Offset(x = timelineXOffset, y = yOffset),
         )
       }
-
       if (style.pointType.isCustom()) {
+        val pointSizeInPixels = style.pointRadius.toPx() * 2.4f * radiusAnimFactor
+        val iconSize = Size(pointSizeInPixels, pointSizeInPixels)
         style.pointType.icon?.let { painter ->
           this.withTransform(
             transformBlock = {
               translate(
-                left = timelineXOffset - painter.intrinsicSize.width / 2f,
-                top = yOffset - painter.intrinsicSize.height / 2f,
+                left = timelineXOffset - iconSize.width / 2f,
+                top = yOffset - iconSize.height / 2f,
               )
             },
             drawBlock = {
               this.drawIntoCanvas {
                 with(painter) {
-                  draw(intrinsicSize)
+                  val tint = style.pointType.tint?.let { ColorFilter.tint(it) }
+                  draw(size = iconSize, colorFilter = tint)
                 }
               }
             },
