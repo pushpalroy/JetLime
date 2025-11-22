@@ -124,7 +124,13 @@ internal fun VerticalEvent(
           VerticalAlignment.LEFT -> style.pointRadius.toPx()
           VerticalAlignment.RIGHT -> this.size.width - style.pointRadius.toPx()
         }
-        val yOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val yOffset = when (style.pointPlacement) {
+          PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          PointPlacement.CENTER -> {
+            val effectiveHeight = this.size.height - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveHeight / 2f
+          }
+        }
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
@@ -267,7 +273,13 @@ internal fun HorizontalEvent(
           HorizontalAlignment.TOP -> style.pointRadius.toPx()
           HorizontalAlignment.BOTTOM -> this.size.height - style.pointRadius.toPx()
         }
-        val xOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val xOffset = when (style.pointPlacement) {
+          PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          PointPlacement.CENTER -> {
+            val effectiveWidth = this.size.width - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveWidth / 2f
+          }
+        }
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 

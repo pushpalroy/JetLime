@@ -40,9 +40,11 @@ import androidx.compose.ui.unit.Dp
  * @property pointAnimation Optional animation for the event point.
  * @property pointStrokeWidth The stroke width of the event point.
  * @property pointStrokeColor The stroke color of the event point.
+ * @property pointPlacement The placement of the point relative to the event content (START or CENTER).
  */
 @Immutable
 class JetLimeEventStyle internal constructor(
+  var pointPlacement: PointPlacement,
   val pointType: EventPointType,
   val pointColor: Color,
   val pointFillColor: Color,
@@ -70,6 +72,17 @@ class JetLimeEventStyle internal constructor(
   }
 
   /**
+   * Sets the placement of the point relative to the event content.
+   *
+   * @param pointPlacement The [PointPlacement] to use for drawing the point.
+   * @return A [JetLimeEventStyle] instance with the updated point placement.
+   */
+  @Stable
+  fun setPointPlacement(pointPlacement: PointPlacement): JetLimeEventStyle = this.apply {
+    this.pointPlacement = pointPlacement
+  }
+
+  /**
    * Checks if this instance is equal to another object. Two instances of [JetLimeEventStyle] are
    * considered equal if they have the same values for all properties.
    *
@@ -80,6 +93,7 @@ class JetLimeEventStyle internal constructor(
     if (this === other) return true
     if (other == null || other !is JetLimeEventStyle) return false
     if (position != other.position) return false
+    if (pointPlacement != other.pointPlacement) return false
     if (pointType != other.pointType) return false
     if (pointColor != other.pointColor) return false
     if (pointFillColor != other.pointFillColor) return false
@@ -97,6 +111,7 @@ class JetLimeEventStyle internal constructor(
    */
   override fun hashCode(): Int {
     var result = position.hashCode()
+    result = 31 * result + pointPlacement.hashCode()
     result = 31 * result + pointType.hashCode()
     result = 31 * result + pointColor.hashCode()
     result = 31 * result + pointFillColor.hashCode()
@@ -107,4 +122,15 @@ class JetLimeEventStyle internal constructor(
 
     return result
   }
+}
+
+/**
+ * Defines the placement of the timeline point relative to the event content.
+ */
+enum class PointPlacement {
+  /** Point drawn at the start edge (existing default behaviour). */
+  START,
+
+  /** Point drawn centered relative to the event content box. */
+  CENTER,
 }

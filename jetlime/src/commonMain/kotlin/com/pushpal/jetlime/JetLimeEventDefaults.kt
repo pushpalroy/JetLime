@@ -74,6 +74,7 @@ object JetLimeEventDefaults {
   @Composable
   fun eventStyle(
     position: EventPosition,
+    pointPlacement: PointPlacement = PointPlacement.START,
     pointType: EventPointType = PointType,
     pointColor: Color = MaterialTheme.colorScheme.onPrimary,
     pointFillColor: Color = MaterialTheme.colorScheme.primary,
@@ -82,6 +83,7 @@ object JetLimeEventDefaults {
     pointStrokeWidth: Dp = PointStrokeWidth,
     pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
   ): JetLimeEventStyle = JetLimeEventStyle(
+    pointPlacement = pointPlacement,
     pointType = pointType,
     pointColor = pointColor,
     pointFillColor = pointFillColor,
