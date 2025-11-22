@@ -78,7 +78,7 @@ android {
   sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
   defaultConfig {
-    minSdk = 21
+    minSdk = 23
     testOptions.targetSdk = 36
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
