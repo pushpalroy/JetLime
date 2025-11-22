@@ -23,13 +23,15 @@
 *
 */
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
+import kotlinx.browser.document
 import org.jetbrains.skiko.wasm.onWasmReady
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
   onWasmReady {
-    CanvasBasedWindow("KotlinBrowser") {
+    val root = document.getElementById("root") ?: error("Missing #root container")
+    ComposeViewport(root) {
       App()
     }
   }
