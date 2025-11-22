@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.2.21"
-agp = "8.13.1"
+agp = "8.5.2"
 activityCompose = "1.12.0"
 compose-plugin = "1.9.3"
 kotlinxCollectionsImmutable = "0.4.0"
