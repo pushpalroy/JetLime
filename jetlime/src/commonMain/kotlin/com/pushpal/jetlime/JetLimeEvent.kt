@@ -43,7 +43,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.Arrangement.HORIZONTAL
 import com.pushpal.jetlime.Arrangement.VERTICAL
@@ -115,14 +117,24 @@ internal fun VerticalEvent(
   content: @Composable () -> Unit,
 ) {
   val verticalAlignment = remember { jetLimeStyle.lineVerticalAlignment }
+  val layoutDirection = LocalLayoutDirection.current
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   Box(
     modifier = modifier
       .wrapContentSize()
       .drawBehind {
+        val isRtl = layoutDirection == LayoutDirection.Rtl
         val xOffset = when (verticalAlignment) {
-          VerticalAlignment.LEFT -> style.pointRadius.toPx()
-          VerticalAlignment.RIGHT -> this.size.width - style.pointRadius.toPx()
+          VerticalAlignment.LEFT -> if (isRtl) {
+            this.size.width - style.pointRadius.toPx()
+          } else {
+            style.pointRadius.toPx()
+          }
+          VerticalAlignment.RIGHT -> if (isRtl) {
+            style.pointRadius.toPx()
+          } else {
+            this.size.width - style.pointRadius.toPx()
+          }
         }
         val yOffset = when (style.pointPlacement) {
           PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
@@ -264,7 +276,7 @@ internal fun VerticalEvent(
         }
       },
   ) {
-    PlaceVerticalEventContent(style, jetLimeStyle, verticalAlignment, content)
+    PlaceVerticalEventContent(style, jetLimeStyle, verticalAlignment, layoutDirection, content)
   }
 }
 
@@ -274,6 +286,7 @@ internal fun VerticalEvent(
  * @param style The style of the [JetLimeEvent].
  * @param jetLimeStyle The JetLime style configuration.
  * @param alignment The vertical alignment for the event.
+ * @param layoutDirection The current layout direction (LTR or RTL).
  * @param content The composable content to be placed.
  */
 @Composable
@@ -281,22 +294,26 @@ private fun PlaceVerticalEventContent(
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
   alignment: VerticalAlignment,
+  layoutDirection: LayoutDirection,
   content: @Composable () -> Unit,
 ) {
+  val isRtl = layoutDirection == LayoutDirection.Rtl
+  val timelinePadding = style.pointRadius * 2 + jetLimeStyle.contentDistance
+
   Box(
     modifier = Modifier
       .testTag("VerticalEventContentBox")
       .defaultMinSize(minHeight = style.pointRadius * 2)
       .padding(
         start = if (alignment == VerticalAlignment.LEFT) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
+          if (isRtl) 0.dp else timelinePadding
         } else {
-          0.dp
+          if (isRtl) timelinePadding else 0.dp
         },
         end = if (alignment == VerticalAlignment.RIGHT) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
+          if (isRtl) 0.dp else timelinePadding
         } else {
-          0.dp
+          if (isRtl) timelinePadding else 0.dp
         },
         bottom = if (style.position.isNotEnd()) {
           jetLimeStyle.itemSpacing
@@ -326,6 +343,7 @@ internal fun HorizontalEvent(
   content: @Composable () -> Unit,
 ) {
   val horizontalAlignment = remember { jetLimeStyle.lineHorizontalAlignment }
+  val layoutDirection = LocalLayoutDirection.current
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   Box(
     modifier = modifier
@@ -460,7 +478,7 @@ internal fun HorizontalEvent(
         }
       },
   ) {
-    PlaceHorizontalEventContent(style, jetLimeStyle, horizontalAlignment, content)
+    PlaceHorizontalEventContent(style, jetLimeStyle, horizontalAlignment, layoutDirection, content)
   }
 }
 
@@ -470,6 +488,7 @@ internal fun HorizontalEvent(
  * @param style The style of the [JetLimeEvent].
  * @param jetLimeStyle The JetLime style configuration.
  * @param alignment The vertical alignment for the event.
+ * @param layoutDirection The current layout direction (LTR or RTL).
  * @param content The composable content to be placed.
  */
 @Composable
@@ -477,20 +496,24 @@ private fun PlaceHorizontalEventContent(
   style: JetLimeEventStyle,
   jetLimeStyle: JetLimeStyle,
   alignment: HorizontalAlignment,
+  layoutDirection: LayoutDirection,
   content: @Composable () -> Unit,
 ) {
+  val isRtl = layoutDirection == LayoutDirection.Rtl
+  val timelinePadding = style.pointRadius * 2 + jetLimeStyle.contentDistance
+
   Box(
     modifier = Modifier
       .testTag("HorizontalEventContentBox")
       .defaultMinSize(minWidth = style.pointRadius * 2)
       .padding(
         top = if (alignment == HorizontalAlignment.TOP) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
+          timelinePadding
         } else {
           0.dp
         },
         bottom = if (alignment == HorizontalAlignment.BOTTOM) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
+          timelinePadding
         } else {
           0.dp
         },
