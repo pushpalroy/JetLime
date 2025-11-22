@@ -37,6 +37,7 @@ import com.pushpal.jetlime.ItemsList
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
+import com.pushpal.jetlime.PointPlacement
 import data.getPlanets
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import timelines.event.HorizontalEventContent
@@ -60,6 +61,7 @@ fun BasicHorizontalTimeLine(
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
           position = position,
+          pointPlacement = if (index > 1) PointPlacement.CENTER else PointPlacement.START,
           pointAnimation = if (index == 1) JetLimeEventDefaults.pointAnimation() else null,
         ),
       ) {

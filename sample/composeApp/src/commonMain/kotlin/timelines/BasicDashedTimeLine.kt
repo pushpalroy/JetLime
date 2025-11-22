@@ -40,6 +40,7 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
+import com.pushpal.jetlime.PointPlacement
 import data.getCharacters
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import timelines.event.VerticalEventContent
@@ -66,6 +67,7 @@ fun BasicDashedTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: S
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
           position = position,
+          pointPlacement = if (index > 1) PointPlacement.CENTER else PointPlacement.START,
           pointAnimation = if (index == 2) JetLimeEventDefaults.pointAnimation() else null,
           pointType = if (index == 1) EventPointType.filled(0.8f) else EventPointType.Default,
         ),

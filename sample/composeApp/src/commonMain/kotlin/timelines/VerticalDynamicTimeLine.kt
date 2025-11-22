@@ -54,6 +54,7 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
+import com.pushpal.jetlime.PointPlacement
 import data.Item
 import data.getCharacters
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -132,6 +133,13 @@ fun VerticalDynamicTimeLine(
           },
           style = JetLimeEventDefaults.eventStyle(
             position = position,
+            pointPlacement = if (index == 3 ||
+              index == 5
+            ) {
+              PointPlacement.CENTER
+            } else {
+              PointPlacement.START
+            },
           ),
         ) {
           VerticalEventContent(item = item)

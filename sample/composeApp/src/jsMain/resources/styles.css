@@ -1,0 +1,16 @@
+html, body, #root {
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+}
+#root {
+/* Ensures children using fillMaxSize() can expand */
+min-height: 100vh;
+display: flex;
+}
+canvas {
+/* If a canvas is still used internally, force it to fill */
+width: 100% !important;
+height: 100% !important;
+}

@@ -84,7 +84,7 @@ fun HomeScreen(
 fun HomeContent(modifier: Modifier = Modifier) {
   val tabs = remember { listOf("Basic", "Dashed", "Dynamic", "Custom", "Extended") }
   var selectedIndex by remember { mutableIntStateOf(0) }
-  val snackbarState = remember { SnackbarHostState() }
+  val snackBarState = remember { SnackbarHostState() }
   val coroutineScope = rememberCoroutineScope()
 
   Column(modifier = modifier) {
@@ -109,19 +109,19 @@ fun HomeContent(modifier: Modifier = Modifier) {
       modifier = Modifier.fillMaxSize(),
     ) {
       Scaffold(
-        snackbarHost = { SnackbarHost(snackbarState) },
+        snackbarHost = { SnackbarHost(snackBarState) },
         contentWindowInsets = WindowInsets(0.dp),
       ) {
         when (selectedIndex) {
           0 -> {
             Column {
-              BasicHorizontalTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
-              BasicVerticalTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+              BasicHorizontalTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
+              BasicVerticalTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
             }
           }
 
-          1 -> BasicDashedTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
-          2 -> VerticalDynamicTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+          1 -> BasicDashedTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
+          2 -> VerticalDynamicTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
           3 -> {
             Column {
               CustomizedHorizontalTimeLine()
@@ -129,7 +129,7 @@ fun HomeContent(modifier: Modifier = Modifier) {
             }
           }
 
-          4 -> ExtendedVerticalTimeLine { coroutineScope.launch { snackbarState.showSnackbar(it) } }
+          4 -> ExtendedVerticalTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
         }
       }
     }
@@ -155,7 +155,7 @@ fun HomeAppBar(
         onCheckedChange = onThemeChange,
       )
     },
-    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+    colors = TopAppBarDefaults.topAppBarColors(),
     modifier = modifier,
   )
 }

@@ -76,6 +76,10 @@ class EventPosition internal constructor(val name: String) {
   @Stable
   fun isNotEnd(): Boolean = this != END
 
+  /** Helper to check if current position is not the start. */
+  @Stable
+  fun isNotStart(): Boolean = name != "Start"
+
   /**
    * Checks if this instance is equal to another object. Two instances of [EventPosition] are
    * considered equal if they have the same name.

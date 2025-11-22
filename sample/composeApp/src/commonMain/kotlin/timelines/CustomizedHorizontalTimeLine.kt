@@ -41,6 +41,7 @@ import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeRow
+import com.pushpal.jetlime.PointPlacement
 import data.getPlanets
 import jetlime.sample.composeapp.generated.resources.Res
 import jetlime.sample.composeapp.generated.resources.icon_check
@@ -77,6 +78,7 @@ fun CustomizedHorizontalTimeLine(modifier: Modifier = Modifier) {
             2 -> Color.White
             else -> Color(0xFF2889D6)
           },
+          pointPlacement = if (index > 2) PointPlacement.CENTER else PointPlacement.START,
           pointAnimation = if (index == 3) JetLimeEventDefaults.pointAnimation() else null,
           pointType = when (index) {
             1 -> EventPointType.filled(0.7f) // 70% fill

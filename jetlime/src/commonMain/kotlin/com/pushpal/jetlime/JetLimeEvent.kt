@@ -124,26 +124,94 @@ internal fun VerticalEvent(
           VerticalAlignment.LEFT -> style.pointRadius.toPx()
           VerticalAlignment.RIGHT -> this.size.width - style.pointRadius.toPx()
         }
-        val yOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val yOffset = when (style.pointPlacement) {
+          PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          PointPlacement.CENTER -> {
+            val effectiveHeight =
+              this.size.height -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveHeight / 2f
+          }
+
+          PointPlacement.END -> {
+            // Place at bottom minus radius (visual anchor). If not last, subtract spacing from height computation
+            val effectiveHeight =
+              this.size.height -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveHeight - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          }
+        }
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
         // Line
-        if (style.position.isNotEnd()) {
-          val yShift = yOffset * (jetLimeStyle.pointStartFactor - 1)
+        // Upward connector only for CENTER placement (connects from top of item to point center)
+        if (style.pointPlacement == PointPlacement.CENTER && style.position.isNotStart()) {
           drawLine(
             brush = jetLimeStyle.lineBrush,
-            start = Offset(
-              x = xOffset,
-              y = yOffset,
-            ),
-            end = Offset(
-              x = xOffset,
-              y = this.size.height + yShift,
-            ),
+            start = Offset(x = xOffset, y = 0f),
+            end = Offset(x = xOffset, y = yOffset),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),
             pathEffect = jetLimeStyle.pathEffect,
           )
+        }
+        // Line logic for CENTER placement: keep continuity through centers
+        if (style.pointPlacement == PointPlacement.CENTER) {
+          // Upward segment (skip for first item)
+          if (style.position.isNotStart()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = 0f),
+              end = Offset(x = xOffset, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+          // Downward segment (skip for last item)
+          if (style.position.isNotEnd()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = xOffset, y = this.size.height),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+        } else if (style.pointPlacement == PointPlacement.END) {
+          // END placement: draw upward segment (skip first) from top to end point; draw downward only if not last (from point to bottom)
+          if (style.position.isNotStart()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = 0f),
+              end = Offset(x = xOffset, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+          if (style.position.isNotEnd()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = xOffset, y = this.size.height),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+        } else {
+          // START placement logic (unchanged)
+          if (style.position.isNotEnd()) {
+            val endY = run {
+              val yShift = yOffset * (jetLimeStyle.pointStartFactor - 1)
+              this.size.height + yShift
+            }
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = xOffset, y = endY),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
         }
 
         // Point background
@@ -267,26 +335,78 @@ internal fun HorizontalEvent(
           HorizontalAlignment.TOP -> style.pointRadius.toPx()
           HorizontalAlignment.BOTTOM -> this.size.height - style.pointRadius.toPx()
         }
-        val xOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        val xOffset = when (style.pointPlacement) {
+          PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          PointPlacement.CENTER -> {
+            val effectiveWidth =
+              this.size.width -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveWidth / 2f
+          }
+
+          PointPlacement.END -> {
+            val effectiveWidth =
+              this.size.width -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            effectiveWidth - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+          }
+        }
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
         // Line
-        if (style.position.isNotEnd()) {
-          val xShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
-          drawLine(
-            brush = jetLimeStyle.lineBrush,
-            start = Offset(
-              x = xOffset,
-              y = yOffset,
-            ),
-            end = Offset(
-              x = this.size.width + xShift,
-              y = yOffset,
-            ),
-            strokeWidth = jetLimeStyle.lineThickness.toPx(),
-            pathEffect = jetLimeStyle.pathEffect,
-          )
+        if (style.pointPlacement == PointPlacement.CENTER) {
+          // Left segment (skip for first item)
+          if (style.position.isNotStart()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = 0f, y = yOffset),
+              end = Offset(x = xOffset, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+          // Right segment (skip for last item)
+          if (style.position.isNotEnd()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = this.size.width, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+        } else if (style.pointPlacement == PointPlacement.END) {
+          if (style.position.isNotStart()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = 0f, y = yOffset),
+              end = Offset(x = xOffset, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+          if (style.position.isNotEnd()) {
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = this.size.width, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
+        } else {
+          // START placement original behavior
+          if (style.position.isNotEnd()) {
+            val xShift = xOffset * (jetLimeStyle.pointStartFactor - 1)
+            drawLine(
+              brush = jetLimeStyle.lineBrush,
+              start = Offset(x = xOffset, y = yOffset),
+              end = Offset(x = this.size.width + xShift, y = yOffset),
+              strokeWidth = jetLimeStyle.lineThickness.toPx(),
+              pathEffect = jetLimeStyle.pathEffect,
+            )
+          }
         }
 
         // Point background

@@ -8,6 +8,19 @@ plugins {
   alias(libs.plugins.dokka)
 }
 
+// Dokka V2 extension
+// Shared configuration without deprecated properties
+dokka {
+  moduleName.set("jetlime")
+  dokkaSourceSets.configureEach {
+    enableAndroidDocumentationLink.set(true)
+    val moduleDoc = rootProject.file("dokkaModule.md")
+    val packageDoc = rootProject.file("dokkaPackage.md")
+    if (moduleDoc.exists()) includes.from(moduleDoc.path)
+    if (packageDoc.exists()) includes.from(packageDoc.path)
+  }
+}
+
 kotlin {
   cocoapods {
     version = "4.0.0"
@@ -78,7 +91,7 @@ android {
   sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
   defaultConfig {
-    minSdk = 21
+    minSdk = 23
     testOptions.targetSdk = 36
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -126,19 +139,6 @@ composeCompiler {
   metricsDestination = layout.buildDirectory.dir("compose_compiler/metrics")
 }
 
-// Dokka
-tasks.dokkaHtml.configure {
-  outputDirectory.set(file("../docs"))
-  pluginsMapConfiguration.set(
-    mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""),
-  )
-  dokkaSourceSets {
-    named("commonMain") {
-      noAndroidSdkLink.set(false)
-    }
-  }
-}
-
 mavenPublishing {
   // Configure publishing to Maven Central
   publishToMavenCentral()
@@ -180,4 +180,18 @@ mavenPublishing {
       developerConnection.set("scm:git:ssh://git@github.com/pushpalroy/jetlime.git")
     }
   }
+}
+
+// Copy Dokka output into root docs directory (legacy location expected by project)
+tasks.register<Copy>("syncDokkaToDocs") {
+  description = "Sync Dokka HTML output to root docs directory"
+  group = "documentation"
+  dependsOn("dokkaGenerateHtml")
+  val srcDir = layout.buildDirectory.dir("dokka/html")
+  val destDir = rootProject.layout.projectDirectory.dir("docs")
+  doFirst {
+    delete(destDir)
+  }
+  from(srcDir)
+  into(destDir)
 }

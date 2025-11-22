@@ -172,17 +172,55 @@ fun JetLimeExtendedEvent(
 
     // Drawing on canvas for additional graphical elements
     Canvas(modifier = Modifier.matchParentSize()) {
-      val yOffset = style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+      val yOffset = when (style.pointPlacement) {
+        PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        PointPlacement.CENTER -> (
+          this.size.height -
+            if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+          ) /
+          2f
+        PointPlacement.END -> {
+          val effectiveHeight =
+            this.size.height -
+              if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+          effectiveHeight - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+        }
+      }
       val radius = style.pointRadius.toPx() * radiusAnimFactor
 
-      if (style.position.isNotEnd()) {
-        drawLine(
-          brush = jetLimeStyle.lineBrush,
-          start = Offset(x = timelineXOffset, y = yOffset),
-          end = Offset(x = timelineXOffset, y = this.size.height),
-          strokeWidth = jetLimeStyle.lineThickness.toPx(),
-          pathEffect = jetLimeStyle.pathEffect,
-        )
+      if (style.pointPlacement == PointPlacement.START) {
+        if (style.position.isNotEnd()) {
+          drawLine(
+            brush = jetLimeStyle.lineBrush,
+            start = Offset(x = timelineXOffset, y = yOffset),
+            end = Offset(
+              x = timelineXOffset,
+              y = this.size.height + yOffset * (jetLimeStyle.pointStartFactor - 1),
+            ),
+            strokeWidth = jetLimeStyle.lineThickness.toPx(),
+            pathEffect = jetLimeStyle.pathEffect,
+          )
+        }
+      } else {
+        // CENTER or END: draw upward (except first) and downward (except last) segments
+        if (style.position.isNotStart()) {
+          drawLine(
+            brush = jetLimeStyle.lineBrush,
+            start = Offset(x = timelineXOffset, y = 0f),
+            end = Offset(x = timelineXOffset, y = yOffset),
+            strokeWidth = jetLimeStyle.lineThickness.toPx(),
+            pathEffect = jetLimeStyle.pathEffect,
+          )
+        }
+        if (style.position.isNotEnd()) {
+          drawLine(
+            brush = jetLimeStyle.lineBrush,
+            start = Offset(x = timelineXOffset, y = yOffset),
+            end = Offset(x = timelineXOffset, y = this.size.height),
+            strokeWidth = jetLimeStyle.lineThickness.toPx(),
+            pathEffect = jetLimeStyle.pathEffect,
+          )
+        }
       }
 
       drawCircle(
