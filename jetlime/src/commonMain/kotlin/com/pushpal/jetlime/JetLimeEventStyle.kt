@@ -133,4 +133,7 @@ enum class PointPlacement {
 
   /** Point drawn centered relative to the event content box. */
   CENTER,
+
+  /** Point drawn at the end edge (bottom for vertical, right for horizontal). */
+  END,
 }
