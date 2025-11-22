@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.Dp
  * @property pointAnimation Optional animation for the event point.
  * @property pointStrokeWidth The stroke width of the event point.
  * @property pointStrokeColor The stroke color of the event point.
- * @property pointPlacement The placement of the point relative to the event content (START or CENTER).
+ * @property pointPlacement The placement of the point relative to the event content (START, CENTER, or END).
  */
 @Immutable
 class JetLimeEventStyle internal constructor(

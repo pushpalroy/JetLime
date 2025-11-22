@@ -2,8 +2,8 @@
 
 > A simple yet highly customizable UI library to show a timeline view in Compose Multiplatform.
 
-[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.8.2-blue?style=for-the-badge&logo=appveyor)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#jetpack-compose-artifacts-used)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-blue.svg?color=blue&style=for-the-badge)
+[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.9.3-blue?style=for-the-badge&logo=appveyor)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#jetpack-compose-artifacts-used)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
@@ -27,7 +27,15 @@
 |:------------------------------------------------:|----------------------------------------------|:-----------------------------------------------:|---------------------------------------------|
 | <img src="art/platform/android.png" width=120 /> | <img src="art/platform/iOS.png" width=120 /> | <img src="art/platform/desktop.png" width=240/> | <img src="art/platform/web.png" width=240/> |
 
-## 🚀 Implementation
+## ✨ Highlights
+- Compose Multiplatform timelines: Android, iOS, Desktop (JVM), Web (JS & WASM)
+- Vertical and horizontal layouts (JetLimeColumn / JetLimeRow)
+- Flexible point placement: START, CENTER, END with continuous line joins
+- Dashed/gradient/solid lines via Brush + PathEffect
+- Extended events with dual content slots (left/right), icons, and animations
+- Small, focused API with sensible defaults (JetLimeDefaults)
+
+## 📦 Installation
 
 In `build.gradle` of shared module, include the following dependency
 
@@ -37,9 +45,9 @@ dependencies {
 }
 ```
 
-## ✍️ Usage
+## 📖 Usage
 
-### 👇 Add items in a Vertical Timeline
+### 📍 Add items in a Vertical Timeline
 
 Use the [JetLimeColumn](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
 
@@ -60,7 +68,7 @@ JetLimeColumn(
   }
 }
 ```
-### 👉 Add items in a Horizontal Timeline
+### 📍 Add items in a Horizontal Timeline
 
 Use the [JetLimeRow](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-row.html)
 
@@ -90,7 +98,7 @@ If we want to add items dynamically from a data source, we should use `mutableSt
 val items = remember { mutableStateListOf<MyItem>() }
 ```
 
-### ✨ Add Extended events to a Vertical Timeline
+### 🧩 Extended Events (Vertical Timeline)
 
 Use the [JetLimeExtendedEvent](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-extended-event.html) with a [JetLimeColumn](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-column.html)
 Using this we can pass an additional content to draw on the left side of the timeline.
@@ -117,7 +125,7 @@ JetLimeColumn(
 }
 ```
 
-### ⚡ Modify `JetLimeColumn` Style
+### 🎛️ Customize `JetLimeColumn` Style
 
 Use the [JetLimeDefaults.columnStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/column-style.html)
 
@@ -134,7 +142,7 @@ JetLimeColumn(
   // Code to add events
 }
 ```
-### ⚡ Modify `JetLimeRow` Style
+### 🎛️ Customize `JetLimeRow` Style
 
 Use the [JetLimeDefaults.rowStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/row-style.html)
 
@@ -152,7 +160,7 @@ JetLimeRow(
 }
 ```
 
-### ⚡ Modify `JetLimeEvent` Style
+### 🎛️ Customize `JetLimeEvent` Style
 
 Use the [JetLimeEventDefaults.eventStyle()](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html)
 
@@ -174,9 +182,9 @@ JetLimeEvent(
 ```
 ---
 
-### 🎯 JetLimeColumn and JetLimeRow Properties
+### ⚙️ JetLimeColumn and JetLimeRow Properties
 
-#### 💨 Alignment
+#### 🧭 Alignment
 
 The timeline line and point circles can be set to either side.
 
@@ -192,7 +200,7 @@ For a `JetLimeRow` the alignment can be set to [TOP](https://pushpalroy.github.i
 lineHorizontalAlignment = TOP or BOTTOM // Default is TOP
 ```
 
-#### 💨 Line Style
+#### 🎨 Line Style
 
 The line can be drawn by passing a `Brush` object to [lineBrush](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-brush.html) in a `columnStyle` or `rowStyle`.
 Default values can also be used from [JetLimeDefaults](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-defaults/index.html) and colors can be modified for quick setup:
@@ -216,23 +224,23 @@ style = JetLimeDefaults.columnStyle(
       )
 ```
 
-#### 💨 Content Distance
+#### ↔️ Content Distance
 
 The [contentDistance](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/content-distance.html) in `Dp` specifies how far the timeline line should be from the timeline content.
 
-#### 💨 Item Spacing
+#### ↕️ Item Spacing
 
 The [itemSpacing](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/item-spacing.html) in `Dp` specifies the gap between the event items.
 
-#### 💨 Line Thickness
+#### 📏 Line Thickness
 
 The [lineThickness](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-thickness.html) in `Dp` the thickness of the timeline line.
 
 ---
 
-### 🎯 JetLimeEvent Properties
+### ⚙️ JetLimeEvent Properties
 
-#### 💨 Position
+#### 📍 Position
 
 We always need to pass the position to the [eventStyle](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-event-defaults/event-style.html) that will be received in the JetLimeColumn lambda.
 This is needed so that JetLimeColumn can calculate the position of an event in the list at any time.
@@ -254,7 +262,32 @@ JetLimeColumn(
 }
 ```
 
-#### 💨 Point Type
+#### 📌 Point Placement
+
+The `pointPlacement` of type [PointPlacement](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-point-placement/index.html) controls where the point renders within the item:
+- `START` – near the start edge (top for vertical, left for horizontal). Default.
+- `CENTER` – centered within the item.
+- `END` – near the end edge (bottom for vertical, right for horizontal).
+
+Examples:
+```kotlin
+// All items CENTER
+JetLimeEventDefaults.eventStyle(position = position, pointPlacement = PointPlacement.CENTER)
+
+// All items END
+JetLimeEventDefaults.eventStyle(position = position, pointPlacement = PointPlacement.END)
+
+// Mixed: second-to-last CENTER, rest START
+JetLimeEventDefaults.eventStyle(
+  position = position,
+  pointPlacement = if (index == items.size - 2) PointPlacement.CENTER else PointPlacement.START,
+)
+```
+Notes:
+- Lines connect continuously across START/CENTER/END, and stop cleanly at the last item’s point.
+- Works for both JetLimeColumn (vertical) and JetLimeRow (horizontal).
+
+#### 🟡 Point Type
 
 The `pointType` of type [EventPointType](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-type/index.html) specifies the style of the point circle.
 It can be any of the three types: `EMPTY`, `FILLED` or `CUSTOM`.
@@ -277,7 +310,7 @@ This can be used to use a custom icon instead of the default types defined. An o
 pointType = EventPointType.custom(icon = painterResource(id = R.drawable.icon_check), tint = Color.Green)
 ```
 
-#### 💨 Point Animation
+#### 🔁 Point Animation
 
 The `pointAnimation` of type [EventPointAnimation](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-event-point-animation/index.html) specifies the animation of the point circle.
 
@@ -289,30 +322,30 @@ pointAnimation = JetLimeEventDefaults.pointAnimation()
 To use a custom animation `initialValue`, `targetValue` and `animationSpec` can be passed to `pointAnimation()`.
 `animationSpec` should be of the type `InfiniteRepeatableSpec<Float>`.
 
-#### 💨 Point Color
+#### 🎨 Point Color
 
 The `pointColor` is the color of the event point circle background.
 
-#### 💨 Point Fill Color
+#### 🎨 Point Fill Color
 
 The `pointFillColor` is the fill color of the event point circle which is drawn over the `pointColor`.
 
-#### 💨 Point Radius
+#### 📐 Point Radius
 
 The `pointRadius` in `Dp` is the radius of the point circle.
 
-#### 💨 Point Stroke Width
+#### 🖊️ Point Stroke Width
 
 The `pointStrokeWidth` in `Dp` is the width of the circle border.
 
-#### 💨 Point Stroke Color
+#### 🖍️ Point Stroke Color
 
 The `pointStrokeColor` is the color of the circle border.
 
-## 📃 Documentation
+## 📚 Documentation
 The full API documentation is available here: [JetLime Documentation](https://pushpalroy.github.io/JetLime/index.html)
 
-### ☀️ Inspiration
+## 💡 Inspiration
 
 - [Timeline-View by Vipul Asri](https://github.com/vipulasri/Timeline-View)
 - [This amazing blog by Vita Sokolova on Timeline component with Jetpack Compose](https://proandroiddev.com/a-step-by-step-guide-to-building-a-timeline-component-with-jetpack-compose-358a596847cb)
@@ -321,7 +354,7 @@ The full API documentation is available here: [JetLime Documentation](https://pu
 
 Would love to receive contributions! Read [contribution guidelines](CONTRIBUTING.md) for more information regarding contribution.
 
-### 🚀 Deploying to Maven Central
+### 📦 Publishing to Maven Central
 
 This guide outlines the steps to publish a new version of the **Jetlime** library to **Maven Central**.
 
@@ -383,7 +416,7 @@ After a successful publish, you should confirm that the new version is available
 
 Have any questions, doubts or want to present your opinions, views? You're always welcome. You can [start discussions](https://github.com/pushpalroy/jetlime/discussions).
 
-## 📃 License
+## 📝 License
 
 ```
 MIT License

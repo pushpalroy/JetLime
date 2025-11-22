@@ -62,6 +62,7 @@ object JetLimeEventDefaults {
    * Creates a default [JetLimeEventStyle] object with specified parameters.
    *
    * @param position The position of the event relative to the timeline.
+   * @param pointPlacement Controls where the point renders within the item. One of [PointPlacement.START], [PointPlacement.CENTER], or [PointPlacement.END]. Defaults to START.
    * @param pointType The type of point used in the event. Defaults to a filled point.
    * @param pointColor The color of the point. Defaults to the 'onPrimary' color from MaterialTheme's color scheme.
    * @param pointFillColor The fill color of the point. Defaults to the primary color from MaterialTheme's color scheme.
