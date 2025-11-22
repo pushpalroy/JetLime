@@ -89,8 +89,8 @@ kotlin {
       // Local library
       implementation(project(":jetlime"))
 
-      // Maven library - For testing
-      // implementation(libs.jetlime)
+      // Uncomment for maven testing
+      // implementation("io.github.pushpalroy:jetlime:4.1.0")
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
