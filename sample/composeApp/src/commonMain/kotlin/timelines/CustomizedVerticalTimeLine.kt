@@ -40,6 +40,7 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
+import com.pushpal.jetlime.PointPlacement
 import com.pushpal.jetlime.VerticalAlignment.RIGHT
 import data.getCharacters
 import jetlime.sample.composeapp.generated.resources.Res
@@ -78,6 +79,7 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
             3, 4 -> Color.White
             else -> Color(0xFF2889D6)
           },
+          pointPlacement = if (index > 3) PointPlacement.CENTER else PointPlacement.START,
           pointAnimation = when (index) {
             1, 4 -> JetLimeEventDefaults.pointAnimation()
             else -> null

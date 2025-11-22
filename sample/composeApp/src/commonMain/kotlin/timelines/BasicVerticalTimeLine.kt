@@ -59,7 +59,7 @@ fun BasicVerticalTimeLine(modifier: Modifier = Modifier, showSnackbar: (message:
       JetLimeEvent(
         style = JetLimeEventDefaults.eventStyle(
           position = position,
-          pointPlacement = if (index == 3) PointPlacement.CENTER else PointPlacement.START,
+          pointPlacement = if (index > 1) PointPlacement.CENTER else PointPlacement.START,
           pointAnimation = if (index == 2) JetLimeEventDefaults.pointAnimation() else null,
           pointType = if (index == 1) EventPointType.filled(0.8f) else EventPointType.Default,
         ),
