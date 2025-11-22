@@ -174,10 +174,15 @@ fun JetLimeExtendedEvent(
     Canvas(modifier = Modifier.matchParentSize()) {
       val yOffset = when (style.pointPlacement) {
         PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
-        PointPlacement.CENTER -> (this.size.height - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f) / 2f
+        PointPlacement.CENTER -> (
+          this.size.height -
+            if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+          ) /
+          2f
         PointPlacement.END -> {
           val effectiveHeight =
-            this.size.height - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+            this.size.height -
+              if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
           effectiveHeight - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
         }
       }

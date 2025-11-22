@@ -133,7 +133,13 @@ fun VerticalDynamicTimeLine(
           },
           style = JetLimeEventDefaults.eventStyle(
             position = position,
-            pointPlacement = if (index == 3 || index == 5) PointPlacement.CENTER else PointPlacement.START,
+            pointPlacement = if (index == 3 ||
+              index == 5
+            ) {
+              PointPlacement.CENTER
+            } else {
+              PointPlacement.START
+            },
           ),
         ) {
           VerticalEventContent(item = item)

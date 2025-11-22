@@ -128,14 +128,16 @@ internal fun VerticalEvent(
           PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
           PointPlacement.CENTER -> {
             val effectiveHeight =
-              this.size.height - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+              this.size.height -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
             effectiveHeight / 2f
           }
 
           PointPlacement.END -> {
             // Place at bottom minus radius (visual anchor). If not last, subtract spacing from height computation
             val effectiveHeight =
-              this.size.height - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+              this.size.height -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
             effectiveHeight - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
           }
         }
@@ -337,13 +339,15 @@ internal fun HorizontalEvent(
           PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
           PointPlacement.CENTER -> {
             val effectiveWidth =
-              this.size.width - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+              this.size.width -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
             effectiveWidth / 2f
           }
 
           PointPlacement.END -> {
             val effectiveWidth =
-              this.size.width - if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
+              this.size.width -
+                if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
             effectiveWidth - style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
           }
         }
