@@ -487,7 +487,7 @@ internal fun HorizontalEvent(
  *
  * @param style The style of the [JetLimeEvent].
  * @param jetLimeStyle The JetLime style configuration.
- * @param alignment The vertical alignment for the event.
+ * @param alignment The horizontal alignment for the event.
  * @param layoutDirection The current layout direction (LTR or RTL).
  * @param content The composable content to be placed.
  */
