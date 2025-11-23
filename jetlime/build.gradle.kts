@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.kotlin.cocoapods)
   alias(libs.plugins.nexus.vanniktech.publish)
   alias(libs.plugins.dokka)
+  alias(libs.plugins.stability.analyzer)
 }
 
 // Dokka V2 extension
