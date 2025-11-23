@@ -199,12 +199,14 @@ fun JetLimeExtendedEvent(
       }
     }
 
-    // In both LTR and RTL, draw the timeline at the logical offset measured from the left;
-    // do not mirror here to avoid pushing content out of bounds.
-    val timelineXOffset = logicalTimelineXOffset
-
     // Drawing on canvas for additional graphical elements
     Canvas(modifier = Modifier.matchParentSize()) {
+      // Use the logical timeline offset directly in both LTR and RTL so that
+      // the line stays aligned with the layout’s coordinate system. RTL
+      // placement is handled by how content is positioned relative to this
+      // logical offset, avoiding overlap with the main content.
+      val timelineXOffset = logicalTimelineXOffset
+
       val yOffset = when (style.pointPlacement) {
         PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
         PointPlacement.CENTER -> (
