@@ -18,14 +18,14 @@ runs:
       run: chmod +x gradlew
 
     # Caching gradle packages
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       name: Cache Gradle for quicker builds
       id: caching_gradle
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle*', '**/build.gradle*', '**/gradle/wrapper/gradle-wrapper.properties', '**/buildSrc/**/*.kt') }}
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
 
