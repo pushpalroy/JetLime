@@ -28,8 +28,9 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.absolutePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -283,26 +284,27 @@ private fun PlaceVerticalEventContent(
   alignment: VerticalAlignment,
   content: @Composable () -> Unit,
 ) {
+  val leftPad = if (alignment == VerticalAlignment.LEFT) {
+    // Physical left side padding irrespective of layout direction
+    style.pointRadius * 2 + jetLimeStyle.contentDistance
+  } else {
+    0.dp
+  }
+  val rightPad = if (alignment == VerticalAlignment.RIGHT) {
+    style.pointRadius * 2 + jetLimeStyle.contentDistance
+  } else {
+    0.dp
+  }
   Box(
     modifier = Modifier
       .testTag("VerticalEventContentBox")
       .defaultMinSize(minHeight = style.pointRadius * 2)
-      .padding(
-        start = if (alignment == VerticalAlignment.LEFT) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
-        } else {
-          0.dp
-        },
-        end = if (alignment == VerticalAlignment.RIGHT) {
-          style.pointRadius * 2 + jetLimeStyle.contentDistance
-        } else {
-          0.dp
-        },
-        bottom = if (style.position.isNotEnd()) {
-          jetLimeStyle.itemSpacing
-        } else {
-          0.dp
-        },
+      // Use absolutePadding so LEFT/RIGHT alignment refers to physical sides, not start/end semantics.
+      .absolutePadding(
+        left = leftPad,
+        right = rightPad,
+        top = 0.dp,
+        bottom = if (style.position.isNotEnd()) jetLimeStyle.itemSpacing else 0.dp,
       ),
   ) {
     content()
