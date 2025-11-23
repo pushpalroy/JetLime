@@ -29,6 +29,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -298,5 +299,59 @@ class JetLimeRowTest {
 
     composeTestRule.onNodeWithTag("RowItem_Item 1").assertIsDisplayed()
     composeTestRule.onNodeWithTag("RowItem_Item 3").assertIsDisplayed()
+  }
+
+  @OptIn(ExperimentalComposeApi::class)
+  @Test
+  fun jetLimeExtendedEvent_ltr_contentsAreVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+        JetLimeColumn(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeExtendedEvent(
+              style = JetLimeEventDefaults.eventStyle(position = pos),
+              additionalContent = {
+                Text(text = "Additional", modifier = Modifier.testTag("ExtendedAdditional_LTR"))
+              },
+            ) {
+              Text(text = item, modifier = Modifier.testTag("ExtendedMain_LTR"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("ExtendedAdditional_LTR").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("ExtendedMain_LTR").assertIsDisplayed()
+  }
+
+  @OptIn(ExperimentalComposeApi::class)
+  @Test
+  fun jetLimeExtendedEvent_rtl_contentsAreVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        JetLimeColumn(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeExtendedEvent(
+              style = JetLimeEventDefaults.eventStyle(position = pos),
+              additionalContent = {
+                Text(text = "Additional", modifier = Modifier.testTag("ExtendedAdditional_RTL"))
+              },
+            ) {
+              Text(text = item, modifier = Modifier.testTag("ExtendedMain_RTL"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("ExtendedAdditional_RTL").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("ExtendedMain_RTL").assertIsDisplayed()
   }
 }
