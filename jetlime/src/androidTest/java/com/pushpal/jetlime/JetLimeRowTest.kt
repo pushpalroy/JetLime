@@ -28,10 +28,12 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertPositionInRootIsEqualTo
@@ -41,6 +43,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
@@ -243,5 +246,57 @@ class JetLimeRowTest {
 
     items.add("Another Item")
     composeTestRule.onNodeWithText("Another Item").assertIsDisplayed()
+  }
+
+  @Test
+  fun jetLimeRow_horizontalEvent_ltr_contentIsVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1", "Item 2", "Item 3"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+        JetLimeRow(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeEvent(
+              style = JetLimeEventDefaults.eventStyle(
+                position = pos,
+                pointPlacement = PointPlacement.CENTER,
+              ),
+            ) {
+              Text(text = item, modifier = Modifier.testTag("RowItem_$item"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("RowItem_Item 1").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("RowItem_Item 3").assertIsDisplayed()
+  }
+
+  @Test
+  fun jetLimeRow_horizontalEvent_rtl_contentIsVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1", "Item 2", "Item 3"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        JetLimeRow(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeEvent(
+              style = JetLimeEventDefaults.eventStyle(
+                position = pos,
+                pointPlacement = PointPlacement.CENTER,
+              ),
+            ) {
+              Text(text = item, modifier = Modifier.testTag("RowItem_$item"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("RowItem_Item 1").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("RowItem_Item 3").assertIsDisplayed()
   }
 }
