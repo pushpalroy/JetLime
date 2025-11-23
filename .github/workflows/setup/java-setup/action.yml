@@ -18,7 +18,11 @@ runs:
       run: chmod +x gradlew
 
     # Caching gradle packages
-    - uses: actions/cache@v4
+    # TODO: remove temporary workaround after fixed
+    # temporarily work around https://github.com/actions/runner-images/issues/13341
+    # by disabling caching for macOS
+    - if: ${{ runner.os != 'macOS' }}
+      uses: actions/cache@v4
       name: Cache Gradle for quicker builds
       id: caching_gradle
       with:
