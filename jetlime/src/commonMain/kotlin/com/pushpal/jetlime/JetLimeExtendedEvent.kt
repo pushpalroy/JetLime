@@ -44,7 +44,9 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.pushpal.jetlime.JetLimeEventDefaults.AdditionalContentMaxWidth
 
@@ -91,15 +93,15 @@ fun JetLimeExtendedEvent(
   content: @Composable () -> Unit,
 ) {
   val jetLimeStyle = LocalJetLimeStyle.current
-  val strokeWidth = with(LocalDensity.current) { style.pointStrokeWidth.toPx() }
+  val density = LocalDensity.current
+  val strokeWidth = with(density) { style.pointStrokeWidth.toPx() }
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
+  val layoutDirection = LocalLayoutDirection.current
+  val isRtl = layoutDirection == LayoutDirection.Rtl
 
-  // BoxWithConstraints provides its own constraints which we can use for layout
   BoxWithConstraints(modifier = modifier) {
-    // Variable for keeping track of the X position where the timeline will be drawn
-    var timelineXOffset by remember { mutableFloatStateOf(0f) }
-    // Maximum width for additional content
-    val maxAdditionalContentWidth = with(LocalDensity.current) { additionalContentMaxWidth.toPx() }
+    var logicalTimelineXOffset by remember { mutableFloatStateOf(0f) }
+    val maxAdditionalContentWidth = with(density) { additionalContentMaxWidth.toPx() }
 
     Layout(
       content = {
@@ -137,20 +139,24 @@ fun JetLimeExtendedEvent(
         // Calculating intrinsic width and adjusting it according to the maximum allowed width
         val intrinsicWidth = measurable.minIntrinsicWidth(constraints.maxHeight)
         val adjustedMinWidth = intrinsicWidth.coerceAtMost(maxAdditionalContentWidth.toInt())
+        // Ensure we do not exceed available width
+        val maxWidthForAdditional =
+          maxAdditionalContentWidth.coerceAtMost(constraints.maxWidth.toFloat()).toInt()
         val newConstraints = constraints.copy(
-          minWidth = adjustedMinWidth,
-          maxWidth = maxAdditionalContentWidth.toInt(),
+          minWidth = adjustedMinWidth.coerceAtMost(maxWidthForAdditional),
+          maxWidth = maxWidthForAdditional,
         )
         // Measuring the additional content with the new constraints
         measurable.measure(newConstraints)
       }
 
-      // Calculating the X offset for the timeline based on the width of the additional content
-      timelineXOffset = (additionalContentPlaceable?.width?.toFloat() ?: 0f) + contentDistance
+      // Calculating the logical X offset for the timeline based on the width of the additional content
+      logicalTimelineXOffset =
+        (additionalContentPlaceable?.width?.toFloat() ?: 0f) + contentDistance
 
-      // Calculating the X offset and width available for the main content
-      val contentXOffset = timelineXOffset + timelineThickness + contentDistance
-      val contentWidth = constraints.maxWidth - contentXOffset
+      // Calculating the X offset and width available for the main content in logical LTR space
+      val logicalContentXOffset = logicalTimelineXOffset + timelineThickness + contentDistance
+      val contentWidth = constraints.maxWidth - logicalContentXOffset
 
       // Measuring the main content with the calculated width
       val contentPlaceable = contentMeasurable.measure(
@@ -163,15 +169,44 @@ fun JetLimeExtendedEvent(
         maxOf(contentHeight, additional.height)
       } ?: contentHeight
 
-      // Placing the measured composables in the layout
-      layout(constraints.maxWidth, layoutHeight) {
-        additionalContentPlaceable?.placeRelative(x = 0, y = 0)
-        contentPlaceable.placeRelative(x = contentXOffset.toInt(), y = 0)
+      val totalWidth = constraints.maxWidth
+
+      // Placing the measured composables in the layout, mirroring in RTL so that
+      // additional content is always on the logical "left" of the timeline and main
+      // content on the "right", but visually flipped when isRtl is true.
+      layout(totalWidth, layoutHeight) {
+        if (isRtl) {
+          // In RTL, place additional content flush to the right so it stays visible
+          additionalContentPlaceable?.placeRelative(
+            x = totalWidth - additionalContentPlaceable.width,
+            y = 0,
+          )
+        } else {
+          // LTR: original behavior, additional content starts from left
+          additionalContentPlaceable?.placeRelative(x = 0, y = 0)
+        }
+
+        // Place main content on the opposite side of the timeline depending on direction
+        val contentX = if (isRtl) {
+          // In RTL, main content should be left of the timeline, but still within bounds
+          (logicalTimelineXOffset - contentPlaceable.width - jetLimeStyle.contentDistance.toPx())
+            .coerceAtLeast(0f)
+            .toInt()
+        } else {
+          logicalContentXOffset.toInt()
+        }
+        contentPlaceable.placeRelative(x = contentX, y = 0)
       }
     }
 
     // Drawing on canvas for additional graphical elements
     Canvas(modifier = Modifier.matchParentSize()) {
+      // Use the logical timeline offset directly in both LTR and RTL so that
+      // the line stays aligned with the layout’s coordinate system. RTL
+      // placement is handled by how content is positioned relative to this
+      // logical offset, avoiding overlap with the main content.
+      val timelineXOffset = logicalTimelineXOffset
+
       val yOffset = when (style.pointPlacement) {
         PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
         PointPlacement.CENTER -> (
@@ -179,6 +214,7 @@ fun JetLimeExtendedEvent(
             if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
           ) /
           2f
+
         PointPlacement.END -> {
           val effectiveHeight =
             this.size.height -

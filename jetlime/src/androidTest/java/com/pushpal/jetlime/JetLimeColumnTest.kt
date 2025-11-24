@@ -28,10 +28,13 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertPositionInRootIsEqualTo
@@ -41,6 +44,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
@@ -243,5 +247,55 @@ class JetLimeColumnTest {
 
     items.add("Another Item")
     composeTestRule.onNodeWithText("Another Item").assertIsDisplayed()
+  }
+
+  @Test
+  fun jetLimeColumn_ltr_contentIsVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1", "Item 2", "Item 3"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+        JetLimeColumn(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeEvent(
+              style = JetLimeEventDefaults.eventStyle(position = pos),
+            ) {
+              Text(text = item, modifier = Modifier.testTag("ColumnItem_$item"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("ColumnItem_Item 1").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("ColumnItem_Item 3").assertIsDisplayed()
+  }
+
+  @OptIn(ExperimentalComposeApi::class)
+  @Test
+  fun jetLimeColumn_extendedEvent_rtl_contentsAreVisible() {
+    val itemsList = ItemsList(persistentListOf("Item 1"))
+
+    composeTestRule.setContent {
+      CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        JetLimeColumn(
+          itemsList = itemsList,
+          itemContent = { _, item, pos ->
+            JetLimeExtendedEvent(
+              style = JetLimeEventDefaults.eventStyle(position = pos),
+              additionalContent = {
+                Text(text = "Additional", modifier = Modifier.testTag("ExtendedAdditional"))
+              },
+            ) {
+              Text(text = item, modifier = Modifier.testTag("ExtendedMain"))
+            }
+          },
+        )
+      }
+    }
+
+    composeTestRule.onNodeWithTag("ExtendedAdditional").assertIsDisplayed()
+    composeTestRule.onNodeWithTag("ExtendedMain").assertIsDisplayed()
   }
 }

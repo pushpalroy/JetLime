@@ -4,12 +4,12 @@ runs:
   using: "composite"
   steps:
     # Setup java
-    - name: Setup JDK 17
+    - name: Setup JDK 21
       id: setup_jdk
-      uses: actions/setup-java@v4.3.0
+      uses: actions/setup-java@v5.0.0
       with:
-        distribution: "corretto"
-        java-version: 17
+        distribution: 'zulu'
+        java-version: 21
 
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
@@ -18,14 +18,18 @@ runs:
       run: chmod +x gradlew
 
     # Caching gradle packages
-    - uses: actions/cache@v3
+    # TODO: remove temporary workaround after fixed
+    # temporarily work around https://github.com/actions/runner-images/issues/13341
+    # by disabling caching for macOS
+    - if: ${{ runner.os != 'macOS' }}
+      uses: actions/cache@v4
       name: Cache Gradle for quicker builds
       id: caching_gradle
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
 
