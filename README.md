@@ -31,6 +31,7 @@
 - Compose Multiplatform timelines: Android, iOS, Desktop (JVM), Web (JS & WASM)
 - Vertical and horizontal layouts (JetLimeColumn / JetLimeRow)
 - Flexible point placement: START, CENTER, END with continuous line joins
+- RTL layout support for JetLimeRow and JetLimeExtendedEvent (mirrors timelines and keeps content visible in right-to-left layouts)
 - Dashed/gradient/solid lines via Brush + PathEffect
 - Extended events with dual content slots (left/right), icons, and animations
 - Small, focused API with sensible defaults (JetLimeDefaults)
@@ -41,7 +42,7 @@ In `build.gradle` of shared module, include the following dependency
 
 ```gradle
 dependencies {
-  implementation("io.github.pushpalroy:jetlime:4.1.0")
+  implementation("io.github.pushpalroy:jetlime:4.1.1")
 }
 ```
 
@@ -237,6 +238,42 @@ The [itemSpacing](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetli
 The [lineThickness](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-style/line-thickness.html) in `Dp` the thickness of the timeline line.
 
 ---
+
+### 🌍 RTL Layout Support
+
+JetLime supports right-to-left (RTL) layouts out of the box using Compose’s `LayoutDirection.Rtl`.
+
+- **Horizontal timelines (`JetLimeRow` + `JetLimeEvent`)**
+  - The timeline direction is mirrored in RTL.
+  - Start and end items are correctly connected.
+  - Points and lines stay aligned without clipping, and the last item’s line joins cleanly.
+
+- **Extended vertical events (`JetLimeExtendedEvent` inside `JetLimeColumn`)**
+  - Additional content remains fully visible on the side nearest the logical start.
+  - Main content remains fully visible on the opposite side.
+  - The timeline line and point stay between additional and main content without overlapping them.
+
+To preview RTL behavior in your app, wrap your content with a `CompositionLocalProvider`:
+
+```kotlin
+CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+  JetLimeColumn(
+    itemsList = ItemsList(items),
+    key = { _, item -> item.id },
+  ) { index, item, position ->
+    JetLimeExtendedEvent(
+      style = JetLimeEventDefaults.eventStyle(position = position),
+      additionalContent = { /* Additional content */ },
+    ) {
+      // Main content
+    }
+  }
+}
+```
+
+|                Basic (RTL)                | Dynamic (RTL)                               |                Extended (RTL)                |
+|:-----------------------------------------:|---------------------------------------------|:--------------------------------------------:|
+| <img src="art/rtl/basic.png" width=180 /> | <img src="art/rtl/dynamic.png" width=180 /> | <img src="art/rtl/extended.png" width=180 /> |
 
 ### ⚙️ JetLimeEvent Properties
 

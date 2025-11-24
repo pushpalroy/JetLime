@@ -90,7 +90,7 @@ kotlin {
       implementation(project(":jetlime"))
 
       // Uncomment for maven testing
-      // implementation("io.github.pushpalroy:jetlime:4.1.0")
+      // implementation("io.github.pushpalroy:jetlime:4.1.1")
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
