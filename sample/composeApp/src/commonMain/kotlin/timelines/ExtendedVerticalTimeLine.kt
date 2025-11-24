@@ -45,6 +45,7 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.JetLimeExtendedEvent
+import com.skydoves.compose.stability.runtime.TraceRecomposition
 import data.Item
 import data.activityNames
 import data.placeNames
@@ -61,6 +62,7 @@ import timelines.event.placeInfo
 
 @OptIn(ExperimentalComposeApi::class)
 @ExperimentalAnimationApi
+@TraceRecomposition
 @Composable
 fun ExtendedVerticalTimeLine(
   modifier: Modifier = Modifier,
