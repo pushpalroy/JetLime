@@ -39,11 +39,13 @@ import com.pushpal.jetlime.JetLimeColumn
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.PointPlacement
+import com.skydoves.compose.stability.runtime.TraceRecomposition
 import data.getCharacters
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
+@TraceRecomposition
 @Composable
 fun BasicVerticalTimeLine(modifier: Modifier = Modifier, showSnackbar: (message: String) -> Unit) {
   val items = remember { getCharacters().subList(0, 4) }

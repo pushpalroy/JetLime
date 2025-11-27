@@ -10,6 +10,7 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.cocoapods)
   alias(libs.plugins.compose.compiler.report.generator)
+  alias(libs.plugins.stability.analyzer)
 }
 
 kotlin {

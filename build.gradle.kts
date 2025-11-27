@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.kotlin.cocoapods) apply false
   alias(libs.plugins.compose.compiler.report.generator) apply false
+  alias(libs.plugins.stability.analyzer) apply false
 }
 
 // Compose Compiler Metrics

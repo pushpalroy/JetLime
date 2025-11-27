@@ -55,12 +55,14 @@ import com.pushpal.jetlime.JetLimeDefaults
 import com.pushpal.jetlime.JetLimeEvent
 import com.pushpal.jetlime.JetLimeEventDefaults
 import com.pushpal.jetlime.PointPlacement
+import com.skydoves.compose.stability.runtime.TraceRecomposition
 import data.Item
 import data.getCharacters
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import timelines.event.VerticalEventContent
 
 @ExperimentalAnimationApi
+@TraceRecomposition
 @Composable
 fun VerticalDynamicTimeLine(
   modifier: Modifier = Modifier,
