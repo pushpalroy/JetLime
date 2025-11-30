@@ -53,7 +53,7 @@ class JetLimeEventStyle internal constructor(
   val pointAnimation: EventPointAnimation?,
   val pointStrokeWidth: Dp,
   val pointStrokeColor: Color,
-  val lineBrush: Brush?
+  val lineBrush: Brush?,
 ) {
 
   /** The position of the event in the UI component. */

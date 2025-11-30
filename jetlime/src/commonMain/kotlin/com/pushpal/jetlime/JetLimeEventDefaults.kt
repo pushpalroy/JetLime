@@ -86,7 +86,7 @@ object JetLimeEventDefaults {
     pointStrokeWidth: Dp = PointStrokeWidth,
     pointStrokeColor: Color = MaterialTheme.colorScheme.primary,
     lineBrush: Brush? = null,
-    ): JetLimeEventStyle = JetLimeEventStyle(
+  ): JetLimeEventStyle = JetLimeEventStyle(
     pointPlacement = pointPlacement,
     pointType = pointType,
     pointColor = pointColor,
@@ -96,7 +96,7 @@ object JetLimeEventDefaults {
     pointStrokeWidth = pointStrokeWidth,
     pointStrokeColor = pointStrokeColor,
     lineBrush = lineBrush,
-    ).apply {
+  ).apply {
     this.position = position
   }
 
