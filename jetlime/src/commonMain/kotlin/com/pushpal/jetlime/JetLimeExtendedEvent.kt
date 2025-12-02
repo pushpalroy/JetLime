@@ -98,6 +98,7 @@ fun JetLimeExtendedEvent(
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   val layoutDirection = LocalLayoutDirection.current
   val isRtl = layoutDirection == LayoutDirection.Rtl
+  val lineBrush = remember(style, jetLimeStyle) { style.lineBrush ?: jetLimeStyle.lineBrush }
 
   BoxWithConstraints(modifier = modifier) {
     var logicalTimelineXOffset by remember { mutableFloatStateOf(0f) }
@@ -227,7 +228,7 @@ fun JetLimeExtendedEvent(
       if (style.pointPlacement == PointPlacement.START) {
         if (style.position.isNotEnd()) {
           drawLine(
-            brush = jetLimeStyle.lineBrush,
+            brush = lineBrush,
             start = Offset(x = timelineXOffset, y = yOffset),
             end = Offset(
               x = timelineXOffset,
@@ -241,7 +242,7 @@ fun JetLimeExtendedEvent(
         // CENTER or END: draw upward (except first) and downward (except last) segments
         if (style.position.isNotStart()) {
           drawLine(
-            brush = jetLimeStyle.lineBrush,
+            brush = lineBrush,
             start = Offset(x = timelineXOffset, y = 0f),
             end = Offset(x = timelineXOffset, y = yOffset),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -250,7 +251,7 @@ fun JetLimeExtendedEvent(
         }
         if (style.position.isNotEnd()) {
           drawLine(
-            brush = jetLimeStyle.lineBrush,
+            brush = lineBrush,
             start = Offset(x = timelineXOffset, y = yOffset),
             end = Offset(x = timelineXOffset, y = this.size.height),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),

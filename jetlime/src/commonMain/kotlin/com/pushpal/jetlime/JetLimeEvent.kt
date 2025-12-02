@@ -119,6 +119,8 @@ internal fun VerticalEvent(
 ) {
   val verticalAlignment = remember { jetLimeStyle.lineVerticalAlignment }
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
+  val lineBrush = remember(style, jetLimeStyle) { style.lineBrush ?: jetLimeStyle.lineBrush }
+
   Box(
     modifier = modifier
       .wrapContentSize()
@@ -151,7 +153,7 @@ internal fun VerticalEvent(
         // Upward connector only for CENTER placement (connects from top of item to point center)
         if (style.pointPlacement == PointPlacement.CENTER && style.position.isNotStart()) {
           drawLine(
-            brush = jetLimeStyle.lineBrush,
+            brush = lineBrush,
             start = Offset(x = xOffset, y = 0f),
             end = Offset(x = xOffset, y = yOffset),
             strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -163,7 +165,7 @@ internal fun VerticalEvent(
           // Upward segment (skip for first item)
           if (style.position.isNotStart()) {
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = xOffset, y = 0f),
               end = Offset(x = xOffset, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -173,7 +175,7 @@ internal fun VerticalEvent(
           // Downward segment (skip for last item)
           if (style.position.isNotEnd()) {
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = xOffset, y = yOffset),
               end = Offset(x = xOffset, y = this.size.height),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -184,7 +186,7 @@ internal fun VerticalEvent(
           // END placement: draw upward segment (skip first) from top to end point; draw downward only if not last (from point to bottom)
           if (style.position.isNotStart()) {
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = xOffset, y = 0f),
               end = Offset(x = xOffset, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -193,7 +195,7 @@ internal fun VerticalEvent(
           }
           if (style.position.isNotEnd()) {
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = xOffset, y = yOffset),
               end = Offset(x = xOffset, y = this.size.height),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -208,7 +210,7 @@ internal fun VerticalEvent(
               this.size.height + yShift
             }
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = xOffset, y = yOffset),
               end = Offset(x = xOffset, y = endY),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -333,6 +335,8 @@ internal fun HorizontalEvent(
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   val layoutDirection = LocalLayoutDirection.current
   val isRtl = layoutDirection == LayoutDirection.Rtl
+  val lineBrush = remember(style, jetLimeStyle) { style.lineBrush ?: jetLimeStyle.lineBrush }
+
   Box(
     modifier = modifier
       .wrapContentSize()
@@ -369,7 +373,7 @@ internal fun HorizontalEvent(
             val startX = if (isRtl) this.size.width else 0f
             val endX = xOffset
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = startX, y = yOffset),
               end = Offset(x = endX, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -381,7 +385,7 @@ internal fun HorizontalEvent(
             val startX = xOffset
             val endX = if (isRtl) 0f else this.size.width
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = startX, y = yOffset),
               end = Offset(x = endX, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -394,7 +398,7 @@ internal fun HorizontalEvent(
             val startX = if (isRtl) this.size.width else 0f
             val endX = xOffset
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = startX, y = yOffset),
               end = Offset(x = endX, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -405,7 +409,7 @@ internal fun HorizontalEvent(
             val startX = xOffset
             val endX = if (isRtl) 0f else this.size.width
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = startX, y = yOffset),
               end = Offset(x = endX, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),
@@ -419,7 +423,7 @@ internal fun HorizontalEvent(
             val startX = xOffset
             val endX = if (isRtl) 0f - xShift else this.size.width + xShift
             drawLine(
-              brush = jetLimeStyle.lineBrush,
+              brush = lineBrush,
               start = Offset(x = startX, y = yOffset),
               end = Offset(x = endX, y = yOffset),
               strokeWidth = jetLimeStyle.lineThickness.toPx(),

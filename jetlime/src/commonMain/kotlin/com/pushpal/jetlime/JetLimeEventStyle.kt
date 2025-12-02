@@ -26,6 +26,7 @@ package com.pushpal.jetlime
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.Dp
  * @property pointStrokeWidth The stroke width of the event point.
  * @property pointStrokeColor The stroke color of the event point.
  * @property pointPlacement The placement of the point relative to the event content (START, CENTER, or END).
+ * @property lineBrush The brush used for drawing the connecting line to the next event, or null to use the default from JetLimeStyle.
  */
 @Immutable
 class JetLimeEventStyle internal constructor(
@@ -52,6 +54,7 @@ class JetLimeEventStyle internal constructor(
   val pointAnimation: EventPointAnimation?,
   val pointStrokeWidth: Dp,
   val pointStrokeColor: Color,
+  val lineBrush: Brush?,
 ) {
 
   /** The position of the event in the UI component. */
@@ -100,7 +103,8 @@ class JetLimeEventStyle internal constructor(
     if (pointRadius != other.pointRadius) return false
     if (pointAnimation != other.pointAnimation) return false
     if (pointStrokeWidth != other.pointStrokeWidth) return false
-    return pointStrokeColor == other.pointStrokeColor
+    if (pointStrokeColor != other.pointStrokeColor) return false
+    return lineBrush == other.lineBrush
   }
 
   /**
@@ -119,6 +123,7 @@ class JetLimeEventStyle internal constructor(
     result = 31 * result + pointAnimation.hashCode()
     result = 31 * result + pointStrokeWidth.hashCode()
     result = 31 * result + pointStrokeColor.hashCode()
+    result = 31 * result + lineBrush.hashCode()
 
     return result
   }
