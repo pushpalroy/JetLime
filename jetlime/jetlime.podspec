@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'jetlime'
-    spec.version                  = '4.1.1'
+    spec.version                  = '4.2.0'
     spec.homepage                 = 'https://github.com/pushpalroy/JetLime'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
