@@ -85,7 +85,9 @@ fun CustomizedVerticalTimeLine(modifier: Modifier = Modifier) {
             else -> null
           },
           pointType = when (index) {
-            1 -> EventPointType.filled(0.7f) // 70% fill
+            1 -> EventPointType.filled(0.7f)
+
+            // 70% fill
             3 -> EventPointType.custom(
               icon = painterResource(Res.drawable.icon_check),
               tint = Color(0xFF649228),

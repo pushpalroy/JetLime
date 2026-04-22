@@ -129,6 +129,7 @@ internal fun VerticalEvent(
         }
         val yOffset = when (style.pointPlacement) {
           PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+
           PointPlacement.CENTER -> {
             val effectiveHeight =
               this.size.height -
@@ -343,6 +344,7 @@ internal fun HorizontalEvent(
         }
         val logicalXOffset = when (style.pointPlacement) {
           PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+
           PointPlacement.CENTER -> {
             val effectiveWidth =
               this.size.width -
