@@ -2,8 +2,8 @@
 
 > A simple yet highly customizable UI library to show a timeline view in Compose Multiplatform.
 
-[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.9.3-blue?style=for-the-badge&logo=appveyor)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#jetpack-compose-artifacts-used)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?color=blue&style=for-the-badge)
+[![Jetbrains Compose](https://img.shields.io/badge/Jetbrains%20Compose-1.10.3-blue?style=for-the-badge&logo=appveyor)](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#jetpack-compose-artifacts-used)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.3.20-blue.svg?color=blue&style=for-the-badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.pushpalroy/jetlime?style=for-the-badge&logo=appveyor)](https://search.maven.org/artifact/io.github.pushpalroy/jetlime)
 ![Stars](https://img.shields.io/github/stars/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/pushpalroy/jetlime?color=yellowgreen&style=for-the-badge)

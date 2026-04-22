@@ -9,7 +9,7 @@ JetLime is a Kotlin Multiplatform (KMP) Compose Multiplatform library that rende
 The repo has two Gradle modules:
 - `:jetlime` — the library (all platform source in `src/commonMain/kotlin/com/pushpal/jetlime/`; Android-specific manifest + instrumented tests in `src/androidMain` and `src/androidTest`).
 - `:sample:composeApp` — a sample app that consumes `:jetlime` via `implementation(project(":jetlime"))` and runs on all five targets (Android, iOS via CocoaPods, Desktop, Web-JS, Web-WASM).
-JDK 17 is required for builds; CI uses JDK 21 only for the Spotless lint job. Kotlin 2.2.21, Compose Multiplatform 1.9.3, `androidTarget` compileSdk 36 / minSdk 23.
+JDK 17 is required for builds; CI uses JDK 21 only for the Spotless lint job. Kotlin 2.3.20, Compose Multiplatform 1.10.3, `androidTarget` compileSdk 36 / minSdk 23.
  
 ## Common Commands
  
