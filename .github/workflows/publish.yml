@@ -44,6 +44,9 @@ jobs:
           # Update README installation snippet
           sed -i '' "s/implementation(\"io.github.pushpalroy:jetlime:.*\")/implementation(\"io.github.pushpalroy:jetlime:$VERSION\")/g" README.md
 
+          # Update commented-out maven testing snippet in sample app
+          sed -i '' "s|// implementation(\"io.github.pushpalroy:jetlime:.*\")|// implementation(\"io.github.pushpalroy:jetlime:$VERSION\")|g" sample/composeApp/build.gradle.kts
+
       - name: Publish to Maven Central
         shell: bash
         env:
@@ -54,6 +57,11 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
         run: |
           ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+
+      - name: Generate Dokka API docs
+        shell: bash
+        run: |
+          ./scripts/run_dokka.sh
 
       - name: Commit version updates
         shell: bash
@@ -70,3 +78,14 @@ jobs:
           VERSION="${{ github.event.inputs.version }}"
           git tag -a "$VERSION" -m "Release $VERSION"
           git push origin "$VERSION"
+
+      - name: Create GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          gh release create "$VERSION" \
+            --title "v$VERSION" \
+            --target main \
+            --generate-notes

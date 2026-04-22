@@ -38,7 +38,7 @@ class EventPosition internal constructor(val name: String) {
   companion object {
 
     /** Represents the start position in a sequence. */
-    private val START = EventPosition("Start")
+    internal val START = EventPosition("Start")
 
     /** Represents the middle position in a sequence. */
     private val MIDDLE = EventPosition("Middle")
@@ -78,7 +78,7 @@ class EventPosition internal constructor(val name: String) {
 
   /** Helper to check if current position is not the start. */
   @Stable
-  fun isNotStart(): Boolean = name != "Start"
+  fun isNotStart(): Boolean = this != START
 
   /**
    * Checks if this instance is equal to another object. Two instances of [EventPosition] are
