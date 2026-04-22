@@ -35,6 +35,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -84,7 +85,8 @@ fun <T> JetLimeColumn(
   key: ((index: Int, item: T) -> Any)? = null,
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
-  CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(VERTICAL)) {
+  val providedStyle = remember(style) { style.alignment(VERTICAL) }
+  CompositionLocalProvider(LocalJetLimeStyle provides providedStyle) {
     LazyColumn(
       modifier = modifier,
       state = listState,
@@ -149,7 +151,8 @@ fun <T> JetLimeRow(
   key: ((index: Int, item: T) -> Any)? = null,
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
-  CompositionLocalProvider(LocalJetLimeStyle provides style.alignment(HORIZONTAL)) {
+  val providedStyle = remember(style) { style.alignment(HORIZONTAL) }
+  CompositionLocalProvider(LocalJetLimeStyle provides providedStyle) {
     LazyRow(
       modifier = modifier,
       state = listState,

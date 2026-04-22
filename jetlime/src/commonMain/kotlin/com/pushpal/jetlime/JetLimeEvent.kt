@@ -524,15 +524,12 @@ private fun PlaceHorizontalEventContent(
  */
 @Composable
 internal fun calculateRadiusAnimFactor(style: JetLimeEventStyle): State<Float> {
+  val animation = style.pointAnimation ?: return remember { mutableFloatStateOf(1.0f) }
   val infiniteTransition = rememberInfiniteTransition(label = "RadiusInfiniteTransition")
-  return if (style.pointAnimation != null) {
-    infiniteTransition.animateFloat(
-      initialValue = style.pointAnimation.initialValue,
-      targetValue = style.pointAnimation.targetValue,
-      animationSpec = style.pointAnimation.animationSpec,
-      label = "RadiusFloatAnimation",
-    )
-  } else {
-    remember { mutableFloatStateOf(1.0f) }
-  }
+  return infiniteTransition.animateFloat(
+    initialValue = animation.initialValue,
+    targetValue = animation.targetValue,
+    animationSpec = animation.animationSpec,
+    label = "RadiusFloatAnimation",
+  )
 }
