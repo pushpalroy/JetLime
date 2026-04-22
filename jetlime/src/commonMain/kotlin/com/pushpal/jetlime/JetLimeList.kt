@@ -34,8 +34,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -180,4 +180,4 @@ fun <T> JetLimeRow(
  * This is used to provide a default or overridden style configuration down the composition tree. Accessing this without a provider
  * will result in an error, ensuring that the style is always defined when used within a composable context.
  */
-val LocalJetLimeStyle = compositionLocalOf<JetLimeStyle> { error("No JetLimeStyle provided") }
+val LocalJetLimeStyle = staticCompositionLocalOf<JetLimeStyle> { error("No JetLimeStyle provided") }
