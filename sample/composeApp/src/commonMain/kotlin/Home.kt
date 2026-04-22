@@ -121,7 +121,9 @@ fun HomeContent(modifier: Modifier = Modifier) {
           }
 
           1 -> BasicDashedTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
+
           2 -> VerticalDynamicTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
+
           3 -> {
             Column {
               CustomizedHorizontalTimeLine()

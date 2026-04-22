@@ -262,5 +262,6 @@ fun Int.decidePointType(): EventPointType = when (this) {
   )
 
   5 -> EventPointType.Default
+
   else -> EventPointType.Default
 }

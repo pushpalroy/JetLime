@@ -209,6 +209,7 @@ fun JetLimeExtendedEvent(
 
       val yOffset = when (style.pointPlacement) {
         PointPlacement.START -> style.pointRadius.toPx() * jetLimeStyle.pointStartFactor
+
         PointPlacement.CENTER -> (
           this.size.height -
             if (style.position.isNotEnd()) jetLimeStyle.itemSpacing.toPx() else 0f
