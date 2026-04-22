@@ -58,6 +58,11 @@ jobs:
         run: |
           ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
+      - name: Generate Dokka API docs
+        shell: bash
+        run: |
+          ./scripts/run_dokka.sh
+
       - name: Commit version updates
         shell: bash
         run: |
