@@ -117,7 +117,7 @@ internal fun VerticalEvent(
   modifier: Modifier = Modifier,
   content: @Composable () -> Unit,
 ) {
-  val verticalAlignment = remember { jetLimeStyle.lineVerticalAlignment }
+  val verticalAlignment = jetLimeStyle.lineVerticalAlignment
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   Box(
     modifier = modifier
@@ -148,17 +148,6 @@ internal fun VerticalEvent(
         val radius = style.pointRadius.toPx() * radiusAnimFactor
         val strokeWidth = style.pointStrokeWidth.toPx()
 
-        // Line
-        // Upward connector only for CENTER placement (connects from top of item to point center)
-        if (style.pointPlacement == PointPlacement.CENTER && style.position.isNotStart()) {
-          drawLine(
-            brush = jetLimeStyle.lineBrush,
-            start = Offset(x = xOffset, y = 0f),
-            end = Offset(x = xOffset, y = yOffset),
-            strokeWidth = jetLimeStyle.lineThickness.toPx(),
-            pathEffect = jetLimeStyle.pathEffect,
-          )
-        }
         // Line logic for CENTER placement: keep continuity through centers
         if (style.pointPlacement == PointPlacement.CENTER) {
           // Upward segment (skip for first item)
@@ -330,7 +319,7 @@ internal fun HorizontalEvent(
   modifier: Modifier = Modifier,
   content: @Composable () -> Unit,
 ) {
-  val horizontalAlignment = remember { jetLimeStyle.lineHorizontalAlignment }
+  val horizontalAlignment = jetLimeStyle.lineHorizontalAlignment
   val radiusAnimFactor by calculateRadiusAnimFactor(style)
   val layoutDirection = LocalLayoutDirection.current
   val isRtl = layoutDirection == LayoutDirection.Rtl

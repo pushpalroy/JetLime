@@ -58,25 +58,37 @@ class JetLimeStyle internal constructor(
   val pathEffect: PathEffect?,
   val lineHorizontalAlignment: HorizontalAlignment,
   val lineVerticalAlignment: VerticalAlignment,
+  internal val arrangement: Arrangement = VERTICAL,
 ) {
 
-  internal var arrangement: Arrangement = VERTICAL
   internal val pointStartFactor: Float = 1.1f
 
   /**
-   * Sets the arrangement of the JetLime list component.
+   * Returns a [JetLimeStyle] with its [arrangement] set to the specified value.
    *
-   * This function allows for setting the arrangement of a JetLime list component. It modifies the current
-   * instance of [JetLimeStyle], setting its arrangement property to the specified [Arrangement] depending
-   * on whether a component is a [JetLimeColumn] or [JetLimeRow].
+   * This returns a new [JetLimeStyle] instance if the current arrangement differs from the
+   * requested one, so the original instance is never mutated and can be safely shared across
+   * multiple [JetLimeColumn] / [JetLimeRow] usages.
    *
    * @param arrangement The [Arrangement] to set for the JetLime list component.
-   * @return A [JetLimeStyle] instance with the updated arrangement.
+   * @return A [JetLimeStyle] instance with the requested arrangement.
    */
   @Stable
-  internal fun alignment(arrangement: Arrangement): JetLimeStyle = this.apply {
-    this.arrangement = arrangement
-  }
+  internal fun alignment(arrangement: Arrangement): JetLimeStyle =
+    if (this.arrangement == arrangement) {
+      this
+    } else {
+      JetLimeStyle(
+        contentDistance = contentDistance,
+        itemSpacing = itemSpacing,
+        lineThickness = lineThickness,
+        lineBrush = lineBrush,
+        pathEffect = pathEffect,
+        lineHorizontalAlignment = lineHorizontalAlignment,
+        lineVerticalAlignment = lineVerticalAlignment,
+        arrangement = arrangement,
+      )
+    }
 
   /**
    * Checks if this [JetLimeStyle] is equal to another object.
@@ -96,7 +108,8 @@ class JetLimeStyle internal constructor(
     if (lineBrush != other.lineBrush) return false
     if (pathEffect != other.pathEffect) return false
     if (lineHorizontalAlignment != other.lineHorizontalAlignment) return false
-    return lineVerticalAlignment == other.lineVerticalAlignment
+    if (lineVerticalAlignment != other.lineVerticalAlignment) return false
+    return arrangement == other.arrangement
   }
 
   /**
@@ -115,6 +128,7 @@ class JetLimeStyle internal constructor(
     result = 31 * result + pathEffect.hashCode()
     result = 31 * result + lineHorizontalAlignment.hashCode()
     result = 31 * result + lineVerticalAlignment.hashCode()
+    result = 31 * result + arrangement.hashCode()
     return result
   }
 }
