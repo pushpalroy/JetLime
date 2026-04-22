@@ -1,0 +1,71 @@
+name: Publish to Maven Central
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 4.2.0)'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Release and Publish
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Java and Gradle
+        uses: ./.github/workflows/setup/java-setup
+
+      - name: Update version in project files
+        shell: bash
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+
+          # Update coordinates in jetlime/build.gradle.kts
+          sed -i '' "s/coordinates(\"io.github.pushpalroy\", artifactId, \".*\")/coordinates(\"io.github.pushpalroy\", artifactId, \"$VERSION\")/g" jetlime/build.gradle.kts
+
+          # Update cocoapods version in jetlime/build.gradle.kts
+          sed -i '' "/cocoapods {/,/}/ s/version = \".*\"/version = \"$VERSION\"/" jetlime/build.gradle.kts
+
+          # Update podspec version
+          sed -i '' "s/spec.version                  = '.*'/spec.version                  = '$VERSION'/g" jetlime/jetlime.podspec
+
+          # Update git tag script
+          sed -i '' "s/TAG=\".*\"/TAG=\"$VERSION\"/g" scripts/add_git_tag.sh
+
+          # Update README installation snippet
+          sed -i '' "s/implementation(\"io.github.pushpalroy:jetlime:.*\")/implementation(\"io.github.pushpalroy:jetlime:$VERSION\")/g" README.md
+
+      - name: Publish to Maven Central
+        shell: bash
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: |
+          ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+
+      - name: Commit version updates
+        shell: bash
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Bump version to ${{ github.event.inputs.version }}"
+          git push origin main
+
+      - name: Create and push git tag
+        shell: bash
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          git tag -a "$VERSION" -m "Release $VERSION"
+          git push origin "$VERSION"
