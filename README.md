@@ -34,6 +34,7 @@
 - RTL layout support for JetLimeRow and JetLimeExtendedEvent (mirrors timelines and keeps content visible in right-to-left layouts)
 - Dashed/gradient/solid lines via Brush + PathEffect
 - Extended events with dual content slots (left/right), icons, and animations
+- Built-in pagination / infinite scroll (JetLimePaginatedColumn / JetLimePaginatedRow) with no extra dependency
 - Small, focused API with sensible defaults (JetLimeDefaults)
 
 ## 📦 Installation
@@ -125,6 +126,53 @@ JetLimeColumn(
   }
 }
 ```
+
+### 🔄 Paginated Timeline (Infinite Scroll)
+
+Use [JetLimePaginatedColumn](https://pushpalroy.github.io/JetLime/jetlime/com.pushpal.jetlime/-jet-lime-paginated-column.html)
+(or `JetLimePaginatedRow`) to load items page by page as the user scrolls. The component watches the
+scroll position and calls `onLoadMore` when the user gets within `loadMoreThreshold` items of the end,
+as long as a page is not already loading and more items remain. Pagination is implemented natively —
+no extra dependency is added.
+
+You own the page state (`itemsList`, `isLoading`, `hasMoreItems`); append the next page inside
+`onLoadMore` and update the flags. While `hasMoreItems` is `true`, the timeline line stays continuous
+into the next page, and it terminates once you set `hasMoreItems = false`.
+
+```kotlin
+val items = remember { mutableStateListOf<Item>() }
+var isLoading by remember { mutableStateOf(false) }
+var hasMore by remember { mutableStateOf(true) }
+val scope = rememberCoroutineScope()
+
+// Trigger the first page; the scroll-based loader fires only once items exist.
+LaunchedEffect(Unit) { if (items.isEmpty()) loadNextPage() }
+
+JetLimePaginatedColumn(
+  itemsList = ItemsList(items),
+  key = { _, item -> item.id },
+  isLoading = isLoading,
+  hasMoreItems = hasMore,
+  onLoadMore = {
+    scope.launch {
+      isLoading = true
+      val page = repository.loadNextPage() // your data source
+      items.addAll(page.items)
+      hasMore = !page.isLast
+      isLoading = false
+    }
+  },
+) { index, item, position ->
+  JetLimeEvent(
+    style = JetLimeEventDefaults.eventStyle(position = position)
+  ) {
+    // Content here
+  }
+}
+```
+
+A default centered progress indicator is shown while `isLoading` is `true`; override it with the
+`loadingContent` parameter.
 
 ### 🎛️ Customize `JetLimeColumn` Style
 

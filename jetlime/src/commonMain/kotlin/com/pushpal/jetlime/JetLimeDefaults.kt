@@ -53,6 +53,12 @@ object JetLimeDefaults {
   private val ItemSpacing: Dp = 8.dp
 
   /**
+   * The default number of items from the end of the list at which [JetLimePaginatedColumn] or
+   * [JetLimePaginatedRow] triggers the `onLoadMore` callback to fetch the next page.
+   */
+  val LoadMoreThreshold: Int = 3
+
+  /**
    * Creates a linear gradient brush for lines in [JetLimeColumn] or [JetLimeRow] components.
    *
    * @param colors The colors to be used in the gradient. Defaults to primary, secondary, and tertiary colors from MaterialTheme's color scheme.

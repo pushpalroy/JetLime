@@ -57,6 +57,24 @@ class EventPosition internal constructor(val name: String) {
     fun dynamic(index: Int, listSize: Int) = eventPosition(index, listSize)
 
     /**
+     * Determines the event position for a paginated list, keeping the timeline line continuous
+     * while more pages can still be loaded.
+     *
+     * When [isLastPage] is `false`, the last currently-loaded item is treated as [MIDDLE] instead
+     * of [END] so its connector line keeps extending toward the loading indicator / next page,
+     * avoiding a flicker each time a new page is appended. Once [isLastPage] becomes `true`, the
+     * trailing item resolves to [END] and the line terminates correctly.
+     *
+     * @param index The index of the item in the list.
+     * @param listSize The total size of the currently-loaded list.
+     * @param isLastPage Whether the last page has been reached (no more items to load).
+     * @return [EventPosition] corresponding to the index, accounting for pending pages.
+     */
+    @Stable
+    internal fun dynamicPaginated(index: Int, listSize: Int, isLastPage: Boolean) =
+      if (!isLastPage && index == listSize - 1) MIDDLE else eventPosition(index, listSize)
+
+    /**
      * Internal function to determine the event position based on index and list size.
      */
     @Stable
