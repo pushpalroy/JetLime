@@ -102,7 +102,7 @@ import com.pushpal.jetlime.Arrangement.VERTICAL
  * @param isLoading Whether a page fetch is currently in flight. Suppresses further [onLoadMore] calls and shows [loadingContent].
  * @param hasMoreItems Whether more pages can be loaded. When `false`, [onLoadMore] is not called and the timeline line terminates at the last item.
  * @param loadMoreThreshold The number of items from the end at which [onLoadMore] is triggered.
- * @param loadingContent The footer composable shown while [isLoading] is `true`.
+ * @param loadingContent The footer composable shown while [isLoading] is `true`. Defaults to a centered circular progress indicator; pass `null` to show no footer at all.
  * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
@@ -117,7 +117,7 @@ fun <T> JetLimePaginatedColumn(
   isLoading: Boolean = false,
   hasMoreItems: Boolean = true,
   loadMoreThreshold: Int = JetLimeDefaults.LoadMoreThreshold,
-  loadingContent: @Composable () -> Unit = { DefaultColumnLoadingContent() },
+  loadingContent: (@Composable () -> Unit)? = { DefaultColumnLoadingContent() },
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
   TriggerLoadMore(
@@ -151,8 +151,9 @@ fun <T> JetLimePaginatedColumn(
         )
         itemContent(index, item, eventPosition)
       }
-      if (isLoading) {
-        item(key = LoadMoreItemKey) { loadingContent() }
+      val footer = loadingContent
+      if (isLoading && footer != null) {
+        item(key = LoadMoreItemKey) { footer() }
       }
     }
   }
@@ -180,7 +181,7 @@ fun <T> JetLimePaginatedColumn(
  * @param isLoading Whether a page fetch is currently in flight. Suppresses further [onLoadMore] calls and shows [loadingContent].
  * @param hasMoreItems Whether more pages can be loaded. When `false`, [onLoadMore] is not called and the timeline line terminates at the last item.
  * @param loadMoreThreshold The number of items from the end at which [onLoadMore] is triggered.
- * @param loadingContent The trailing composable shown while [isLoading] is `true`.
+ * @param loadingContent The trailing composable shown while [isLoading] is `true`. Defaults to a centered circular progress indicator; pass `null` to show no trailing loader at all.
  * @param itemContent A composable lambda that takes an index, an item of type [T], and an [EventPosition] to build each item's content.
  */
 @Composable
@@ -195,7 +196,7 @@ fun <T> JetLimePaginatedRow(
   isLoading: Boolean = false,
   hasMoreItems: Boolean = true,
   loadMoreThreshold: Int = JetLimeDefaults.LoadMoreThreshold,
-  loadingContent: @Composable () -> Unit = { DefaultRowLoadingContent() },
+  loadingContent: (@Composable () -> Unit)? = { DefaultRowLoadingContent() },
   itemContent: @Composable (index: Int, T, EventPosition) -> Unit,
 ) {
   TriggerLoadMore(
@@ -229,8 +230,9 @@ fun <T> JetLimePaginatedRow(
         )
         itemContent(index, item, eventPosition)
       }
-      if (isLoading) {
-        item(key = LoadMoreItemKey) { loadingContent() }
+      val footer = loadingContent
+      if (isLoading && footer != null) {
+        item(key = LoadMoreItemKey) { footer() }
       }
     }
   }

@@ -171,8 +171,21 @@ JetLimePaginatedColumn(
 }
 ```
 
-A default centered progress indicator is shown while `isLoading` is `true`; override it with the
-`loadingContent` parameter.
+A default centered progress indicator is shown while `isLoading` is `true`. Customize it by passing
+your own composable to `loadingContent`, or hide it entirely by passing `loadingContent = null` (no
+footer is added in that case):
+
+```kotlin
+JetLimePaginatedColumn(
+  itemsList = ItemsList(items),
+  isLoading = isLoading,
+  hasMoreItems = hasMore,
+  onLoadMore = { /* ... */ },
+  loadingContent = null, // or a custom composable, e.g. { MyLoader() }
+) { index, item, position ->
+  // Content here
+}
+```
 
 ### 🎛️ Customize `JetLimeColumn` Style
 

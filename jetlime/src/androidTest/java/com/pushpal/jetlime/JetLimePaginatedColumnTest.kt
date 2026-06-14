@@ -29,6 +29,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -90,6 +92,54 @@ class JetLimePaginatedColumnTest {
     }
 
     composeTestRule.onNodeWithTag("LoadingFooter").assertIsDisplayed()
+  }
+
+  @Test
+  fun jetLimePaginatedColumn_showsDefaultLoaderWhenLoading() {
+    val itemsList = ItemsList(persistentListOf("Item 1", "Item 2"))
+
+    composeTestRule.setContent {
+      JetLimePaginatedColumn(
+        itemsList = itemsList,
+        onLoadMore = {},
+        isLoading = true,
+        itemContent = { _, item, _ ->
+          JetLimeEvent {
+            Text(text = item)
+          }
+        },
+      )
+    }
+
+    // The default footer is a circular progress indicator.
+    composeTestRule.onNode(
+      SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo),
+    ).assertIsDisplayed()
+  }
+
+  @Test
+  fun jetLimePaginatedColumn_hidesLoaderWhenLoadingContentIsNull() {
+    val itemsList = ItemsList(persistentListOf("Item 1", "Item 2"))
+
+    composeTestRule.setContent {
+      JetLimePaginatedColumn(
+        itemsList = itemsList,
+        onLoadMore = {},
+        isLoading = true,
+        loadingContent = null,
+        itemContent = { _, item, _ ->
+          JetLimeEvent {
+            Text(text = item)
+          }
+        },
+      )
+    }
+
+    // Items still render, but no footer loader is added at all.
+    composeTestRule.onNodeWithText("Item 1").assertIsDisplayed()
+    composeTestRule.onNode(
+      SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo),
+    ).assertDoesNotExist()
   }
 
   @Test
