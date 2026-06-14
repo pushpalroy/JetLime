@@ -13,7 +13,7 @@ plugins {
 }
 
 kotlin {
-  js(IR) {
+  js {
     browser()
     binaries.executable()
   }
@@ -27,11 +27,8 @@ kotlin {
         outputFileName = "composeApp.js"
         devServer =
           (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-            static =
-              (static ?: mutableListOf()).apply {
-                // Serve sources to debug inside browser
-                add(project.projectDir.path)
-              }
+            // Serve sources to debug inside browser
+            static(project.projectDir.path)
           }
       }
     }
@@ -85,6 +82,7 @@ kotlin {
       implementation(compose.components.resources)
       implementation(compose.materialIconsExtended)
       implementation(compose.components.uiToolingPreview)
+      implementation(compose.preview)
 
       // Local library
       implementation(project(":jetlime"))

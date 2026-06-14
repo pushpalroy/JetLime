@@ -147,8 +147,8 @@ fun HomeContent(modifier: Modifier = Modifier) {
 @Composable
 fun HomeAppBar(
   isDarkTheme: Boolean,
-  modifier: Modifier = Modifier,
   onThemeChange: ((Boolean) -> Unit)?,
+  modifier: Modifier = Modifier,
 ) {
   TopAppBar(
     title = {
@@ -167,7 +167,7 @@ fun HomeAppBar(
   )
 }
 
-@Preview
+@androidx.compose.ui.tooling.preview.Preview
 @Composable
 private fun PreviewHomeScreen() {
   HomeScreen()
