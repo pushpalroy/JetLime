@@ -54,6 +54,7 @@ import timelines.BasicVerticalTimeLine
 import timelines.CustomizedHorizontalTimeLine
 import timelines.CustomizedVerticalTimeLine
 import timelines.ExtendedVerticalTimeLine
+import timelines.PaginatedVerticalTimeLine
 import timelines.VerticalDynamicTimeLine
 
 @Composable
@@ -82,7 +83,7 @@ fun HomeScreen(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(modifier: Modifier = Modifier) {
-  val tabs = remember { listOf("Basic", "Dashed", "Dynamic", "Custom", "Extended") }
+  val tabs = remember { listOf("Basic", "Dashed", "Dynamic", "Custom", "Extended", "Paginated") }
   var selectedIndex by remember { mutableIntStateOf(0) }
   val snackBarState = remember { SnackbarHostState() }
   val coroutineScope = rememberCoroutineScope()
@@ -132,6 +133,10 @@ fun HomeContent(modifier: Modifier = Modifier) {
           }
 
           4 -> ExtendedVerticalTimeLine { coroutineScope.launch { snackBarState.showSnackbar(it) } }
+
+          5 -> PaginatedVerticalTimeLine {
+            coroutineScope.launch { snackBarState.showSnackbar(it) }
+          }
         }
       }
     }
