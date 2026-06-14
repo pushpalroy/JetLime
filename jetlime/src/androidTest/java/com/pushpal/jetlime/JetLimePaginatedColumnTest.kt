@@ -232,6 +232,34 @@ class JetLimePaginatedColumnTest {
   }
 
   @Test
+  fun jetLimePaginatedColumn_singleItemStaysStartWhileMoreItems() {
+    val itemsList = ItemsList(persistentListOf("Item 1"))
+    var isNotStart: Boolean? = null
+    var isNotEnd: Boolean? = null
+
+    composeTestRule.setContent {
+      JetLimePaginatedColumn(
+        itemsList = itemsList,
+        onLoadMore = {},
+        hasMoreItems = true,
+        itemContent = { _, item, position ->
+          isNotStart = position.isNotStart()
+          isNotEnd = position.isNotEnd()
+          JetLimeEvent {
+            Text(text = item)
+          }
+        },
+      )
+    }
+
+    composeTestRule.waitForIdle()
+    // The single item is still the timeline start: only the outgoing connector is forced on,
+    // so no incoming connector is drawn before the first event.
+    assertThat(isNotStart).isFalse()
+    assertThat(isNotEnd).isTrue()
+  }
+
+  @Test
   fun jetLimePaginatedColumn_lastItemTerminatesOnLastPage() {
     val itemsList = ItemsList(persistentListOf("Item 1", "Item 2", "Item 3"))
     val isNotEndByIndex = mutableMapOf<Int, Boolean>()
