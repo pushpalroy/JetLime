@@ -33,7 +33,7 @@ kotlin {
     }
   }
 
-  js(IR) {
+  js {
     browser()
     binaries.library()
   }
@@ -74,6 +74,7 @@ kotlin {
       implementation(compose.material3)
       implementation(compose.ui)
       implementation(compose.components.uiToolingPreview)
+      implementation(compose.preview)
       api(libs.kotlinx.collections.immutable)
     }
     desktopMain.dependencies {
