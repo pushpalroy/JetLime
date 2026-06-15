@@ -78,7 +78,7 @@ The workflow updates all version references automatically. The files it touches 
 
 1. Go to **GitHub → Actions → Publish to Maven Central**
 2. Click **Run workflow**
-3. Enter the new version (e.g. `4.3.0`) and click **Run workflow**
+3. Enter the new version (e.g. `4.4.0`) and click **Run workflow**
 
 ### What the workflow does
 
@@ -89,7 +89,7 @@ The workflow updates all version references automatically. The files it touches 
 | Update versions | Runs `sed` across all version-bearing files |
 | Publish | Runs `publishAndReleaseToMavenCentral` — signs, uploads, and auto-releases |
 | Commit | Commits the version bump files and pushes to `main` |
-| Tag | Creates and pushes an annotated git tag (e.g. `4.3.0`) |
+| Tag | Creates and pushes an annotated git tag (e.g. `4.4.0`) |
 
 ### Step 3 — Verify
 
